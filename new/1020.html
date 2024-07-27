@@ -1,165 +1,155 @@
-
 <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>海贼王</title>
+    <link rel="ico" href="/favicon.ico" />
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background-color: #eee;
+      }
+      /* * {
+        border: 1px solid black;
+      } */
 
-  <body>
-
-   <div style="
-    background-color:#f1f1f1;
-    text-align: center;
-    padding:40px;
-   ">
-<img src="https://p.qqan.com/up/2015-11/2015112414491659468.png"  alt="你似乎沉入了海底" width="120px"; height="120px";>
-</div>
-
-<div style="
-  max-width: 700px;
-  margin: 30px auto;
-  padding: 15px;
-  line-height: 1.7;
-  text-align: center;
-">
-   <p>你好啊，我是林东明</p>
-   <p>我当过店长、做过游戏策划、动画编剧、美工</p>
-   <p>我开过网店，拼多多、京东、淘宝、小红书</p>
-   <p>我剪辑过短视频</p>
-   <p>我也在自学各种软件</p>
-</div>
-<div style="
-  background-color:#f1f1f1;
-  text-align: center;
-  padding:40px;
-  font-size: 12px；
-">
-</div>
-
-    
- <a href="">
-<button>数字</button></a>
-
-
-<head>
-	<meta charset="utf-8"> 
-	<title></title>
-	<link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.net/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-
-<body>
-<div class="container"  >
-
- <div style=" text-align: center;">
-  <h2>自学进度</h2></div>
-  
-  
-  <a href="https://docs.qq.com/doc/DVXVwS3pEWlZNbnhC" accesskey="h">PS（图像处理）</a><br>
-  <div class="progress">
-    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" 
-    aria-valuemax="100" style="width:75%">
-     75%  
+      .yinying {
+        box-shadow: rgb(0, 0, 0 / 20%) 0px 2px 1px -1px,
+          rgb(0, 0, 0 / 14%) 0px 1px 1px 0px, rgb(0, 0, 0 / 12%) 0px 1px 3px;
+      }
+      .flex {
+        display: flex;
+      }
+      .baise {
+        background-color: white;
+      }
+      .flex1 {
+        flex: 1;
+      }
+      .column {
+        flex-direction: column;
+      }
+      .mg8 {
+        margin: 8px;
+      }
+      .mgr8 {
+        margin-right: 8px;
+      }
+      .mgt8 {
+        margin-top: 8px;
+      }
+      .daoHang {
+        padding: 10px 20px;
+        border-bottom: 1px solid rgb(195, 195, 195);
+        font-size: 14px;
+        color: #666;
+      }
+      /* 当屏幕宽度小于600px时要改变的css */
+      @media (max-width: 600px) {
+      }
+       {
+        .ceBian {
+          display: none;
+        }
+        .neiRong {
+          flex-direction: column;
+        }
+        .shuJuQu {
+          flex-direction: column;
+        }
+        .youQu {
+          margin-left: 8px;
+        }
+        .shuJU {
+          margin: 0 0 8px;
+          flex: auto;
+        }
+      }
+      .neiRong::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="flex">
+    <!-- 侧边栏 -->
+    <div style="width: 200px; z-index: 2" class="baise yinying">
+      <!-- 头像栏 -->
+      <div
+        style="
+          padding: 10px;
+          align-items: center;
+          justify-content: center;
+          border-bottom: 1px solid #999;
+        "
+        class="flex"
+      >
+        <img
+          src="https://p.qqan.com/up/2015-11/2015112414491659468.png"
+          width="40px"
+          height="40px"
+          alt=""
+        />
+        <div style="margin-left: 10px">海贼王</div>
+      </div>
+      <!-- 导航栏 -->
+      <div class="flex1">
+        <div class="daoHang">路飞</div>
+        <div class="daoHang">索隆</div>
+        <div class="daoHang">娜美</div>
+        <div class="daoHang">乌索普</div>
+        <div class="daoHang">山治</div>
+        <div class="daoHang">乔巴</div>
+        <div class="daoHang">罗宾</div>
+        <div class="daoHang">弗兰奇</div>
+        <div class="daoHang">布鲁克</div>
+      </div>
     </div>
-  </div>
- 
- <div style="
-  right: 0px;
-"> 
-<a href="https://docs.qq.com/doc/DVWhoUnpNeWhuR0x1" accesskey="h">Adobe AI（矢量图制作）</a><br>
- </div>
-
-  <div class="progress">
-    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" 
-    aria-valuemax="100" style="width:40%">
-       40% 
+    <!-- 主区域 -->
+    <div class="flex1 flex column">
+      <!-- 头部栏 -->
+      <div style="height: 60px; z-index: 1" class="baise yinying"></div>
+      <!-- 内容区 -->
+      <div style="overflow: auto" class="neiRong flex1 flex">
+        <!-- 左区 -->
+        <div style="flex: 3" class="flex column mg8">
+          <!-- 数据区 -->
+          <div class="flex shuJuQu">
+            <!-- 数据块 -->
+            <div
+              style="height: 100px"
+              class="shuJU flex1 baise mgr8 yinying"
+            ></div>
+            <div
+              style="height: 100px"
+              class="shuJU flex1 baise mgr8 yinying"
+            ></div>
+            <div
+              style="height: 100px"
+              class="shuJU flex1 baise mgr8 yinying"
+            ></div>
+            <div style="height: 100px" class="shuJU flex1 baise yinying"></div>
+          </div>
+          <!-- 列表区 -->
+          <div class="flex column">
+            <!-- 列表项 -->
+            <div style="height: 160px" class="baise mgt8 yinying"></div>
+            <div style="height: 160px" class="baise mgt8 yinying"></div>
+            <div style="height: 160px" class="baise mgt8 yinying"></div>
+            <div style="height: 160px" class="baise mgt8 yinying"></div>
+            <div style="height: 160px" class="baise mgt8 yinying"></div>
+            <div style="height: 160px" class="baise mgt8 yinying"></div>
+          </div>
+        </div>
+        <!-- 右区 -->
+        <div style="flex: 1" class="youQu flex column mgr8 mgt8">
+          <!-- 提示区 -->
+          <div style="height: 150px" class="baise yinying"></div>
+          <!-- 消息区 -->
+          <div style="height: 300px" class="baise mgt8 yinying"></div>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <a href="https://docs.qq.com/doc/DVU1nVGJYakJJSEVC" accesskey="h">PR（视频编辑）</a><br>
-  <div class="progress">
-    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" 
-    aria-valuemax="100" style="width:40%">
-       40%
-    </div>
-  </div>
-
-
-  编程（代码）
-  <div class="progress">
-    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" 
-    aria-valuemax="100" style="width:5%">
-       5%
-    </div>
-  </div>
-
-   剪映（视频编辑）
-   <div class="progress" color:yellow >
-    <div class="progress-bar progress-bar-success" role="progressbar"  aria-valuenow="20" aria-valuemin="0" 
-    aria-valuemax="100" style="width:60%" >
-        60%
-    </div>
-  </div>
-
-   Blender（3D建模）
-  <div class="progress">
-    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" 
-    aria-valuemax="100" style="width:15%">
-       15% 
-    </div>
-  </div>
-
-    AE（图形视频处理）
-  <div class="progress">
-    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" 
-    aria-valuemax="100" style="width:40%">
-       40%
-    </div>
-  </div>
-  
-    C4D（三维建模）
-  <div class="progress">
-    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" 
-    aria-valuemax="100" style="width:20%">
-       20%
-    </div>
-  </div>
-
-    XD（UI/UX设计）
-   <div class="progress" color:yellow >
-    <div class="progress-bar progress-bar-success" role="progressbar"  aria-valuenow="20" aria-valuemin="0" 
-    aria-valuemax="100" style="width:20%" >
-        20%
-    </div>
-  </div>
-	
-  </div>	
-</div>
-  </body>
-
-
-
-<div style="
-  max-width: 700px;
-  margin: 30px auto;
-  padding: 15px;
-  line-height: 1.7;
-  text-align: center;
-">
-
-</div>
-<div style="
-  background-color:#f1f1f1;
-  text-align: center;
-  padding:40px;
-  font-size: 12px；
-">
-   <p>我的网站</p>
-   <a href="https://hzd19991020.github.io/hz01/">友情链接</a>
-
-
-   <div style="
-    background-color:#f1f1f1;
-    text-align: center;
-    padding:40px;
-   ">
-</div>
   </body>
 </html>
