@@ -1,5 +1,5 @@
 body {
-    background-image: url('../images/background.jpg');  /* 使用相对路径 */
+    background-image: url('../images/4.jpg');  /* 使用相对路径 */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
