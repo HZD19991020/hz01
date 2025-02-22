@@ -3,132 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>背景视频</title>
+  <title>背景视频展示</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* 设置背景视频 */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* 内容区域样式 */
+    .content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    /* 白色模块样式 */
+    .white-module {
+      background-color: #f1f1f1;
+      text-align: center;
+      padding: 30px;
+      margin: 30px auto;
+    }
+    /* 个人作品集模块 */
+    .project-module {
+      background-color: #f1f1f1;
+      text-align: center;
+      max-width: 300px;
+      margin: 30px auto;
+      padding: 20px;
+      font-size: 12px;
+    }
+    /* 链接样式 */
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
+  <!-- 背景视频 -->
   <div class="video-background">
     <video autoplay muted loop>
       <source src="../images/background-video.mp4" type="video/mp4">
       您的浏览器不支持视频播放。
     </video>
   </div>
-  
+  <!-- 内容区域 -->
   <div class="content">
     <h1>欢迎来到我的网站</h1>
     <p>这里是背景视频展示的示例。</p>
   </div>
-</body>
-</html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网页背景图</title>
-    <link rel="stylesheet" href="css/styles.css">  <!-- 引用背景图片 -->
-</head>
-<body>
-    <h1></h1>
-    <p></p>
-</body>
-</html>
-
-    <div style="background-color:#f1f1f1; text-align: center; padding:30px;"><!-- 第一个白色模块 -->
-      <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>多行对齐</title>
-    <style>
-        .first-line {
-            text-align: center; /* 第一行居中对齐 */
-        }
-        .second-line {
-            text-align: left; /* 第二行左对齐 */
-	    margin-left: 30%; /* 左边距 */
-            margin-right: 30%; /* 右边距 */
-        }
-    </style>
-</head>
-<body>
-    <div class="first-line">
-     <p>ONE PIECE</p>
-    </div>
-    <div class="second-line">
-         大秘宝的召唤，路飞从东海出发，一路上寻找伙伴</p>
-    </div>
-
-</body>
- 
-      
-    </div>
-
-    <div style="max-width: 700px; margin: 30px auto; padding: 100px; line-height: 1.7; text-align: center;">
-      <!-- 不是白色模块，改动的是这里 -->
-    </div>
-
-	  
-<div style="
-  background-color:#f1f1f1;
-  text-align: center;
-  max-width: 300px;
-  margin: 30px auto;
-  padding:20px; 
-  font-size: 12px；
-">
-<h2>以下是个人作品集</h2>
-<a href="https://docs.qq.com/doc/DVUdUTkZYTnJSaXFw"> PR作品（查看点这里）</a><br>
-</div> <!-- 第二个白色模块，padding是白色模块的大小 -->
-
-<head>
-	<meta charset="utf-8"> 
-	<title></title>
-	<link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.net/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-	<div class="container"  >
-
- <div style=" text-align: center;">
+  <!-- 第一个白色模块 -->
+  <div class="white-module">
+    <p>ONE PIECE</p>
+    <p>大秘宝的召唤，路飞从东海出发，一路上寻找伙伴</p>
   </div>
-		
-</head>
-
-<body>
-
-<div style="
-  
-  margin: 30px auto;
-  padding: 15px;
-  line-height: 1.7;
-  text-align: center;
-"> <!-- 第二个透明模块 -->
-
- </div>
-  
-
-  </body>
-
-    </div>
+  <!-- 第二个白色模块 -->
+  <div class="white-module" style="max-width: 700px; padding: 100px;">
+    <!-- 这里可以添加更多内容 -->
+    <p>不是白色模块，改动的是这里</p>
   </div>
-	
-  </div>	
-</div>
-  </body>
-
-
-
-<div style="
-  max-width: 700px;
-  margin: 30px auto;
-  padding: 15px;
-  line-height: 1.7;
-  text-align: center;
-"><!-- 第二个白色模块 -->
-
-    <div style="background-color:#f1f1f1; text-align: center; padding:20px; font-size: 12px;">
-        <p>我的网站</p>
-        <a href="https://hzd19991020.github.io/hz01/zuopin/index.html">友情链接</a>
-    </div>
-
+  <!-- 个人作品集模块 -->
+  <div class="project-module">
+    <h2>以下是个人作品集</h2>
+    <a href="https://docs.qq.com/doc/DVUdUTkZYTnJSaXFw" target="_blank">PR作品（查看点这里）</a>
+  </div>
+  <!-- 友情链接模块 -->
+  <div class="white-module">
+    <p>我的网站</p>
+    <a href="https://hzd19991020.github.io/hz01/zuopin/index.html" target="_blank">友情链接</a>
+  </div>
 </body>
 </html>
