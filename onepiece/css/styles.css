@@ -1,0 +1,23 @@
+/* 设置背景视频容器的样式 */
+.video-background {
+  position: fixed;  /* 固定定位 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* 确保视频在内容后面 */
+  overflow: hidden; /* 防止视频溢出 */
+}
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* 确保视频覆盖整个屏幕 */
+}
+/* 内容部分的样式 */
+.content {
+  position: relative;
+  z-index: 1; /* 确保内容在视频上面 */
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
