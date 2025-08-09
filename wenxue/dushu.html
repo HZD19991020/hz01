@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>书界传奇 - 读书成就系统</title>
+    <style>
+        /* 基础样式 */
+        :root {
+            --wow-gold: #ffd700;
+            --wow-blue: #00aeff;
+            --wow-dark: #1a1a1a;
+            --wow-light: #e6e6e6;
+            --book-brown: #5d4037;
+            --paper-beige: #f5f0e6;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e6e6e6;
+            background-image: url('https://images.blz-contentstack.com/v3/assets/bltc965041283bac56c/blt4e188e67c8a6a6b0/5ebd3e1d998f686c20a8b6a5/wow-classic-bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
+            border-bottom: 2px solid var(--wow-gold);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--wow-gold);
+            text-decoration: none;
+            font-family: 'Times New Roman', serif;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: var(--wow-light);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--wow-gold);
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            color: var(--wow-gold);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--wow-gold);
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background-color: #ffc600;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        /* 主要内容区域 */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #333;
+            border-radius: 8px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* 特色区域 */
+        .featured {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .feature-card {
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 1px solid #333;
+            border-top: 4px solid var(--wow-gold);
+            border-radius: 6px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-card h3 {
+            color: var(--wow-gold);
+            font-size: 22px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .feature-card p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        /* 成就系统 */
+        .achievement-section {
+            margin: 50px 0;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--wow-gold);
+            padding-bottom: 10px;
+        }
+        
+        .section-header h2 {
+            color: var(--wow-gold);
+            font-size: 32px;
+            margin: 0;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .section-header .icon {
+            margin-right: 15px;
+            font-size: 28px;
+        }
+        
+        .achievement-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .achievement {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #333;
+            border-left: 5px solid var(--wow-gold);
+            padding: 15px;
+            display: flex;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+        
+        .achievement.silver {
+            border-left-color: #c0c0c0;
+        }
+        
+        .achievement.bronze {
+            border-left-color: #cd7f32;
+        }
+        
+        .achievement:hover {
+            background: rgba(30, 30, 30, 0.8);
+        }
+        
+        .achievement-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #222;
+            border: 2px solid #444;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--wow-gold);
+        }
+        
+        .achievement-content {
+            flex: 1;
+        }
+        
+        .achievement-title {
+            color: var(--wow-gold);
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+        
+        .silver .achievement-title {
+            color: #c0c0c0;
+        }
+        
+        .bronze .achievement-title {
+            color: #cd7f32;
+        }
+        
+        .achievement-desc {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .achievement-progress {
+            height: 8px;
+            background-color: #222;
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #3a6ea5, #4b9cd3);
+            width: 60%;
+            border-radius: 4px;
+        }
+        
+        /* 新闻区域 */
+        .news-section {
+            margin-top: 50px;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .news-card {
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 1px solid #333;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .news-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-date {
+            color: var(--wow-gold);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .news-title {
+            color: #fff;
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .news-excerpt {
+            color: #aaa;
+            line-height: 1.6;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 40px 0;
+            margin-top: 50px;
+            border-top: 2px solid var(--wow-gold);
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--wow-gold);
+            margin-bottom: 15px;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .footer-links h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--wow-gold);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">书界传奇</a>
+            <div class="nav-links">
+                <a href="#">首页</a>
+                <a href="#">书库</a>
+                <a href="#">成就</a>
+                <a href="#">社区</a>
+                <a href="#">新闻</a>
+                <a href="#">关于</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>探索无尽书海</h1>
+            <p>在知识的国度中书写你的传奇，解锁专属阅读成就，与全球书友一同踏上这段史诗般的阅读之旅</p>
+            <a href="#" class="btn">立即加入</a>
+        </div>
+    </section>
+    
+    <!-- 主要内容 -->
+    <div class="main-container">
+        <!-- 特色区域 -->
+        <section class="featured">
+            <div class="feature-card">
+                <h3>月度精选</h3>
+                <p>每月更新的精选书单，由资深编辑和社区投票选出，涵盖各类文学体裁和知识领域。</p>
+                <a href="#" class="btn" style="margin-top: 15px; display: inline-block;">查看书单</a>
+            </div>
+            <div class="feature-card">
+                <h3>阅读挑战</h3>
+                <p>参与我们的季度阅读挑战，完成指定书单即可获得稀有成就和专属奖励。</p>
+                <a href="#" class="btn" style="margin-top: 15px; display: inline-block;">了解详情</a>
+            </div>
+            <div class="feature-card">
+                <h3>读书会</h3>
+                <p>加入线上读书会，与志同道合的书友交流心得，参与作者见面会和专题讨论。</p>
+                <a href="#" class="btn" style="margin-top: 15px; display: inline-block;">加入讨论</a>
+            </div>
+        </section>
+        
+        <!-- 成就系统 -->
+        <section class="achievement-section">
+            <div class="section-header">
+                <span class="icon">🏆</span>
+                <h2>阅读成就</h2>
+            </div>
+            
+            <div class="achievement-container">
+                <div class="achievement gold">
+                    <div class="achievement-icon">📚</div>
+                    <div class="achievement-content">
+                        <div class="achievement-title">藏书大师</div>
+                        <div class="achievement-desc">收藏超过100本书籍</div>
+                        <div class="achievement-progress">
+                            <div class="progress-bar" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="achievement silver">
+                    <div class="achievement-icon">🌍</div>
+                    <div class="achievement-content">
+                        <div class="achievement-title">环球读者</div>
+                        <div class="achievement-desc">阅读来自6大洲的作品</div>
+                        <div class="achievement-progress">
+                            <div class="progress-bar" style="width: 50%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="achievement bronze">
+                    <div class="achievement-icon">⏱️</div>
+                    <div class="achievement-content">
+                        <div class="achievement-title">晨读习惯</div>
+                        <div class="achievement-desc">连续30天早晨阅读30分钟</div>
+                        <div class="achievement-progress">
+                            <div class="progress-bar" style="width: 20%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="achievement">
+                    <div class="achievement-icon">✍️</div>
+                    <div class="achievement-content">
+                        <div class="achievement-title">深度思考者</div>
+                        <div class="achievement-desc">为10本书撰写读书笔记</div>
+                        <div class="achievement-progress">
+                            <div class="progress-bar" style="width: 40%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="#" class="btn">查看全部成就</a>
+            </div>
+        </section>
+        
+        <!-- 新闻区域 -->
+        <section class="news-section">
+            <div class="section-header">
+                <span class="icon">📢</span>
+                <h2>最新动态</h2>
+            </div>
+            
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="news-content">
+                        <div class="news-date">2023年6月15日</div>
+                        <h3 class="news-title">夏季阅读挑战赛即将开始</h3>
+                        <p class="news-excerpt">参与我们的夏季特别活动，完成指定书单即可获得限定成就和精美礼品...</p>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="news-content">
+                        <div class="news-date">2023年6月10日</div>
+                        <h3 class="news-title">新书推荐：《知识之巅》</h3>
+                        <p class="news-excerpt">本月编辑精选，带你探索人类知识的边界与未来发展的无限可能...</p>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="news-content">
+                        <div class="news-date">2023年6月5日</div>
+                        <h3 class="news-title">读书会：科幻文学专题讨论</h3>
+                        <p class="news-excerpt">加入我们本月的线上读书会，与特邀嘉宾一起探讨科幻文学的发展与未来...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <div class="footer-logo">书界传奇</div>
+                <p style="color: #aaa; line-height: 1.6;">探索知识的世界，书写你的阅读传奇。</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>快速链接</h3>
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">书库</a></li>
+                    <li><a href="#">成就系统</a></li>
+                    <li><a href="#">社区</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>帮助</h3>
+                <ul>
+                    <li><a href="#">常见问题</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">使用条款</a></li>
+                    <li><a href="#">隐私政策</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>关注我们</h3>
+                <ul>
+                    <li><a href="#">微博</a></li>
+                    <li><a href="#">微信</a></li>
+                    <li><a href="#">知乎</a></li>
+                    <li><a href="#">B站</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 书界传奇. 保留所有权利。
+        </div>
+    </footer>
+</body>
+</html>
