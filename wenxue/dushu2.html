@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>书海拾贝 - 发现好书，分享阅读</title>
+    <style>
+        /* 基础样式 */
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #494949;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #3377aa;
+        }
+        
+        a:hover {
+            color: #ffffff;
+            background-color: #3377aa;
+        }
+        
+        /* 顶部导航 */
+        .top-nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e8e8e8;
+            padding: 10px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            width: 950px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007722;
+        }
+        
+        .search-box {
+            display: flex;
+            width: 300px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-right: none;
+            font-size: 14px;
+        }
+        
+        .search-box button {
+            padding: 0 15px;
+            background-color: #007722;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .user-menu a {
+            margin-left: 15px;
+            color: #666;
+        }
+        
+        .user-menu a:hover {
+            background-color: transparent;
+            color: #007722;
+        }
+        
+        /* 主要内容 */
+        .main-container {
+            width: 950px;
+            margin: 20px auto;
+            display: flex;
+        }
+        
+        /* 左侧内容 */
+        .content-left {
+            width: 630px;
+            margin-right: 20px;
+        }
+        
+        /* 右侧边栏 */
+        .sidebar {
+            width: 300px;
+        }
+        
+        /* 模块样式 */
+        .module {
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .module-header {
+            padding: 15px;
+            border-bottom: 1px solid #e8e8e8;
+            font-size: 16px;
+            font-weight: bold;
+            color: #007722;
+        }
+        
+        .module-content {
+            padding: 15px;
+        }
+        
+        /* 书籍列表 */
+        .book-list {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -10px;
+        }
+        
+        .book-item {
+            width: 100px;
+            margin: 10px;
+            text-align: center;
+        }
+        
+        .book-cover {
+            width: 100px;
+            height: 140px;
+            margin-bottom: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .book-cover:hover {
+            transform: translateY(-5px);
+        }
+        
+        .book-title {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 3px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 36px;
+        }
+        
+        .book-rating {
+            color: #e09015;
+            font-size: 12px;
+        }
+        
+        /* 读书笔记 */
+        .note-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .note-item:last-child {
+            border-bottom: none;
+        }
+        
+        .note-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .note-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .note-user {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .note-time {
+            font-size: 12px;
+            color: #999;
+            margin-left: 10px;
+        }
+        
+        .note-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .note-content {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .note-footer {
+            display: flex;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .note-footer span {
+            margin-right: 15px;
+        }
+        
+        /* 热门标签 */
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .tag-item {
+            margin: 0 10px 10px 0;
+            padding: 4px 12px;
+            background-color: #f5f5f5;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .tag-item:hover {
+            background-color: #3377aa;
+            color: white;
+        }
+        
+        /* 新书速递 */
+        .new-book {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .new-book-cover {
+            width: 60px;
+            height: 84px;
+            margin-right: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .new-book-info {
+            flex: 1;
+        }
+        
+        .new-book-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .new-book-author {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .new-book-rating {
+            color: #e09015;
+            font-size: 12px;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background-color: #f0f0f0;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #e8e8e8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="nav-container">
+            <div class="logo">书海拾贝</div>
+            <div class="search-box">
+                <input type="text" placeholder="搜索书籍、作者、ISBN">
+                <button>搜索</button>
+            </div>
+            <div class="user-menu">
+                <a href="#">登录</a>
+                <a href="#">注册</a>
+                <a href="#">我的书架</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 主要内容 -->
+    <div class="main-container">
+        <!-- 左侧内容 -->
+        <div class="content-left">
+            <!-- 热门书籍 -->
+            <div class="module">
+                <div class="module-header">热门书籍</div>
+                <div class="module-content">
+                    <div class="book-list">
+                        <div class="book-item">
+                            <img src="https://img9.doubanio.com/view/subject/s/public/s33834057.jpg" class="book-cover" alt="书籍封面">
+                            <div class="book-title">可能性的艺术：比较政治学30讲</div>
+                            <div class="book-rating">★★★★☆ 9.1</div>
+                        </div>
+                        <div class="book-item">
+                            <img src="https://img9.doubanio.com/view/subject/s/public/s33834058.jpg" class="book-cover" alt="书籍封面">
+                            <div class="book-title">长安的荔枝</div>
+                            <div class="book-rating">★★★★☆ 8.5</div>
+                        </div>
+                        <div class="book-item">
+                            <img src="https://img9.doubanio.com/view/subject/s/public/s33834059.jpg" class="book-cover" alt="书籍封面">
+                            <div class="book-title">始于极限：女性主义往复书简</div>
+                            <div class="book-rating">★★★★★ 9.2</div>
+                        </div>
+                        <div class="book-item">
+                            <img src="https://img9.doubanio.com/view/subject/s/public/s33834060.jpg" class="book-cover" alt="书籍封面">
+                            <div class="book-title">命运</div>
+                            <div class="book-rating">★★★★☆ 8.9</div>
+                        </div>
+                        <div class="book-item">
+                            <img src="https://img9.doubanio.com/view/subject/s/public/s33834061.jpg" class="book-cover" alt="书籍封面">
+                            <div class="book-title">应得的权利</div>
+                            <div class="book-rating">★★★★☆ 8.6</div>
+                        </div>
+                        <div class="book-item">
+                            <img src="https://img9.doubanio.com/view/subject/s/public/s33834062.jpg" class="book-cover" alt="书籍封面">
+                            <div class="book-title">当我们不再理解世界</div>
+                            <div class="book-rating">★★★★☆ 8.3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 最新读书笔记 -->
+            <div class="module">
+                <div class="module-header">最新读书笔记</div>
+                <div class="module-content">
+                    <div class="note-item">
+                        <div class="note-header">
+                            <img src="https://img9.doubanio.com/icon/u1234567-12.jpg" class="note-avatar" alt="用户头像">
+                            <span class="note-user">书虫小张</span>
+                            <span class="note-time">3小时前</span>
+                        </div>
+                        <div class="note-title">读《可能性的艺术》：比较视野下的政治智慧</div>
+                        <div class="note-content">
+                            刘瑜老师的新书《可能性的艺术》通过比较政治学的视角，为我们提供了一个理解政治多样性的框架。书中将不同国家的政治发展比作"可能性艺术"，强调政治选择的重要性而非决定论...
+                        </div>
+                        <div class="note-footer">
+                            <span>来自《可能性的艺术》</span>
+                            <span>12人喜欢</span>
+                            <span>5条回应</span>
+                        </div>
+                    </div>
+                    
+                    <div class="note-item">
+                        <div class="note-header">
+                            <img src="https://img9.doubanio.com/icon/u2345678-13.jpg" class="note-avatar" alt="用户头像">
+                            <span class="note-user">文学少女</span>
+                            <span class="note-time">昨天</span>
+                        </div>
+                        <div class="note-title">《长安的荔枝》：一骑红尘背后的盛唐气象</div>
+                        <div class="note-content">
+                            马伯庸的这部历史小说以"一骑红尘妃子笑"为切入点，展现了盛唐时期庞大的物流系统和官僚体系运作。小说通过一个小官吏的视角，揭示了宏大历史背后普通人的命运...
+                        </div>
+                        <div class="note-footer">
+                            <span>来自《长安的荔枝》</span>
+                            <span>28人喜欢</span>
+                            <span>15条回应</span>
+                        </div>
+                    </div>
+                    
+                    <div class="note-item">
+                        <div class="note-header">
+                            <img src="https://img9.doubanio.com/icon/u3456789-14.jpg" class="note-avatar" alt="用户头像">
+                            <span class="note-user">思想者</span>
+                            <span class="note-time">2天前</span>
+                        </div>
+                        <div class="note-title">《始于极限》读后：女性主义的真诚对话</div>
+                        <div class="note-content">
+                            上野千鹤子与铃木凉美通过书信形式展开的这场对话，展现了不同世代女性主义者之间的思想碰撞。书中对爱情、婚姻、工作、自由等话题的探讨，既有理论深度又充满生活气息...
+                        </div>
+                        <div class="note-footer">
+                            <span>来自《始于极限》</span>
+                            <span>35人喜欢</span>
+                            <span>22条回应</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧边栏 -->
+        <div class="sidebar">
+            <!-- 热门标签 -->
+            <div class="module">
+                <div class="module-header">热门标签</div>
+                <div class="module-content">
+                    <div class="tag-list">
+                        <a href="#" class="tag-item">小说</a>
+                        <a href="#" class="tag-item">文学</a>
+                        <a href="#" class="tag-item">历史</a>
+                        <a href="#" class="tag-item">心理学</a>
+                        <a href="#" class="tag-item">哲学</a>
+                        <a href="#" class="tag-item">社会学</a>
+                        <a href="#" class="tag-item">科幻</a>
+                        <a href="#" class="tag-item">推理</a>
+                        <a href="#" class="tag-item">传记</a>
+                        <a href="#" class="tag-item">艺术</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 新书速递 -->
+            <div class="module">
+                <div class="module-header">新书速递</div>
+                <div class="module-content">
+                    <div class="new-book">
+                        <img src="https://img9.doubanio.com/view/subject/s/public/s33834063.jpg" class="new-book-cover" alt="书籍封面">
+                        <div class="new-book-info">
+                            <div class="new-book-title">芯片战争</div>
+                            <div class="new-book-author">[美] 克里斯·米勒</div>
+                            <div class="new-book-rating">★★★★☆ 8.7</div>
+                        </div>
+                    </div>
+                    
+                    <div class="new-book">
+                        <img src="https://img9.doubanio.com/view/subject/s/public/s33834064.jpg" class="new-book-cover" alt="书籍封面">
+                        <div class="new-book-info">
+                            <div class="new-book-title">看不见的女性</div>
+                            <div class="new-book-author">[英] 卡罗琳·克里亚多·佩雷斯</div>
+                            <div class="new-book-rating">★★★★★ 9.1</div>
+                        </div>
+                    </div>
+                    
+                    <div class="new-book">
+                        <img src="https://img9.doubanio.com/view/subject/s/public/s33834065.jpg" class="new-book-cover" alt="书籍封面">
+                        <div class="new-book-info">
+                            <div class="new-book-title">翦商</div>
+                            <div class="new-book-author">李硕</div>
+                            <div class="new-book-rating">★★★★★ 9.3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 读书活动 -->
+            <div class="module">
+                <div class="module-header">读书活动</div>
+                <div class="module-content">
+                    <p style="margin-bottom: 10px;"><a href="#">📖 夏季阅读挑战赛：完成5本书赢好礼</a></p>
+                    <p style="margin-bottom: 10px;"><a href="#">🎤 线上读书会：科幻文学的未来想象</a></p>
+                    <p><a href="#">✍️ "我最喜爱的一本书"征文大赛</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <div class="footer">
+        <p>© 2023 书海拾贝 - 发现好书，分享阅读</p>
+        <p>关于我们 · 帮助中心 · 联系我们 · 隐私政策</p>
+    </div>
+</body>
+</html>
