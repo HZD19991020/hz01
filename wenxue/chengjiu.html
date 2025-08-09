@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界文学成就</title>
+    <style>
+        /* 基础样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #e6e6e6;
+            padding: 20px;
+        }
+        
+        /* 成就容器 */
+        .achievement-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* 成就项 */
+        .achievement {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #3a3a3a;
+            border-left: 4px solid #ffd700;
+            margin-bottom: 15px;
+            padding: 12px;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* 金色成就 */
+        .achievement.gold {
+            border-left-color: #ffd700;
+            background: linear-gradient(to right, rgba(255, 215, 0, 0.1), rgba(0, 0, 0, 0.7));
+        }
+        
+        /* 银色成就 */
+        .achievement.silver {
+            border-left-color: #c0c0c0;
+            background: linear-gradient(to right, rgba(192, 192, 192, 0.1), rgba(0, 0, 0, 0.7));
+        }
+        
+        /* 成就标题 */
+        .achievement-title {
+            color: #ffd700;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 0 0 3px rgba(255, 215, 0, 0.5);
+        }
+        
+        .silver .achievement-title {
+            color: #c0c0c0;
+            text-shadow: 0 0 3px rgba(192, 192, 192, 0.5);
+        }
+        
+        /* 成就描述 */
+        .achievement-desc {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #a7a7a7;
+        }
+        
+        /* 成就点数 */
+        .achievement-points {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* 进度条容器 */
+        .progress-container {
+            height: 16px;
+            background: #222;
+            border: 1px solid #444;
+            margin-top: 8px;
+            position: relative;
+        }
+        
+        /* 进度条 */
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #3a6ea5, #4b9cd3);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        /* 进度文本 */
+        .progress-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            line-height: 16px;
+            color: white;
+            text-shadow: 1px 1px 1px black;
+        }
+        
+        /* 已完成成就 */
+        .achievement.completed .achievement-title {
+            color: #a7a7a7;
+            text-decoration: line-through;
+        }
+        
+        .achievement.completed .achievement-desc {
+            color: #666;
+        }
+        
+        /* 成就图标 */
+        .achievement-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border: 2px solid #666;
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="achievement-container">
+        <h2 style="color: #ffd700; text-align: center; text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);">成就</h2>
+        
+        <!-- 金色成就 -->
+        <div class="achievement gold">
+            <div class="achievement-points">10</div>
+            <div class="achievement-title">艾泽拉斯的救世主</div>
+            <div class="achievement-desc">击败最终首领，拯救艾泽拉斯</div>
+        </div>
+        
+        <!-- 银色成就 -->
+        <div class="achievement silver">
+            <div class="achievement-points">5</div>
+            <div class="achievement-title">团队协作</div>
+            <div class="achievement-desc">与5名玩家组队完成地下城</div>
+        </div>
+        
+        <!-- 进行中的成就 -->
+        <div class="achievement">
+            <div class="achievement-points">15</div>
+            <div class="achievement-title">怪物猎人</div>
+            <div class="achievement-desc">击败1000只怪物 (732/1000)</div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 73.2%"></div>
+                <div class="progress-text">73%</div>
+            </div>
+        </div>
+        
+        <!-- 已完成成就 -->
+        <div class="achievement completed">
+            <div class="achievement-points">5</div>
+            <div class="achievement-title">初出茅庐</div>
+            <div class="achievement-desc">达到10级</div>
+        </div>
+        
+        <!-- 带进度条的成就 -->
+        <div class="achievement">
+            <div class="achievement-points">20</div>
+            <div class="achievement-title">探索者</div>
+            <div class="achievement-desc">发现100个地点 (42/100)</div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 42%"></div>
+                <div class="progress-text">42%</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 可以添加JavaScript来实现动态进度条等功能
+        // 例如：
+        // document.querySelector('.progress-bar').style.width = '73%';
+    </script>
+</body>
+</html>
