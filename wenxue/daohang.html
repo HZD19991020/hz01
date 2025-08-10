@@ -301,13 +301,16 @@
         }
         
         .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: #6d3100;
-        }
+    background-color: white;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #f5f5f5;
+    color: #6d3100;
+    border-color: #6d3100;
+}
         
         /* 响应式设计 */
         @media (max-width: 768px) {
