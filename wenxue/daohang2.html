@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>书香世界 - 阅读导航</title>
+    <style>
+        /* 基础样式 */
+        :root {
+            --primary-color: #8B4513; /* 深棕色 */
+            --accent-color: #D2B48C; /* 浅褐色 */
+            --text-color: #333333;
+            --light-bg: #FAF5EF;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'SimSun', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* 顶部导航 */
+        .top-nav {
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 0;
+            border-bottom: 2px solid var(--accent-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'KaiTi', 'STKaiti', serif;
+            padding: 15px 20px 15px 0;
+            margin-right: 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            height: 100%;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-item > a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 20px 15px;
+            display: block;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        
+        .nav-item > a:hover {
+            color: var(--primary-color);
+            background-color: rgba(210, 180, 140, 0.1);
+        }
+        
+        /* 下拉菜单 */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            border: 1px solid #e0e0e0;
+            border-top: 2px solid var(--accent-color);
+            width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .dropdown-menu a {
+            color: var(--text-color);
+            padding: 12px 15px;
+            display: block;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s;
+        }
+        
+        .dropdown-menu a:hover {
+            color: var(--primary-color);
+            background-color: rgba(210, 180, 140, 0.1);
+            padding-left: 20px;
+        }
+        
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+        
+        /* 下拉菜单指示箭头 */
+        .nav-item.has-dropdown > a::after {
+            content: "▼";
+            font-size: 10px;
+            margin-left: 5px;
+            color: var(--text-color);
+        }
+        
+        /* 内容区域 */
+        .content {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            min-height: 500px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'KaiTi', 'STKaiti', serif;
+            font-size: 2.5em;
+        }
+        
+        .book-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .book-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .book-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 8px;
+        }
+        
+        .book-author {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .book-desc {
+            font-size: 0.9em;
+            color: #555;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 0;
+            }
+            
+            .nav-links {
+                width: 100%;
+                flex-direction: column;
+            }
+            
+            .nav-item {
+                width: 100%;
+                text-align: left;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                border: none;
+                background-color: rgba(255, 255, 255, 0.9);
+            }
+            
+            .nav-item:hover .dropdown-menu {
+                max-height: 500px;
+            }
+            
+            .book-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="#" class="logo">书香世界</a>
+            
+            <div class="nav-links">
+                <div class="nav-item has-dropdown">
+                    <a href="#">图书分类</a>
+                    <div class="dropdown-menu">
+                        <a href="#">文学小说</a>
+                        <a href="#">人文社科</a>
+                        <a href="#">经济管理</a>
+                        <a href="#">科学技术</a>
+                        <a href="#">生活艺术</a>
+                    </div>
+                </div>
+                
+                <div class="nav-item has-dropdown">
+                    <a href="#">阅读推荐</a>
+                    <div class="dropdown-menu">
+                        <a href="#">本月畅销</a>
+                        <a href="#">经典必读</a>
+                        <a href="#">新书速递</a>
+                        <a href="#">编辑推荐</a>
+                    </div>
+                </div>
+                
+                <div class="nav-item has-dropdown">
+                    <a href="#">读书社区</a>
+                    <div class="dropdown-menu">
+                        <a href="#">书评分享</a>
+                        <a href="#">读书会</a>
+                        <a href="#">作者访谈</a>
+                        <a href="#">阅读活动</a>
+                    </div>
+                </div>
+                
+                <div class="nav-item has-dropdown">
+                    <a href="#">我的书架</a>
+                    <div class="dropdown-menu">
+                        <a href="#">阅读记录</a>
+                        <a href="#">书单收藏</a>
+                        <a href="#">读书笔记</a>
+                        <a href="#">阅读统计</a>
+                    </div>
+                </div>
+                
+                <div class="nav-item">
+                    <a href="#">书店</a>
+                </div>
+                
+                <div class="nav-item has-dropdown">
+                    <a href="#">关于我们</a>
+                    <div class="dropdown-menu">
+                        <a href="#">平台介绍</a>
+                        <a href="#">联系我们</a>
+                        <a href="#">加入我们</a>
+                        <a href="#">帮助中心</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 内容区域 -->
+    <div class="content">
+        <h1>发现你的下一本好书</h1>
+        <p>在浩瀚书海中寻找属于你的精神食粮，让阅读成为生活的日常。</p>
+        
+        <div class="book-list">
+            <div class="book-card">
+                <div class="book-title">活着</div>
+                <div class="book-author">余华</div>
+                <div class="book-desc">《活着》讲述一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。</div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-title">百年孤独</div>
+                <div class="book-author">加西亚·马尔克斯</div>
+                <div class="book-desc">魔幻现实主义文学的代表作，描写了布恩迪亚家族七代人的传奇故事，以及加勒比海沿岸小镇马孔多的百年兴衰。</div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-title">人类简史</div>
+                <div class="book-author">尤瓦尔·赫拉利</div>
+                <div class="book-desc">从认知革命、农业革命到科学革命，理清影响人类发展的重大脉络，重新定义我们是谁、我们从哪里来。</div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-title">平凡的世界</div>
+                <div class="book-author">路遥</div>
+                <div class="book-desc">全景式地表现中国当代城乡社会生活，高度浓缩了中国西北农村的历史变迁过程。</div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-title">围城</div>
+                <div class="book-author">钱钟书</div>
+                <div class="book-desc">中国现代文学史上一部风格独特的讽刺小说，被誉为"新儒林外史"。</div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-title">三体</div>
+                <div class="book-author">刘慈欣</div>
+                <div class="book-desc">中国科幻文学的里程碑之作，讲述了地球人类文明和三体文明的信息交流、生死搏杀及两个文明在宇宙中的兴衰历程。</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
