@@ -527,6 +527,201 @@
                 width: 100%;
             }
         }
+
+        /* 画廊样式 */
+        .gallery-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 30px;
+        }
+
+        .gallery-section h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'KaiTi', 'STKaiti', serif;
+            font-size: 2em;
+        }
+
+        .gallery-container {
+            width: 100%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .main-image-container {
+            width: 100%;
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .main-image.zoom {
+            transform: scale(1.05);
+        }
+        
+        .image-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            font-size: 24px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .thumbnail-container {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .thumbnail {
+            width: 80px;
+            height: 60px;
+            border: 2px solid white;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .thumbnail:hover, .thumbnail.active {
+            opacity: 1;
+            border-color: #ff4757;
+            transform: translateY(-5px);
+        }
+        
+        .nav-arrows {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            z-index: 5;
+        }
+        
+        .arrow {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .arrow i {
+            color: white;
+            font-size: 24px;
+        }
+        
+        .zoom-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .zoom-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .zoom-btn i {
+            color: white;
+            font-size: 18px;
+        }
+        
+        /* 加载动画 */
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ff4757;
+            animation: spin 1s ease-in-out infinite;
+            z-index: 5;
+        }
+        
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main-image-container {
+                height: 400px;
+            }
+            
+            .thumbnail {
+                width: 60px;
+                height: 45px;
+            }
+            
+            .image-title {
+                font-size: 18px;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-image-container {
+                height: 300px;
+            }
+            
+            .thumbnail-container {
+                right: 10px;
+                bottom: 10px;
+                gap: 5px;
+            }
+            
+            .thumbnail {
+                width: 40px;
+                height: 30px;
+            }
+            
+            .arrow {
+                width: 40px;
+                height: 40px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -821,6 +1016,47 @@
         </div>
     </div>
 
+    <!-- 画廊区域 -->
+    <div class="gallery-section">
+        <h2>获奖作品展示</h2>
+        <div class="gallery-container">
+            <div class="main-image-container">
+                <!-- 加载动画 -->
+                <div class="loader" style="display: none;"></div>
+                
+                <!-- 主图 -->
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="风景图片1" class="main-image">
+                
+                <!-- 图片标题 -->
+                <div class="image-title">美丽的自然风景 (1/5)</div>
+                
+                <!-- 缩放按钮 -->
+                <div class="zoom-btn" title="放大/缩小">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+                
+                <!-- 导航箭头 -->
+                <div class="nav-arrows">
+                    <div class="arrow prev" title="上一张">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="arrow next" title="下一张">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 缩略图容器 -->
+            <div class="thumbnail-container">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="缩略图1" class="thumbnail active" data-index="0">
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="缩略图2" class="thumbnail" data-index="1">
+                <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="缩略图3" class="thumbnail" data-index="2">
+                <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="缩略图4" class="thumbnail" data-index="3">
+                <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="缩略图5" class="thumbnail" data-index="4">
+            </div>
+        </div>
+    </div>
+
     <script>
         // 登录弹窗控制
         const loginBtn = document.getElementById('loginBtn');
@@ -856,6 +1092,140 @@
             // 模拟登录成功
             alert('登录成功!');
             modal.style.display = 'none';
+        });
+
+        // 画廊脚本
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const mainImage = document.querySelector('.main-image');
+            const mainImageContainer = document.querySelector('.main-image-container');
+            const imageTitle = document.querySelector('.image-title');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const prevArrow = document.querySelector('.arrow.prev');
+            const nextArrow = document.querySelector('.arrow.next');
+            const zoomBtn = document.querySelector('.zoom-btn');
+            const loader = document.querySelector('.loader');
+            
+            // 图片数据
+            const images = [
+                {
+                    url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                    title: '美丽的自然风景 (1/5)'
+                },
+                {
+                    url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                    title: '晨雾中的森林 (2/5)'
+                },
+                {
+                    url: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                    title: '热带雨林瀑布 (3/5)'
+                },
+                {
+                    url: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                    title: '秋日枫叶 (4/5)'
+                },
+                {
+                    url: 'https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                    title: '日落草原 (5/5)'
+                }
+            ];
+            
+            let currentIndex = 0;
+            let isZoomed = false;
+            
+            // 更新主图函数
+            function updateMainImage(index) {
+                // 显示加载动画
+                loader.style.display = 'block';
+                mainImage.style.opacity = '0';
+                
+                // 预加载图片
+                const img = new Image();
+                img.src = images[index].url;
+                img.onload = function() {
+                    // 图片加载完成后更新显示
+                    mainImage.src = this.src;
+                    imageTitle.textContent = images[index].title;
+                    
+                    // 更新缩略图激活状态
+                    thumbnails.forEach((thumb, i) => {
+                        thumb.classList.toggle('active', i === index);
+                    });
+                    
+                    // 隐藏加载动画
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        mainImage.style.opacity = '1';
+                    }, 300);
+                };
+                
+                currentIndex = index;
+            }
+            
+            // 缩略图点击事件
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (index !== currentIndex) {
+                        updateMainImage(index);
+                    }
+                });
+            });
+            
+            // 上一张按钮
+            prevArrow.addEventListener('click', function() {
+                const newIndex = (currentIndex - 1 + images.length) % images.length;
+                updateMainImage(newIndex);
+            });
+            
+            // 下一张按钮
+            nextArrow.addEventListener('click', function() {
+                const newIndex = (currentIndex + 1) % images.length;
+                updateMainImage(newIndex);
+            });
+            
+            // 键盘左右键控制
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    const newIndex = (currentIndex - 1 + images.length) % images.length;
+                    updateMainImage(newIndex);
+                } else if (e.key === 'ArrowRight') {
+                    const newIndex = (currentIndex + 1) % images.length;
+                    updateMainImage(newIndex);
+                }
+            });
+            
+            // 缩放按钮
+            zoomBtn.addEventListener('click', function() {
+                isZoomed = !isZoomed;
+                mainImage.classList.toggle('zoom', isZoomed);
+                this.querySelector('i').className = isZoomed ? 'fas fa-search-minus' : 'fas fa-search-plus';
+            });
+            
+            // 触摸滑动支持 (移动端)
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            mainImageContainer.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            mainImageContainer.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    // 向左滑动 - 下一张
+                    const newIndex = (currentIndex + 1) % images.length;
+                    updateMainImage(newIndex);
+                } else if (touchEndX > touchStartX + 50) {
+                    // 向右滑动 - 上一张
+                    const newIndex = (currentIndex - 1 + images.length) % images.length;
+                    updateMainImage(newIndex);
+                }
+            }
         });
     </script>
 </body>
