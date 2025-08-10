@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>左右布局可切换内容展示</title>
+    <title>世界文学阅读系统</title>
     <style>
         /* 基础样式 */
         * {
@@ -99,41 +99,153 @@
             overflow: hidden;
         }
         
-        /* 右侧内容区域 */
+        /* 右侧内容区域 - 成就样式 */
         .right-content {
             flex: 1;
             padding: 30px;
             overflow-y: auto;
         }
         
-        .content-header {
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
+        /* 成就容器 */
+        .achievement-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
-        .content-header h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #222;
+        /* 成就项 */
+        .achievement {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-left: 4px solid #ffd700;
+            margin-bottom: 15px;
+            padding: 12px;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            border-radius: 4px;
         }
         
-        .content-header .meta {
-            color: #666;
+        /* 勾选框样式 */
+        .achievement-checkbox {
+            margin-right: 15px;
+            margin-top: 3px;
+            position: relative;
+        }
+        
+        /* 自定义勾选框外观 */
+        .achievement-checkbox input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cccccc;
+            border-radius: 3px;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .achievement-checkbox input[type="checkbox"]:hover {
+            border-color: #999999;
+        }
+        
+        .achievement-checkbox input[type="checkbox"]:checked {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+        
+        .achievement-checkbox input[type="checkbox"]:checked::after {
+            content: "✓";
+            position: absolute;
+            color: white;
+            font-size: 14px;
+            left: 3px;
+            top: -1px;
+        }
+        
+        /* 成就内容 */
+        .achievement-content {
+            flex: 1;
+        }
+        
+        /* 金色成就 */
+        .achievement.gold {
+            border-left-color: #ffd700;
+            background: linear-gradient(to right, rgba(255, 215, 0, 0.05), #ffffff);
+        }
+        
+        /* 银色成就 */
+        .achievement.silver {
+            border-left-color: #c0c0c0;
+            background: linear-gradient(to right, rgba(192, 192, 192, 0.05), #ffffff);
+        }
+        
+        /* 成就标题 */
+        .achievement-title {
+            color: #d4af37; /* 金色 */
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .silver .achievement-title {
+            color: #c0c0c0; /* 银色 */
+        }
+        
+        /* 成就描述 */
+        .achievement-desc {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #666666;
+        }
+        
+        /* 成就点数 */
+        .achievement-points {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            color: #d4af37;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* 统计区域 - 修改后的紧凑样式 */
+        .achievement-stats {
+            margin-top: 20px;
+            padding: 12px 15px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
             font-size: 14px;
             display: flex;
-            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .content-body {
-            line-height: 1.8;
+        .achievement-stats div {
+            display: flex;
+            align-items: center;
         }
         
-        .content-body img {
-            max-width: 100%;
-            height: auto;
-            margin: 20px 0;
-            border-radius: 4px;
+        .achievement-stats span {
+            font-weight: bold;
+            margin-left: 5px;
+            color: #d4af37;
+        }
+        
+        /* 标题样式 */
+        .achievement-header {
+            color: #d4af37;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
         
         /* 响应式设计 */
@@ -161,129 +273,142 @@
         <div class="left-sidebar">
             <!-- 分类切换标签 -->
             <div class="category-tabs">
-                <div class="tab active" data-category="news">新闻</div>
-                <div class="tab" data-category="tutorials">教程</div>
-                <div class="tab" data-category="resources">资源</div>
+                <div class="tab active" data-category="classics">经典文学</div>
+                <div class="tab" data-category="short-stories">短篇小说</div>
+                <div class="tab" data-category="poetry">诗歌</div>
             </div>
             
-            <!-- 新闻列表 -->
-            <ul class="item-list" id="news-list">
+            <!-- 经典文学列表 -->
+            <ul class="item-list" id="classics-list">
                 <li class="list-item active" data-id="1">
-                    <h3>魔兽世界10.1.5版本更新公告</h3>
-                    <p>详细介绍10.1.5版本的新内容和系统改进...</p>
+                    <h3>《红楼梦》</h3>
+                    <p>中国古典四大名著之首，清代作家曹雪芹创作的长篇小说...</p>
                 </li>
                 <li class="list-item" data-id="2">
-                    <h3>全新团队副本"亚贝鲁斯"开放</h3>
-                    <p>探索泰坦遗迹，挑战新的首领获取强力装备...</p>
+                    <h3>《战争与和平》</h3>
+                    <p>俄国作家列夫·托尔斯泰的代表作，描写拿破仑入侵俄国时期的故事...</p>
                 </li>
                 <li class="list-item" data-id="3">
-                    <h3>2023年竞技场世界锦标赛</h3>
-                    <p>全球顶尖PVP玩家将角逐冠军头衔和丰厚奖金...</p>
+                    <h3>《百年孤独》</h3>
+                    <p>加西亚·马尔克斯的代表作，魔幻现实主义文学的经典...</p>
                 </li>
                 <li class="list-item" data-id="4">
-                    <h3>新坐骑与宠物预览</h3>
-                    <p>10.1.5版本新增的可收集坐骑和宠物一览...</p>
+                    <h3>《傲慢与偏见》</h3>
+                    <p>简·奥斯汀的代表作，描写19世纪英国乡绅阶层的爱情与婚姻...</p>
                 </li>
                 <li class="list-item" data-id="5">
-                    <h3>开发者访谈：职业平衡调整</h3>
-                    <p>游戏设计师谈10.1.5版本各职业的改动思路...</p>
+                    <h3>《罪与罚》</h3>
+                    <p>陀思妥耶夫斯基的心理学小说，探讨犯罪与救赎的主题...</p>
                 </li>
             </ul>
             
-            <!-- 教程列表 (默认隐藏) -->
-            <ul class="item-list" id="tutorials-list" style="display: none;">
+            <!-- 短篇小说列表 (默认隐藏) -->
+            <ul class="item-list" id="short-stories-list" style="display: none;">
                 <li class="list-item" data-id="6">
-                    <h3>新手入门指南</h3>
-                    <p>从创建角色到满级的完整成长路线指引...</p>
+                    <h3>《麦琪的礼物》</h3>
+                    <p>欧·亨利的经典短篇，讲述一对贫穷夫妻互赠圣诞礼物的故事...</p>
                 </li>
                 <li class="list-item" data-id="7">
-                    <h3>职业专精选择建议</h3>
-                    <p>分析各职业专精的特点和适用场景...</p>
+                    <h3>《项链》</h3>
+                    <p>莫泊桑的代表作，讲述一个关于虚荣与命运的讽刺故事...</p>
                 </li>
                 <li class="list-item" data-id="8">
-                    <h3>团队副本机制详解</h3>
-                    <p>当前版本团队副本所有首领的战术指南...</p>
+                    <h3>《变色龙》</h3>
+                    <p>契诃夫的短篇小说，讽刺沙皇专制制度下的小官员形象...</p>
                 </li>
                 <li class="list-item" data-id="9">
-                    <h3>装备属性优先级</h3>
-                    <p>各职业专精的最佳属性搭配和装备选择...</p>
+                    <h3>《最后一片叶子》</h3>
+                    <p>欧·亨利的感人故事，讲述艺术与生命的关系...</p>
                 </li>
                 <li class="list-item" data-id="10">
-                    <h3>专业技能赚钱攻略</h3>
-                    <p>如何通过专业技能获得最大收益...</p>
+                    <h3>《羊脂球》</h3>
+                    <p>莫泊桑的成名作，普法战争背景下的社会众生相...</p>
                 </li>
             </ul>
             
-            <!-- 资源列表 (默认隐藏) -->
-            <ul class="item-list" id="resources-list" style="display: none;">
+            <!-- 诗歌列表 (默认隐藏) -->
+            <ul class="item-list" id="poetry-list" style="display: none;">
                 <li class="list-item" data-id="11">
-                    <h3>插件包推荐</h3>
-                    <p>提升游戏体验的必备插件合集...</p>
+                    <h3>《李白诗选》</h3>
+                    <p>唐代诗人李白的诗歌精选，展现盛唐气象与浪漫主义精神...</p>
                 </li>
                 <li class="list-item" data-id="12">
-                    <h3>宏命令大全</h3>
-                    <p>各职业实用的宏命令收集...</p>
+                    <h3>《杜甫诗选》</h3>
+                    <p>诗圣杜甫的作品集，反映安史之乱前后的社会现实...</p>
                 </li>
                 <li class="list-item" data-id="13">
-                    <h3>界面设置优化</h3>
-                    <p>专业玩家的UI配置建议...</p>
+                    <h3>《泰戈尔诗选》</h3>
+                    <p>印度诗人泰戈尔的抒情诗，充满哲理与东方智慧...</p>
                 </li>
                 <li class="list-item" data-id="14">
-                    <h3>数据统计网站</h3>
-                    <p>WCL、RaiderIO等实用网站指南...</p>
+                    <h3>《海子诗选》</h3>
+                    <p>中国当代诗人海子的作品，充满激情与理想主义...</p>
                 </li>
                 <li class="list-item" data-id="15">
-                    <h3>社区资源导航</h3>
-                    <p>优质社区、论坛和Discord服务器推荐...</p>
+                    <h3>《普希金诗选》</h3>
+                    <p>俄罗斯文学之父普希金的诗歌作品，语言优美情感真挚...</p>
                 </li>
             </ul>
         </div>
         
-        <!-- 右侧内容区域 -->
+        <!-- 右侧内容区域 - 成就系统 -->
         <div class="right-content">
-            <div class="content-header">
-                <h2>魔兽世界10.1.5版本更新公告</h2>
-                <div class="meta">
-                    <span>发布日期: 2023-07-12</span>
-                    <span>作者: 暴雪娱乐</span>
-                    <span>分类: 新闻</span>
+            <div class="achievement-container">
+                <h2 class="achievement-header">世界三大短篇小说家爱好者</h2>
+                
+                <!-- 欧亨利成就 -->
+                <div class="achievement gold">
+                    <label class="achievement-checkbox">
+                        <input type="checkbox" class="achievement-check" data-points="10">
+                    </label>
+                    <div class="achievement-content">
+                        <div class="achievement-points">10</div>
+                        <div class="achievement-title">欧亨利（美国）</div>
+                        <div class="achievement-desc">阅读欧亨利短篇小说1本</div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 30%"></div>
+                            <div class="progress-text">30% 完成</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="content-body">
-                <img src="https://images.blz-contentstack.com/v3/assets/bltc965041283bac56c/blt8c5f7e8a9e5a0a1c/64a8f8c5c9b5b910f8e5c3a3/WoW-Dragonflight-10.1.5-Header.jpg" alt="10.1.5版本">
+
+                <!-- 莫泊桑成就 -->
+                <div class="achievement gold">
+                    <label class="achievement-checkbox">
+                        <input type="checkbox" class="achievement-check" data-points="10">
+                    </label>
+                    <div class="achievement-content">
+                        <div class="achievement-points">10</div>
+                        <div class="achievement-title">莫泊桑（法国）</div>
+                        <div class="achievement-desc">阅读莫泊桑短篇小说1本</div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 50%"></div>
+                            <div class="progress-text">50% 完成</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 契诃夫成就 -->
+                <div class="achievement gold">
+                    <label class="achievement-checkbox">
+                        <input type="checkbox" class="achievement-check" data-points="10">
+                    </label>
+                    <div class="achievement-content">
+                        <div class="achievement-points">10</div>
+                        <div class="achievement-title">契诃夫（俄罗斯）</div>
+                        <div class="achievement-desc">阅读契诃夫短篇小说1本</div>
+                        <div class="progress-container">
+                            <div class="progress-bar" style="width: 20%"></div>
+                            <div class="progress-text">20% 完成</div>
+                        </div>
+                    </div>
+                </div>
                 
-                <p>《魔兽世界》"巨龙时代"内容更新的下一个章节已经到来！10.1.5版本"时光裂隙"现已上线，带来了全新内容、系统改进和更多精彩玩法。</p>
-                
-                <h3>新内容：大法师梅特里时空漫游</h3>
-                
-                <p>在这个全新的单人挑战中，玩家将跟随大法师梅特里穿越扭曲的时空裂隙，体验《魔兽世界》历史上的关键战役。每次挑战都会随机生成不同的敌人和奖励，确保每次体验都独一无二。</p>
-                
-                <h3>新种族职业组合：德莱尼术士</h3>
-                
-                <p>德莱尼现在可以选择成为术士了！这一全新的种族职业组合为德莱尼玩家提供了全新的游戏体验。德莱尼术士拥有独特的视觉效果和新的种族特长"圣光抵抗"，减少受到的神圣伤害。</p>
-                
-                <h3>职业调整与平衡</h3>
-                
-                <p>10.1.5版本对所有职业都进行了调整，重点是改善天赋树的多样性和平衡性。一些关键变化包括：</p>
-                
-                <ul>
-                    <li>死亡骑士：鲜血专精的生存能力得到提升</li>
-                    <li>法师：奥术专精的爆发伤害略微降低</li>
-                    <li>德鲁伊：恢复专精的治疗效果更加稳定</li>
-                    <li>恶魔猎手：复仇专精的仇恨生成能力增强</li>
-                </ul>
-                
-                <h3>用户界面改进</h3>
-                
-                <p>本次更新还带来了多项UI改进，包括：</p>
-                
-                <ul>
-                    <li>全新的任务追踪系统，可以更清晰地查看目标进度</li>
-                    <li>改进的地下城查找器界面</li>
-                    <li>可自定义的动作条布局选项</li>
-                    <li>增强的团队框架设置</li>
-                </ul>
+                <!-- 统计区域 -->
+                <div class="achievement-stats">
+                    <div>已完成成就: <span id="completed-count">0</span>/<span id="total-count">3</span></div>
+                    <div>成就点数: <span id="total-points">0</span></div>
+                </div>
             </div>
         </div>
     </div>
@@ -293,113 +418,53 @@
             // 获取DOM元素
             const tabs = document.querySelectorAll('.tab');
             const lists = {
-                news: document.getElementById('news-list'),
-                tutorials: document.getElementById('tutorials-list'),
-                resources: document.getElementById('resources-list')
+                classics: document.getElementById('classics-list'),
+                'short-stories': document.getElementById('short-stories-list'),
+                poetry: document.getElementById('poetry-list')
             };
             const listItems = document.querySelectorAll('.list-item');
-            const rightContent = document.querySelector('.right-content');
             
-            // 模拟内容数据
-            const contentData = {
-                1: {
-                    title: "魔兽世界10.1.5版本更新公告",
-                    date: "2023-07-12",
-                    author: "暴雪娱乐",
-                    category: "新闻",
-                    image: "https://images.blz-contentstack.com/v3/assets/bltc965041283bac56c/blt8c5f7e8a9e5a0a1c/64a8f8c5c9b5b910f8e5c3a3/WoW-Dragonflight-10.1.5-Header.jpg",
-                    content: `
-                        <p>《魔兽世界》"巨龙时代"内容更新的下一个章节已经到来！10.1.5版本"时光裂隙"现已上线，带来了全新内容、系统改进和更多精彩玩法。</p>
-                        
-                        <h3>新内容：大法师梅特里时空漫游</h3>
-                        
-                        <p>在这个全新的单人挑战中，玩家将跟随大法师梅特里穿越扭曲的时空裂隙，体验《魔兽世界》历史上的关键战役。每次挑战都会随机生成不同的敌人和奖励，确保每次体验都独一无二。</p>
-                        
-                        <h3>新种族职业组合：德莱尼术士</h3>
-                        
-                        <p>德莱尼现在可以选择成为术士了！这一全新的种族职业组合为德莱尼玩家提供了全新的游戏体验。德莱尼术士拥有独特的视觉效果和新的种族特长"圣光抵抗"，减少受到的神圣伤害。</p>
-                        
-                        <h3>职业调整与平衡</h3>
-                        
-                        <p>10.1.5版本对所有职业都进行了调整，重点是改善天赋树的多样性和平衡性。一些关键变化包括：</p>
-                        
-                        <ul>
-                            <li>死亡骑士：鲜血专精的生存能力得到提升</li>
-                            <li>法师：奥术专精的爆发伤害略微降低</li>
-                            <li>德鲁伊：恢复专精的治疗效果更加稳定</li>
-                            <li>恶魔猎手：复仇专精的仇恨生成能力增强</li>
-                        </ul>
-                        
-                        <h3>用户界面改进</h3>
-                        
-                        <p>本次更新还带来了多项UI改进，包括：</p>
-                        
-                        <ul>
-                            <li>全新的任务追踪系统，可以更清晰地查看目标进度</li>
-                            <li>改进的地下城查找器界面</li>
-                            <li>可自定义的动作条布局选项</li>
-                            <li>增强的团队框架设置</li>
-                        </ul>
-                    `
-                },
-                2: {
-                    title: "全新团队副本'亚贝鲁斯'开放",
-                    date: "2023-06-20",
-                    author: "暴雪娱乐",
-                    category: "新闻",
-                    image: "https://images.blz-contentstack.com/v3/assets/bltc965041283bac56c/blt4a1e0d5e949e5a9a/647f3e7b2b4a5310f8e5c3a3/WoW-Dragonflight-10.1-Raid.jpg",
-                    content: `
-                        <p>巨龙时代的全新团队副本"亚贝鲁斯，暗影之熔炉"现已开放，玩家将深入泰坦设施，面对9个强大的首领挑战。</p>
-                        
-                        <h3>副本背景</h3>
-                        
-                        <p>亚贝鲁斯是泰坦用来监禁邪恶实体的设施，但现在其中的守卫系统已经失效，被监禁的实体正在逃脱。玩家需要深入设施，阻止灾难发生。</p>
-                        
-                        <h3>首领亮点</h3>
-                        
-                        <ul>
-                            <li>熔炉守卫者：需要团队协作破解泰坦防御系统</li>
-                            <li>虚空观察者：独特的视角反转机制</li>
-                            <li>终末使者：史诗级的多阶段战斗</li>
-                        </ul>
-                        
-                        <h3>装备奖励</h3>
-                        
-                        <p>副本掉落物品等级441-450的装备，以及独特的坐骑和幻化外观。</p>
-                    `
-                },
-                // 其他内容数据...
-                6: {
-                    title: "新手入门指南",
-                    date: "2023-05-15",
-                    author: "社区团队",
-                    category: "教程",
-                    image: "https://images.blz-contentstack.com/v3/assets/bltc965041283bac56c/blt0a5f1a7a5a5a5a5a/5ebd3e1d998f686c20a8b6a5/wow-classic-bg.jpg",
-                    content: `
-                        <p>欢迎来到艾泽拉斯！本指南将帮助你快速上手《魔兽世界》。</p>
-                        
-                        <h3>创建你的第一个角色</h3>
-                        
-                        <p>选择种族和职业时，考虑以下因素：</p>
-                        <ul>
-                            <li>种族天赋提供的加成</li>
-                            <li>职业的游戏风格（近战、远程、治疗、坦克等）</li>
-                            <li>个人审美偏好</li>
-                        </ul>
-                        
-                        <h3>1-60级升级路线</h3>
-                        
-                        <p>推荐的升级路线：</p>
-                        <ol>
-                            <li>完成起始区域任务（1-10级）</li>
-                            <li>选择适合你等级的经典旧世区域</li>
-                            <li>达到30级后可以考虑体验战场</li>
-                            <li>58级后前往外域或诺森德</li>
-                        </ol>
-                    `
-                },
-                // 更多内容数据...
-            };
+            // 成就系统相关元素
+            const checkboxes = document.querySelectorAll('.achievement-check');
+            const completedCount = document.getElementById('completed-count');
+            const totalCount = document.getElementById('total-count');
+            const totalPoints = document.getElementById('total-points');
+            
+            // 设置总成就数
+            totalCount.textContent = checkboxes.length;
+            
+            // 页面加载时从本地存储恢复勾选状态
+            window.addEventListener('DOMContentLoaded', () => {
+                checkboxes.forEach((checkbox, index) => {
+                    const isChecked = localStorage.getItem(`achievement_${index}`) === 'true';
+                    checkbox.checked = isChecked;
+                    if (isChecked) {
+                        checkbox.dispatchEvent(new Event('change'));
+                    }
+                });
+            });
+            
+            // 为每个勾选框添加事件监听
+            checkboxes.forEach((checkbox, index) => {
+                checkbox.addEventListener('change', function() {
+                    // 保存勾选状态到本地存储
+                    localStorage.setItem(`achievement_${index}`, this.checked);
+                    updateStats();
+                });
+            });
+            
+            // 更新统计信息
+            function updateStats() {
+                const checkedBoxes = document.querySelectorAll('.achievement-check:checked');
+                completedCount.textContent = checkedBoxes.length;
+                
+                // 计算总点数
+                let points = 0;
+                checkedBoxes.forEach(box => {
+                    points += parseInt(box.dataset.points);
+                });
+                totalPoints.textContent = points;
+            }
             
             // 切换分类标签
             tabs.forEach(tab => {
@@ -420,7 +485,6 @@
                     const firstItem = lists[category].querySelector('.list-item');
                     if (firstItem) {
                         firstItem.classList.add('active');
-                        updateContent(firstItem.dataset.id);
                     }
                 });
             });
@@ -432,33 +496,8 @@
                     const list = this.parentElement;
                     list.querySelectorAll('.list-item').forEach(i => i.classList.remove('active'));
                     this.classList.add('active');
-                    
-                    // 更新右侧内容
-                    updateContent(this.dataset.id);
                 });
             });
-            
-            // 更新右侧内容函数
-            function updateContent(id) {
-                const data = contentData[id];
-                if (!data) return;
-                
-                rightContent.innerHTML = `
-                    <div class="content-header">
-                        <h2>${data.title}</h2>
-                        <div class="meta">
-                            <span>发布日期: ${data.date}</span>
-                            <span>作者: ${data.author}</span>
-                            <span>分类: ${data.category}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="content-body">
-                        <img src="${data.image}" alt="${data.title}">
-                        ${data.content}
-                    </div>
-                `;
-            }
         });
     </script>
 </body>
