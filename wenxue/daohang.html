@@ -26,76 +26,29 @@
         
         /* 顶部导航 */
         .top-nav {
-    background-color: rgba(255, 255, 255, 0.98);
-    padding: 0;
-    border-bottom: 2px solid var(--accent-color);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 0;
+            border-bottom: 2px solid var(--accent-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 10px;
-    position: relative;
-}
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            position: relative;
+        }
 
-.nav-item > a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 20px 12px;
-    display: block;
-    transition: all 0.3s;
-    height: 100%;
-    white-space: nowrap;
-}
-
-.nav-item.has-dropdown > a::after {
-    content: "▼";
-    font-size: 8px;
-    margin-left: 3px;
-    position: static;
-    transform: none;
-    top: auto;
-    right: auto;
-    color: var(--text-color);
-}
-
-.user-actions a {
-    color: var(--text-color);
-    text-decoration: none;
-    margin-left: 12px;
-    font-size: 14px;
-    transition: all 0.3s;
-    white-space: nowrap;
-}
-
-@media (max-width: 1024px) {
-    .nav-item > a {
-        padding: 20px 8px;
-        font-size: 14px;
-    }
-    
-    .user-actions a {
-        margin-left: 8px;
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 768px) {
-    /* 保持原有的移动端样式 */
-}
-        
         .logo-container {
             position: relative;
             margin-right: 20px;
+            flex-shrink: 0; /* 防止logo被压缩 */
         }
         
         .logo {
@@ -107,25 +60,26 @@
             padding: 15px 20px 15px 0;
             display: flex;
             align-items: center;
+            white-space: nowrap;
         }
         
-      .logo.has-dropdown {
-    position: relative;
-    padding-right: 20px;
-    display: flex;
-    align-items: center;
-}
+        .logo.has-dropdown {
+            position: relative;
+            padding-right: 20px;
+            display: flex;
+            align-items: center;
+        }
 
-.logo.has-dropdown::after {
-    content: "▼";
-    font-size: 10px;
-    margin-left: 5px;
-    position: static;
-    transform: none;
-    top: auto;
-    right: auto;
-    color: var(--text-color);
-}
+        .logo.has-dropdown::after {
+            content: "▼";
+            font-size: 10px;
+            margin-left: 5px;
+            position: static;
+            transform: none;
+            top: auto;
+            right: auto;
+            color: var(--text-color);
+        }
         
         .logo-dropdown {
             position: absolute;
@@ -182,33 +136,55 @@
             flex: 1;
         }
         
-       .nav-links {
-    display: flex;
-    height: 100%;
-    flex-grow: 1;
-    align-items: center; /* 确保所有项垂直居中 */
-}
-
-.nav-item {
-    position: relative;
-    display: flex; /* 使用flex布局确保对齐 */
-    align-items: center; /* 垂直居中 */
-}
+        .nav-links {
+            display: flex;
+            height: 100%;
+            flex-grow: 1;
+            align-items: center;
+            overflow-x: auto; /* 允许横向滚动 */
+            white-space: nowrap; /* 防止文字换行 */
+        }
+        
+        .nav-item {
+            position: relative;
+            display: inline-flex; /* 改为行内flex布局 */
+            align-items: center;
+            flex-shrink: 0; /* 防止导航项被压缩 */
+        }
         
         .nav-item > a {
             color: var(--text-color);
             text-decoration: none;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
-            padding: 20px 15px;
+            padding: 20px 12px;
             display: block;
             transition: all 0.3s;
             height: 100%;
+            white-space: nowrap;
         }
         
         .nav-item > a:hover {
             color: var(--primary-color);
             background-color: var(--hover-bg);
+        }
+        
+        .nav-item.has-dropdown > a {
+            position: relative;
+            padding-right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item.has-dropdown > a::after {
+            content: "▼";
+            font-size: 8px;
+            margin-left: 3px;
+            position: static;
+            transform: none;
+            top: auto;
+            right: auto;
+            color: var(--text-color);
         }
         
         /* 下拉菜单 - 带图标 */
@@ -266,24 +242,48 @@
             flex: 1;
         }
         
-        /* 下拉菜单指示箭头 */
-     .nav-item.has-dropdown > a {
-    position: relative;
-    padding-right: 20px; /* 为箭头留出适当空间 */
-    display: flex;
-    align-items: center;
-}
+        /* 用户操作区 */
+        .user-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0; /* 防止用户操作区被压缩 */
+            padding-left: 20px; /* 增加左侧间距 */
+        }
+        
+        .user-actions a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 12px;
+            font-size: 14px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .user-actions a:hover {
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
 
-.nav-item.has-dropdown > a::after {
-    content: "▼";
-    font-size: 10px;
-    margin-left: 5px; /* 箭头与文字间距 */
-    position: static; /* 改为静态定位 */
-    transform: none; /* 移除垂直居中 */
-    top: auto;
-    right: auto;
-    color: var(--text-color);
-}
+        .btn-primary:hover {
+            background-color: #f5f5f5;
+            color: #6d3100;
+            border-color: #6d3100;
+        }
         
         /* 内容区域 */
         .content {
@@ -345,47 +345,19 @@
             color: #555;
         }
         
-        /* 用户操作区 */
-        .user-actions {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-        }
-        
-        .user-actions a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .user-actions a:hover {
-            color: var(--primary-color);
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary {
-    background-color: white;
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-}
-
-.btn-primary:hover {
-    background-color: #f5f5f5;
-    color: #6d3100;
-    border-color: #6d3100;
-}
-        
         /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .nav-item > a {
+                padding: 20px 8px;
+                font-size: 14px;
+            }
+            
+            .user-actions a {
+                margin-left: 8px;
+                font-size: 13px;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -411,11 +383,13 @@
             .nav-links {
                 width: 100%;
                 flex-direction: column;
+                overflow-x: visible;
             }
             
             .nav-item {
                 width: 100%;
                 text-align: left;
+                display: block;
             }
             
             .dropdown-menu {
@@ -442,6 +416,7 @@
                 margin: 15px 0;
                 width: 100%;
                 justify-content: center;
+                padding-left: 0;
             }
         }
     </style>
@@ -453,390 +428,222 @@
             <div class="logo-container">
                 <a href="#" class="logo has-dropdown">世界奖项</a>
                 <div class="logo-dropdown">
-    <a href="https://example.com/literature" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-home"></i></span>
-        <span class="logo-menu-text">文学奖项</span>
-    </a>
-    <a href="https://example.com/movie" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-info-circle"></i></span>
-        <span class="logo-menu-text">电影奖项</span>
-    </a>
-    <a href="https://example.com/animation" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-envelope"></i></span>
-        <span class="logo-menu-text">动画奖项</span>
-    </a>
-    <a href="https://example.com/comic" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-question-circle"></i></span>
-        <span class="logo-menu-text">漫画奖项</span>
-    </a>
-    <a href="https://example.com/music" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-question-circle"></i></span>
-        <span class="logo-menu-text">音乐奖项</span>
-    </a>
-    <a href="https://example.com/photography" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-question-circle"></i></span>
-        <span class="logo-menu-text">摄影奖项</span>
-    </a>
-    <a href="https://example.com/illustration" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-question-circle"></i></span>
-        <span class="logo-menu-text">插画奖项</span>
-    </a>
-</div>
+                    <a href="https://example.com/literature" target="_blank">
+                        <span class="logo-menu-icon"><i class="fas fa-home"></i></span>
+                        <span class="logo-menu-text">文学奖项</span>
+                    </a>
+                    <a href="https://example.com/movie" target="_blank">
+                        <span class="logo-menu-icon"><i class="fas fa-info-circle"></i></span>
+                        <span class="logo-menu-text">电影奖项</span>
+                    </a>
+                    <a href="https://example.com/animation" target="_blank">
+                        <span class="logo-menu-icon"><i class="fas fa-envelope"></i></span>
+                        <span class="logo-menu-text">动画奖项</span>
+                    </a>
+                    <a href="https://example.com/comic" target="_blank">
+                        <span class="logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+                        <span class="logo-menu-text">漫画奖项</span>
+                    </a>
+                    <a href="https://example.com/music" target="_blank">
+                        <span class="logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+                        <span class="logo-menu-text">音乐奖项</span>
+                    </a>
+                    <a href="https://example.com/photography" target="_blank">
+                        <span class="logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+                        <span class="logo-menu-text">摄影奖项</span>
+                    </a>
+                    <a href="https://example.com/illustration" target="_blank">
+                        <span class="logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+                        <span class="logo-menu-text">插画奖项</span>
+                    </a>
+                </div>
             </div>
             
             <div class="nav-links">
                 <div class="nav-item has-dropdown">
                     <a href="#">世界文学奖</a>
-                   <div class="dropdown-menu">
-    <a href="https://baike.baidu.com/item/%E8%AF%BA%E8%B4%9D%E5%B0%94%E6%96%87%E5%AD%A6%E5%A5%96/571471?fromModule=lemma_inlink" target="_blank">
-        <span class="menu-icon"><i class="fas fa-book-open"></i></span>
-        <span class="menu-text">诺贝尔文学奖</span>
-    </a>
-    <a href="https://example.com/booker" target="_blank">
-        <span class="menu-icon"><i class="fas fa-users"></i></span>
-        <span class="menu-text">布克奖</span>
-    </a>
-    <a href="https://example.com/pulitzer" target="_blank">
-        <span class="menu-icon"><i class="fas fa-chart-line"></i></span>
-        <span class="menu-text">普利策文学奖</span>
-    </a>
-    <a href="https://example.com/international-booker" target="_blank">
-        <span class="menu-icon"><i class="fas fa-fire"></i></span>
-        <span class="menu-text">布克国际文学奖</span>
-    </a>
-    <a href="https://example.com/goncourt" target="_blank">
-        <span class="menu-icon"><i class="fas fa-crown"></i></span>
-        <span class="menu-text">龚古尔文学奖</span>
-    </a>
-    <a href="https://example.com/del-duca" target="_blank">
-        <span class="menu-icon"><i class="fas fa-star"></i></span>
-        <span class="menu-text">奇诺・德尔杜卡世界奖</span>
-    </a>
-</div>
-              
+                    <div class="dropdown-menu">
+                        <a href="https://baike.baidu.com/item/%E8%AF%BA%E8%B4%9D%E5%B0%94%E6%96%87%E5%AD%A6%E5%A5%96/571471?fromModule=lemma_inlink" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-book-open"></i></span>
+                            <span class="menu-text">诺贝尔文学奖</span>
+                        </a>
+                        <a href="https://example.com/booker" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-users"></i></span>
+                            <span class="menu-text">布克奖</span>
+                        </a>
+                        <a href="https://example.com/pulitzer" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-chart-line"></i></span>
+                            <span class="menu-text">普利策文学奖</span>
+                        </a>
+                        <a href="https://example.com/international-booker" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-fire"></i></span>
+                            <span class="menu-text">布克国际文学奖</span>
+                        </a>
+                        <a href="https://example.com/goncourt" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-crown"></i></span>
+                            <span class="menu-text">龚古尔文学奖</span>
+                        </a>
+                        <a href="https://example.com/del-duca" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-star"></i></span>
+                            <span class="menu-text">奇诺・德尔杜卡世界奖</span>
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="nav-item has-dropdown">
                     <a href="#">区域文学奖</a>
-                   <div class="dropdown-menu">
-    <a href="https://example.com/maodun" target="_blank">
-        <span class="menu-icon"><i class="fas fa-comment-dots"></i></span>
-        <span class="menu-text">茅盾文学奖（中国）</span>
-    </a>
-    <a href="https://example.com/luxun" target="_blank">
-        <span class="menu-icon"><i class="fas fa-users"></i></span>
-        <span class="menu-text">鲁迅文学奖（中国）</span>
-    </a>
-    <a href="https://example.com/national-book" target="_blank">
-        <span class="menu-icon"><i class="fas fa-microphone"></i></span>
-        <span class="menu-text">美国国家图书奖</span>
-    </a>
-    <a href="https://example.com/buechner" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">格奥尔格・毕希纳奖（德国）</span>
-    </a>
-    <a href="https://example.com/dublin" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">都柏林文学奖（德国）</span>
-    </a>
-    <a href="https://example.com/akutagawa" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">芥川龙之介奖（日本）</span>
-    </a>
-    <a href="https://example.com/naoki" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">直木奖（日本）</span>
-    </a>
-    <a href="https://example.com/kafka" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">卡夫卡文学奖（捷克）</span>
-    </a>
-    <a href="https://example.com/cervantes" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">米格尔・德・塞万提斯奖（西班牙）</span>
-    </a>
-    <a href="https://example.com/neustadt" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">纽斯塔特国际文学奖（美国）</span>
-    </a>
-    <a href="https://example.com/jerusalem" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">耶路撒冷文学奖（以色列）</span>
-    </a>
-    <a href="https://example.com/prince-asturias" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">阿斯图里亚斯王子奖（西班牙）</span>
-    </a>
-    <a href="https://example.com/caine" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">凯恩非洲文学奖</span>
-    </a>
-    <a href="https://example.com/arabic-fiction" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">国际阿拉伯小说奖</span>
-    </a>
-    <a href="https://example.com/jnanpith" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">杰南皮特奖（印度）</span>
-    </a>
-</div>
+                    <div class="dropdown-menu">
+                        <a href="https://example.com/maodun" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-comment-dots"></i></span>
+                            <span class="menu-text">茅盾文学奖（中国）</span>
+                        </a>
+                        <a href="https://example.com/luxun" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-users"></i></span>
+                            <span class="menu-text">鲁迅文学奖（中国）</span>
+                        </a>
+                        <a href="https://example.com/national-book" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-microphone"></i></span>
+                            <span class="menu-text">美国国家图书奖</span>
+                        </a>
+                        <a href="https://example.com/buechner" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">格奥尔格・毕希纳奖（德国）</span>
+                        </a>
+                        <a href="https://example.com/dublin" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">都柏林文学奖（德国）</span>
+                        </a>
+                        <a href="https://example.com/akutagawa" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">芥川龙之介奖（日本）</span>
+                        </a>
+                        <a href="https://example.com/naoki" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">直木奖（日本）</span>
+                        </a>
+                        <a href="https://example.com/kafka" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">卡夫卡文学奖（捷克）</span>
+                        </a>
+                        <a href="https://example.com/cervantes" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">米格尔・德・塞万提斯奖（西班牙）</span>
+                        </a>
+                        <a href="https://example.com/neustadt" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">纽斯塔特国际文学奖（美国）</span>
+                        </a>
+                        <a href="https://example.com/jerusalem" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">耶路撒冷文学奖（以色列）</span>
+                        </a>
+                        <a href="https://example.com/prince-asturias" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">阿斯图里亚斯王子奖（西班牙）</span>
+                        </a>
+                        <a href="https://example.com/caine" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">凯恩非洲文学奖</span>
+                        </a>
+                        <a href="https://example.com/arabic-fiction" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">国际阿拉伯小说奖</span>
+                        </a>
+                        <a href="https://example.com/jnanpith" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">杰南皮特奖（印度）</span>
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="nav-item has-dropdown">
                     <a href="#">儿童文学奖</a>
-                   <div class="dropdown-menu">
-    <a href="https://example.com/andersen" target="_blank">
-        <span class="menu-icon"><i class="fas fa-history"></i></span>
-        <span class="menu-text">国际安徒生奖</span>
-    </a>
-</div>
+                    <div class="dropdown-menu">
+                        <a href="https://example.com/andersen" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-history"></i></span>
+                            <span class="menu-text">国际安徒生奖</span>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="nav-item has-dropdown">
                     <a href="#">推理小说奖</a>
-                   <div class="dropdown-menu">
-    <a href="https://example.com/edgar" target="_blank">
-        <span class="menu-icon"><i class="fas fa-history"></i></span>
-        <span class="menu-text">埃德加・爱伦・坡奖（美国）</span>
-    </a>
-    <a href="https://example.com/agatha" target="_blank">
-        <span class="menu-icon"><i class="fas fa-list"></i></span>
-        <span class="menu-text">阿加莎奖（美国）</span>
-    </a>
-    <a href="https://example.com/gold-dagger" target="_blank">
-        <span class="menu-icon"><i class="fas fa-edit"></i></span>
-        <span class="menu-text">金匕首奖（英国）</span>
-    </a>
-    <a href="https://example.com/ranpo" target="_blank">
-        <span class="menu-icon"><i class="fas fa-chart-pie"></i></span>
-        <span class="menu-text">江户川乱步奖（日本）</span>
-    </a>
-    <a href="https://example.com/honkaku" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">本格推理大奖（日本）</span>
-    </a>
-    <a href="https://example.com/anthony" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">安东尼奖（美国）</span>
-    </a>
-    <a href="https://example.com/glass-key" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">玻璃钥匙奖（北欧）</span>
-    </a>
-    <a href="https://example.com/japan-mystery" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">日本推理作家协会奖</span>
-    </a>
-    <a href="https://example.com/international-dagger" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">国际匕首奖（英国）</span>
-    </a>
-    <a href="https://example.com/barry" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">巴瑞奖（美国）</span>
-    </a>
-    <a href="https://example.com/shimada" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">岛田庄司推理小说奖（中国台湾）</span>
-    </a>
-    <a href="https://example.com/flint" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">燧石文学奖・推理单元（中国）</span>
-    </a>
-    <a href="https://example.com/macavity" target="_blank">
-        <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
-        <span class="menu-text">麦卡维帝奖</span>
-    </a>
-</div>
+                    <div class="dropdown-menu">
+                        <a href="https://example.com/edgar" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-history"></i></span>
+                            <span class="menu-text">埃德加・爱伦・坡奖（美国）</span>
+                        </a>
+                        <a href="https://example.com/agatha" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-list"></i></span>
+                            <span class="menu-text">阿加莎奖（美国）</span>
+                        </a>
+                        <a href="https://example.com/gold-dagger" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-edit"></i></span>
+                            <span class="menu-text">金匕首奖（英国）</span>
+                        </a>
+                        <a href="https://example.com/ranpo" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-chart-pie"></i></span>
+                            <span class="menu-text">江户川乱步奖（日本）</span>
+                        </a>
+                        <a href="https://example.com/honkaku" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">本格推理大奖（日本）</span>
+                        </a>
+                        <a href="https://example.com/anthony" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">安东尼奖（美国）</span>
+                        </a>
+                        <a href="https://example.com/glass-key" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">玻璃钥匙奖（北欧）</span>
+                        </a>
+                        <a href="https://example.com/japan-mystery" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">日本推理作家协会奖</span>
+                        </a>
+                        <a href="https://example.com/international-dagger" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">国际匕首奖（英国）</span>
+                        </a>
+                        <a href="https://example.com/barry" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">巴瑞奖（美国）</span>
+                        </a>
+                        <a href="https://example.com/shimada" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">岛田庄司推理小说奖（中国台湾）</span>
+                        </a>
+                        <a href="https://example.com/flint" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">燧石文学奖・推理单元（中国）</span>
+                        </a>
+                        <a href="https://example.com/macavity" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-calendar-alt"></i></span>
+                            <span class="menu-text">麦卡维帝奖</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-item has-dropdown">
+                    <a href="#">科幻小说奖</a>
+                    <div class="dropdown-menu">
+                        <a href="https://example.com/hugo" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-history"></i></span>
+                            <span class="menu-text">雨果奖（美国）</span>
+                        </a>
+                        <a href="https://example.com/nebula" target="_blank">
+                            <span class="menu-icon"><i class="fas fa-history"></i></span>
+                            <span class="menu-text">星云奖（美国）</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-
-
-                </div>
-                
-    
-    <div class="nav-item has-dropdown">
-        <a href="#">科幻小说奖</a>
-        <div class="dropdown-menu">
-            <a href="https://example.com/hugo" target="_blank">
-                <span class="menu-icon"><i class="fas fa-history"></i></span>
-                <span class="menu-text">雨果奖（美国）</span>
-            </a>
-            <a href="https://example.com/nebula" target="_blank">
-                <span class="menu-icon"><i class="fas fa-history"></i></span>
-                <span class="menu-text">星云奖（美国）</span>
-            </a>
-        </div>
-    </div>
-</div>
             
-           <div class="user-actions">
-
-    <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <!-- 保留原有的head内容 -->
-    <style>
-        /* 新增登录弹窗样式 */
-        .login-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        
-        .login-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 30px;
-            border: 1px solid var(--accent-color);
-            border-radius: 8px;
-            width: 350px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .login-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--accent-color);
-        }
-        
-        .login-title {
-            color: var(--primary-color);
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        
-        .close-btn {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .close-btn:hover {
-            color: var(--primary-color);
-        }
-        
-        .login-form input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        
-        .login-form button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        .login-form button:hover {
-            background-color: #6d3100;
-        }
-        
-        .login-footer {
-            margin-top: 15px;
-            text-align: center;
-            font-size: 0.9em;
-        }
-        
-        .login-footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-    <!-- 保留原有的导航代码 -->
-    
-    <!-- 修改用户操作区 -->
-    <div class="user-actions">
-        <a href="#"><i class="fas fa-search"></i> 搜索</a>
-        <a href="#" id="loginBtn"><i class="fas fa-user"></i> 登录</a>
-        <a href="#" class="btn btn-primary"><i class="fas fa-book-reader"></i> 开始阅读</a>
-    </div>
-    
-    <!-- 登录弹窗 -->
-    <div id="loginModal" class="login-modal">
-        <div class="login-content">
-            <div class="login-header">
-                <span class="login-title">用户登录</span>
-                <span class="close-btn">&times;</span>
+            <div class="user-actions">
+                <a href="#"><i class="fas fa-search"></i> 搜索</a>
+                <a href="#" id="loginBtn"><i class="fas fa-user"></i> 登录</a>
+                <a href="#" class="btn btn-primary"><i class="fas fa-book-reader"></i> 开始阅读</a>
             </div>
-            <form class="login-form">
-                <input type="text" placeholder="用户名/邮箱" required>
-                <input type="password" placeholder="密码" required>
-                <div style="display: flex; align-items: center; margin: 10px 0;">
-                    <input type="checkbox" id="remember" style="width: auto; margin-right: 10px;">
-                    <label for="remember">记住我</label>
-                </div>
-                <button type="submit">登录</button>
-            </form>
-            <div class="login-footer">
-                <a href="#">忘记密码?</a> | <a href="#">注册账号</a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- 保留原有的内容区域 -->
-    
-    <script>
-        // 登录弹窗控制
-        const loginBtn = document.getElementById('loginBtn');
-        const modal = document.getElementById('loginModal');
-        const closeBtn = document.querySelector('.close-btn');
-        
-        loginBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            modal.style.display = 'block';
-        });
-        
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-        });
-        
-        window.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-        
-        // 表单提交处理
-        const loginForm = document.querySelector('.login-form');
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = this.querySelector('input[type="text"]').value;
-            const password = this.querySelector('input[type="password"]').value;
-            const remember = this.querySelector('input[type="checkbox"]').checked;
-            
-            // 这里添加实际的登录逻辑
-            console.log('登录信息:', { username, password, remember });
-            
-            // 模拟登录成功
-            alert('登录成功!');
-            modal.style.display = 'none';
-        });
-    </script>
-</body>
-</html>
-
-</div>
         </div>
     </nav>
     
@@ -883,5 +690,65 @@
             </div>
         </div>
     </div>
+
+    <!-- 登录弹窗 -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-content">
+            <div class="login-header">
+                <span class="login-title">用户登录</span>
+                <span class="close-btn">&times;</span>
+            </div>
+            <form class="login-form">
+                <input type="text" placeholder="用户名/邮箱" required>
+                <input type="password" placeholder="密码" required>
+                <div style="display: flex; align-items: center; margin: 10px 0;">
+                    <input type="checkbox" id="remember" style="width: auto; margin-right: 10px;">
+                    <label for="remember">记住我</label>
+                </div>
+                <button type="submit">登录</button>
+            </form>
+            <div class="login-footer">
+                <a href="#">忘记密码?</a> | <a href="#">注册账号</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 登录弹窗控制
+        const loginBtn = document.getElementById('loginBtn');
+        const modal = document.getElementById('loginModal');
+        const closeBtn = document.querySelector('.close-btn');
+        
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'block';
+        });
+        
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // 表单提交处理
+        const loginForm = document.querySelector('.login-form');
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = this.querySelector('input[type="text"]').value;
+            const password = this.querySelector('input[type="password"]').value;
+            const remember = this.querySelector('input[type="checkbox"]').checked;
+            
+            // 这里添加实际的登录逻辑
+            console.log('登录信息:', { username, password, remember });
+            
+            // 模拟登录成功
+            alert('登录成功!');
+            modal.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
