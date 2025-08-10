@@ -1,0 +1,11 @@
+world-awards/
+├── index.html          # 主入口
+├── modules/            # 模块目录
+│   ├── header.html     # 导航栏
+│   ├── content.html    # 书籍内容
+│   └── gallery.html    # 画廊
+├── js/
+│   ├── main.js         # 主逻辑（登录等）
+│   └── gallery.js      # 画廊专用逻辑
+└── css/
+    └── style.css       # 全局样式
