@@ -61,12 +61,20 @@
             align-items: center;
         }
         
-        .logo.has-dropdown::after {
-            content: "▼";
-            font-size: 10px;
-            margin-left: 5px;
-            color: var(--text-color);
-        }
+      .logo.has-dropdown {
+    position: relative;
+    padding-right: 25px;
+}
+
+.logo.has-dropdown::after {
+    content: "▼";
+    font-size: 10px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+}
         
         .logo-dropdown {
             position: absolute;
@@ -205,12 +213,21 @@
         }
         
         /* 下拉菜单指示箭头 */
-        .nav-item.has-dropdown > a::after {
-            content: "▼";
-            font-size: 10px;
-            margin-left: 5px;
-            color: var(--text-color);
-        }
+        .nav-item.has-dropdown > a {
+    position: relative;
+    padding-right: 25px; /* 为箭头留出空间 */
+}
+
+.nav-item.has-dropdown > a::after {
+    content: "▼";
+    font-size: 10px;
+    position: absolute;  /* 改为绝对定位 */
+    right: 10px;         /* 从右侧定位 */
+    top: 50%;            /* 垂直居中 */
+    transform: translateY(-50%); /* 精确垂直居中 */
+    color: var(--text-color);
+    margin-left: 0;      /* 移除原来的左边距 */
+}
         
         /* 内容区域 */
         .content {
