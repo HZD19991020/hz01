@@ -63,16 +63,19 @@
         
       .logo.has-dropdown {
     position: relative;
-    padding-right: 25px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .logo.has-dropdown::after {
     content: "▼";
     font-size: 10px;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    margin-left: 5px;
+    position: static;
+    transform: none;
+    top: auto;
+    right: auto;
     color: var(--text-color);
 }
         
@@ -213,20 +216,22 @@
         }
         
         /* 下拉菜单指示箭头 */
-        .nav-item.has-dropdown > a {
+     .nav-item.has-dropdown > a {
     position: relative;
-    padding-right: 25px; /* 为箭头留出空间 */
+    padding-right: 20px; /* 为箭头留出适当空间 */
+    display: flex;
+    align-items: center;
 }
 
 .nav-item.has-dropdown > a::after {
     content: "▼";
     font-size: 10px;
-    position: absolute;  /* 改为绝对定位 */
-    right: 10px;         /* 从右侧定位 */
-    top: 50%;            /* 垂直居中 */
-    transform: translateY(-50%); /* 精确垂直居中 */
+    margin-left: 5px; /* 箭头与文字间距 */
+    position: static; /* 改为静态定位 */
+    transform: none; /* 移除垂直居中 */
+    top: auto;
+    right: auto;
     color: var(--text-color);
-    margin-left: 0;      /* 移除原来的左边距 */
 }
         
         /* 内容区域 */
