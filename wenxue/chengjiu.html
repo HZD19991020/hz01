@@ -235,42 +235,47 @@
     </div>
     
     <script>
-        // 获取所有勾选框
-        const checkboxes = document.querySelectorAll('.achievement-check');
-        const completedCount = document.getElementById('completed-count');
-        const totalCount = document.getElementById('total-count');
-        const totalPoints = document.getElementById('total-points');
-        
-        // 设置总成就数
-        totalCount.textContent = checkboxes.length;
-        
-        // 初始化统计
-        updateStats();
-        
-        // 为每个勾选框添加事件监听
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                updateStats();
-            });
+    // 获取所有勾选框
+    const checkboxes = document.querySelectorAll('.achievement-check');
+    const completedCount = document.getElementById('completed-count');
+    const totalCount = document.getElementById('total-count');
+    const totalPoints = document.getElementById('total-points');
+    
+    // 设置总成就数
+    totalCount.textContent = checkboxes.length;
+    
+    // 页面加载时从本地存储恢复勾选状态
+    window.addEventListener('DOMContentLoaded', () => {
+        checkboxes.forEach((checkbox, index) => {
+            const isChecked = localStorage.getItem(`achievement_${index}`) === 'true';
+            checkbox.checked = isChecked;
+            if (isChecked) {
+                checkbox.dispatchEvent(new Event('change'));
+            }
         });
-        
-        // 更新统计信息
-        function updateStats() {
-            const checkedBoxes = document.querySelectorAll('.achievement-check:checked');
-            completedCount.textContent = checkedBoxes.length;
-            
-            // 计算总点数
-            let points = 0;
-            checkedBoxes.forEach(box => {
-                points += parseInt(box.dataset.points);
-            });
-            totalPoints.textContent = points;
-        }
-        
-        // 自动勾选已完成的成就
-        document.querySelectorAll('.achievement-check[checked]').forEach(checkbox => {
-            checkbox.dispatchEvent(new Event('change'));
+    });
+    
+    // 为每个勾选框添加事件监听
+    checkboxes.forEach((checkbox, index) => {
+        checkbox.addEventListener('change', function() {
+            // 保存勾选状态到本地存储
+            localStorage.setItem(`achievement_${index}`, this.checked);
+            updateStats();
         });
-    </script>
+    });
+    
+    // 更新统计信息
+    function updateStats() {
+        const checkedBoxes = document.querySelectorAll('.achievement-check:checked');
+        completedCount.textContent = checkedBoxes.length;
+        
+        // 计算总点数
+        let points = 0;
+        checkedBoxes.forEach(box => {
+            points += parseInt(box.dataset.points);
+        });
+        totalPoints.textContent = points;
+    }
+</script>
 </body>
 </html>
