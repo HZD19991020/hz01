@@ -163,14 +163,28 @@
             color: #aaaaaa;
         }
         
-        /* 统计区域 */
+        /* 统计区域 - 修改后的紧凑样式 */
         .achievement-stats {
             margin-top: 20px;
-            padding: 15px;
+            padding: 12px 15px;
             background: #ffffff;
             border: 1px solid #e0e0e0;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .achievement-stats div {
+            display: flex;
+            align-items: center;
+        }
+        
+        .achievement-stats span {
+            font-weight: bold;
+            margin-left: 5px;
+            color: #d4af37;
         }
         
         /* 标题样式 */
@@ -199,7 +213,7 @@
             </div>
         </div>
 
-         <!-- 金色成就 -->
+        <!-- 金色成就 -->
         <div class="achievement gold">
             <label class="achievement-checkbox">
                 <input type="checkbox" class="achievement-check" data-points="10">
@@ -211,7 +225,7 @@
             </div>
         </div>
 
-         <!-- 金色成就 -->
+        <!-- 金色成就 -->
         <div class="achievement gold">
             <label class="achievement-checkbox">
                 <input type="checkbox" class="achievement-check" data-points="10">
@@ -219,17 +233,11 @@
             <div class="achievement-content">
                 <div class="achievement-points">10</div>
                 <div class="achievement-title">契诃夫（俄罗斯）</div>
-                <div class="achievement-desc">阅读莫泊桑短篇小说1本</div>
+                <div class="achievement-desc">阅读契诃夫短篇小说1本</div>
             </div>
         </div>
-
-      
-
-  
-
-        </div>
         
-        <!-- 统计区域 -->
+        <!-- 统计区域 - 修改后的紧凑布局 -->
         <div class="achievement-stats">
             <div>已完成成就: <span id="completed-count">0</span>/<span id="total-count">3</span></div>
             <div>成就点数: <span id="total-points">0</span></div>
