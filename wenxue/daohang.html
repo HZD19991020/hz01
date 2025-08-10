@@ -182,15 +182,18 @@
             flex: 1;
         }
         
-        .nav-links {
-            display: flex;
-            height: 100%;
-            flex-grow: 1;
-        }
-        
-        .nav-item {
-            position: relative;
-        }
+       .nav-links {
+    display: flex;
+    height: 100%;
+    flex-grow: 1;
+    align-items: center; /* 确保所有项垂直居中 */
+}
+
+.nav-item {
+    position: relative;
+    display: flex; /* 使用flex布局确保对齐 */
+    align-items: center; /* 垂直居中 */
+}
         
         .nav-item > a {
             color: var(--text-color);
