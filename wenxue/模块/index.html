@@ -2,15 +2,26 @@
 <html>
 <head>
     <title>世界奖项</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="样式.css">
 </head>
 <body>
-    <!-- 用 div 作为模块容器 -->
-    <div id="header"></div>
-    <div id="content"></div>
-    <div id="gallery"></div>
+    <div id="导航栏"></div>
+    <div id="书籍"></div>
+    <div id="画廊"></div>
 
-    <!-- 加载模块的脚本 -->
-    <script src="js/load-modules.js"></script>
+    <script>
+    // 加载模块函数
+    async function 加载模块(文件名, 容器ID) {
+        const 响应 = await fetch(文件名);
+        document.getElementById(容器ID).innerHTML = await 响应.text();
+    }
+    
+    // 页面加载后执行
+    window.onload = () => {
+        加载模块("导航栏.html", "导航栏");
+        加载模块("书籍.html", "书籍");
+        加载模块("画廊.html", "画廊");
+    };
+    </script>
 </body>
 </html>
