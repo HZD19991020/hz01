@@ -99,14 +99,53 @@
             overflow: hidden;
         }
         
-        /* 右侧内容区域 - 成就样式 */
+        /* 右侧内容区域 */
         .right-content {
             flex: 1;
             padding: 30px;
             overflow-y: auto;
         }
         
-        /* 成就容器 */
+        /* 书籍详情页样式 */
+        .book-detail {
+            display: none;
+        }
+        
+        .book-detail.active {
+            display: block;
+        }
+        
+        .content-header {
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .content-header h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        
+        .content-header .meta {
+            color: #666;
+            font-size: 14px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .content-body {
+            line-height: 1.8;
+        }
+        
+        .content-body img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        /* 成就系统样式 */
         .achievement-container {
             max-width: 100%;
             margin: 0 auto;
@@ -116,7 +155,6 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
-        /* 成就项 */
         .achievement {
             background: #ffffff;
             border: 1px solid #e0e0e0;
@@ -130,14 +168,12 @@
             border-radius: 4px;
         }
         
-        /* 勾选框样式 */
         .achievement-checkbox {
             margin-right: 15px;
             margin-top: 3px;
             position: relative;
         }
         
-        /* 自定义勾选框外观 */
         .achievement-checkbox input[type="checkbox"] {
             appearance: none;
             -webkit-appearance: none;
@@ -169,43 +205,37 @@
             top: -1px;
         }
         
-        /* 成就内容 */
         .achievement-content {
             flex: 1;
         }
         
-        /* 金色成就 */
         .achievement.gold {
             border-left-color: #ffd700;
             background: linear-gradient(to right, rgba(255, 215, 0, 0.05), #ffffff);
         }
         
-        /* 银色成就 */
         .achievement.silver {
             border-left-color: #c0c0c0;
             background: linear-gradient(to right, rgba(192, 192, 192, 0.05), #ffffff);
         }
         
-        /* 成就标题 */
         .achievement-title {
-            color: #d4af37; /* 金色 */
+            color: #d4af37;
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 5px;
         }
         
         .silver .achievement-title {
-            color: #c0c0c0; /* 银色 */
+            color: #c0c0c0;
         }
         
-        /* 成就描述 */
         .achievement-desc {
             font-size: 14px;
             margin-bottom: 8px;
             color: #666666;
         }
         
-        /* 成就点数 */
         .achievement-points {
             position: absolute;
             top: 12px;
@@ -215,7 +245,34 @@
             font-size: 16px;
         }
         
-        /* 统计区域 - 修改后的紧凑样式 */
+        .progress-container {
+            height: 16px;
+            background: #e9e9e9;
+            border: 1px solid #d0d0d0;
+            margin-top: 8px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #3a6ea5, #4b9cd3);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            line-height: 16px;
+            color: #333333;
+        }
+        
         .achievement-stats {
             margin-top: 20px;
             padding: 12px 15px;
@@ -239,7 +296,6 @@
             color: #d4af37;
         }
         
-        /* 标题样式 */
         .achievement-header {
             color: #d4af37;
             text-align: center;
@@ -281,8 +337,8 @@
             <!-- 经典文学列表 -->
             <ul class="item-list" id="classics-list">
                 <li class="list-item active" data-id="1">
-                    <h3>世界三大短篇小说家</h3>
-                    <p>欧亨利、莫泊桑、契诃夫...</p>
+                    <h3>《红楼梦》</h3>
+                    <p>中国古典四大名著之首，清代作家曹雪芹创作的长篇小说...</p>
                 </li>
                 <li class="list-item" data-id="2">
                     <h3>《战争与和平》</h3>
@@ -351,9 +407,154 @@
             </ul>
         </div>
         
-        <!-- 右侧内容区域 - 成就系统 -->
+        <!-- 右侧内容区域 -->
         <div class="right-content">
-            <div class="achievement-container">
+            <!-- 红楼梦详情页 -->
+            <div class="book-detail active" id="book-1">
+                <div class="content-header">
+                    <h2>《红楼梦》</h2>
+                    <div class="meta">
+                        <span>作者: 曹雪芹</span>
+                        <span>出版时间: 1791年</span>
+                        <span>分类: 经典文学</span>
+                    </div>
+                </div>
+                
+                <div class="content-body">
+                    <img src="https://img9.doubanio.com/view/subject/s/public/s1070959.jpg" alt="红楼梦">
+                    
+                    <p>《红楼梦》，中国古代章回体长篇小说，中国古典四大名著之一，一般认为是清代作家曹雪芹所著。小说以贾、史、王、薛四大家族的兴衰为背景，以富贵公子贾宝玉为视角，以贾宝玉与林黛玉、薛宝钗的爱情婚姻悲剧为主线，描绘了一批举止见识出于须眉之上的闺阁佳人的人生百态，展现了真正的人性美和悲剧美，可以说是一部从各个角度展现女性美以及中国古代社会世态百相的史诗性著作。</p>
+                    
+                    <h3>内容简介</h3>
+                    <p>《红楼梦》以贾、王、史、薛四大家族由盛而衰的全过程为创作背景，以贾宝玉、林黛玉、薛宝钗的爱情婚姻故事为主线，刻画了以贾宝玉和金陵十二钗为中心的正邪两赋有情人的人性美和悲剧美。通过家族悲剧、女儿悲剧及主人公的人生悲剧，揭示出封建末世危机。</p>
+                    
+                    <h3>艺术成就</h3>
+                    <p>《红楼梦》是一部具有世界影响力的人情小说，举世公认的中国古典小说巅峰之作，中国封建社会的百科全书，传统文化的集大成者。小说以"大旨谈情，实录其事"自勉，只按自己的事体情理，按迹循踪，摆脱旧套，新鲜别致，取得了非凡的艺术成就。</p>
+                </div>
+            </div>
+            
+            <!-- 战争与和平详情页 -->
+            <div class="book-detail" id="book-2">
+                <div class="content-header">
+                    <h2>《战争与和平》</h2>
+                    <div class="meta">
+                        <span>作者: 列夫·托尔斯泰</span>
+                        <span>出版时间: 1869年</span>
+                        <span>分类: 经典文学</span>
+                    </div>
+                </div>
+                
+                <div class="content-body">
+                    <img src="https://img9.doubanio.com/view/subject/s/public/s32266693.jpg" alt="战争与和平">
+                    
+                    <p>《战争与和平》是俄国作家列夫·托尔斯泰创作的长篇小说，也是其代表作之一。该作以1812年的卫国战争为中心，反映从1805到1820年间的重大历史事件。以鲍尔康斯、别祖霍夫、罗斯托夫和库拉金四大贵族的经历为主线，在战争与和平的交替描写中把众多的事件和人物串联起来。</p>
+                    
+                    <h3>内容简介</h3>
+                    <p>小说从1805年彼得堡贵族沙龙谈论拿破仑战争开始，到1820年十二月党人运动的酝酿为止，以1812年俄国卫国战争为中心，展现了当时俄国从城市到乡村的广阔社会生活画面，气势磅礴地反映了1805—1820年间许多重大的历史事件。</p>
+                    
+                    <h3>艺术特色</h3>
+                    <p>托尔斯泰在《战争与和平》中塑造了559个人物形象，上至皇帝、大臣、将帅、贵族，下至商人、士兵、农民，各阶层人物都得到了生动的描写。小说对人物的描写既复杂又丰满，常用对比的艺术方法来表述，体裁在俄国文学史上是一种创新，也超越了欧洲长篇小说的传统规范。</p>
+                </div>
+            </div>
+            
+            <!-- 百年孤独详情页 -->
+            <div class="book-detail" id="book-3">
+                <div class="content-header">
+                    <h2>《百年孤独》</h2>
+                    <div class="meta">
+                        <span>作者: 加西亚·马尔克斯</span>
+                        <span>出版时间: 1967年</span>
+                        <span>分类: 经典文学</span>
+                    </div>
+                </div>
+                
+                <div class="content-body">
+                    <img src="https://img9.doubanio.com/view/subject/s/public/s6384944.jpg" alt="百年孤独">
+                    
+                    <p>《百年孤独》是哥伦比亚作家加西亚·马尔克斯创作的长篇小说，是其代表作，也是拉丁美洲魔幻现实主义文学的代表作，被誉为"再现拉丁美洲历史社会图景的鸿篇巨著"。</p>
+                    
+                    <h3>内容简介</h3>
+                    <p>作品描写了布恩迪亚家族七代人的传奇故事，以及加勒比海沿岸小镇马孔多的百年兴衰，反映了拉丁美洲一个世纪以来风云变幻的历史。作品融入神话传说、民间故事、宗教典故等神秘因素，巧妙地糅合了现实与虚幻，展现出一个瑰丽的想象世界。</p>
+                    
+                    <h3>文学价值</h3>
+                    <p>《百年孤独》风格独特，既气势恢宏又奇幻诡丽。粗犷处寥寥数笔勾勒出数十年内战的血腥冷酷；细腻处描写热恋中情欲煎熬如慕如诉；奇诡处人间鬼界过去未来变幻莫测。轻灵厚重，兼而有之，被公认为魔幻现实主义最具代表性的作品。</p>
+                </div>
+            </div>
+            
+            <!-- 麦琪的礼物详情页 -->
+            <div class="book-detail" id="book-6">
+                <div class="content-header">
+                    <h2>《麦琪的礼物》</h2>
+                    <div class="meta">
+                        <span>作者: 欧·亨利</span>
+                        <span>出版时间: 1905年</span>
+                        <span>分类: 短篇小说</span>
+                    </div>
+                </div>
+                
+                <div class="content-body">
+                    <img src="https://img9.doubanio.com/view/subject/s/public/s29842518.jpg" alt="麦琪的礼物">
+                    
+                    <p>《麦琪的礼物》是美国作家欧·亨利创作的短篇小说，讲述了一对穷困的年轻夫妇忍痛割爱互赠圣诞礼物的故事，反映了美国下层人民生活的艰难，赞美了主人公善良的心地和纯真的爱情。</p>
+                    
+                    <h3>故事梗概</h3>
+                    <p>吉姆和德拉是一对贫穷的年轻夫妇。圣诞节前夕，德拉卖掉了自己引以为豪的长发，为丈夫买了一条白金表链；而吉姆则卖掉了祖传的金表，为妻子买了一套精美的梳子。当他们互赠礼物时，才发现彼此的礼物都已失去了使用价值，但他们得到了比任何实物都宝贵的东西——真挚的爱。</p>
+                    
+                    <h3>艺术特色</h3>
+                    <p>欧·亨利以细腻的笔触描写了一对贫穷夫妇的爱情故事，展现了"含泪的微笑"的独特风格。小说构思精巧，结局出人意料又在情理之中，是欧·亨利式结尾的典范之作。</p>
+                </div>
+            </div>
+            
+            <!-- 项链详情页 -->
+            <div class="book-detail" id="book-7">
+                <div class="content-header">
+                    <h2>《项链》</h2>
+                    <div class="meta">
+                        <span>作者: 莫泊桑</span>
+                        <span>出版时间: 1884年</span>
+                        <span>分类: 短篇小说</span>
+                    </div>
+                </div>
+                
+                <div class="content-body">
+                    <img src="https://img9.doubanio.com/view/subject/s/public/s29842518.jpg" alt="项链">
+                    
+                    <p>《项链》是法国作家莫泊桑创作于1884年的短篇小说，讲述了小公务员的妻子玛蒂尔德为参加晚会向朋友借了一串钻石项链，却不慎丢失，为了赔偿项链，她节衣缩食辛苦劳作了十年，最后得知所借的项链是假的的故事。</p>
+                    
+                    <h3>故事梗概</h3>
+                    <p>玛蒂尔德是一位美丽但出身低微的女子，嫁给了一个小职员。她一直梦想着上流社会的生活。一次，丈夫弄来一张部长举办的晚会请柬。为了参加晚会，玛蒂尔德向朋友借了一串钻石项链。晚会上她大获成功，但回家后发现项链不见了。夫妻俩借钱买了一串新项链还给朋友。为了还债，他们过了十年艰苦生活。最后玛蒂尔德偶然遇到那位朋友，才知道当初借的项链是假的。</p>
+                    
+                    <h3>主题思想</h3>
+                    <p>小说讽刺了小资产阶级的虚荣心和追求享乐的思想，同时揭示了当时法国社会金钱至上的风气和下层人民的艰难生活。莫泊桑以犀利的笔触揭示了人性的弱点和命运的残酷。</p>
+                </div>
+            </div>
+            
+            <!-- 李白诗选详情页 -->
+            <div class="book-detail" id="book-11">
+                <div class="content-header">
+                    <h2>《李白诗选》</h2>
+                    <div class="meta">
+                        <span>作者: 李白</span>
+                        <span>朝代: 唐代</span>
+                        <span>分类: 诗歌</span>
+                    </div>
+                </div>
+                
+                <div class="content-body">
+                    <img src="https://img9.doubanio.com/view/subject/s/public/s29842518.jpg" alt="李白诗选">
+                    
+                    <p>李白（701年－762年），字太白，号青莲居士，又号"谪仙人"，唐代伟大的浪漫主义诗人，被后人誉为"诗仙"，与杜甫并称为"李杜"。其诗风格豪放飘逸，想象丰富，语言流转自然，音律和谐多变，善于从民歌、神话中汲取营养素材，构成其特有的瑰玮绚烂的色彩，达到盛唐诗歌艺术的巅峰。</p>
+                    
+                    <h3>代表作品</h3>
+                    <p>李白的诗歌今存990多首，有《李太白集》传世。代表作有《望庐山瀑布》、《行路难》、《蜀道难》、《将进酒》、《梦游天姥吟留别》等。</p>
+                    
+                    <h3>诗歌特色</h3>
+                    <p>李白的诗歌具有"笔落惊风雨，诗成泣鬼神"的艺术魅力，主观抒情色彩十分浓烈，感情的表达具有一种排山倒海、一泻千里的气势。诗中常将想象、夸张、比喻、拟人等手法综合运用，从而造成神奇异彩、瑰丽动人的意境。</p>
+                </div>
+            </div>
+            
+            <!-- 世界三大短篇小说家成就系统 -->
+            <div class="achievement-container" id="achievement-system">
                 <h2 class="achievement-header">世界三大短篇小说家爱好者</h2>
                 
                 <!-- 欧亨利成就 -->
@@ -423,6 +624,8 @@
                 poetry: document.getElementById('poetry-list')
             };
             const listItems = document.querySelectorAll('.list-item');
+            const bookDetails = document.querySelectorAll('.book-detail');
+            const achievementSystem = document.getElementById('achievement-system');
             
             // 成就系统相关元素
             const checkboxes = document.querySelectorAll('.achievement-check');
@@ -485,6 +688,7 @@
                     const firstItem = lists[category].querySelector('.list-item');
                     if (firstItem) {
                         firstItem.classList.add('active');
+                        showContent(firstItem.dataset.id);
                     }
                 });
             });
@@ -496,8 +700,32 @@
                     const list = this.parentElement;
                     list.querySelectorAll('.list-item').forEach(i => i.classList.remove('active'));
                     this.classList.add('active');
+                    
+                    // 显示对应内容
+                    showContent(this.dataset.id);
                 });
             });
+            
+            // 显示对应内容
+            function showContent(id) {
+                // 隐藏所有书籍详情
+                bookDetails.forEach(detail => detail.classList.remove('active'));
+                
+                // 隐藏成就系统
+                achievementSystem.style.display = 'none';
+                
+                // 显示选中的书籍详情
+                const selectedBook = document.getElementById(`book-${id}`);
+                if (selectedBook) {
+                    selectedBook.classList.add('active');
+                } else {
+                    // 如果没有对应的书籍详情，显示成就系统
+                    achievementSystem.style.display = 'block';
+                }
+            }
+            
+            // 默认显示第一个书籍详情
+            showContent('1');
         });
     </script>
 </body>
