@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>世界文学阅读系统</title>
+    <title>文学阅读成就系统</title>
     <style>
         /* 基础样式 */
         * {
@@ -104,45 +104,6 @@
             flex: 1;
             padding: 30px;
             overflow-y: auto;
-        }
-        
-        /* 书籍详情页样式 */
-        .book-detail {
-            display: none;
-        }
-        
-        .book-detail.active {
-            display: block;
-        }
-        
-        .content-header {
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .content-header h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #222;
-        }
-        
-        .content-header .meta {
-            color: #666;
-            font-size: 14px;
-            display: flex;
-            gap: 15px;
-        }
-        
-        .content-body {
-            line-height: 1.8;
-        }
-        
-        .content-body img {
-            max-width: 100%;
-            height: auto;
-            margin: 20px 0;
-            border-radius: 4px;
         }
         
         /* 成就系统样式 */
@@ -407,209 +368,10 @@
             </ul>
         </div>
         
-        <!-- 右侧内容区域 -->
+        <!-- 右侧内容区域 - 成就系统 -->
         <div class="right-content">
-            <!-- 红楼梦详情页 -->
-            <div class="book-detail active" id="book-1">
-                <div class="content-header">
-                    <h2>《红楼梦》</h2>
-                    <div class="meta">
-                        <span>作者: 曹雪芹</span>
-                        <span>出版时间: 1791年</span>
-                        <span>分类: 经典文学</span>
-                    </div>
-                </div>
-                
-                <div class="content-body">
-                    <img src="https://img9.doubanio.com/view/subject/s/public/s1070959.jpg" alt="红楼梦">
-                    
-                    <p>《红楼梦》，中国古代章回体长篇小说，中国古典四大名著之一，一般认为是清代作家曹雪芹所著。小说以贾、史、王、薛四大家族的兴衰为背景，以富贵公子贾宝玉为视角，以贾宝玉与林黛玉、薛宝钗的爱情婚姻悲剧为主线，描绘了一批举止见识出于须眉之上的闺阁佳人的人生百态，展现了真正的人性美和悲剧美，可以说是一部从各个角度展现女性美以及中国古代社会世态百相的史诗性著作。</p>
-                    
-                    <h3>内容简介</h3>
-                    <p>《红楼梦》以贾、王、史、薛四大家族由盛而衰的全过程为创作背景，以贾宝玉、林黛玉、薛宝钗的爱情婚姻故事为主线，刻画了以贾宝玉和金陵十二钗为中心的正邪两赋有情人的人性美和悲剧美。通过家族悲剧、女儿悲剧及主人公的人生悲剧，揭示出封建末世危机。</p>
-                    
-                    <h3>艺术成就</h3>
-                    <p>《红楼梦》是一部具有世界影响力的人情小说，举世公认的中国古典小说巅峰之作，中国封建社会的百科全书，传统文化的集大成者。小说以"大旨谈情，实录其事"自勉，只按自己的事体情理，按迹循踪，摆脱旧套，新鲜别致，取得了非凡的艺术成就。</p>
-                </div>
-            </div>
-            
-            <!-- 战争与和平详情页 -->
-            <div class="book-detail" id="book-2">
-                <div class="content-header">
-                    <h2>《战争与和平》</h2>
-                    <div class="meta">
-                        <span>作者: 列夫·托尔斯泰</span>
-                        <span>出版时间: 1869年</span>
-                        <span>分类: 经典文学</span>
-                    </div>
-                </div>
-                
-                <div class="content-body">
-                    <img src="https://img9.doubanio.com/view/subject/s/public/s32266693.jpg" alt="战争与和平">
-                    
-                    <p>《战争与和平》是俄国作家列夫·托尔斯泰创作的长篇小说，也是其代表作之一。该作以1812年的卫国战争为中心，反映从1805到1820年间的重大历史事件。以鲍尔康斯、别祖霍夫、罗斯托夫和库拉金四大贵族的经历为主线，在战争与和平的交替描写中把众多的事件和人物串联起来。</p>
-                    
-                    <h3>内容简介</h3>
-                    <p>小说从1805年彼得堡贵族沙龙谈论拿破仑战争开始，到1820年十二月党人运动的酝酿为止，以1812年俄国卫国战争为中心，展现了当时俄国从城市到乡村的广阔社会生活画面，气势磅礴地反映了1805—1820年间许多重大的历史事件。</p>
-                    
-                    <h3>艺术特色</h3>
-                    <p>托尔斯泰在《战争与和平》中塑造了559个人物形象，上至皇帝、大臣、将帅、贵族，下至商人、士兵、农民，各阶层人物都得到了生动的描写。小说对人物的描写既复杂又丰满，常用对比的艺术方法来表述，体裁在俄国文学史上是一种创新，也超越了欧洲长篇小说的传统规范。</p>
-                </div>
-            </div>
-            
-            <!-- 百年孤独详情页 -->
-            <div class="book-detail" id="book-3">
-                <div class="content-header">
-                    <h2>《百年孤独》</h2>
-                    <div class="meta">
-                        <span>作者: 加西亚·马尔克斯</span>
-                        <span>出版时间: 1967年</span>
-                        <span>分类: 经典文学</span>
-                    </div>
-                </div>
-                
-                <div class="content-body">
-                    <img src="https://img9.doubanio.com/view/subject/s/public/s6384944.jpg" alt="百年孤独">
-                    
-                    <p>《百年孤独》是哥伦比亚作家加西亚·马尔克斯创作的长篇小说，是其代表作，也是拉丁美洲魔幻现实主义文学的代表作，被誉为"再现拉丁美洲历史社会图景的鸿篇巨著"。</p>
-                    
-                    <h3>内容简介</h3>
-                    <p>作品描写了布恩迪亚家族七代人的传奇故事，以及加勒比海沿岸小镇马孔多的百年兴衰，反映了拉丁美洲一个世纪以来风云变幻的历史。作品融入神话传说、民间故事、宗教典故等神秘因素，巧妙地糅合了现实与虚幻，展现出一个瑰丽的想象世界。</p>
-                    
-                    <h3>文学价值</h3>
-                    <p>《百年孤独》风格独特，既气势恢宏又奇幻诡丽。粗犷处寥寥数笔勾勒出数十年内战的血腥冷酷；细腻处描写热恋中情欲煎熬如慕如诉；奇诡处人间鬼界过去未来变幻莫测。轻灵厚重，兼而有之，被公认为魔幻现实主义最具代表性的作品。</p>
-                </div>
-            </div>
-            
-            <!-- 麦琪的礼物详情页 -->
-            <div class="book-detail" id="book-6">
-                <div class="content-header">
-                    <h2>《麦琪的礼物》</h2>
-                    <div class="meta">
-                        <span>作者: 欧·亨利</span>
-                        <span>出版时间: 1905年</span>
-                        <span>分类: 短篇小说</span>
-                    </div>
-                </div>
-                
-                <div class="content-body">
-                    <img src="https://img9.doubanio.com/view/subject/s/public/s29842518.jpg" alt="麦琪的礼物">
-                    
-                    <p>《麦琪的礼物》是美国作家欧·亨利创作的短篇小说，讲述了一对穷困的年轻夫妇忍痛割爱互赠圣诞礼物的故事，反映了美国下层人民生活的艰难，赞美了主人公善良的心地和纯真的爱情。</p>
-                    
-                    <h3>故事梗概</h3>
-                    <p>吉姆和德拉是一对贫穷的年轻夫妇。圣诞节前夕，德拉卖掉了自己引以为豪的长发，为丈夫买了一条白金表链；而吉姆则卖掉了祖传的金表，为妻子买了一套精美的梳子。当他们互赠礼物时，才发现彼此的礼物都已失去了使用价值，但他们得到了比任何实物都宝贵的东西——真挚的爱。</p>
-                    
-                    <h3>艺术特色</h3>
-                    <p>欧·亨利以细腻的笔触描写了一对贫穷夫妇的爱情故事，展现了"含泪的微笑"的独特风格。小说构思精巧，结局出人意料又在情理之中，是欧·亨利式结尾的典范之作。</p>
-                </div>
-            </div>
-            
-            <!-- 项链详情页 -->
-            <div class="book-detail" id="book-7">
-                <div class="content-header">
-                    <h2>《项链》</h2>
-                    <div class="meta">
-                        <span>作者: 莫泊桑</span>
-                        <span>出版时间: 1884年</span>
-                        <span>分类: 短篇小说</span>
-                    </div>
-                </div>
-                
-                <div class="content-body">
-                    <img src="https://img9.doubanio.com/view/subject/s/public/s29842518.jpg" alt="项链">
-                    
-                    <p>《项链》是法国作家莫泊桑创作于1884年的短篇小说，讲述了小公务员的妻子玛蒂尔德为参加晚会向朋友借了一串钻石项链，却不慎丢失，为了赔偿项链，她节衣缩食辛苦劳作了十年，最后得知所借的项链是假的的故事。</p>
-                    
-                    <h3>故事梗概</h3>
-                    <p>玛蒂尔德是一位美丽但出身低微的女子，嫁给了一个小职员。她一直梦想着上流社会的生活。一次，丈夫弄来一张部长举办的晚会请柬。为了参加晚会，玛蒂尔德向朋友借了一串钻石项链。晚会上她大获成功，但回家后发现项链不见了。夫妻俩借钱买了一串新项链还给朋友。为了还债，他们过了十年艰苦生活。最后玛蒂尔德偶然遇到那位朋友，才知道当初借的项链是假的。</p>
-                    
-                    <h3>主题思想</h3>
-                    <p>小说讽刺了小资产阶级的虚荣心和追求享乐的思想，同时揭示了当时法国社会金钱至上的风气和下层人民的艰难生活。莫泊桑以犀利的笔触揭示了人性的弱点和命运的残酷。</p>
-                </div>
-            </div>
-            
-            <!-- 李白诗选详情页 -->
-            <div class="book-detail" id="book-11">
-                <div class="content-header">
-                    <h2>《李白诗选》</h2>
-                    <div class="meta">
-                        <span>作者: 李白</span>
-                        <span>朝代: 唐代</span>
-                        <span>分类: 诗歌</span>
-                    </div>
-                </div>
-                
-                <div class="content-body">
-                    <img src="https://img9.doubanio.com/view/subject/s/public/s29842518.jpg" alt="李白诗选">
-                    
-                    <p>李白（701年－762年），字太白，号青莲居士，又号"谪仙人"，唐代伟大的浪漫主义诗人，被后人誉为"诗仙"，与杜甫并称为"李杜"。其诗风格豪放飘逸，想象丰富，语言流转自然，音律和谐多变，善于从民歌、神话中汲取营养素材，构成其特有的瑰玮绚烂的色彩，达到盛唐诗歌艺术的巅峰。</p>
-                    
-                    <h3>代表作品</h3>
-                    <p>李白的诗歌今存990多首，有《李太白集》传世。代表作有《望庐山瀑布》、《行路难》、《蜀道难》、《将进酒》、《梦游天姥吟留别》等。</p>
-                    
-                    <h3>诗歌特色</h3>
-                    <p>李白的诗歌具有"笔落惊风雨，诗成泣鬼神"的艺术魅力，主观抒情色彩十分浓烈，感情的表达具有一种排山倒海、一泻千里的气势。诗中常将想象、夸张、比喻、拟人等手法综合运用，从而造成神奇异彩、瑰丽动人的意境。</p>
-                </div>
-            </div>
-            
-            <!-- 世界三大短篇小说家成就系统 -->
             <div class="achievement-container" id="achievement-system">
-                <h2 class="achievement-header">世界三大短篇小说家爱好者</h2>
-                
-                <!-- 欧亨利成就 -->
-                <div class="achievement gold">
-                    <label class="achievement-checkbox">
-                        <input type="checkbox" class="achievement-check" data-points="10">
-                    </label>
-                    <div class="achievement-content">
-                        <div class="achievement-points">10</div>
-                        <div class="achievement-title">欧亨利（美国）</div>
-                        <div class="achievement-desc">阅读欧亨利短篇小说1本</div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 30%"></div>
-                            <div class="progress-text">30% 完成</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 莫泊桑成就 -->
-                <div class="achievement gold">
-                    <label class="achievement-checkbox">
-                        <input type="checkbox" class="achievement-check" data-points="10">
-                    </label>
-                    <div class="achievement-content">
-                        <div class="achievement-points">10</div>
-                        <div class="achievement-title">莫泊桑（法国）</div>
-                        <div class="achievement-desc">阅读莫泊桑短篇小说1本</div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 50%"></div>
-                            <div class="progress-text">50% 完成</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 契诃夫成就 -->
-                <div class="achievement gold">
-                    <label class="achievement-checkbox">
-                        <input type="checkbox" class="achievement-check" data-points="10">
-                    </label>
-                    <div class="achievement-content">
-                        <div class="achievement-points">10</div>
-                        <div class="achievement-title">契诃夫（俄罗斯）</div>
-                        <div class="achievement-desc">阅读契诃夫短篇小说1本</div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 20%"></div>
-                            <div class="progress-text">20% 完成</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 统计区域 -->
-                <div class="achievement-stats">
-                    <div>已完成成就: <span id="completed-count">0</span>/<span id="total-count">3</span></div>
-                    <div>成就点数: <span id="total-points">0</span></div>
-                </div>
+                <!-- 动态内容将由JavaScript生成 -->
             </div>
         </div>
     </div>
@@ -624,49 +386,137 @@
                 poetry: document.getElementById('poetry-list')
             };
             const listItems = document.querySelectorAll('.list-item');
-            const bookDetails = document.querySelectorAll('.book-detail');
             const achievementSystem = document.getElementById('achievement-system');
             
-            // 成就系统相关元素
-            const checkboxes = document.querySelectorAll('.achievement-check');
-            const completedCount = document.getElementById('completed-count');
-            const totalCount = document.getElementById('total-count');
-            const totalPoints = document.getElementById('total-points');
+            // 成就数据 - 根据书籍ID存储不同的成就
+            const achievementData = {
+                1: { // 红楼梦
+                    title: "《红楼梦》阅读成就",
+                    achievements: [
+                        { title: "初读红楼", desc: "完成《红楼梦》前10回阅读", points: 10, progress: 20 },
+                        { title: "人物关系掌握", desc: "理清主要人物关系图", points: 20, progress: 10 },
+                        { title: "诗词欣赏", desc: "欣赏并理解书中5首诗词", points: 15, progress: 30 }
+                    ]
+                },
+                2: { // 战争与和平
+                    title: "《战争与和平》阅读成就",
+                    achievements: [
+                        { title: "历史背景了解", desc: "了解拿破仑战争历史背景", points: 10, progress: 40 },
+                        { title: "主要人物分析", desc: "分析3个主要人物性格", points: 15, progress: 25 },
+                        { title: "战争场景阅读", desc: "阅读完整3场战争描写", points: 20, progress: 15 }
+                    ]
+                },
+                6: { // 麦琪的礼物
+                    title: "《麦琪的礼物》阅读成就",
+                    achievements: [
+                        { title: "故事梗概", desc: "理解并复述故事主要内容", points: 10, progress: 60 },
+                        { title: "主题分析", desc: "分析小说的主题思想", points: 15, progress: 40 },
+                        { title: "写作手法", desc: "学习欧·亨利式结尾", points: 20, progress: 30 }
+                    ]
+                },
+                7: { // 项链
+                    title: "《项链》阅读成就",
+                    achievements: [
+                        { title: "情节梳理", desc: "梳理故事主要情节发展", points: 10, progress: 50 },
+                        { title: "人物心理分析", desc: "分析玛蒂尔德的性格变化", points: 15, progress: 35 },
+                        { title: "社会意义", desc: "理解小说的社会批判意义", points: 20, progress: 25 }
+                    ]
+                },
+                11: { // 李白诗选
+                    title: "《李白诗选》阅读成就",
+                    achievements: [
+                        { title: "名篇背诵", desc: "背诵5首李白代表诗作", points: 10, progress: 30 },
+                        { title: "风格分析", desc: "理解李白诗歌的浪漫主义风格", points: 15, progress: 20 },
+                        { title: "创作背景", desc: "了解3首诗的创作背景", points: 20, progress: 10 }
+                    ]
+                },
+                // 默认成就数据
+                default: {
+                    title: "文学阅读成就系统",
+                    achievements: [
+                        { title: "阅读爱好者", desc: "完成1本书籍的阅读", points: 10, progress: 0 },
+                        { title: "文学探索者", desc: "阅读3种不同文学体裁", points: 20, progress: 0 },
+                        { title: "深度读者", desc: "写1篇读书笔记", points: 30, progress: 0 }
+                    ]
+                }
+            };
             
-            // 设置总成就数
-            totalCount.textContent = checkboxes.length;
-            
-            // 页面加载时从本地存储恢复勾选状态
-            window.addEventListener('DOMContentLoaded', () => {
-                checkboxes.forEach((checkbox, index) => {
-                    const isChecked = localStorage.getItem(`achievement_${index}`) === 'true';
-                    checkbox.checked = isChecked;
-                    if (isChecked) {
-                        checkbox.dispatchEvent(new Event('change'));
+            // 初始化成就系统
+            function initAchievementSystem(bookId) {
+                const data = achievementData[bookId] || achievementData.default;
+                
+                let html = `
+                    <h2 class="achievement-header">${data.title}</h2>
+                `;
+                
+                data.achievements.forEach((achievement, index) => {
+                    html += `
+                    <div class="achievement gold">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" class="achievement-check" data-points="${achievement.points}" 
+                                   data-book="${bookId}" data-index="${index}">
+                        </label>
+                        <div class="achievement-content">
+                            <div class="achievement-points">${achievement.points}</div>
+                            <div class="achievement-title">${achievement.title}</div>
+                            <div class="achievement-desc">${achievement.desc}</div>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: ${achievement.progress}%"></div>
+                                <div class="progress-text">${achievement.progress}% 完成</div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                });
+                
+                html += `
+                <div class="achievement-stats">
+                    <div>已完成成就: <span id="completed-count">0</span>/<span id="total-count">${data.achievements.length}</span></div>
+                    <div>成就点数: <span id="total-points">0</span></div>
+                </div>
+                `;
+                
+                achievementSystem.innerHTML = html;
+                
+                // 为新的勾选框添加事件监听
+                document.querySelectorAll('.achievement-check').forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const bookId = this.dataset.book;
+                        const index = this.dataset.index;
+                        const isChecked = this.checked;
+                        
+                        // 保存状态到本地存储
+                        localStorage.setItem(`achievement_${bookId}_${index}`, isChecked);
+                        updateStats(bookId);
+                    });
+                });
+                
+                // 从本地存储恢复状态
+                data.achievements.forEach((_, index) => {
+                    const checkbox = document.querySelector(`.achievement-check[data-book="${bookId}"][data-index="${index}"]`);
+                    if (checkbox) {
+                        const isChecked = localStorage.getItem(`achievement_${bookId}_${index}`) === 'true';
+                        checkbox.checked = isChecked;
                     }
                 });
-            });
-            
-            // 为每个勾选框添加事件监听
-            checkboxes.forEach((checkbox, index) => {
-                checkbox.addEventListener('change', function() {
-                    // 保存勾选状态到本地存储
-                    localStorage.setItem(`achievement_${index}`, this.checked);
-                    updateStats();
-                });
-            });
+                
+                updateStats(bookId);
+            }
             
             // 更新统计信息
-            function updateStats() {
-                const checkedBoxes = document.querySelectorAll('.achievement-check:checked');
-                completedCount.textContent = checkedBoxes.length;
+            function updateStats(bookId) {
+                const checkboxes = document.querySelectorAll(`.achievement-check[data-book="${bookId}"]`);
+                const checkedBoxes = document.querySelectorAll(`.achievement-check[data-book="${bookId}"]:checked`);
+                
+                document.getElementById('completed-count').textContent = checkedBoxes.length;
+                document.getElementById('total-count').textContent = checkboxes.length;
                 
                 // 计算总点数
                 let points = 0;
                 checkedBoxes.forEach(box => {
                     points += parseInt(box.dataset.points);
                 });
-                totalPoints.textContent = points;
+                document.getElementById('total-points').textContent = points;
             }
             
             // 切换分类标签
@@ -688,7 +538,7 @@
                     const firstItem = lists[category].querySelector('.list-item');
                     if (firstItem) {
                         firstItem.classList.add('active');
-                        showContent(firstItem.dataset.id);
+                        initAchievementSystem(firstItem.dataset.id);
                     }
                 });
             });
@@ -701,31 +551,16 @@
                     list.querySelectorAll('.list-item').forEach(i => i.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // 显示对应内容
-                    showContent(this.dataset.id);
+                    // 更新成就系统
+                    initAchievementSystem(this.dataset.id);
                 });
             });
             
-            // 显示对应内容
-            function showContent(id) {
-                // 隐藏所有书籍详情
-                bookDetails.forEach(detail => detail.classList.remove('active'));
-                
-                // 隐藏成就系统
-                achievementSystem.style.display = 'none';
-                
-                // 显示选中的书籍详情
-                const selectedBook = document.getElementById(`book-${id}`);
-                if (selectedBook) {
-                    selectedBook.classList.add('active');
-                } else {
-                    // 如果没有对应的书籍详情，显示成就系统
-                    achievementSystem.style.display = 'block';
-                }
+            // 初始化：选中第一个列表项并显示对应的成就系统
+            const firstItem = document.querySelector('.list-item.active');
+            if (firstItem) {
+                initAchievementSystem(firstItem.dataset.id);
             }
-            
-            // 默认显示第一个书籍详情
-            showContent('1');
         });
     </script>
 </body>
