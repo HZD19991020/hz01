@@ -65,6 +65,15 @@
             color: var(--text-color);
         }
 
+
+        .nav-separator {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    color: #999;  /* 设置图标颜色 */
+    font-size: 0.8em;  /* 设置图标大小 */
+}
+
         /* 用户操作区修正 */
         .user-actions {
             margin-left: auto;
