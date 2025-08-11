@@ -95,6 +95,16 @@
         display: inline-block;
         vertical-align: middle;
     }
+
+/* 仅修复空白问题，不影响其他样式 */
+.dropdown-menu a > .menu-icon:empty {
+    display: none;
+    margin-right: 0;
+    width: 0;
+}
+.dropdown-menu a {
+    padding-left: 15px !important;
+}
     
     /* 用户操作区修正 */
     .user-actions {
