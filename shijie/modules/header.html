@@ -1,5 +1,25 @@
 <style>
-    /* Add this CSS to ensure dropdown text is left-aligned */
+    /* 添加分隔图标对齐样式 */
+    .nav-separator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0 10px;
+    }
+    
+    .nav-separator img {
+        vertical-align: middle;
+    }
+    
+    /* 确保导航容器整体对齐 */
+    .nav-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    
+    /* 下拉菜单文字左对齐样式 */
     .dropdown-menu a,
     .logo-dropdown a {
         text-align: left;
@@ -49,7 +69,7 @@
             </div>
         </div>
 
-        <div class="nav-separator">
+           <div class="nav-separator">
             <img src="path/to/your-icon.png" alt="分隔图标" width="16" height="16">
         </div>
         
