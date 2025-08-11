@@ -5,7 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>世界奖项</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="/hz01/shijie/css/style.css">
+    <!-- 改为相对路径 -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 临时添加关键样式（建议最终移到style.css） */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .login-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+        }
+    </style>
 </head>
 <body>
     <!-- 模块容器 -->
@@ -13,10 +35,9 @@
     <div id="content"></div>
     <div id="gallery"></div>
 
-    <!-- 登录弹窗（固定结构保留在主页面） -->
+    <!-- 登录弹窗 -->
     <div id="loginModal" class="login-modal">
-        <!-- ...原有登录弹窗代码... -->
-          <div class="login-content">
+        <div class="login-content">
             <div class="login-header">
                 <span class="login-title">用户登录</span>
                 <span class="close-btn">&times;</span>
@@ -24,8 +45,8 @@
             <form class="login-form">
                 <input type="text" placeholder="用户名/邮箱" required>
                 <input type="password" placeholder="密码" required>
-                <div style="display: flex; align-items: center; margin: 10px 0;">
-                    <input type="checkbox" id="remember" style="width: auto; margin-right: 10px;">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
                     <label for="remember">记住我</label>
                 </div>
                 <button type="submit">登录</button>
@@ -33,32 +54,30 @@
             <div class="login-footer">
                 <a href="#">忘记密码?</a> | <a href="#">注册账号</a>
             </div>
+        </div>
     </div>
 
-
-      
-  </div>
-</div>
-
-    <!-- 加载所有模块和脚本 -->
-    <script src="js/main.js"></script>
-    <script src="/hz01/shijie/js/load-modules.js"></script>
-
-        <script>
-function changeImage(src) {
-  // 更新大图
-  document.getElementById('current-image').src = src;
-  
-  // 更新缩略图活动状态
-  const thumbnails = document.querySelectorAll('.thumbnail');
-  thumbnails.forEach(thumb => {
-    thumb.classList.remove('active');
-    if (thumb.getAttribute('onclick').includes(src)) {
-      thumb.classList.add('active');
-    }
-  });
-}
-</script>
+    <!-- 脚本应放在body末尾 -->
+    <script>
+    // 等待DOM加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+        function changeImage(src) {
+            const currentImg = document.getElementById('current-image');
+            if (currentImg) currentImg.src = src;
+            
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.toggle('active', thumb.getAttribute('onclick').includes(src));
+            });
+        }
         
+        // 登录弹窗控制示例
+        document.querySelector('.close-btn')?.addEventListener('click', () => {
+            document.getElementById('loginModal').style.display = 'none';
+        });
+    });
+    </script>
+    
+    <script src="js/main.js"></script>
+    <script src="js/load-modules.js"></script> <!-- 改为相对路径 -->
 </body>
 </html>
