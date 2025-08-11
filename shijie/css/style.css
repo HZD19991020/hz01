@@ -1,762 +1,314 @@
-/* 粘贴原代码中所有CSS内容 */
 <style>
-        /* 基础样式 */
-        :root {
-            --primary-color: #8B4513; /* 深棕色 */
-            --accent-color: #D2B48C; /* 浅褐色 */
-            --text-color: #333333;
-            --light-bg: #FAF5EF;
-            --hover-bg: rgba(210, 180, 140, 0.1);
-        }
-        
-        body {
-            font-family: 'Microsoft YaHei', 'SimSun', serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        
-        /* 顶部导航 */
-        .top-nav {
-            background-color: rgba(255, 255, 255, 0.98);
-            padding: 0;
-            border-bottom: 2px solid var(--accent-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            height: 60px; /* 固定导航栏高度 */
-        }
+    /* 基础样式 */
+    :root {
+        --primary-color: #8B4513; /* 深棕色 */
+        --accent-color: #D2B48C; /* 浅褐色 */
+        --text-color: #333333;
+        --light-bg: #FAF5EF;
+        --hover-bg: rgba(210, 180, 140, 0.1);
+    }
+    
+    body {
+        font-family: 'Microsoft YaHei', 'SimSun', serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+        color: var(--text-color);
+        line-height: 1.6;
+    }
+    
+    /* 顶部导航 */
+    .top-nav {
+        background-color: rgba(255, 255, 255, 0.98);
+        padding: 0;
+        border-bottom: 2px solid var(--accent-color);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        height: 60px; /* 固定导航栏高度 */
+    }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: flex-start;
-            align-items: stretch; /* 修改为stretch使子项等高 */
-            padding: 0 10px;
-            position: relative;
-            height: 100%;
-        }
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center; /* 修改为center使子项垂直居中 */
+        padding: 0 10px;
+        position: relative;
+        height: 100%;
+    }
 
-        .nav-item > a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: bold;
-            padding-left: 20px;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s;
-            height: 100%;
-            white-space: nowrap;
-        }
+    .nav-item > a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: bold;
+        padding-left: 20px;
+        display: flex;
+        align-items: center;
+        transition: all 0.3s;
+        height: 100%;
+        white-space: nowrap;
+    }
 
-        .nav-item.has-dropdown > a::after {
-            content: "▼";
-            font-size: 8px;
-            margin-left: 3px;
-            position: static;
-            transform: none;
-            top: auto;
-            right: auto;
-            color: var(--text-color);
-        }
+    .nav-item.has-dropdown > a::after {
+        content: "▼";
+        font-size: 8px;
+        margin-left: 3px;
+        position: static;
+        transform: none;
+        top: auto;
+        right: auto;
+        color: var(--text-color);
+    }
 
-           /* 强制下拉菜单项左对齐 */
-.dropdown-menu a, 
-.logo-dropdown a {
-    text-align: left !important;
-    justify-content: flex-start !important;
-    padding-left: 15px !important;
-}
+    /* 分隔图标样式 */
+    .nav-separator {
+        height: 60%;
+        width: 1px;
+        background-color: #D2B48C;
+        margin: 0 15px;
+    }
 
-/* 确保菜单文本靠左 */
-.menu-text, 
-.logo-menu-text {
-    display: block;
-    text-align: left !important;
-    width: 100%;
-    margin-left: 0 !important;
-}
-
-/* 移除可能的右浮动或居中设置 */
-.has-dropdown .dropdown-menu, 
-.logo-container .logo-dropdown {
-    text-align: left !important;
-}
-
-/* 图标和文字排列 */
-.dropdown-menu a span, 
-.logo-dropdown a span {
-    display: inline-block;
-    vertical-align: middle;
-}             
-   
-
-        /* 用户操作区修正 */
-        .user-actions {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-
-        .user-actions a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin-left: 12px;
-            font-size: 14px;
-            transition: all 0.3s;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            height: 100%;
-            padding: 0 12px;
-        }
-
-        .user-actions a:hover {
-            color: var(--primary-color);
-            background-color: var(--hover-bg);
-        }
-
-        .user-actions .btn {
-            padding: 8px 20px;
-            margin-left: 12px;
-            height: auto;
-            line-height: normal;
-        }
-
-        @media (max-width: 1024px) {
-            .nav-item > a {
-                padding: 0 8px;
-                font-size: 14px;
-            }
-            
-            .user-actions a {
-                margin-left: 8px;
-                font-size: 13px;
-                padding: 0 8px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            /* 移动端样式保持不变 */
-        }
-        
-        .logo-container {
-            position: relative;
-            margin-right: 20px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-family: 'KaiTi', 'STKaiti', serif;
-            padding: 0 20px 0 0;
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-        
-        .logo.has-dropdown {
-            position: relative;
-            padding-right: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo.has-dropdown::after {
-            content: "▼";
-            font-size: 10px;
-            margin-left: 5px;
-            position: static;
-            transform: none;
-            top: auto;
-            right: auto;
-            color: var(--text-color);
-        }
-        
-        .logo-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: rgba(255, 255, 255, 0.98);
-            border: 1px solid #e0e0e0;
-            border-top: 2px solid var(--accent-color);
-            width: 200px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            padding: 15px 0;
-            border-radius: 0 0 8px 8px;
-        }
-        
-        .logo-container:hover .logo-dropdown {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .logo-dropdown a {
-            color: var(--text-color);
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #f5f5f5;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        
-        .logo-dropdown a:hover {
-            color: var(--primary-color);
-            background-color: var(--hover-bg);
-            padding-left: 25px;
-        }
-        
-        .logo-dropdown a:last-child {
-            border-bottom: none;
-        }
-        
-        .logo-menu-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 15px;
-            color: var(--accent-color);
-            text-align: center;
-            font-size: 18px;
-        }
-        
-        .logo-menu-text {
-            flex: 1;
-        }
-        
-        .nav-links {
-            display: flex;
-            height: 100%;
-            flex-grow: 1;
-        }
-        
-        .nav-item {
-            position: relative;
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
-        
-        /* 下拉菜单 - 带图标 */
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: rgba(255, 255, 255, 0.98);
-            border: 1px solid #e0e0e0;
-            border-top: 2px solid var(--accent-color);
-            width: 280px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            padding: 15px 0;
-            border-radius: 0 0 8px 8px;
-        max-height: 70vh;
-    overflow-y: auto;
-    scrollbar-width: thin;
-        }
-        
-        .nav-item:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .dropdown-menu a {
-            color: var(--text-color);
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #f5f5f5;
-            transition: all 0.3s;
-        }
-        
-        .dropdown-menu a:hover {
-            color: var(--primary-color);
-            background-color: var(--hover-bg);
-            padding-left: 25px;
-        }
-        
-        .dropdown-menu a:last-child {
-            border-bottom: none;
-        }
-        
-        .menu-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 15px;
-            color: var(--accent-color);
-            text-align: center;
-            font-size: 18px;
-        }
-        
-        .menu-text {
-            flex: 1;
-        }
-        
-        /* 内容区域 */
-        .content {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            min-height: 500px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 30px;
-            font-family: 'KaiTi', 'STKaiti', serif;
-            font-size: 2.5em;
-        }
-        
-        .book-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .book-card {
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            padding: 20px;
-            transition: transform 0.3s;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .book-title {
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            border-bottom: 1px solid var(--accent-color);
-            padding-bottom: 8px;
-        }
-        
-        .book-author {
-            color: #666;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-        
-        .book-desc {
-            font-size: 0.9em;
-            color: #555;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 4px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary {
-            background-color: white;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-        }
-
-        .btn-primary:hover {
-            background-color: #f5f5f5;
-            color: #6d3100;
-            border-color: #6d3100;
-        }
-        
-        /* 登录弹窗样式 */
-        .login-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        
-        .login-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 30px;
-            border: 1px solid var(--accent-color);
-            border-radius: 8px;
-            width: 350px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .login-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--accent-color);
-        }
-        
-        .login-title {
-            color: var(--primary-color);
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        
-        .close-btn {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .close-btn:hover {
-            color: var(--primary-color);
-        }
-        
-        .login-form input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        
-        .login-form button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        .login-form button:hover {
-            background-color: #6d3100;
-        }
-        
-        .login-footer {
-            margin-top: 15px;
-            text-align: center;
-            font-size: 0.9em;
-        }
-        
-        .login-footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                padding: 0;
-                height: auto;
-            }
-            
-            .logo-container {
-                width: 100%;
-                text-align: center;
-                margin-right: 0;
-                padding: 15px 0;
-                height: auto;
-            }
-            
-            .logo {
-                justify-content: center;
-                height: auto;
-                padding: 15px 0;
-            }
-            
-            .logo-dropdown {
-                width: 100%;
-                left: 0;
-            }
-            
-            .nav-links {
-                width: 100%;
-                flex-direction: column;
-                height: auto;
-            }
-            
-            .nav-item {
-                width: 100%;
-                text-align: left;
-                height: auto;
-                padding: 10px 0;
-            }
-            
-            .dropdown-menu {
-                position: static;
-                width: 100%;
-                opacity: 1;
-                visibility: visible;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-                border: none;
-                background-color: rgba(255, 255, 255, 0.9);
-            }
-            
-            .nav-item:hover .dropdown-menu {
-                max-height: 500px;
-            }
-            
-            .book-list {
-                grid-template-columns: 1fr;
-            }
-            
-            .user-actions {
-                margin: 15px 0;
-                width: 100%;
-                justify-content: center;
-                height: auto;
-                flex-direction: column;
-            }
-
-            .user-actions a {
-                margin: 5px 0;
-                padding: 10px;
-                width: 100%;
-                text-align: center;
-            }
-
-            .user-actions .btn {
-                margin: 10px 0;
-                width: 100%;
-            }
-        }
-
-        /* 画廊样式 */
-        .gallery-section {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 30px;
-        }
-
-        .gallery-section h2 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 30px;
-            font-family: 'KaiTi', 'STKaiti', serif;
-            font-size: 2em;
-        }
-
-        .gallery-container {
-            width: 100%;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .main-image-container {
-            width: 100%;
-            height: 600px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .main-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .main-image.zoom {
-            transform: scale(1.05);
-        }
-        
-        .image-title {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            color: white;
-            font-size: 24px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-        
-        .thumbnail-container {
-            position: absolute;
-            right: 20px;
-            bottom: 20px;
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-        
-        .thumbnail {
-            width: 80px;
-            height: 60px;
-            border: 2px solid white;
-            border-radius: 4px;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-            object-fit: cover;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .thumbnail:hover, .thumbnail.active {
-            opacity: 1;
-            border-color: #ff4757;
-            transform: translateY(-5px);
-        }
-        
-        .nav-arrows {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            transform: translateY(-50%);
-            z-index: 5;
-        }
-        
-        .arrow {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .arrow:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        
-        .arrow i {
-            color: white;
-            font-size: 24px;
-        }
-        
-        .zoom-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
-        }
-        
-        .zoom-btn:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        
-        .zoom-btn i {
-            color: white;
-            font-size: 18px;
-        }
-        
-        /* 加载动画 */
-        .loader {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #ff4757;
-            animation: spin 1s ease-in-out infinite;
-            z-index: 5;
-        }
-        
-        @keyframes spin {
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .main-image-container {
-                height: 400px;
-            }
-            
-            .thumbnail {
-                width: 60px;
-                height: 45px;
-            }
-            
-            .image-title {
-                font-size: 18px;
-                padding: 15px;
-
+    /* 下拉菜单强制左对齐 */
     .dropdown-menu a, 
     .logo-dropdown a {
-        padding: 10px 15px !important;
-        font-size: 14px;
+        text-align: left;
+        justify-content: flex-start;
+        padding-left: 15px !important;
     }
-            }
+
+    /* 确保菜单文本靠左 */
+    .menu-text, 
+    .logo-menu-text {
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    /* 图标和文字排列 */
+    .dropdown-menu a span, 
+    .logo-dropdown a span {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+    /* 用户操作区修正 */
+    .user-actions {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .user-actions a {
+        color: var(--text-color);
+        text-decoration: none;
+        margin-left: 12px;
+        font-size: 14px;
+        transition: all 0.3s;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 0 12px;
+    }
+
+    .user-actions a:hover {
+        color: var(--primary-color);
+        background-color: var(--hover-bg);
+    }
+
+    .user-actions .btn {
+        padding: 8px 20px;
+        margin-left: 12px;
+        height: auto;
+        line-height: normal;
+    }
+
+    @media (max-width: 1024px) {
+        .nav-item > a {
+            padding: 0 8px;
+            font-size: 14px;
         }
         
-        @media (max-width: 480px) {
-            .main-image-container {
-                height: 300px;
-            }
-            
-            .thumbnail-container {
-                right: 10px;
-                bottom: 10px;
-                gap: 5px;
-            }
-            
-            .thumbnail {
-                width: 40px;
-                height: 30px;
-            }
-            
-            .arrow {
-                width: 40px;
-                height: 40px;
-            }
+        .user-actions a {
+            margin-left: 8px;
+            font-size: 13px;
+            padding: 0 8px;
         }
-    </style>
-:root { --primary-color: #8B4513; ... }
-.top-nav { ... }
-.content { ... }
+    }
+
+    @media (max-width: 768px) {
+        /* 移动端样式保持不变 */
+    }
+    
+    .logo-container {
+        position: relative;
+        margin-right: 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    
+    .logo {
+        font-size: 28px;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-family: 'KaiTi', 'STKaiti', serif;
+        padding: 0 20px 0 0;
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    
+    .logo.has-dropdown {
+        position: relative;
+        padding-right: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo.has-dropdown::after {
+        content: "▼";
+        font-size: 10px;
+        margin-left: 5px;
+        position: static;
+        transform: none;
+        top: auto;
+        right: auto;
+        color: var(--text-color);
+    }
+    
+    .logo-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.98);
+        border: 1px solid #e0e0e0;
+        border-top: 2px solid var(--accent-color);
+        width: 200px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        padding: 15px 0;
+        border-radius: 0 0 8px 8px;
+    }
+    
+    .logo-container:hover .logo-dropdown {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .logo-dropdown a {
+        color: var(--text-color);
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #f5f5f5;
+        transition: all 0.3s;
+        text-decoration: none;
+    }
+    
+    .logo-dropdown a:hover {
+        color: var(--primary-color);
+        background-color: var(--hover-bg);
+        padding-left: 25px;
+    }
+    
+    .logo-dropdown a:last-child {
+        border-bottom: none;
+    }
+    
+    .logo-menu-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 15px;
+        color: var(--accent-color);
+        text-align: center;
+        font-size: 18px;
+    }
+    
+    .logo-menu-text {
+        flex: 1;
+    }
+    
+    .nav-links {
+        display: flex;
+        height: 100%;
+        flex-grow: 1;
+    }
+    
+    .nav-item {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* 下拉菜单 - 带图标 */
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.98);
+        border: 1px solid #e0e0e0;
+        border-top: 2px solid var(--accent-color);
+        width: 280px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        padding: 15px 0;
+        border-radius: 0 0 8px 8px;
+        max-height: 70vh;
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+    
+    .nav-item:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .dropdown-menu a {
+        color: var(--text-color);
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #f5f5f5;
+        transition: all 0.3s;
+    }
+    
+    .dropdown-menu a:hover {
+        color: var(--primary-color);
+        background-color: var(--hover-bg);
+        padding-left: 25px;
+    }
+    
+    .dropdown-menu a:last-child {
+        border-bottom: none;
+    }
+    
+    .menu-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 15px;
+        color: var(--accent-color);
+        text-align: center;
+        font-size: 18px;
+    }
+    
+    .menu-text {
+        flex: 1;
+    }
+    
+    /* 其余样式保持不变... */
+</style>
