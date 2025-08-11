@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>世界奖项</title>
-    <link rel="stylesheet" href="样式.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="导航栏"></div>
-    <div id="书籍"></div>
-    <div id="画廊"></div>
+    <!-- 模块容器 -->
+    <div id="header"></div>
+    <div id="content"></div>
+    <div id="gallery"></div>
 
-    <script>
-    // 加载模块函数
-    async function 加载模块(文件名, 容器ID) {
-        const 响应 = await fetch(文件名);
-        document.getElementById(容器ID).innerHTML = await 响应.text();
-    }
-    
-    // 页面加载后执行
-    window.onload = () => {
-        加载模块("导航栏.html", "导航栏");
-        加载模块("书籍.html", "书籍");
-        加载模块("画廊.html", "画廊");
-    };
-    </script>
+    <!-- 登录弹窗（固定结构保留在主页面） -->
+    <div id="loginModal" class="login-modal">
+        <!-- ...原有登录弹窗代码... -->
+    </div>
+
+    <!-- 加载所有模块和脚本 -->
+    <script src="js/main.js"></script>
+    <script src="js/load-modules.js"></script>
 </body>
 </html>
