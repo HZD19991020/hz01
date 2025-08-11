@@ -65,7 +65,35 @@
             color: var(--text-color);
         }
 
+           /* 强制下拉菜单项左对齐 */
+.dropdown-menu a, 
+.logo-dropdown a {
+    text-align: left !important;
+    justify-content: flex-start !important;
+    padding-left: 15px !important;
+}
 
+/* 确保菜单文本靠左 */
+.menu-text, 
+.logo-menu-text {
+    display: block;
+    text-align: left !important;
+    width: 100%;
+    margin-left: 0 !important;
+}
+
+/* 移除可能的右浮动或居中设置 */
+.has-dropdown .dropdown-menu, 
+.logo-container .logo-dropdown {
+    text-align: left !important;
+}
+
+/* 图标和文字排列 */
+.dropdown-menu a span, 
+.logo-dropdown a span {
+    display: inline-block;
+    vertical-align: middle;
+}             
    
 
         /* 用户操作区修正 */
