@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = 'none';
         }
     });
+
+    // 如果是 Vue Router
+const router = new VueRouter({
+  mode: 'history',
+  routes: [
+    { path: '/shijie/*', beforeEnter: (to, from, next) => { window.location.href = to.path; } }, // 放行子目录
+    // 其他路由...
+  ]
+});
     
     // ...其余登录逻辑...
 });
