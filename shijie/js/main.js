@@ -21,6 +21,17 @@ const router = new VueRouter({
     // 其他路由...
   ]
 });
+
+
+    // 显示登录弹窗（示例：点击某个按钮时触发）
+document.getElementById('login-button').addEventListener('click', function() {
+    document.getElementById('loginModal').style.display = 'block';
+});
+
+// 关闭登录弹窗
+document.querySelector('.close-btn').addEventListener('click', function() {
+    document.getElementById('loginModal').style.display = 'none';
+});
     
     // ...其余登录逻辑...
 });
