@@ -35,6 +35,33 @@
             </div>
     </div>
 
+
+        <div class="works">
+  <h2>作品展示</h2>
+  <div class="gallery-container">
+    <!-- 大图展示区 -->
+    <div class="main-image">
+      <img id="current-image" src="images/1.jpg" alt="作品展示">
+    </div>
+    
+    <!-- 小图缩略图导航 -->
+    <div class="thumbnail-container">
+      <div class="thumbnail active" onclick="changeImage('images/1.jpg')">
+        <img src="images/1.jpg" alt="作品1">
+      </div>
+      <div class="thumbnail" onclick="changeImage('images/2.jpg')">
+        <img src="images/2.jpg" alt="作品2">
+      </div>
+      <div class="thumbnail" onclick="changeImage('images/3.jpg')">
+        <img src="images/3.jpg" alt="作品3">
+      </div>
+      <div class="thumbnail" onclick="changeImage('images/4.jpg')">
+        <img src="images/4.jpg" alt="作品4">
+      </div>
+    </div>
+  </div>
+</div>
+
     <!-- 加载所有模块和脚本 -->
     <script src="js/main.js"></script>
     <script src="/hz01/shijie/js/load-modules.js"></script>
