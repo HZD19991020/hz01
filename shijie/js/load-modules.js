@@ -1,20 +1,28 @@
-// 功能：把拆分的HTML文件拼到主页对应位置
-async function loadModule(模块ID, 文件路径) {
-  const 响应 = await fetch(文件路径);      // 去拿积木（HTML文件）
-  const html代码 = await 响应.text();     // 读取积木内容
-  document.getElementById(模块ID).innerHTML = html代码; // 把积木放到指定位置
-  
-  // 如果是画廊积木，额外加载它的专属JS
-  if(文件路径.includes('gallery.html')) {
-    const 脚本 = document.createElement('script');
-    脚本.src = 'js/gallery.js';
-    document.body.appendChild(脚本);
-  }
+// 动态加载HTML模块
+async function loadModule(moduleId, filePath) {
+    try {
+        const response = await fetch(filePath);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const html = await response.text();
+        document.getElementById(moduleId).innerHTML = html;
+        
+        // 特殊处理画廊模块
+        if (filePath.includes('gallery.html')) {
+            const script = document.createElement('script');
+            script.src = 'js/gallery.js';
+            document.body.appendChild(script);
+        }
+    } catch (error) {
+        console.error(`加载模块失败: ${moduleId}`, error);
+        document.getElementById(moduleId).innerHTML = `
+            <div class="error">模块加载失败，请刷新页面或检查网络</div>
+        `;
+    }
 }
 
-// 页面加载后开始拼积木
+// 页面加载完成后执行
 window.addEventListener('DOMContentLoaded', () => {
-  loadModule('header', 'modules/header.html');  // 拼导航栏
-  loadModule('content', 'modules/content.html');// 拼书籍区
-  loadModule('gallery', 'modules/gallery.html');// 拼画廊
+    loadModule('header', 'modules/header.html');
+    loadModule('content', 'modules/content.html');
+    loadModule('gallery', 'modules/gallery.html');
 });
