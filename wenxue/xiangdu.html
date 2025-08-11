@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的想读列表 - 读书</title>
+    <style>
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f7f7f7;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 15px;
+        }
+        
+        .book-item {
+            display: flex;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .book-cover {
+            width: 80px;
+            height: 120px;
+            margin-right: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .book-info {
+            flex: 1;
+        }
+        
+        .book-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #007722;
+        }
+        
+        .book-author {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .book-meta {
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        
+        .book-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .wish-btn {
+            background-color: #f5f5f5;
+            color: #494949;
+            border: 1px solid #cccccc;
+            padding: 5px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 15px;
+            transition: all 0.3s;
+        }
+        
+        .wish-btn:hover {
+            background-color: #e6e6e6;
+        }
+        
+        .wish-btn.wished {
+            background-color: #e7f3e6;
+            color: #3a7a1c;
+            border-color: #c2e0b7;
+        }
+        
+        .wish-btn.wished:after {
+            content: "✓";
+            margin-left: 5px;
+        }
+        
+        .filter-bar {
+            display: flex;
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .filter-item {
+            margin-right: 20px;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        
+        .filter-item.active {
+            background-color: #f0f7eb;
+            color: #3a7a1c;
+        }
+        
+        .wish-list {
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .wish-list-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .empty-tip {
+            color: #999;
+            text-align: center;
+            padding: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>我的想读</h1>
+    </div>
+    
+    <div class="filter-bar">
+        <div class="filter-item active" data-filter="all">全部</div>
+        <div class="filter-item" data-filter="literature">文学</div>
+        <div class="filter-item" data-filter="history">历史</div>
+        <div class="filter-item" data-filter="science">科普</div>
+        <div class="filter-item" data-filter="novel">小说</div>
+    </div>
+    
+    <div class="wish-list">
+        <div class="wish-list-title">我的想读书单（共<span id="wish-count">3</span>本）</div>
+        
+        <div id="wish-list-container">
+            <!-- 想读列表将通过JavaScript动态生成 -->
+        </div>
+        
+        <div id="empty-tip" class="empty-tip" style="display: none;">
+            你还没有添加任何想读的书籍
+        </div>
+    </div>
+    
+    <h2 style="margin: 30px 0 15px;">推荐书籍</h2>
+    
+    <div class="book-item">
+        <img src="https://img9.doubanio.com/view/subject/s/public/s33834057.jpg" class="book-cover" alt="百年孤独">
+        <div class="book-info">
+            <div class="book-title">百年孤独</div>
+            <div class="book-author">[哥伦比亚] 加西亚·马尔克斯</div>
+            <div class="book-meta">南海出版公司 / 2011-6 / 39.50元</div>
+            <div class="book-actions">
+                <button class="wish-btn" data-book-id="1" data-category="literature">想读</button>
+                <span>已有123456人想读</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="book-item">
+        <img src="https://img9.doubanio.com/view/subject/s/public/s27279654.jpg" class="book-cover" alt="人类简史">
+        <div class="book-info">
+            <div class="book-title">人类简史：从动物到上帝</div>
+            <div class="book-author">[以色列] 尤瓦尔·赫拉利</div>
+            <div class="book-meta">中信出版社 / 2014-11 / 68.00元</div>
+            <div class="book-actions">
+                <button class="wish-btn" data-book-id="2" data-category="science">想读</button>
+                <span>已有98765人想读</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="book-item">
+        <img src="https://img9.doubanio.com/view/subject/s/public/s1070222.jpg" class="book-cover" alt="围城">
+        <div class="book-info">
+            <div class="book-title">围城</div>
+            <div class="book-author">钱钟书</div>
+            <div class="book-meta">人民文学出版社 / 1991-2 / 19.00元</div>
+            <div class="book-actions">
+                <button class="wish-btn" data-book-id="3" data-category="literature">想读</button>
+                <span>已有87654人想读</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="book-item">
+        <img src="https://img9.doubanio.com/view/subject/s/public/s29839009.jpg" class="book-cover" alt="明朝那些事儿">
+        <div class="book-info">
+            <div class="book-title">明朝那些事儿（1-7）</div>
+            <div class="book-author">当年明月</div>
+            <div class="book-meta">中国友谊出版公司 / 2006-9 / 358.20元</div>
+            <div class="book-actions">
+                <button class="wish-btn" data-book-id="4" data-category="history">想读</button>
+                <span>已有76543人想读</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 存储用户想读的书籍数据
+        let wishList = JSON.parse(localStorage.getItem('wishList')) || [];
+        let currentFilter = 'all';
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 绑定想读按钮点击事件
+            document.querySelectorAll('.wish-btn').forEach(btn => {
+                btn.addEventListener('click', toggleWishList);
+                
+                // 检查是否已经在想读列表中
+                const bookId = btn.getAttribute('data-book-id');
+                if (wishList.some(book => book.id === bookId)) {
+                    btn.classList.add('wished');
+                }
+            });
+            
+            // 绑定筛选按钮点击事件
+            document.querySelectorAll('.filter-item').forEach(filter => {
+                filter.addEventListener('click', function() {
+                    document.querySelector('.filter-item.active').classList.remove('active');
+                    this.classList.add('active');
+                    currentFilter = this.getAttribute('data-filter');
+                    renderWishList();
+                });
+            });
+            
+            // 初始渲染想读列表
+            renderWishList();
+        });
+        
+        // 切换想读状态
+        function toggleWishList(e) {
+            const btn = e.target;
+            const bookId = btn.getAttribute('data-book-id');
+            const bookTitle = btn.closest('.book-item').querySelector('.book-title').textContent;
+            const bookAuthor = btn.closest('.book-item').querySelector('.book-author').textContent;
+            const bookCover = btn.closest('.book-item').querySelector('.book-cover').src;
+            const category = btn.getAttribute('data-category');
+            
+            if (btn.classList.contains('wished')) {
+                // 从想读列表中移除
+                wishList = wishList.filter(book => book.id !== bookId);
+                btn.classList.remove('wished');
+            } else {
+                // 添加到想读列表
+                wishList.push({
+                    id: bookId,
+                    title: bookTitle,
+                    author: bookAuthor,
+                    cover: bookCover,
+                    category: category,
+                    addedDate: new Date().toISOString()
+                });
+                btn.classList.add('wished');
+            }
+            
+            // 保存到本地存储
+            localStorage.setItem('wishList', JSON.stringify(wishList));
+            
+            // 更新想读列表显示
+            renderWishList();
+        }
+        
+        // 渲染想读列表
+        function renderWishList() {
+            const container = document.getElementById('wish-list-container');
+            const emptyTip = document.getElementById('empty-tip');
+            const wishCount = document.getElementById('wish-count');
+            
+            // 筛选书籍
+            let filteredBooks = wishList;
+            if (currentFilter !== 'all') {
+                filteredBooks = wishList.filter(book => book.category === currentFilter);
+            }
+            
+            // 更新计数
+            wishCount.textContent = filteredBooks.length;
+            
+            // 清空容器
+            container.innerHTML = '';
+            
+            if (filteredBooks.length === 0) {
+                emptyTip.style.display = 'block';
+            } else {
+                emptyTip.style.display = 'none';
+                
+                // 生成想读列表
+                filteredBooks.forEach(book => {
+                    const bookElement = document.createElement('div');
+                    bookElement.className = 'book-item';
+                    bookElement.innerHTML = `
+                        <img src="${book.cover}" class="book-cover" alt="${book.title}">
+                        <div class="book-info">
+                            <div class="book-title">${book.title}</div>
+                            <div class="book-author">${book.author}</div>
+                            <div class="book-meta">添加于 ${new Date(book.addedDate).toLocaleDateString()}</div>
+                            <div class="book-actions">
+                                <button class="wish-btn wished" data-book-id="${book.id}">想读</button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(bookElement);
+                    
+                    // 绑定新添加的想读按钮事件
+                    bookElement.querySelector('.wish-btn').addEventListener('click', toggleWishList);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
