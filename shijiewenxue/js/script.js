@@ -1,7 +1,7 @@
 // 动态加载组件
 document.addEventListener('DOMContentLoaded', function() {
     // 加载导航栏
-    fetch('components/navbar.html')
+    fetch('/hz01/shijiewenxue/components/navbar.html')
         .then(response => response.text())
         .then(html => {
             document.getElementById('navbar-container').innerHTML = html;
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     // 加载登录弹窗
-    fetch('components/login-modal.html')
+    fetch('/hz01/shijiewenxue/components/login-modal.html')
         .then(response => response.text())
         .then(html => {
             document.getElementById('login-modal-container').innerHTML = html;
