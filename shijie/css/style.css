@@ -268,6 +268,9 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             padding: 15px 0;
             border-radius: 0 0 8px 8px;
+        max-height: 70vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
         }
         
         .nav-item:hover .dropdown-menu {
@@ -723,6 +726,12 @@
             .image-title {
                 font-size: 18px;
                 padding: 15px;
+
+    .dropdown-menu a, 
+    .logo-dropdown a {
+        padding: 10px 15px !important;
+        font-size: 14px;
+    }
             }
         }
         
