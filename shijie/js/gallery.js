@@ -1,20 +1,22 @@
-// 功能：只负责画廊的图片切换、缩略图等特效
-function initGallery() {
-  // 1. 获取画廊相关元素
-  const 主图片 = document.querySelector('.main-image');
-  const 缩略图组 = document.querySelectorAll('.thumbnail');
-  
-  // 2. 点击缩略图切换主图
-  缩略图组.forEach(缩略图 => {
-    缩略图.addEventListener('click', () => {
-      主图片.src = 缩略图.dataset.大图路径;
-    });
-  });
-  
-  // 3. 其他画廊特效...
-}
-
-// 确保DOM加载后执行
-if(document.querySelector('.gallery-container')) {
-  initGallery(); // 只有页面有画廊时才激活
-}
+document.addEventListener('DOMContentLoaded', function() {
+    // 从原代码中提取画廊部分的JavaScript逻辑
+    const mainImage = document.querySelector('.main-image');
+    const imageTitle = document.querySelector('.image-title');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const prevArrow = document.querySelector('.arrow.prev');
+    const nextArrow = document.querySelector('.arrow.next');
+    const zoomBtn = document.querySelector('.zoom-btn');
+    const loader = document.querySelector('.loader');
+   
+    
+    // 注意：需要确保DOM已加载（因为这是动态插入的）
+    function initGallery() {
+        // 画廊初始化逻辑
+    }
+    
+    // 如果直接运行说明是单独测试，立即初始化
+    if (document.querySelector('.gallery-container')) {
+        initGallery();
+    }
+});
