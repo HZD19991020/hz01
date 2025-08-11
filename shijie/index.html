@@ -16,6 +16,23 @@
     <!-- 登录弹窗（固定结构保留在主页面） -->
     <div id="loginModal" class="login-modal">
         <!-- ...原有登录弹窗代码... -->
+          <div class="login-content">
+            <div class="login-header">
+                <span class="login-title">用户登录</span>
+                <span class="close-btn">&times;</span>
+            </div>
+            <form class="login-form">
+                <input type="text" placeholder="用户名/邮箱" required>
+                <input type="password" placeholder="密码" required>
+                <div style="display: flex; align-items: center; margin: 10px 0;">
+                    <input type="checkbox" id="remember" style="width: auto; margin-right: 10px;">
+                    <label for="remember">记住我</label>
+                </div>
+                <button type="submit">登录</button>
+            </form>
+            <div class="login-footer">
+                <a href="#">忘记密码?</a> | <a href="#">注册账号</a>
+            </div>
     </div>
 
     <!-- 加载所有模块和脚本 -->
