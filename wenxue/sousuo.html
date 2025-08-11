@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>网站内容搜索</title>
+    <style>
+        .search-result { margin: 20px 0; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .search-highlight { background-color: yellow; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>网站内容搜索</h1>
+    <input type="text" id="searchInput" placeholder="输入搜索词...">
+    <button onclick="performSearch()">搜索</button>
+    
+    <div id="resultsContainer"></div>
+
+    <script>
+        // 定义要搜索的页面列表
+        const pagesToSearch = [
+            { url: 'index.html', title: '首页' },
+            { url: 'about.html', title: '关于我们' },
+            { url: 'articles/article1.html', title: '文章1' },
+            { url: 'articles/article2.html', title: '文章2' }
+            // 添加更多页面...
+        ];
+
+        async function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.trim();
+            if (!searchTerm) return;
+            
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = '<p>正在搜索...</p>';
+            
+            let resultsFound = false;
+            let resultsHTML = '';
+            
+            for (const page of pagesToSearch) {
+                try {
+                    const response = await fetch(page.url);
+                    if (!response.ok) continue;
+                    
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // 获取页面主要内容（可以根据你的HTML结构调整选择器）
+                    const mainContent = doc.querySelector('main, article, .content') || doc.body;
+                    const textContent = mainContent.textContent;
+                    
+                    // 简单搜索逻辑（可改为更复杂的匹配）
+                    if (textContent.toLowerCase().includes(searchTerm.toLowerCase())) {
+                        resultsFound = true;
+                        // 创建结果摘要（显示前200个字符）
+                        const excerpt = textContent.substring(0, 200) + '...';
+                        // 高亮显示搜索词
+                        const highlightedExcerpt = excerpt.replace(
+                            new RegExp(searchTerm, 'gi'),
+                            match => `<span class="search-highlight">${match}</span>`
+                        );
+                        
+                        resultsHTML += `
+                            <div class="search-result">
+                                <h3><a href="${page.url}">${page.title}</a></h3>
+                                <p>${highlightedExcerpt}</p>
+                                <small>匹配页面: ${page.url}</small>
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    console.error(`搜索页面 ${page.url} 时出错:`, error);
+                }
+            }
+            
+            if (resultsFound) {
+                resultsContainer.innerHTML = resultsHTML;
+            } else {
+                resultsContainer.innerHTML = `<p>没有找到包含 "${searchTerm}" 的内容</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
