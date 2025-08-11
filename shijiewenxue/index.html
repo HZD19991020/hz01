@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- 导航栏（从组件引入） -->
+    <!-- 导航栏（由JS动态加载） -->
     <div id="navbar-container"></div>
 
     <!-- 内容区域 -->
@@ -17,16 +17,56 @@
         <p>在浩瀚书海中寻找属于你的精神食粮，让阅读成为生活的日常。</p>
         
         <div class="book-list">
-            <!-- 书籍卡片内容 -->
+            <div class="book-card">
+                <div class="book-title">活着</div>
+                <div class="book-author">余华</div>
+                <div class="book-desc">《活着》讲述一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。</div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-title">百年孤独</div>
+                <div class="book-author">加西亚・马尔克斯</div>
+                <div class="book-desc">魔幻现实主义文学的代表作，描写了布恩迪亚家族七代人的传奇故事，以及加勒比海沿岸小镇马孔多的百年兴衰。</div>
+            </div>
+            
+            <div class="book-card">
+                <div class="book-title">人类简史</div>
+                <div class="book-author">尤瓦尔・赫拉利</div>
+                <div class="book-desc">从认知革命、农业革命到科学革命，理清影响人类发展的重大脉络，重新定义我们是谁、我们从哪里来。</div>
+            </div>
         </div>
     </div>
 
     <!-- 画廊区域 -->
     <div class="gallery-section">
-        <!-- 画廊内容 -->
+        <h2>诺贝尔奖作品展示</h2>
+        <div class="gallery-container">
+            <div class="main-image-container">
+                <div class="loader" style="display: none;"></div>
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="风景图片1" class="main-image">
+                <div class="image-title">美丽的自然风景 (1/5)</div>
+                <div class="zoom-btn" title="放大/缩小">
+                    <i class="fas fa-search-plus"></i>
+                </div>
+                <div class="nav-arrows">
+                    <div class="arrow prev" title="上一张">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="arrow next" title="下一张">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="thumbnail-container">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="缩略图1" class="thumbnail active" data-index="0">
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="缩略图2" class="thumbnail" data-index="1">
+                <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="缩略图3" class="thumbnail" data-index="2">
+            </div>
+        </div>
     </div>
 
-    <!-- 登录弹窗（从组件引入） -->
+    <!-- 登录弹窗（由JS动态加载） -->
     <div id="login-modal-container"></div>
 
     <!-- JavaScript -->
