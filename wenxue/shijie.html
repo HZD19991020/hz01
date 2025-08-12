@@ -1590,42 +1590,79 @@
     </div>
 
     <script>
-      // 移动端logo下拉菜单交互
-      document.querySelector('.mobile-logo').addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        this.parentElement.classList.toggle('active');
-      });
+     // 移动端logo下拉菜单交互
+document.querySelector('.mobile-logo').addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // 关闭所有分类菜单
+    document.querySelectorAll('.mobile-nav-category').forEach(category => {
+        category.classList.remove('active');
+        category.nextElementSibling.classList.remove('active');
+    });
+    
+    // 切换logo下拉菜单
+    this.parentElement.classList.toggle('active');
+    
+    // 关闭主菜单
+    document.querySelector(".mobile-nav").classList.remove("active");
+});
 
-      // 点击页面其他区域关闭logo下拉菜单
-      document.addEventListener('click', function() {
+// 点击页面其他区域关闭所有菜单
+document.addEventListener('click', function(e) {
+    // 如果点击的不是导航相关元素
+    if (!e.target.closest('.mobile-nav') && !e.target.closest('.mobile-logo-container')) {
+        // 关闭logo下拉菜单
         document.querySelector('.mobile-logo-container').classList.remove('active');
-      });
+        // 关闭所有分类菜单
+        document.querySelectorAll('.mobile-nav-category').forEach(category => {
+            category.classList.remove('active');
+            category.nextElementSibling.classList.remove('active');
+        });
+        // 关闭主菜单
+        document.querySelector(".mobile-nav").classList.remove("active");
+    }
+});
 
-      // 移动端分类菜单交互
-      document.querySelectorAll('.mobile-nav-category').forEach(category => {
-        category.addEventListener('click', function() {
-          this.classList.toggle('active');
-          const submenu = this.nextElementSibling;
-          submenu.classList.toggle('active');
-          
-          // 关闭其他打开的菜单
-          document.querySelectorAll('.mobile-nav-category').forEach(otherCategory => {
-            if (otherCategory !== this && otherCategory.classList.contains('active')) {
-              otherCategory.classList.remove('active');
-              otherCategory.nextElementSibling.classList.remove('active');
+   // 移动端分类菜单交互
+document.querySelectorAll('.mobile-nav-category').forEach(category => {
+    category.addEventListener('click', function(e) {
+        e.stopPropagation();
+        // 关闭logo下拉菜单
+        document.querySelector('.mobile-logo-container').classList.remove('active');
+        
+        // 检查当前菜单是否已激活
+        const isActive = this.classList.contains('active');
+        
+        // 关闭所有其他菜单
+        document.querySelectorAll('.mobile-nav-category').forEach(otherCategory => {
+            if (otherCategory !== this) {
+                otherCategory.classList.remove('active');
+                otherCategory.nextElementSibling.classList.remove('active');
             }
-          });
         });
-      });
+        
+        // 切换当前菜单状态
+        if (!isActive) {
+            this.classList.add('active');
+            this.nextElementSibling.classList.add('active');
+        }
+    });
+});
 
-      // 新增移动端菜单交互
-      document
-        .querySelector(".mobile-menu-btn")
-        .addEventListener("click", function (e) {
-          e.stopPropagation();
-          document.querySelector(".mobile-nav").classList.toggle("active");
-        });
+
+  // 新增移动端菜单按钮交互
+document.querySelector(".mobile-menu-btn").addEventListener("click", function (e) {
+    e.stopPropagation();
+    // 关闭所有打开的菜单
+    document.querySelector('.mobile-logo-container').classList.remove('active');
+    document.querySelectorAll('.mobile-nav-category').forEach(category => {
+        category.classList.remove('active');
+        category.nextElementSibling.classList.remove('active');
+    });
+    // 切换主菜单
+    document.querySelector(".mobile-nav").classList.toggle("active");
+});
 
       // 点击页面关闭菜单
       document.addEventListener("click", function (e) {
