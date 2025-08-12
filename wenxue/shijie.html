@@ -1083,6 +1083,41 @@
       .mobile-logo-menu-text {
         flex: 1;
       }
+
+
+       /* ======== 新增的书籍卡片链接样式 ======== */
+    /* 书籍卡片链接样式 */
+    .book-card-link {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    /* 书籍卡片悬停效果 */
+    .book-card-link:hover .book-card {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        background-color: #f8f3ec;
+        border-color: var(--accent-color);
+    }
+
+    /* 书籍卡片点击效果 */
+    .book-card-link:active .book-card {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 原有书籍卡片样式保持不变 */
+    .book-card {
+        background-color: var(--light-bg);
+        border-radius: 8px;
+        padding: 20px;
+        transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+        border: 1px solid #e0e0e0;
+        height: 100%;
+        box-sizing: border-box;
+    }
     </style>
   </head>
   <body>
@@ -1505,55 +1540,73 @@
       <h1>发现你的下一本好书</h1>
       <p>在浩瀚书海中寻找属于你的精神食粮，让阅读成为生活的日常。</p>
 
-      <div class="book-list">
+    <div class="book-list">
+    <!-- 活着 -->
+    <a href="https://book.douban.com/subject/4913064/" target="_blank" class="book-card-link">
         <div class="book-card">
-          <div class="book-title">活着</div>
-          <div class="book-author">余华</div>
-          <div class="book-desc">
-            《活着》讲述一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。
-          </div>
+            <div class="book-title">活着</div>
+            <div class="book-author">余华</div>
+            <div class="book-desc">
+                《活着》讲述一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。
+            </div>
         </div>
+    </a>
 
+    <!-- 百年孤独 -->
+    <a href="https://book.douban.com/subject/6082808/" target="_blank" class="book-card-link">
         <div class="book-card">
-          <div class="book-title">百年孤独</div>
-          <div class="book-author">加西亚・马尔克斯</div>
-          <div class="book-desc">
-            魔幻现实主义文学的代表作，描写了布恩迪亚家族七代人的传奇故事，以及加勒比海沿岸小镇马孔多的百年兴衰。
-          </div>
+            <div class="book-title">百年孤独</div>
+            <div class="book-author">加西亚・马尔克斯</div>
+            <div class="book-desc">
+                魔幻现实主义文学的代表作，描写了布恩迪亚家族七代人的传奇故事，以及加勒比海沿岸小镇马孔多的百年兴衰。
+            </div>
         </div>
+    </a>
 
+    <!-- 人类简史 -->
+    <a href="https://book.douban.com/subject/25985021/" target="_blank" class="book-card-link">
         <div class="book-card">
-          <div class="book-title">人类简史</div>
-          <div class="book-author">尤瓦尔・赫拉利</div>
-          <div class="book-desc">
-            从认知革命、农业革命到科学革命，理清影响人类发展的重大脉络，重新定义我们是谁、我们从哪里来。
-          </div>
+            <div class="book-title">人类简史</div>
+            <div class="book-author">尤瓦尔・赫拉利</div>
+            <div class="book-desc">
+                从认知革命、农业革命到科学革命，理清影响人类发展的重大脉络，重新定义我们是谁、我们从哪里来。
+            </div>
         </div>
+    </a>
 
+    <!-- 平凡的世界 -->
+    <a href="https://book.douban.com/subject/1084165/" target="_blank" class="book-card-link">
         <div class="book-card">
-          <div class="book-title">平凡的世界</div>
-          <div class="book-author">路遥</div>
-          <div class="book-desc">
-            全景式地表现中国当代城乡社会生活，高度浓缩了中国西北农村的历史变迁过程。
-          </div>
+            <div class="book-title">平凡的世界</div>
+            <div class="book-author">路遥</div>
+            <div class="book-desc">
+                全景式地表现中国当代城乡社会生活，高度浓缩了中国西北农村的历史变迁过程。
+            </div>
         </div>
+    </a>
 
+    <!-- 围城 -->
+    <a href="https://book.douban.com/subject/1008145/" target="_blank" class="book-card-link">
         <div class="book-card">
-          <div class="book-title">围城</div>
-          <div class="book-author">钱钟书</div>
-          <div class="book-desc">
-            中国现代文学史上一部风格独特的讽刺小说，被誉为"新儒林外史"。
-          </div>
+            <div class="book-title">围城</div>
+            <div class="book-author">钱钟书</div>
+            <div class="book-desc">
+                中国现代文学史上一部风格独特的讽刺小说，被誉为"新儒林外史"。
+            </div>
         </div>
+    </a>
 
+    <!-- 三体 -->
+    <a href="https://book.douban.com/subject/2567698/" target="_blank" class="book-card-link">
         <div class="book-card">
-          <div class="book-title">三体</div>
-          <div class="book-author">刘慈欣</div>
-          <div class="book-desc">
-            中国科幻文学的里程碑之作，讲述了地球人类文明和三体文明的信息交流、生死搏杀及两个文明在宇宙中的兴衰历程。
-          </div>
+            <div class="book-title">三体</div>
+            <div class="book-author">刘慈欣</div>
+            <div class="book-desc">
+                中国科幻文学的里程碑之作，讲述了地球人类文明和三体文明的信息交流、生死搏杀及两个文明在宇宙中的兴衰历程。
+            </div>
         </div>
-      </div>
+    </a>
+</div>
     </div>
 
     <!-- 画廊区域 -->
@@ -1572,7 +1625,7 @@
           />
 
           <!-- 图片标题 -->
-          <div class="image-title">美丽的自然风景 (1/5)</div>
+          <div class="image-title">《老人与海》海明威 (1/5)</div>
 
           <!-- 缩放按钮 -->
           <div class="zoom-btn" title="放大/缩小">
