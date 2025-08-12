@@ -807,6 +807,53 @@
         }
       }
 
+      /* 新增移动端子菜单样式 */
+.mobile-nav-category {
+  padding: 15px 20px;
+  font-weight: bold;
+  color: var(--primary-color);
+  background-color: var(--light-bg);
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-nav-category::after {
+  content: "+";
+  font-size: 18px;
+}
+
+.mobile-nav-category.active::after {
+  content: "-";
+}
+
+.mobile-nav-submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+.mobile-nav-submenu a {
+  display: block;
+  padding: 12px 20px 12px 35px;
+  color: var(--text-color);
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s;
+}
+
+.mobile-nav-submenu a:hover {
+  background-color: var(--hover-bg);
+  color: var(--primary-color);
+}
+
+.mobile-nav-submenu.active {
+  max-height: 1000px;
+}
+
       /* ======== 新增移动端专属样式 ======== */
       .mobile-nav {
         --mobile-primary: #8b4513;
@@ -1383,6 +1430,23 @@
     </div>
 
     <script>
+
+        // 移动端分类菜单交互
+document.querySelectorAll('.mobile-nav-category').forEach(category => {
+  category.addEventListener('click', function() {
+    this.classList.toggle('active');
+    const submenu = this.nextElementSibling;
+    submenu.classList.toggle('active');
+    
+    // 关闭其他打开的菜单
+    document.querySelectorAll('.mobile-nav-category').forEach(otherCategory => {
+      if (otherCategory !== this && otherCategory.classList.contains('active')) {
+        otherCategory.classList.remove('active');
+        otherCategory.nextElementSibling.classList.remove('active');
+      }
+    });
+  });
+});
       // 新增移动端菜单交互
       document
         .querySelector(".mobile-menu-btn")
