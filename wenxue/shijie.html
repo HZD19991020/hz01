@@ -876,22 +876,39 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
 
-      .mobile-nav-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 15px;
-        height: 50px;
-        border-bottom: 1px solid #eee;
-      }
+     /* 修改移动端导航头部布局 */
+.mobile-nav-header {
+    display: flex;
+    justify-content: center; /* 主轴上居中 */
+    align-items: center;
+    padding: 10px 15px;
+    height: 50px;
+    border-bottom: 1px solid #eee;
+    position: relative; /* 添加相对定位 */
+}
 
-      .mobile-menu-btn {
-        background: none;
-        border: none;
-        font-size: 24px;
-        color: var(--mobile-primary);
-        cursor: pointer;
-      }
+ /* 保持菜单按钮靠左 */
+.mobile-menu-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--mobile-primary);
+    cursor: pointer;
+    position: absolute; /* 绝对定位 */
+    left: 15px; /* 靠左 */
+    top: 50%; /* 垂直居中 */
+    transform: translateY(-50%); /* 精确垂直居中 */
+}
+
+/* 调整logo容器 */
+.mobile-logo-container {
+    width: 100%; /* 占据全部宽度以便居中 */
+    position: relative; /* 为绝对定位的子元素提供参照 */
+    display: flex; /* 使用flex布局确保垂直居中 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    height: 100%; /* 确保高度充满父容器 */
+}
 
       .mobile-nav-content {
         max-height: 0;
@@ -939,15 +956,20 @@
     padding-right: 15px; /* 调整右侧内边距 */
 }
       
-      .mobile-logo {
-        font-size: 24px;
-        font-weight: bold;
-        color: var(--primary-color);
-        text-decoration: none;
-        font-family: "KaiTi", "STKaiti", serif;
-        padding-right: 20px;
-        position: relative;
-      }
+   /* 修改移动端logo样式 */
+.mobile-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-family: "KaiTi", "STKaiti", serif;
+    /* 移除原有的padding-right */
+    position: relative;
+    /* 新增居中样式 */
+    display: inline-block; /* 使margin: 0 auto生效 */
+    margin: 0 auto; /* 水平居中 */
+    text-align: center; /* 文本居中 */
+}
       
       .mobile-logo.has-dropdown::after {
     content: "▼";
@@ -961,34 +983,36 @@
     transform: none; /* 移除可能的变换 */
 }
       
-        /* 修改移动端logo下拉菜单样式 */
-  .mobile-logo-dropdown {
+     /* 修改移动端logo下拉菜单样式 */
+.mobile-logo-dropdown {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 50%; /* 从左侧50%开始 */
+    transform: translateX(-50%); /* 向左移动自身宽度的一半 */
     background-color: rgba(255, 255, 255, 0.98);
     border: 1px solid #e0e0e0;
-    border-top: none; /* 去掉顶部边框 */
+    border-top: none;
     width: 200px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
     z-index: 1000;
-    box-shadow: none; /* 初始状态下不显示阴影 */
+    box-shadow: none;
     padding: 0;
-    opacity: 0; /* 初始状态下完全透明 */
-    visibility: hidden; /* 初始状态下不可见 */
-  }
+    opacity: 0;
+    visibility: hidden;
+}
+
       
-       .mobile-logo-container.active .mobile-logo-dropdown {
+  .mobile-logo-container.active .mobile-logo-dropdown {
     max-height: 500px;
     padding: 15px 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 展开时显示阴影 */
-    opacity: 1; /* 展开时完全不透明 */
-    visibility: visible; /* 展开时可见 */
-    border: 1px solid #e0e0e0; /* 展开时显示边框 */
-    border-top: none; /* 保持顶部无边框 */
-  }
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    visibility: visible;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+}
       
       .mobile-logo-dropdown a {
         color: var(--text-color);
