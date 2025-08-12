@@ -121,18 +121,6 @@
       }
 
       @media (max-width: 768px) {
-        .top-nav {
-          height: 50px;
-          position: fixed;
-          width: 100%;
-        }
-
-        .nav-container {
-          flex-direction: column;
-          padding: 0;
-          height: auto;
-        }
-
         .logo-container {
           width: 100%;
           text-align: center;
@@ -146,18 +134,6 @@
           padding: 0;
         }
 
-        .nav-links {
-          flex-direction: column;
-          width: 100%;
-        }
-
-        .nav-item {
-          width: 100%;
-          text-align: center;
-          height: auto;
-          padding: 5px 0;
-        }
-
         .dropdown-menu {
           position: static;
           width: 100%;
@@ -167,12 +143,6 @@
           box-shadow: none;
           border: none;
           padding: 0;
-        }
-
-        .nav-item:hover .dropdown-menu,
-        .nav-item:focus-within .dropdown-menu {
-          max-height: 500px;
-          padding: 10px 0;
         }
 
         .user-actions {
@@ -836,11 +806,99 @@
           height: 30px;
         }
       }
+
+      /* ======== 新增移动端专属样式 ======== */
+      .mobile-nav {
+        --mobile-primary: #8b4513;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: white;
+        display: none; /* 默认隐藏 */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .mobile-nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        height: 50px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .mobile-menu-btn {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--mobile-primary);
+        cursor: pointer;
+      }
+
+      .mobile-nav-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background: white;
+      }
+
+      /* 菜单项样式 */
+      .mobile-nav-item {
+        padding: 15px 20px;
+        border-bottom: 1px solid #f5f5f5;
+        cursor: pointer;
+      }
+
+      /* 菜单展开状态 */
+      .mobile-nav.active .mobile-nav-content {
+        max-height: 100vh;
+      }
+
+      /* ======== 媒体查询切换 ======== */
+      @media (max-width: 768px) {
+        .desktop-nav {
+          display: none;
+        }
+        .mobile-nav {
+          display: block;
+        }
+
+        .content {
+          margin-top: 50px !important;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .mobile-nav {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
-    <!-- 顶部导航 -->
-    <nav class="top-nav">
+    <!-- 新增移动端导航 -->
+    <nav class="mobile-nav">
+      <div class="mobile-nav-header">
+        <div class="mobile-logo">世界奖项</div>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-content">
+        <!-- 复制原有导航项（示例） -->
+        <div class="mobile-nav-item">世界文学奖</div>
+        <div class="mobile-nav-item">区域文学奖</div>
+        <!-- 其他菜单项... -->
+        <div class="mobile-user-actions">
+          <a href="#"><i class="fas fa-search"></i> 搜索</a>
+          <a href="#" id="mobileLoginBtn"><i class="fas fa-user"></i> 登录</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 原电脑端导航改为 desktop-nav -->
+    <nav class="desktop-nav">
       <div class="nav-container">
         <div class="logo-container">
           <a href="#" class="logo has-dropdown">世界奖项</a>
@@ -1205,6 +1263,21 @@
     </div>
 
     <script>
+      // 新增移动端菜单交互
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function (e) {
+          e.stopPropagation();
+          document.querySelector(".mobile-nav").classList.toggle("active");
+        });
+
+      // 点击页面关闭菜单
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest(".mobile-nav")) {
+          document.querySelector(".mobile-nav").classList.remove("active");
+        }
+      });
+
       // 登录弹窗控制
       const loginBtn = document.getElementById("loginBtn");
       const modal = document.getElementById("loginModal");
