@@ -659,30 +659,50 @@
         transform: translateY(-5px);
       }
 
-      .nav-arrows {
+/* 修改导航箭头样式 */
+.nav-arrows {
   position: absolute;
   top: 50%;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0 10px; /* 减少左右内边距 */
+  padding: 0 50px; /* 减少两侧的内边距，使箭头更靠近中间 */
   transform: translateY(-50%);
   z-index: 5;
-  box-sizing: border-box; /* 添加这个确保padding不影响宽度 */
+  box-sizing: border-box;
 }
+
 
 @media (max-width: 768px) {
   .nav-arrows {
     padding: 0 5px; /* 移动端更小的内边距 */
   }
   
-  .arrow {
-    width: 40px;
-    height: 40px;
-    position: relative; /* 添加相对定位 */
-    transform: none; /* 移除之前的transform */
-    margin: 0; /* 移除默认边距 */
-  }
+/* 修改箭头颜色为白色 */
+.arrow {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5); /* 保持半透明黑色背景 */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white; /* 确保箭头图标为白色 */
+  font-size: 24px;
+}
+
+/* 确保hover状态也是白色 */
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white; /* 保持hover时箭头为白色 */
+}
+
+/* 如果图标颜色被其他样式覆盖，可以增加特异性 */
+.nav-arrows .arrow i {
+  color: white !important;
+}
   
   .arrow.prev {
     left: 5px; /* 调整左箭头位置 */
@@ -693,30 +713,32 @@
   }
 }
 
-      .zoom-btn {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        z-index: 10;
-        transition: all 0.3s ease;
-      }
+   /* 调整缩放按钮 */
+.zoom-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 45px; /* 增大按钮大小 */
+  height: 45px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
 
-      .zoom-btn:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-      }
+   .zoom-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
 
-      .zoom-btn i {
-        color: white;
-        font-size: 18px;
-      }
+.zoom-btn i {
+  color: white;
+  font-size: 20px; /* 增大图标大小 */
+}
 
       /* 加载动画 */
       .loader {
@@ -761,16 +783,31 @@
           height: 300px;
         }
 
-        .thumbnail-container {
-          right: 10px;
-          bottom: 10px;
-          gap: 5px;
-        }
+        /* 调整缩略图容器位置 */
+.thumbnail-container {
+  position: absolute;
+  right: 50%; /* 改为居中 */
+  transform: translateX(50%); /* 水平居中 */
+  bottom: 30px; /* 增加底部间距 */
+  display: flex;
+  gap: 15px; /* 增加缩略图间距 */
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.3); /* 添加半透明背景 */
+  padding: 10px;
+  border-radius: 8px;
+}
 
-        .thumbnail {
-          width: 40px;
-          height: 30px;
-        }
+       .thumbnail {
+  width: 100px; /* 增大缩略图大小 */
+  height: 75px;
+  border: 2px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
+}
 
         .arrow {
           width: 40px;
@@ -1542,15 +1579,15 @@
             <i class="fas fa-search-plus"></i>
           </div>
 
-          <!-- 导航箭头 -->
-          <div class="nav-arrows">
-            <div class="arrow prev" title="上一张">
-              <i class="fas fa-chevron-left"></i>
-            </div>
-            <div class="arrow next" title="下一张">
-              <i class="fas fa-chevron-right"></i>
-            </div>
-          </div>
+         <!-- 导航箭头 -->
+<div class="nav-arrows">
+  <div class="arrow prev" title="上一张">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  <div class="arrow next" title="下一张">
+    <i class="fas fa-chevron-right"></i>
+  </div>
+</div>
         </div>
 
         <!-- 缩略图容器 -->
@@ -1722,28 +1759,28 @@ document.querySelector(".mobile-menu-btn").addEventListener("click", function (e
         const loader = document.querySelector(".loader");
 
         // 图片数据
-        const images = [
-          {
-            url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-            title: "《老人与海》海明威 (1/5)",
-          },
-          {
-            url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-            title: "《百年孤独》加西亚·马尔克斯 (2/5)",
-          },
-          {
-            url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-            title: "《局外人》阿尔贝·加缪 (3/5)",
-          },
-          {
-            url: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-            title: "《静静的顿河》米哈依尔·肖洛霍夫 (4/5)",
-          },
-          {
-            url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-            title: "《霍乱时期的爱情》‌加西亚·马尔克斯 (5/5)",
-          },
-        ];
+const images = [
+  {
+    url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    title: "《老人与海》海明威 (1/5)"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    title: "《百年孤独》加西亚·马尔克斯 (2/5)"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    title: "《局外人》阿尔贝·加缪 (3/5)"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    title: "《静静的顿河》米哈依尔·肖洛霍夫 (4/5)"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    title: "《霍乱时期的爱情》‌加西亚·马尔克斯 (5/5)"
+  }
+];
 
         let currentIndex = 0;
         let isZoomed = false;
