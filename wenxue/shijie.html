@@ -929,12 +929,12 @@
         }
       }
       
-      /* 新增移动端logo下拉菜单样式 */
-      .mobile-logo-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-      }
+      /* 修改移动端logo下拉箭头样式 */
+.mobile-logo.has-dropdown {
+    display: flex;
+    align-items: center; /* 确保箭头和文本垂直居中 */
+    padding-right: 15px; /* 调整右侧内边距 */
+}
       
       .mobile-logo {
         font-size: 24px;
@@ -947,15 +947,16 @@
       }
       
       .mobile-logo.has-dropdown::after {
-        content: "▼";
-        font-size: 10px;
-        margin-left: 5px;
-        position: static;
-        transform: none;
-        top: auto;
-        right: auto;
-        color: var(--text-color);
-      }
+    content: "▼";
+    font-size: 10px;
+    margin-left: 5px;
+    position: relative; /* 改为相对定位 */
+    top: auto;
+    right: auto;
+    color: var(--text-color);
+    line-height: 1; /* 确保箭头行高正常 */
+    transform: none; /* 移除可能的变换 */
+}
       
         /* 修改移动端logo下拉菜单样式 */
   .mobile-logo-dropdown {
