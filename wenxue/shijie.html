@@ -39,16 +39,17 @@
         height: 60px; /* 固定导航栏高度 */
       }
 
-      .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: flex-start;
-        align-items: stretch; /* 修改为stretch使子项等高 */
-        padding: 0 10px;
-        position: relative;
-        height: 100%;
-      }
+      /* 修改导航栏容器样式 */
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; /* 确保所有子项垂直居中 */
+    padding: 0 10px;
+    position: relative;
+    height: 100%;
+  }
 
       .nav-item > a {
         color: var(--text-color);
@@ -163,13 +164,14 @@
         }
       }
 
-      .logo-container {
-        position: relative;
-        margin-right: 20px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-      }
+       /* 调整logo容器 */
+  .logo-container {
+    position: relative;
+    margin-right: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+  }
 
       .logo {
         font-size: 28px;
@@ -256,24 +258,27 @@
         flex: 1;
       }
 
-      .nav-links {
-        display: flex;
-        height: 100%;
-        flex-grow: 1;
-      }
+      /* 调整导航链接容器 */
+  .nav-links {
+    display: flex;
+    height: 100%; /* 与导航栏同高 */
+    flex-grow: 1;
+    align-items: center; /* 垂直居中 */
+  }
 
-      .nav-item {
-        position: relative;
-        height: 100%;
-        display: flex;
-        align-items: center;
-      }
+       /* 调整导航项样式 */
+  .nav-item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+  }
 
       /* 下拉菜单 - 带图标 */
-      .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
+     .dropdown-menu {
+    position: absolute;
+    top: 100%; /* 从按钮底部开始 */
+    left: 0;
         background-color: rgba(255, 255, 255, 0.98);
         border: 1px solid #e0e0e0;
         border-top: 2px solid var(--accent-color);
@@ -652,36 +657,38 @@
       }
 
       .nav-arrows {
-        position: absolute;
-        top: 50%;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 20px;
-        transform: translateY(-50%);
-        z-index: 5;
-      }
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px; /* 减少左右内边距 */
+  transform: translateY(-50%);
+  z-index: 5;
+  box-sizing: border-box; /* 添加这个确保padding不影响宽度 */
+}
 
-      .arrow {
-        width: 50px;
-        height: 50px;
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .arrow:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-      }
-
-      .arrow i {
-        color: white;
-        font-size: 24px;
-      }
+@media (max-width: 768px) {
+  .nav-arrows {
+    padding: 0 5px; /* 移动端更小的内边距 */
+  }
+  
+  .arrow {
+    width: 40px;
+    height: 40px;
+    position: relative; /* 添加相对定位 */
+    transform: none; /* 移除之前的transform */
+    margin: 0; /* 移除默认边距 */
+  }
+  
+  .arrow.prev {
+    left: 5px; /* 调整左箭头位置 */
+  }
+  
+  .arrow.next {
+    right: 5px; /* 调整右箭头位置 */
+  }
+}
 
       .zoom-btn {
         position: absolute;
@@ -921,13 +928,137 @@
           display: none;
         }
       }
+      
+      /* 新增移动端logo下拉菜单样式 */
+      .mobile-logo-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      
+      .mobile-logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-family: "KaiTi", "STKaiti", serif;
+        padding-right: 20px;
+        position: relative;
+      }
+      
+      .mobile-logo.has-dropdown::after {
+        content: "▼";
+        font-size: 10px;
+        margin-left: 5px;
+        position: static;
+        transform: none;
+        top: auto;
+        right: auto;
+        color: var(--text-color);
+      }
+      
+        /* 修改移动端logo下拉菜单样式 */
+  .mobile-logo-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.98);
+    border: 1px solid #e0e0e0;
+    border-top: none; /* 去掉顶部边框 */
+    width: 200px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    z-index: 1000;
+    box-shadow: none; /* 初始状态下不显示阴影 */
+    padding: 0;
+    opacity: 0; /* 初始状态下完全透明 */
+    visibility: hidden; /* 初始状态下不可见 */
+  }
+      
+       .mobile-logo-container.active .mobile-logo-dropdown {
+    max-height: 500px;
+    padding: 15px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 展开时显示阴影 */
+    opacity: 1; /* 展开时完全不透明 */
+    visibility: visible; /* 展开时可见 */
+    border: 1px solid #e0e0e0; /* 展开时显示边框 */
+    border-top: none; /* 保持顶部无边框 */
+  }
+      
+      .mobile-logo-dropdown a {
+        color: var(--text-color);
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #f5f5f5;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+      
+      .mobile-logo-dropdown a:hover {
+        color: var(--primary-color);
+        background-color: var(--hover-bg);
+        padding-left: 25px;
+      }
+      
+      .mobile-logo-dropdown a:last-child {
+        border-bottom: none;
+      }
+      
+      .mobile-logo-menu-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 15px;
+        color: var(--accent-color);
+        text-align: center;
+        font-size: 18px;
+      }
+      
+      .mobile-logo-menu-text {
+        flex: 1;
+      }
     </style>
   </head>
   <body>
     <!-- 新增移动端导航 -->
     <nav class="mobile-nav">
       <div class="mobile-nav-header">
-        <div class="mobile-logo">世界奖项</div>
+        <div class="mobile-logo-container">
+          <a href="#" class="mobile-logo has-dropdown">世界奖项</a>
+          <div class="mobile-logo-dropdown">
+            <a href="https://example.com/literature" target="_blank">
+              <span class="mobile-logo-menu-icon"><i class="fas fa-home"></i></span>
+              <span class="mobile-logo-menu-text">文学奖项</span>
+            </a>
+            <a href="https://example.com/movie" target="_blank">
+              <span class="mobile-logo-menu-icon"><i class="fas fa-info-circle"></i></span>
+              <span class="mobile-logo-menu-text">电影奖项</span>
+            </a>
+            <a href="https://example.com/animation" target="_blank">
+              <span class="mobile-logo-menu-icon"><i class="fas fa-envelope"></i></span>
+              <span class="mobile-logo-menu-text">动画奖项</span>
+            </a>
+            <a href="https://example.com/comic" target="_blank">
+              <span class="mobile-logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+              <span class="mobile-logo-menu-text">漫画奖项</span>
+            </a>
+            <a href="https://example.com/music" target="_blank">
+              <span class="mobile-logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+              <span class="mobile-logo-menu-text">音乐奖项</span>
+            </a>
+            <a href="https://example.com/photography" target="_blank">
+              <span class="mobile-logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+              <span class="mobile-logo-menu-text">摄影奖项</span>
+            </a>
+            <a href="https://example.com/illustration" target="_blank">
+              <span class="mobile-logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+              <span class="mobile-logo-menu-text">插画奖项</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 导航按钮 --> 
         <button class="mobile-menu-btn">
           <i class="fas fa-bars"></i>
         </button>
@@ -1430,23 +1561,35 @@
     </div>
 
     <script>
+      // 移动端logo下拉菜单交互
+      document.querySelector('.mobile-logo').addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.parentElement.classList.toggle('active');
+      });
 
-        // 移动端分类菜单交互
-document.querySelectorAll('.mobile-nav-category').forEach(category => {
-  category.addEventListener('click', function() {
-    this.classList.toggle('active');
-    const submenu = this.nextElementSibling;
-    submenu.classList.toggle('active');
-    
-    // 关闭其他打开的菜单
-    document.querySelectorAll('.mobile-nav-category').forEach(otherCategory => {
-      if (otherCategory !== this && otherCategory.classList.contains('active')) {
-        otherCategory.classList.remove('active');
-        otherCategory.nextElementSibling.classList.remove('active');
-      }
-    });
-  });
-});
+      // 点击页面其他区域关闭logo下拉菜单
+      document.addEventListener('click', function() {
+        document.querySelector('.mobile-logo-container').classList.remove('active');
+      });
+
+      // 移动端分类菜单交互
+      document.querySelectorAll('.mobile-nav-category').forEach(category => {
+        category.addEventListener('click', function() {
+          this.classList.toggle('active');
+          const submenu = this.nextElementSibling;
+          submenu.classList.toggle('active');
+          
+          // 关闭其他打开的菜单
+          document.querySelectorAll('.mobile-nav-category').forEach(otherCategory => {
+            if (otherCategory !== this && otherCategory.classList.contains('active')) {
+              otherCategory.classList.remove('active');
+              otherCategory.nextElementSibling.classList.remove('active');
+            }
+          });
+        });
+      });
+
       // 新增移动端菜单交互
       document
         .querySelector(".mobile-menu-btn")
