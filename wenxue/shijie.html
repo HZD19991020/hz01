@@ -245,14 +245,17 @@
         border-bottom: none;
       }
 
-      .logo-menu-icon {
-        width: 24px;
-        height: 24px;
-        margin-right: 15px;
-        color: var(--accent-color);
-        text-align: center;
-        font-size: 18px;
-      }
+      .logo-menu-icon, .mobile-logo-menu-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    color: var(--accent-color);
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
       .logo-menu-text {
         flex: 1;
@@ -1029,31 +1032,31 @@
           <a href="#" class="mobile-logo has-dropdown">世界奖项</a>
           <div class="mobile-logo-dropdown">
             <a href="https://example.com/literature" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-home"></i></span>
+              <span class="mobile-logo-menu-icon"><i class="fas fa-book-open"></i></span>
               <span class="mobile-logo-menu-text">文学奖项</span>
             </a>
             <a href="https://example.com/movie" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-info-circle"></i></span>
+              <span class="mobile-logo-menu-icon"><i class="fas fa-film"></i></span>
               <span class="mobile-logo-menu-text">电影奖项</span>
             </a>
             <a href="https://example.com/animation" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-envelope"></i></span>
+              <span class="mobile-logo-menu-icon"><i class="fas fa-play-circle"></i></span>
               <span class="mobile-logo-menu-text">动画奖项</span>
             </a>
             <a href="https://example.com/comic" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+              <span class="mobile-logo-menu-icon"><i class="fas fa-book"></i></span>
               <span class="mobile-logo-menu-text">漫画奖项</span>
             </a>
             <a href="https://example.com/music" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+              <span class="mobile-logo-menu-icon"><i class="fas fa-music"></i></span>
               <span class="mobile-logo-menu-text">音乐奖项</span>
             </a>
             <a href="https://example.com/photography" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+              <span class="mobile-logo-menu-icon"><i class="fas fa-camera"></i></span>
               <span class="mobile-logo-menu-text">摄影奖项</span>
             </a>
             <a href="https://example.com/illustration" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-question-circle"></i></span>
+              <span class="mobile-logo-menu-icon"><i class="fas fa-palette"></i></span>
               <span class="mobile-logo-menu-text">插画奖项</span>
             </a>
           </div>
@@ -1202,47 +1205,48 @@
         <div class="logo-container">
           <a href="#" class="logo has-dropdown">世界奖项</a>
           <div class="logo-dropdown">
-            <a href="https://example.com/literature" target="_blank">
-              <span class="logo-menu-icon"><i class="fas fa-home"></i></span>
-              <span class="logo-menu-text">文学奖项</span>
-            </a>
-            <a href="https://example.com/movie" target="_blank">
-              <span class="logo-menu-icon"
-                ><i class="fas fa-info-circle"></i
-              ></span>
-              <span class="logo-menu-text">电影奖项</span>
-            </a>
-            <a href="https://example.com/animation" target="_blank">
-              <span class="logo-menu-icon"
-                ><i class="fas fa-envelope"></i
-              ></span>
-              <span class="logo-menu-text">动画奖项</span>
-            </a>
-            <a href="https://example.com/comic" target="_blank">
-              <span class="logo-menu-icon"
-                ><i class="fas fa-question-circle"></i
-              ></span>
-              <span class="logo-menu-text">漫画奖项</span>
-            </a>
-            <a href="https://example.com/music" target="_blank">
-              <span class="logo-menu-icon"
-                ><i class="fas fa-question-circle"></i
-              ></span>
-              <span class="logo-menu-text">音乐奖项</span>
-            </a>
-            <a href="https://example.com/photography" target="_blank">
-              <span class="logo-menu-icon"
-                ><i class="fas fa-question-circle"></i
-              ></span>
-              <span class="logo-menu-text">摄影奖项</span>
-            </a>
-            <a href="https://example.com/illustration" target="_blank">
-              <span class="logo-menu-icon"
-                ><i class="fas fa-question-circle"></i
-              ></span>
-              <span class="logo-menu-text">插画奖项</span>
-            </a>
-          </div>
+    <!-- 文学奖项 -->
+    <a href="https://example.com/literature" target="_blank">
+        <span class="logo-menu-icon"><i class="fas fa-book-open"></i></span>
+        <span class="logo-menu-text">文学奖项</span>
+    </a>
+    
+    <!-- 电影奖项 -->
+    <a href="https://example.com/movie" target="_blank">
+        <span class="logo-menu-icon"><i class="fas fa-film"></i></span>
+        <span class="logo-menu-text">电影奖项</span>
+    </a>
+    
+    <!-- 动画奖项 -->
+    <a href="https://example.com/animation" target="_blank">
+        <span class="logo-menu-icon"><i class="fas fa-play-circle"></i></span>
+        <span class="logo-menu-text">动画奖项</span>
+    </a>
+    
+    <!-- 漫画奖项 -->
+    <a href="https://example.com/comic" target="_blank">
+        <span class="logo-menu-icon"><i class="fas fa-book"></i></span>
+        <span class="logo-menu-text">漫画奖项</span>
+    </a>
+    
+    <!-- 音乐奖项 -->
+    <a href="https://example.com/music" target="_blank">
+        <span class="logo-menu-icon"><i class="fas fa-music"></i></span>
+        <span class="logo-menu-text">音乐奖项</span>
+    </a>
+    
+    <!-- 摄影奖项 -->
+    <a href="https://example.com/photography" target="_blank">
+        <span class="logo-menu-icon"><i class="fas fa-camera"></i></span>
+        <span class="logo-menu-text">摄影奖项</span>
+    </a>
+    
+    <!-- 插画奖项 -->
+    <a href="https://example.com/illustration" target="_blank">
+        <span class="logo-menu-icon"><i class="fas fa-palette"></i></span>
+        <span class="logo-menu-text">插画奖项</span>
+    </a>
+</div>
         </div>
 
         <div class="nav-links">
