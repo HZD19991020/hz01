@@ -9,1510 +9,1251 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <style>
-      /* 基础样式 */
-      :root {
-        --primary-color: #8b4513; /* 深棕色 */
-        --accent-color: #d2b48c; /* 浅褐色 */
-        --text-color: #333333;
-        --light-bg: #faf5ef;
-        --hover-bg: rgba(210, 180, 140, 0.1);
-      }
+                              /* 基础样式 - 共用部分 */
+                              :root {
+                                --primary-color: #8b4513; /* 深棕色 */
+                                --accent-color: #d2b48c; /* 浅褐色 */
+                                --text-color: #333333;
+                                --light-bg: #faf5ef;
+                                --hover-bg: rgba(210, 180, 140, 0.1);
+                              }
 
-      body {
-        font-family: "Microsoft YaHei", "SimSun", serif;
-        margin: 0;
-        padding: 0;
-        background-color: #ffffff;
-        color: var(--text-color);
-        line-height: 1.6;
-      }
+                              body {
+                                font-family: "Microsoft YaHei", "SimSun", serif;
+                                margin: 0;
+                                padding: 0;
+                                background-color: #ffffff;
+                                color: var(--text-color);
+                                line-height: 1.6;
+                              }
 
-      /* 顶部导航 */
-      .top-nav {
-        background-color: rgba(255, 255, 255, 0.98);
-        padding: 0;
-        border-bottom: 2px solid var(--accent-color);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        height: 60px; /* 固定导航栏高度 */
-      }
+                              /* 内容区域 - 共用部分 */
+                              .content {
+                                max-width: 1200px;
+                                margin: 50px auto;
+                                padding: 30px;
+                                background-color: #ffffff;
+                                border: 1px solid #e0e0e0;
+                                border-radius: 8px;
+                                min-height: 500px;
+                                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+                              }
 
-      /* 修改导航栏容器样式 */
-  .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center; /* 确保所有子项垂直居中 */
-    padding: 0 10px;
-    position: relative;
-    height: 100%;
-  }
+                              h1 {
+                                color: var(--primary-color);
+                                text-align: center;
+                                margin-bottom: 30px;
+                                font-family: "KaiTi", "STKaiti", serif;
+                                font-size: 2.5em;
+                              }
 
-      .nav-item > a {
-        color: var(--text-color);
-        text-decoration: none;
-        font-size: 15px;
-        font-weight: bold;
-        padding: 0 12px;
-        display: flex;
-        align-items: center;
-        transition: all 0.3s;
-        height: 100%;
-        white-space: nowrap;
-      }
+                              /* 书籍卡片 - 共用部分 */
+                              .book-list {
+                                display: grid;
+                                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                                gap: 30px;
+                                margin-top: 40px;
+                              }
 
-      .nav-item.has-dropdown > a::after {
-        content: "▼";
-        font-size: 8px;
-        margin-left: 3px;
-        position: static;
-        transform: none;
-        top: auto;
-        right: auto;
-        color: var(--text-color);
-      }
+                              /* 书籍卡片链接样式 */
+                              .book-card-link {
+                                display: block;
+                                color: inherit;
+                                text-decoration: none;
+                                transition: all 0.3s ease;
+                              }
 
-      /* 用户操作区修正 */
-      .user-actions {
-        margin-left: auto;
-        display: flex;
-        align-items: center;
-        height: 100%;
-      }
+                              /* 书籍卡片悬停效果 */
+                              .book-card-link:hover .book-card {
+                                transform: translateY(-8px);
+                                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+                                background-color: #f8f3ec;
+                                border-color: var(--accent-color);
+                              }
 
-      .user-actions a {
-        color: var(--text-color);
-        text-decoration: none;
-        margin-left: 12px;
-        font-size: 14px;
-        transition: all 0.3s;
-        white-space: nowrap;
-        display: flex;
-        align-items: center;
-        height: 100%;
-        padding: 0 12px;
-      }
+                              /* 书籍卡片点击效果 */
+                              .book-card-link:active .book-card {
+                                transform: translateY(-5px);
+                                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+                              }
 
-      .user-actions a:hover {
-        color: var(--primary-color);
-        background-color: var(--hover-bg);
-      }
+                              /* 原有书籍卡片样式保持不变 */
+                              .book-card {
+                                background-color: var(--light-bg);
+                                border-radius: 8px;
+                                padding: 20px;
+                                transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+                                border: 1px solid #e0e0e0;
+                                height: 100%;
+                                box-sizing: border-box;
+                              }
 
-      .user-actions .btn {
-        padding: 8px 20px;
-        margin-left: 12px;
-        height: auto;
-        line-height: normal;
-      }
+                              .book-title {
+                                color: var(--primary-color);
+                                font-weight: bold;
+                                font-size: 1.2em;
+                                margin-bottom: 10px;
+                                border-bottom: 1px solid var(--accent-color);
+                                padding-bottom: 8px;
+                              }
 
-      @media (max-width: 1024px) {
-        .nav-item > a {
-          padding: 0 8px;
-          font-size: 14px;
-        }
+                              .book-author {
+                                color: #666;
+                                font-style: italic;
+                                margin-bottom: 10px;
+                              }
 
-        .user-actions a {
-          margin-left: 8px;
-          font-size: 13px;
-          padding: 0 8px;
-        }
-      }
+                              .book-desc {
+                                font-size: 0.9em;
+                                color: #555;
+                              }
 
-      @media (max-width: 768px) {
-        .logo-container {
-          width: 100%;
-          text-align: center;
-          padding: 8px 0;
-          height: auto;
-        }
+                              /* 按钮样式 - 共用部分 */
+                              .btn {
+                                display: inline-block;
+                                padding: 8px 20px;
+                                border-radius: 4px;
+                                font-weight: bold;
+                                text-decoration: none;
+                                transition: all 0.3s;
+                              }
 
-        .logo {
-          justify-content: center;
-          font-size: 22px;
-          padding: 0;
-        }
+                              .btn-primary {
+                                background-color: white;
+                                color: var(--primary-color);
+                                border: 1px solid var(--primary-color);
+                              }
 
-        .dropdown-menu {
-          position: static;
-          width: 100%;
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.3s ease;
-          box-shadow: none;
-          border: none;
-          padding: 0;
-        }
+                              .btn-primary:hover {
+                                background-color: #f5f5f5;
+                                color: #6d3100;
+                                border-color: #6d3100;
+                              }
 
-        .user-actions {
-          margin: 10px 0;
-          width: 100%;
-          justify-content: center;
-          flex-direction: row;
-          flex-wrap: wrap;
-        }
+                              /* 登录弹窗样式 - 共用部分 */
+                              .login-modal {
+                                display: none;
+                                position: fixed;
+                                z-index: 1000;
+                                left: 0;
+                                top: 0;
+                                width: 100%;
+                                height: 100%;
+                                background-color: rgba(0, 0, 0, 0.5);
+                              }
 
-        .content {
-          margin-top: 60px;
-          padding: 15px;
-        }
+                              .login-content {
+                                background-color: #fefefe;
+                                margin: 10% auto;
+                                padding: 30px;
+                                border: 1px solid var(--accent-color);
+                                border-radius: 8px;
+                                width: 350px;
+                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                              }
 
-        .book-list {
-          grid-template-columns: 1fr;
-        }
-      }
+                              .login-header {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin-bottom: 20px;
+                                padding-bottom: 10px;
+                                border-bottom: 1px solid var(--accent-color);
+                              }
 
-       /* 调整logo容器 */
-  .logo-container {
-    position: relative;
-    margin-right: 20px;
-    height: 100%;
-    display: flex;
-    align-items: center; /* 垂直居中 */
-  }
+                              .login-title {
+                                color: var(--primary-color);
+                                font-size: 1.5em;
+                                font-weight: bold;
+                              }
 
-      .logo {
-        font-size: 28px;
-        font-weight: bold;
-        color: var(--primary-color);
-        text-decoration: none;
-        font-family: "KaiTi", "STKaiti", serif;
-        padding: 0 20px 0 0;
-        display: flex;
-        align-items: center;
-        height: 100%;
-      }
+                              .close-btn {
+                                color: #aaa;
+                                font-size: 28px;
+                                font-weight: bold;
+                                cursor: pointer;
+                              }
 
-      .logo.has-dropdown {
-        position: relative;
-        padding-right: 20px;
-        display: flex;
-        align-items: center;
-      }
+                              .close-btn:hover {
+                                color: var(--primary-color);
+                              }
 
-      .logo.has-dropdown::after {
+                              .login-form input {
+                                width: 100%;
+                                padding: 12px;
+                                margin: 10px 0;
+                                border: 1px solid #ddd;
+                                border-radius: 4px;
+                                box-sizing: border-box;
+                              }
+
+                              .login-form button {
+                                width: 100%;
+                                padding: 12px;
+                                margin-top: 15px;
+                                background-color: var(--primary-color);
+                                color: white;
+                                border: none;
+                                border-radius: 4px;
+                                cursor: pointer;
+                                font-weight: bold;
+                              }
+
+                              .login-form button:hover {
+                                background-color: #6d3100;
+                              }
+
+                              .login-footer {
+                                margin-top: 15px;
+                                text-align: center;
+                                font-size: 0.9em;
+                              }
+
+                              .login-footer a {
+                                color: var(--primary-color);
+                                text-decoration: none;
+                              }
+
+                              /* 画廊样式 - 共用部分 */
+                              .gallery-section {
+                                max-width: 1200px;
+                                margin: 50px auto;
+                                padding: 0 30px;
+                              }
+
+                              .gallery-section h2 {
+                                color: var(--primary-color);
+                                text-align: center;
+                                margin-bottom: 30px;
+                                font-family: "KaiTi", "STKaiti", serif;
+                                font-size: 2em;
+                              }
+
+                              .gallery-container {
+                                width: 100%;
+                                position: relative;
+                                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                                border-radius: 8px;
+                                overflow: hidden;
+                              }
+
+                              .main-image-container {
+                                width: 100%;
+                                height: 600px;
+                                position: relative;
+                                overflow: hidden;
+                              }
+
+                              .main-image {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                transition: transform 0.5s ease;
+                              }
+
+                              .main-image.zoom {
+                                transform: scale(1.05);
+                              }
+
+                              .image-title {
+                                position: absolute;
+                                bottom: 0;
+                                left: 0;
+                                width: 100%;
+                                padding: 20px;
+                                background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+                                color: white;
+                                font-size: 24px;
+                                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+                              }
+
+                              .thumbnail-container {
+                                position: absolute;
+                                right: 20px;
+                                bottom: 20px;
+                                display: flex;
+                                gap: 10px;
+                                z-index: 10;
+                              }
+
+                              .thumbnail {
+                                width: 80px;
+                                height: 60px;
+                                border: 2px solid white;
+                                border-radius: 4px;
+                                cursor: pointer;
+                                opacity: 0.7;
+                                transition: all 0.3s ease;
+                                object-fit: cover;
+                                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                              }
+
+                              .thumbnail:hover,
+                              .thumbnail.active {
+                                opacity: 1;
+                                border-color: #ff4757;
+                                transform: translateY(-5px);
+                              }
+
+                              /* 修改导航箭头样式 */
+                              .nav-arrows {
+                                position: absolute;
+                                top: 50%;
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                padding: 0 50px; /* 减少两侧的内边距，使箭头更靠近中间 */
+                                transform: translateY(-50%);
+                                z-index: 5;
+                                box-sizing: border-box;
+                              }
+
+                              /* 修改箭头颜色为白色 */
+                              .arrow {
+                                width: 50px;
+                                height: 50px;
+                                background-color: rgba(0, 0, 0, 0.5); /* 保持半透明黑色背景 */
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                                color: white; /* 确保箭头图标为白色 */
+                                font-size: 24px;
+                              }
+
+                              /* 确保hover状态也是白色 */
+                              .arrow:hover {
+                                background-color: rgba(0, 0, 0, 0.8);
+                                color: white; /* 保持hover时箭头为白色 */
+                              }
+
+                              /* 如果图标颜色被其他样式覆盖，可以增加特异性 */
+                              .nav-arrows .arrow i {
+                                color: white !important;
+                              }
+
+                              /* 调整缩放按钮 */
+                              .zoom-btn {
+                                position: absolute;
+                                top: 20px;
+                                right: 20px;
+                                width: 45px; /* 增大按钮大小 */
+                                height: 45px;
+                                background-color: rgba(0, 0, 0, 0.5);
+                                border-radius: 50%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                cursor: pointer;
+                                z-index: 10;
+                                transition: all 0.3s ease;
+                              }
+
+                              .zoom-btn:hover {
+                                background-color: rgba(0, 0, 0, 0.8);
+                                transform: scale(1.1);
+                              }
+
+                              .zoom-btn i {
+                                color: white;
+                                font-size: 20px; /* 增大图标大小 */
+                              }
+
+                              /* 加载动画 */
+                              .loader {
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                width: 50px;
+                                height: 50px;
+                                border: 5px solid rgba(255, 255, 255, 0.3);
+                                border-radius: 50%;
+                                border-top-color: #ff4757;
+                                animation: spin 1s ease-in-out infinite;
+                                z-index: 5;
+                              }
+
+                              @keyframes spin {
+                                to {
+                                  transform: translate(-50%, -50%) rotate(360deg);
+                                }
+                              }
+
+                              /* ==================== 电脑端专属样式 ==================== */
+                              /* 顶部导航 */
+                              .top-nav {
+                                background-color: rgba(255, 255, 255, 0.98);
+                                padding: 0;
+                                border-bottom: 2px solid var(--accent-color);
+                                position: sticky;
+                                top: 0;
+                                z-index: 100;
+                                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                                height: 60px; /* 固定导航栏高度 */
+                              }
+
+                              /* 修改导航栏容器样式 */
+                              .nav-container {
+                                max-width: 1200px;
+                                margin: 0 auto;
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: center; /* 确保所有子项垂直居中 */
+                                padding: 0 10px;
+                                position: relative;
+                                height: 100%;
+                              }
+
+                              .nav-item > a {
+                                color: var(--text-color);
+                                text-decoration: none;
+                                font-size: 15px;
+                                font-weight: bold;
+                                padding: 0 12px;
+                                display: flex;
+                                align-items: center;
+                                transition: all 0.3s;
+                                height: 100%;
+                                white-space: nowrap;
+                              }
+
+                              .nav-item.has-dropdown > a::after {
+                                content: "▼";
+                                font-size: 8px;
+                                margin-left: 3px;
+                                position: static;
+                                transform: none;
+                                top: auto;
+                                right: auto;
+                                color: var(--text-color);
+                              }
+
+                              /* 用户操作区修正 */
+                              .user-actions {
+                                margin-left: auto;
+                                display: flex;
+                                align-items: center;
+                                height: 100%;
+                              }
+
+                              .user-actions a {
+                                color: var(--text-color);
+                                text-decoration: none;
+                                margin-left: 12px;
+                                font-size: 14px;
+                                transition: all 0.3s;
+                                white-space: nowrap;
+                                display: flex;
+                                align-items: center;
+                                height: 100%;
+                                padding: 0 12px;
+                              }
+
+                              .user-actions a:hover {
+                                color: var(--primary-color);
+                                background-color: var(--hover-bg);
+                              }
+
+                              .user-actions .btn {
+                                padding: 8px 20px;
+                                margin-left: 12px;
+                                height: auto;
+                                line-height: normal;
+                              }
+
+                              /* 调整logo容器 */
+                              .logo-container {
+                                position: relative;
+                                margin-right: 20px;
+                                height: 100%;
+                                display: flex;
+                                align-items: center; /* 垂直居中 */
+                              }
+
+                              .logo {
+                                font-size: 28px;
+                                font-weight: bold;
+                                color: var(--primary-color);
+                                text-decoration: none;
+                                font-family: "KaiTi", "STKaiti", serif;
+                                padding: 0 20px 0 0;
+                                display: flex;
+                                align-items: center;
+                                height: 100%;
+                              }
+
+                              .logo.has-dropdown {
+                                position: relative;
+                                padding-right: 20px;
+                                display: flex;
+                                align-items: center;
+                              }
+
+                              .logo.has-dropdown::after {
+                                content: "▼";
+                                font-size: 10px;
+                                margin-left: 5px;
+                                position: static;
+                                transform: none;
+                                top: auto;
+                                right: auto;
+                                color: var(--text-color);
+                              }
+
+                              .logo-dropdown {
+                                position: absolute;
+                                top: 100%;
+                                left: 0;
+                                background-color: rgba(255, 255, 255, 0.98);
+                                border: 1px solid #e0e0e0;
+                                border-top: 2px solid var(--accent-color);
+                                width: 200px;
+                                opacity: 0;
+                                visibility: hidden;
+                                transition: all 0.3s ease;
+                                z-index: 1000;
+                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                                padding: 15px 0;
+                                border-radius: 0 0 8px 8px;
+                              }
+
+                              .logo-container:hover .logo-dropdown {
+                                opacity: 1;
+                                visibility: visible;
+                              }
+
+                              .logo-dropdown a {
+                                color: var(--text-color);
+                                padding: 12px 20px;
+                                display: flex;
+                                align-items: center;
+                                border-bottom: 1px solid #f5f5f5;
+                                transition: all 0.3s;
+                                text-decoration: none;
+                              }
+
+                              .logo-dropdown a:hover {
+                                color: var(--primary-color);
+                                background-color: var(--hover-bg);
+                                padding-left: 25px;
+                              }
+
+                              .logo-dropdown a:last-child {
+                                border-bottom: none;
+                              }
+
+                              .logo-menu-icon {
+                                width: 24px;
+                                height: 24px;
+                                margin-right: 15px;
+                                color: var(--accent-color);
+                                text-align: center;
+                                font-size: 18px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                              }
+
+                              .logo-menu-text {
+                                flex: 1;
+                              }
+
+                              /* 调整导航链接容器 */
+                              .nav-links {
+                                display: flex;
+                                height: 100%; /* 与导航栏同高 */
+                                flex-grow: 1;
+                                align-items: center; /* 垂直居中 */
+                              }
+
+                              /* 调整导航项样式 */
+                              .nav-item {
+                                position: relative;
+                                height: 100%;
+                                display: flex;
+                                align-items: center; /* 垂直居中 */
+                              }
+
+                              /* 下拉菜单 - 带图标 */
+                              .dropdown-menu {
+                                position: absolute;
+                                top: 100%; /* 从按钮底部开始 */
+                                left: 0;
+                                background-color: rgba(255, 255, 255, 0.98);
+                                border: 1px solid #e0e0e0;
+                                border-top: 2px solid var(--accent-color);
+                                width: 280px;
+                                opacity: 0;
+                                visibility: hidden;
+                                transition: all 0.3s ease;
+                                z-index: 1000;
+                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                                padding: 15px 0;
+                                border-radius: 0 0 8px 8px;
+                              }
+
+                              .nav-item:hover .dropdown-menu {
+                                opacity: 1;
+                                visibility: visible;
+                              }
+
+                              .dropdown-menu a {
+                                color: var(--text-color);
+                                padding: 12px 20px;
+                                display: flex;
+                                align-items: center;
+                                border-bottom: 1px solid #f5f5f5;
+                                transition: all 0.3s;
+                              }
+
+                              .dropdown-menu a:hover {
+                                color: var(--primary-color);
+                                background-color: var(--hover-bg);
+                                padding-left: 25px;
+                              }
+
+                              .dropdown-menu a:last-child {
+                                border-bottom: none;
+                              }
+
+                              .menu-icon {
+                                width: 24px;
+                                height: 24px;
+                                margin-right: 15px;
+                                color: var(--accent-color);
+                                text-align: center;
+                                font-size: 18px;
+                              }
+
+                              .menu-text {
+                                flex: 1;
+                              }
+
+                              /* ==================== 移动端专属样式 ==================== */
+                              /* 基础版-主菜单容器 */
+                              .mobile-nav {
+                                position: fixed;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                z-index: 1100; /* 提高z-index确保在最上层 */
+                                background: white;
+                                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                                display: none; /* 默认隐藏 */
+                              }
+
+                              /* 基础版-主菜单激活状态 */
+                              .mobile-nav.active {
+                                display: block;
+                              }
+
+                              /* 基础版-修改移动端导航头部布局 */
+                              .mobile-nav-header {
+                                display: flex;
+                                justify-content: center; /* 主轴上居中 */
+                                align-items: center;
+                                padding: 10px 15px;
+                                height: 50px;
+                                border-bottom: 1px solid #eee;
+                                position: relative; /* 添加相对定位 */
+                              }
+
+                              /* 基础版-保持菜单按钮靠左 */
+                              .mobile-menu-btn {
+                                position: absolute;
+                                left: 15px;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                z-index: 1100;
+                                background: none;
+                                border: none;
+                                font-size: 20px;
+                                color: var(--primary-color);
+                                width: 30px;
+                                height: 30px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                              }
+
+                              /* 基础版-调整logo容器 */
+                              .mobile-logo-container {
+                                width: 100%; /* 占据全部宽度以便居中 */
+                                position: relative; /* 为绝对定位的子元素提供参照 */
+                                display: flex; /* 使用flex布局确保垂直居中 */
+                                justify-content: center; /* 水平居中 */
+                                align-items: center; /* 垂直居中 */
+                                height: 100%; /* 确保高度充满父容器 */
+                              }
+
+                              /* 基础版-修改移动端logo样式 */
+                              .mobile-logo {
+                                font-size: 24px;
+                                font-weight: bold;
+                                color: var(--primary-color);
+                                text-decoration: none;
+                                font-family: "KaiTi", "STKaiti", serif;
+                                position: relative;
+                                display: inline-block; /* 使margin: 0 auto生效 */
+                                margin: 0 auto; /* 水平居中 */
+                                text-align: center; /* 文本居中 */
+                              }
+
+                              /* 基础版-修改移动端logo下拉箭头样式 */
+                              .mobile-logo.has-dropdown {
+                                position: relative;
+                                padding-right: 20px; /* 为箭头留出空间 */
+                              }
+
+                              /* 基础版-倒三角箭头样式 */
+                              .mobile-logo.has-dropdown::after {
+                                content: "▼";
+                                font-size: 10px;
+                                position: absolute;
+                                right: 0;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                color: var(--text-color);
+                                transition: transform 0.3s;
+                              }
+
+                              /* 基础版-下拉菜单展开时箭头旋转 */
+                              .mobile-logo-container.active .mobile-logo.has-dropdown::after {
+                                transform: translateY(-50%) rotate(180deg);
+                              }
+
+                              /* 基础版-修改移动端logo下拉菜单样式 */
+                              .mobile-logo-dropdown {
+                                position: absolute;
+                                top: 100%;
+                                left: 50%; /* 从左侧50%开始 */
+                                transform: translateX(-50%); /* 向左移动自身宽度的一半 */
+                                background-color: rgba(255, 255, 255, 0.98);
+                                border: 1px solid #e0e0e0;
+                                border-top: none;
+                                width: 200px;
+                                max-height: 0;
+                                overflow: hidden;
+                                transition: max-height 0.3s ease;
+                                z-index: 1000;
+                                box-shadow: none;
+                                padding: 0;
+                                opacity: 0;
+                                visibility: hidden;
+                              }
+
+                              .mobile-logo-container.active .mobile-logo-dropdown {
+                                max-height: 500px;
+                                padding: 15px 0;
+                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                                opacity: 1;
+                                visibility: visible;
+                                border: 1px solid #e0e0e0;
+                                border-top: none;
+                              }
+
+                              .mobile-logo-dropdown a {
+                                color: var(--text-color);
+                                padding: 12px 20px;
+                                display: flex;
+                                align-items: center;
+                                border-bottom: 1px solid #f5f5f5;
+                                transition: all 0.3s;
+                                text-decoration: none;
+                              }
+
+                              .mobile-logo-dropdown a:hover {
+                                color: var(--primary-color);
+                                background-color: var(--hover-bg);
+                                padding-left: 25px;
+                              }
+
+                              .mobile-logo-dropdown a:last-child {
+                                border-bottom: none;
+                              }
+
+                              .mobile-logo-menu-icon {
+                                width: 24px;
+                                height: 24px;
+                                margin-right: 15px;
+                                color: var(--accent-color);
+                                text-align: center;
+                                font-size: 18px;
+                              }
+
+                              .mobile-logo-menu-text {
+                                flex: 1;
+                              }
+
+                              /* 基础版-移动端内容区域 */
+                              .mobile-nav-content {
+                                max-height: 0;
+                                overflow: hidden;
+                                transition: max-height 0.3s ease;
+                                background: white;
+                              }
+
+                              /* 基础版-菜单项样式 */
+                              .mobile-nav-item {
+                                padding: 15px 20px;
+                                border-bottom: 1px solid #f5f5f5;
+                                cursor: pointer;
+                              }
+
+                              /* 基础版-菜单展开状态 */
+                              .mobile-nav.active .mobile-nav-content {
+                                max-height: 100vh; /* 使用视口高度 */
+                                overflow-y: auto; /* 允许滚动 */
+                              }
+
+                              /* 基础版-修改移动端分类标题样式 */
+                              .mobile-nav-category {
+                                padding: 12px 10px;
+                                font-weight: bold;
+                                color: var(--primary-color);
+                                background-color: var(--light-bg);
+                                border-bottom: 1px solid #e0e0e0;
+                                cursor: pointer;
+                                position: relative;
+                                padding-right: 25px;
+                                z-index: 100; /* 确保标题在上层 */
+                              }
+
+                              /* 基础版-调整 + 号位置 */
+                              .mobile-nav-category::after {
+                                content: "+";
+                                font-size: 16px;
+                                position: absolute; /* 绝对定位 */
+                                right: 10px; /* 距离右侧 10px */
+                                top: 50%; /* 垂直居中 */
+                                transform: translateY(-50%);
+                                margin-left: 5px; /* 与文字的间距 */
+                              }
+
+                              .mobile-nav-category.active::after {
+                                content: "-";
+                              }
+
+                              /* 基础版-修改移动端子菜单样式 */
+                              .mobile-nav-submenu {
+                                max-height: 0;
+                                overflow: hidden;
+                                transition: max-height 0.3s ease;
+                                background-color: #fff;
+                                width: 100%;
+                                display: none;
+                                position: relative;
+                                z-index: 100;
+                              }
+
+                              .mobile-nav-submenu.active {
+                                max-height: 60vh; /* 使用视口单位 */
+                                overflow-y: auto;
+                                -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
+                                display: block !important; /* 强制显示 */
+                                position: relative; /* 添加相对定位 */
+                                z-index: 100; /* 确保菜单在上层 */
+                              }
+
+                              /* 基础版-固定分类标题样式 */
+                              .mobile-nav-category.sticky {
+                                position: sticky;
+                                top: 0;
+                                z-index: 110;
+                                background-color: var(--light-bg);
+                                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                              }
+
+                              /* 基础版-移动端"我"的菜单样式 */
+                              .mobile-user-menu-container {
+                                position: absolute;
+                                right: 15px;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                z-index: 1100;
+                                width: 30px;
+                                height: 30px;
+                              }
+
+                              .mobile-user-btn {
+                                background: none;
+                                border: none;
+                                font-size: 20px;
+                                color: var(--primary-color);
+                                cursor: pointer;
+                                width: 40px;
+                                height: 40px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 50%;
+                                transition: all 0.3s;
+                              }
+
+                              .mobile-user-btn:hover {
+                                background-color: rgba(139, 69, 19, 0.1);
+                              }
+
+                              .mobile-user-dropdown {
+                                position: absolute;
+                                right: 0;
+                                top: 100%;
+                                background-color: white;
+                                border: 1px solid #e0e0e0;
+                                border-radius: 8px;
+                                width: 180px;
+                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                                opacity: 0;
+                                visibility: hidden;
+                                transition: all 0.3s;
+                                padding: 10px 0;
+                                margin-top: 5px;
+                              }
+
+                              .mobile-user-menu-container.active .mobile-user-dropdown {
+                                opacity: 1;
+                                visibility: visible;
+                              }
+
+                              .mobile-user-dropdown a {
+                                display: flex;
+                                align-items: center;
+                                padding: 10px 15px;
+                                color: var(--text-color);
+                                text-decoration: none;
+                                font-size: 14px;
+                                transition: all 0.3s;
+                              }
+
+                              .mobile-user-dropdown a:hover {
+                                background-color: var(--hover-bg);
+                                color: var(--primary-color);
+                              }
+
+                              .mobile-user-dropdown i {
+                                margin-right: 10px;
+                                width: 20px;
+                                text-align: center;
+                              }
+
+                              /* 基础版-菜单项样式优化 */
+                              .mobile-nav-submenu a {
+                                display: block;
+                                white-space: normal;
+                                padding: 12px 20px;
+                                border-bottom: 1px solid #f0f0f0;
+                                color: var(--text-color);
+                                text-decoration: none;
+                                transition: all 0.3s;
+                              }
+
+                              .mobile-nav-submenu a:hover {
+                                background-color: var(--hover-bg);
+                                color: var(--primary-color);
+                              }
+
+                              /* 基础版-修复滚动条 */
+                              .mobile-nav-submenu::-webkit-scrollbar {
+                                width: 5px;
+                              }
+                              .mobile-nav-submenu::-webkit-scrollbar-thumb {
+                                background: var(--accent-color);
+                                border-radius: 3px;
+                              }
+
+                              /* ==================== 响应式设计 ==================== */
+                              @media (max-width: 1024px) {
+                                /* 电脑端响应式调整 */
+                                .nav-item > a {
+                                  padding: 0 8px;
+                                  font-size: 14px;
+                                }
+
+                                .user-actions a {
+                                  margin-left: 8px;
+                                  font-size: 13px;
+                                  padding: 0 8px;
+                                }
+                              }
+
+                              @media (max-width: 768px) {
+                                /* 电脑端在小屏幕下的调整 */
+                                .logo-container {
+                                  width: 100%;
+                                  text-align: center;
+                                  padding: 8px 0;
+                                  height: auto;
+                                }
+
+                                .logo {
+                                  justify-content: center;
+                                  font-size: 22px;
+                                  padding: 0;
+                                }
+
+                                .dropdown-menu {
+                                  position: static;
+                                  width: 100%;
+                                  max-height: 0;
+                                  overflow: hidden;
+                                  transition: max-height 0.3s ease;
+                                  box-shadow: none;
+                                  border: none;
+                                  padding: 0;
+                                }
+
+                                .user-actions {
+                                  margin: 10px 0;
+                                  width: 100%;
+                                  justify-content: center;
+                                  flex-direction: row;
+                                  flex-wrap: wrap;
+                                }
+
+                                .content {
+                                  margin-top: 60px;
+                                  padding: 15px;
+                                }
+
+                                .book-list {
+                                  grid-template-columns: 1fr;
+                                }
+
+                                /* 画廊响应式调整 */
+                                .main-image-container {
+                                  height: 400px;
+                                }
+
+                                .thumbnail {
+                                  width: 60px;
+                                  height: 45px;
+                                }
+
+                                .image-title {
+                                  font-size: 18px;
+                                  padding: 15px;
+                                }
+
+                                /* 调整缩略图容器位置 */
+                                .thumbnail-container {
+                                  position: absolute;
+                                  right: 50%; /* 改为居中 */
+                                  transform: translateX(50%); /* 水平居中 */
+                                  bottom: 30px; /* 增加底部间距 */
+                                  display: flex;
+                                  gap: 15px; /* 增加缩略图间距 */
+                                  z-index: 10;
+                                  background-color: rgba(0, 0, 0, 0.3); /* 添加半透明背景 */
+                                  padding: 10px;
+                                  border-radius: 8px;
+                                }
+
+                                .thumbnail {
+                                  width: 100px; /* 增大缩略图大小 */
+                                  height: 75px;
+                                  border: 2px solid white;
+                                  border-radius: 4px;
+                                  cursor: pointer;
+                                  opacity: 0.7;
+                                  transition: all 0.3s ease;
+                                  object-fit: cover;
+                                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
+                                }
+
+                                .arrow {
+                                  width: 40px;
+                                  height: 40px;
+                                }
+
+                                .nav-arrows {
+                                  padding: 0 5px; /* 移动端更小的内边距 */
+                                }
+                              }
+
+                              @media (max-width: 480px) {
+                                /* 更小屏幕的调整 */
+                                .main-image-container {
+                                  height: 300px;
+                                }
+
+                                .thumbnail {
+                                  width: 40px;
+                                  height: 30px;
+                                }
+                              }
+
+                              @media (max-width: 375px) {
+                              .mobile-logo {
+              font-size: 20px;
+              font-weight: bold;
+              color: var(--primary-color);
+              text-decoration: none;
+              font-family: "KaiTi", "STKaiti", serif;
+              white-space: nowrap;
+              display: inline-block;
+              margin: 0;
+              padding-right: 20px; /* 为下拉箭头留空间 */
+            }
+
+                                .mobile-logo.has-dropdown::after {
         content: "▼";
         font-size: 10px;
-        margin-left: 5px;
-        position: static;
-        transform: none;
-        top: auto;
-        right: auto;
-        color: var(--text-color);
-      }
-
-      .logo-dropdown {
         position: absolute;
-        top: 100%;
-        left: 0;
-        background-color: rgba(255, 255, 255, 0.98);
-        border: 1px solid #e0e0e0;
-        border-top: 2px solid var(--accent-color);
-        width: 200px;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        padding: 15px 0;
-        border-radius: 0 0 8px 8px;
-      }
-
-      .logo-container:hover .logo-dropdown {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .logo-dropdown a {
-        color: var(--text-color);
-        padding: 12px 20px;
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #f5f5f5;
-        transition: all 0.3s;
-        text-decoration: none;
-      }
-
-      .logo-dropdown a:hover {
-        color: var(--primary-color);
-        background-color: var(--hover-bg);
-        padding-left: 25px;
-      }
-
-      .logo-dropdown a:last-child {
-        border-bottom: none;
-      }
-
-      .logo-menu-icon, .mobile-logo-menu-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 15px;
-    color: var(--accent-color);
-    text-align: center;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-      .logo-menu-text {
-        flex: 1;
-      }
-
-      /* 调整导航链接容器 */
-  .nav-links {
-    display: flex;
-    height: 100%; /* 与导航栏同高 */
-    flex-grow: 1;
-    align-items: center; /* 垂直居中 */
-  }
-
-       /* 调整导航项样式 */
-  .nav-item {
-    position: relative;
-    height: 100%;
-    display: flex;
-    align-items: center; /* 垂直居中 */
-  }
-
-      /* 下拉菜单 - 带图标 */
-     .dropdown-menu {
-    position: absolute;
-    top: 100%; /* 从按钮底部开始 */
-    left: 0;
-        background-color: rgba(255, 255, 255, 0.98);
-        border: 1px solid #e0e0e0;
-        border-top: 2px solid var(--accent-color);
-        width: 280px;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        padding: 15px 0;
-        border-radius: 0 0 8px 8px;
-      }
-
-      .nav-item:hover .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .dropdown-menu a {
-        color: var(--text-color);
-        padding: 12px 20px;
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #f5f5f5;
-        transition: all 0.3s;
-      }
-
-      .dropdown-menu a:hover {
-        color: var(--primary-color);
-        background-color: var(--hover-bg);
-        padding-left: 25px;
-      }
-
-      .dropdown-menu a:last-child {
-        border-bottom: none;
-      }
-
-      .menu-icon {
-        width: 24px;
-        height: 24px;
-        margin-right: 15px;
-        color: var(--accent-color);
-        text-align: center;
-        font-size: 18px;
-      }
-
-      .menu-text {
-        flex: 1;
-      }
-
-      /* 内容区域 */
-      .content {
-        max-width: 1200px;
-        margin: 50px auto;
-        padding: 30px;
-        background-color: #ffffff;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        min-height: 500px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      }
-
-      h1 {
-        color: var(--primary-color);
-        text-align: center;
-        margin-bottom: 30px;
-        font-family: "KaiTi", "STKaiti", serif;
-        font-size: 2.5em;
-      }
-
-      .book-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 30px;
-        margin-top: 40px;
-      }
-
-      .book-card {
-        background-color: var(--light-bg);
-        border-radius: 8px;
-        padding: 20px;
-        transition: transform 0.3s;
-        border: 1px solid #e0e0e0;
-      }
-
-      .book-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .book-title {
-        color: var(--primary-color);
-        font-weight: bold;
-        font-size: 1.2em;
-        margin-bottom: 10px;
-        border-bottom: 1px solid var(--accent-color);
-        padding-bottom: 8px;
-      }
-
-      .book-author {
-        color: #666;
-        font-style: italic;
-        margin-bottom: 10px;
-      }
-
-      .book-desc {
-        font-size: 0.9em;
-        color: #555;
-      }
-
-      .btn {
-        display: inline-block;
-        padding: 8px 20px;
-        border-radius: 4px;
-        font-weight: bold;
-        text-decoration: none;
-        transition: all 0.3s;
-      }
-
-      .btn-primary {
-        background-color: white;
-        color: var(--primary-color);
-        border: 1px solid var(--primary-color);
-      }
-
-      .btn-primary:hover {
-        background-color: #f5f5f5;
-        color: #6d3100;
-        border-color: #6d3100;
-      }
-
-      /* 登录弹窗样式 */
-      .login-modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-
-      .login-content {
-        background-color: #fefefe;
-        margin: 10% auto;
-        padding: 30px;
-        border: 1px solid var(--accent-color);
-        border-radius: 8px;
-        width: 350px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      }
-
-      .login-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--accent-color);
-      }
-
-      .login-title {
-        color: var(--primary-color);
-        font-size: 1.5em;
-        font-weight: bold;
-      }
-
-      .close-btn {
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      .close-btn:hover {
-        color: var(--primary-color);
-      }
-
-      .login-form input {
-        width: 100%;
-        padding: 12px;
-        margin: 10px 0;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-      }
-
-      .login-form button {
-        width: 100%;
-        padding: 12px;
-        margin-top: 15px;
-        background-color: var(--primary-color);
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: bold;
-      }
-
-      .login-form button:hover {
-        background-color: #6d3100;
-      }
-
-      .login-footer {
-        margin-top: 15px;
-        text-align: center;
-        font-size: 0.9em;
-      }
-
-      .login-footer a {
-        color: var(--primary-color);
-        text-decoration: none;
-      }
-
-      /* 响应式设计 */
-      @media (max-width: 768px) {
-        .nav-container {
-          flex-direction: column;
-          padding: 0;
-          height: auto;
-        }
-
-        .logo-container {
-          width: 100%;
-          text-align: center;
-          margin-right: 0;
-          padding: 15px 0;
-          height: auto;
-        }
-
-        .logo {
-          justify-content: center;
-          height: auto;
-          padding: 15px 0;
-        }
-
-        .logo-dropdown {
-          width: 100%;
-          left: 0;
-        }
-
-        .nav-links {
-          width: 100%;
-          flex-direction: column;
-          height: auto;
-        }
-
-        .nav-item {
-          width: 100%;
-          text-align: left;
-          height: auto;
-          padding: 10px 0;
-        }
-
-        .dropdown-menu {
-          position: static;
-          width: 100%;
-          opacity: 1;
-          visibility: visible;
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.3s ease;
-          border: none;
-          background-color: rgba(255, 255, 255, 0.9);
-        }
-
-        .nav-item:hover .dropdown-menu {
-          max-height: 500px;
-        }
-
-        .book-list {
-          grid-template-columns: 1fr;
-        }
-
-        .user-actions {
-          margin: 15px 0;
-          width: 100%;
-          justify-content: center;
-          height: auto;
-          flex-direction: column;
-        }
-
-        .user-actions a {
-          margin: 5px 0;
-          padding: 10px;
-          width: 100%;
-          text-align: center;
-        }
-
-        .user-actions .btn {
-          margin: 10px 0;
-          width: 100%;
-        }
-      }
-
-      /* 画廊样式 */
-      .gallery-section {
-        max-width: 1200px;
-        margin: 50px auto;
-        padding: 0 30px;
-      }
-
-      .gallery-section h2 {
-        color: var(--primary-color);
-        text-align: center;
-        margin-bottom: 30px;
-        font-family: "KaiTi", "STKaiti", serif;
-        font-size: 2em;
-      }
-
-      .gallery-container {
-        width: 100%;
-        position: relative;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        border-radius: 8px;
-        overflow: hidden;
-      }
-
-      .main-image-container {
-        width: 100%;
-        height: 600px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .main-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-      }
-
-      .main-image.zoom {
-        transform: scale(1.05);
-      }
-
-      .image-title {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 20px;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-        color: white;
-        font-size: 24px;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-      }
-
-      .thumbnail-container {
-        position: absolute;
-        right: 20px;
-        bottom: 20px;
-        display: flex;
-        gap: 10px;
-        z-index: 10;
-      }
-
-      .thumbnail {
-        width: 80px;
-        height: 60px;
-        border: 2px solid white;
-        border-radius: 4px;
-        cursor: pointer;
-        opacity: 0.7;
-        transition: all 0.3s ease;
-        object-fit: cover;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      }
-
-      .thumbnail:hover,
-      .thumbnail.active {
-        opacity: 1;
-        border-color: #ff4757;
-        transform: translateY(-5px);
-      }
-
-/* 修改导航箭头样式 */
-.nav-arrows {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 50px; /* 减少两侧的内边距，使箭头更靠近中间 */
-  transform: translateY(-50%);
-  z-index: 5;
-  box-sizing: border-box;
-}
-
-
-@media (max-width: 768px) {
-  .nav-arrows {
-    padding: 0 5px; /* 移动端更小的内边距 */
-  }
-  
-/* 修改箭头颜色为白色 */
-.arrow {
-  width: 50px;
-  height: 50px;
-  background-color: rgba(0, 0, 0, 0.5); /* 保持半透明黑色背景 */
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: white; /* 确保箭头图标为白色 */
-  font-size: 24px;
-}
-
-/* 确保hover状态也是白色 */
-.arrow:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white; /* 保持hover时箭头为白色 */
-}
-
-/* 如果图标颜色被其他样式覆盖，可以增加特异性 */
-.nav-arrows .arrow i {
-  color: white !important;
-}
-  
-  .arrow.prev {
-    left: 5px; /* 调整左箭头位置 */
-  }
-  
-  .arrow.next {
-    right: 5px; /* 调整右箭头位置 */
-  }
-}
-
-   /* 调整缩放按钮 */
-.zoom-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 45px; /* 增大按钮大小 */
-  height: 45px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: all 0.3s ease;
-}
-
-   .zoom-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  transform: scale(1.1);
-}
-
-.zoom-btn i {
-  color: white;
-  font-size: 20px; /* 增大图标大小 */
-}
-
-      /* 加载动画 */
-      .loader {
-        position: absolute;
+        right: 0;
         top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 50px;
-        height: 50px;
-        border: 5px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: #ff4757;
-        animation: spin 1s ease-in-out infinite;
-        z-index: 5;
-      }
-
-      @keyframes spin {
-        to {
-          transform: translate(-50%, -50%) rotate(360deg);
-        }
-      }
-
-      /* 响应式设计 */
-      @media (max-width: 768px) {
-        .main-image-container {
-          height: 400px;
-        }
-
-        .thumbnail {
-          width: 60px;
-          height: 45px;
-        }
-
-        .image-title {
-          font-size: 18px;
-          padding: 15px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .main-image-container {
-          height: 300px;
-        }
-
-        /* 调整缩略图容器位置 */
-.thumbnail-container {
-  position: absolute;
-  right: 50%; /* 改为居中 */
-  transform: translateX(50%); /* 水平居中 */
-  bottom: 30px; /* 增加底部间距 */
-  display: flex;
-  gap: 15px; /* 增加缩略图间距 */
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0.3); /* 添加半透明背景 */
-  padding: 10px;
-  border-radius: 8px;
-}
-
-       .thumbnail {
-  width: 100px; /* 增大缩略图大小 */
-  height: 75px;
-  border: 2px solid white;
-  border-radius: 4px;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: all 0.3s ease;
-  object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
-}
-
-        .arrow {
-          width: 40px;
-          height: 40px;
-        }
-      }
-
-      /* 新增：针对 iPhone SE 的优化 */
-      @media (max-width: 375px) {
-        .top-nav {
-          height: 45px;
-        }
-
-        .logo {
-          font-size: 20px;
-        }
-
-        .user-actions a {
-          font-size: 12px;
-          padding: 5px 8px;
-        }
-
-        .content {
-          margin-top: 55px;
-          padding: 10px;
-        }
-
-        h1 {
-          font-size: 1.8em;
-          margin-bottom: 20px;
-        }
-
-        .gallery-section h2 {
-          font-size: 1.5em;
-        }
-
-        .main-image-container {
-          height: 250px;
-        }
-
-        .thumbnail {
-          width: 40px;
-          height: 30px;
-        }
-      }
-
-/* 修改移动端分类标题样式 */
-.mobile-nav-category {
-  padding: 12px 10px;
-  font-weight: bold;
-  color: var(--primary-color);
-  background-color: var(--light-bg);
-  border-bottom: 1px solid #e0e0e0;
-  cursor: pointer;
-  position: relative;
-  padding-right: 25px;
-  z-index: 100; /* 确保标题在上层 */
-}
-
-/* 调整 + 号位置 */
-.mobile-nav-category::after {
-  content: "+";
-  font-size: 16px;
-  position: absolute; /* 绝对定位 */
-  right: 10px; /* 距离右侧 10px */
-  top: 50%; /* 垂直居中 */
-  transform: translateY(-50%);
-  margin-left: 5px; /* 与文字的间距 */
-}
-
-.mobile-nav-category.active::after {
-  content: "-";
-}
-
-/* 修改移动端子菜单样式 */
-.mobile-nav-submenu {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  background-color: #fff;
-  width: 100%;
-  display: none;
-  position: relative;
-  z-index: 100;
-}
-
-.mobile-nav-submenu.active {
-    max-height: 60vh; /* 使用视口单位 */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
-    display: block !important; /* 强制显示 */
-    position: relative; /* 添加相对定位 */
-    z-index: 100; /* 确保菜单在上层 */
-}
-
-/* 固定分类标题样式 */
-.mobile-nav-category.sticky {
-  position: sticky;
-  top: 0;
-  z-index: 110;
-  background-color: var(--light-bg);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* 移动端“我”的菜单样式 */
-.mobile-user-menu-container {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1100;
-}
-
-.mobile-user-btn {
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: var(--primary-color);
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.3s;
-}
-
-.mobile-user-btn:hover {
-  background-color: rgba(139, 69, 19, 0.1);
-}
-
-.mobile-user-dropdown {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  background-color: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  width: 180px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s;
-  padding: 10px 0;
-  margin-top: 5px;
-}
-
-.mobile-user-menu-container.active .mobile-user-dropdown {
-  opacity: 1;
-  visibility: visible;
-}
-
-.mobile-user-dropdown a {
-  display: flex;
-  align-items: center;
-  padding: 10px 15px;
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 14px;
-  transition: all 0.3s;
-}
-
-.mobile-user-dropdown a:hover {
-  background-color: var(--hover-bg);
-  color: var(--primary-color);
-}
-
-.mobile-user-dropdown i {
-  margin-right: 10px;
-  width: 20px;
-  text-align: center;
-}
-
-
-/* 菜单项样式优化 */
-.mobile-nav-submenu a {
-    display: block;
-    white-space: normal;
-    padding: 12px 20px;
-    border-bottom: 1px solid #f0f0f0;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-/* 修复滚动条 */
-.mobile-nav-submenu::-webkit-scrollbar {
-    width: 5px;
-}
-.mobile-nav-submenu::-webkit-scrollbar-thumb {
-    background: var(--accent-color);
-    border-radius: 3px;
-}
-
-.mobile-nav-submenu::-webkit-scrollbar-thumb {
-    background: var(--accent-color);
-    border-radius: 3px;
-}
-
-
-.mobile-nav-submenu a:hover {
-    background-color: var(--hover-bg);
-    color: var(--primary-color);
-}
-
-.mobile-nav-submenu.active {
-  max-height: 1000px;
-}
-
-      /* ======== 新增移动端专属样式 ======== */
-     /* 主菜单容器 */
-.mobile-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1100; /* 提高z-index确保在最上层 */
-    background: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: none; /* 默认隐藏 */
-}
-
-/* 主菜单激活状态 */
-.mobile-nav.active {
-    display: block;
-}
-
-/* 分类子菜单默认隐藏 */
-.mobile-nav-submenu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-/* 分类子菜单激活状态 */
-.mobile-nav-category.active + .mobile-nav-submenu {
-    max-height: 1000px;
-}
-
-     /* 修改移动端导航头部布局 */
-.mobile-nav-header {
-    display: flex;
-    justify-content: center; /* 主轴上居中 */
-    align-items: center;
-    padding: 10px 15px;
-    height: 50px;
-    border-bottom: 1px solid #eee;
-    position: relative; /* 添加相对定位 */
-}
-
- /* 保持菜单按钮靠左 */
-.mobile-menu-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: var(--mobile-primary);
-    cursor: pointer;
-    position: absolute; /* 绝对定位 */
-    left: 15px; /* 靠左 */
-    top: 50%; /* 垂直居中 */
-    transform: translateY(-50%); /* 精确垂直居中 */
-      z-index: 1100; /* 确保按钮在最上层 */
-    pointer-events: auto; /* 确保按钮可点击 */
-}
-}
-
-/* 调整logo容器 */
-.mobile-logo-container {
-    width: 100%; /* 占据全部宽度以便居中 */
-    position: relative; /* 为绝对定位的子元素提供参照 */
-    display: flex; /* 使用flex布局确保垂直居中 */
-    justify-content: center; /* 水平居中 */
-    align-items: center; /* 垂直居中 */
-    height: 100%; /* 确保高度充满父容器 */
-}
-
-   .mobile-nav-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: white;
-}
-
-      /* 菜单项样式 */
-      .mobile-nav-item {
-        padding: 15px 20px;
-        border-bottom: 1px solid #f5f5f5;
-        cursor: pointer;
-      }
-
-      /* 菜单展开状态 */
-    .mobile-nav.active .mobile-nav-content {
-    max-height: 100vh; /* 使用视口高度 */
-    overflow-y: auto; /* 允许滚动 */
-}
-
-      /* ======== 媒体查询切换 ======== */
-      @media (max-width: 768px) {
-        .desktop-nav {
-          display: none;
-        }
-        .mobile-nav {
-          display: block;
-        }
-
-        .content {
-          margin-top: 50px !important;
-        }
-      }
-
-      @media (min-width: 769px) {
-        .mobile-nav {
-          display: none;
-        }
-      }
-
-      @media (max-width: 768px) {
-  .mobile-nav-header {
-    position: relative;
-    padding: 10px 50px 10px 15px; /* 增加右侧空间 */
-  }
-  
-  .mobile-logo-container {
-    width: auto;
-    max-width: calc(100% - 100px);
-  }
-}
-      
-      /* 修改移动端logo下拉箭头样式 */
-.mobile-logo.has-dropdown {
-    display: flex;
-    align-items: center; /* 确保箭头和文本垂直居中 */
-    padding-right: 15px; /* 调整右侧内边距 */
-}
-      
-   /* 修改移动端logo样式 */
-.mobile-logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--primary-color);
-    text-decoration: none;
-    font-family: "KaiTi", "STKaiti", serif;
-    /* 移除原有的padding-right */
-    position: relative;
-    /* 新增居中样式 */
-    display: inline-block; /* 使margin: 0 auto生效 */
-    margin: 0 auto; /* 水平居中 */
-    text-align: center; /* 文本居中 */
-}
-      
-      .mobile-logo.has-dropdown::after {
-    content: "▼";
-    font-size: 10px;
-    margin-left: 5px;
-    position: relative; /* 改为相对定位 */
-    top: auto;
-    right: auto;
-    color: var(--text-color);
-    line-height: 1; /* 确保箭头行高正常 */
-    transform: none; /* 移除可能的变换 */
-}
-      
-     /* 修改移动端logo下拉菜单样式 */
-.mobile-logo-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 50%; /* 从左侧50%开始 */
-    transform: translateX(-50%); /* 向左移动自身宽度的一半 */
-    background-color: rgba(255, 255, 255, 0.98);
-    border: 1px solid #e0e0e0;
-    border-top: none;
-    width: 200px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    z-index: 1000;
-    box-shadow: none;
-    padding: 0;
-    opacity: 0;
-    visibility: hidden;
-}
-
-      
-  .mobile-logo-container.active .mobile-logo-dropdown {
-    max-height: 500px;
-    padding: 15px 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    opacity: 1;
-    visibility: visible;
-    border: 1px solid #e0e0e0;
-    border-top: none;
-}
-      
-      .mobile-logo-dropdown a {
+        transform: translateY(-50%);
         color: var(--text-color);
-        padding: 12px 20px;
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #f5f5f5;
-        transition: all 0.3s;
-        text-decoration: none;
-      }
-      
-      .mobile-logo-dropdown a:hover {
-        color: var(--primary-color);
-        background-color: var(--hover-bg);
-        padding-left: 25px;
-      }
-      
-      .mobile-logo-dropdown a:last-child {
-        border-bottom: none;
-      }
-      
-      .mobile-logo-menu-icon {
-        width: 24px;
-        height: 24px;
-        margin-right: 15px;
-        color: var(--accent-color);
-        text-align: center;
-        font-size: 18px;
-      }
-      
-      .mobile-logo-menu-text {
-        flex: 1;
       }
 
+                                /* 确保logo容器不会截断内容 */
+                               .mobile-logo-container {
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: auto;
+                    max-width: calc(100% - 100px);
+                    text-align: center;
+                  }
 
-       /* ======== 新增的书籍卡片链接样式 ======== */
-    /* 书籍卡片链接样式 */
-    .book-card-link {
-        display: block;
-        color: inherit;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
+                                .mobile-menu-btn,
+                                .mobile-user-btn {
+                                  width: 30px;
+                                  height: 30px;
+                                  font-size: 18px;
+                                }
 
-    /* 书籍卡片悬停效果 */
-    .book-card-link:hover .book-card {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-        background-color: #f8f3ec;
-        border-color: var(--accent-color);
-    }
+                                .logo {
+                                  font-size: 20px;
+                                }
 
-    /* 书籍卡片点击效果 */
-    .book-card-link:active .book-card {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    }
+                                .user-actions a {
+                                  font-size: 12px;
+                                  padding: 5px 8px;
+                                }
 
-    /* 原有书籍卡片样式保持不变 */
-    .book-card {
-        background-color: var(--light-bg);
-        border-radius: 8px;
-        padding: 20px;
-        transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-        border: 1px solid #e0e0e0;
-        height: 100%;
-        box-sizing: border-box;
-    }
+                                .content {
+                                  margin-top: 55px;
+                                  padding: 10px;
+                                }
+
+                                h1 {
+                                  font-size: 1.8em;
+                                  margin-bottom: 20px;
+                                }
+
+                                .gallery-section h2 {
+                                  font-size: 1.5em;
+                                }
+
+                                .main-image-container {
+                                  height: 250px;
+                                }
+
+                                .thumbnail {
+                                  width: 40px;
+                                  height: 30px;
+                                }
+                              }
+
+                              /* ======== 媒体查询切换 ======== */
+                              @media (max-width: 768px) {
+                                .desktop-nav {
+                                  display: none;
+                                }
+                                .mobile-nav {
+                                  display: block;
+                                }
+
+                                .content {
+                                  margin-top: 50px !important;
+                                }
+                              }
+
+                              @media (min-width: 769px) {
+                                .mobile-nav {
+                                  display: none;
+                                }
+                              }
+
+                              @media (max-width: 768px) {
+                                .mobile-nav-header {
+                                  position: relative;
+                                  padding: 10px 50px 10px 15px; /* 增加右侧空间 */
+                                }
+
+                                .mobile-logo-container {
+                                  width: auto;
+                                  max-width: calc(100% - 100px);
+                                }
+                              }
+
+                              @media (max-width: 375px) {
+                                .mobile-nav-header {
+                          position: relative;
+                          padding: 10px 50px 10px 15px;
+                          height: 50px;
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                        }
     </style>
   </head>
   <body>
-
-    
-    <!-- 移动端主导航 -->
-    <nav class="mobile-nav">
-  <div class="mobile-nav-header">
-  <!-- 菜单按钮靠左 -->
-  <button class="mobile-menu-btn">
-    <i class="fas fa-bars"></i>
-  </button>
-  
-  <div class="mobile-logo-container">
-    <a href="#" class="mobile-logo has-dropdown">世界奖项</a>
-          <div class="mobile-logo-dropdown">
-            <a href="https://example.com/literature" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-book-open"></i></span>
-              <span class="mobile-logo-menu-text">文学奖项</span>
-            </a>
-            <a href="https://example.com/movie" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-film"></i></span>
-              <span class="mobile-logo-menu-text">电影奖项</span>
-            </a>
-            <a href="https://example.com/animation" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-play-circle"></i></span>
-              <span class="mobile-logo-menu-text">动画奖项</span>
-            </a>
-            <a href="https://example.com/comic" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-book"></i></span>
-              <span class="mobile-logo-menu-text">漫画奖项</span>
-            </a>
-            <a href="https://example.com/music" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-music"></i></span>
-              <span class="mobile-logo-menu-text">音乐奖项</span>
-            </a>
-            <a href="https://example.com/photography" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-camera"></i></span>
-              <span class="mobile-logo-menu-text">摄影奖项</span>
-            </a>
-            <a href="https://example.com/illustration" target="_blank">
-              <span class="mobile-logo-menu-icon"><i class="fas fa-palette"></i></span>
-              <span class="mobile-logo-menu-text">插画奖项</span>
-            </a>
-          </div>
-        </div>
-
-          <!-- 新增用户菜单按钮 -->
-  <div class="mobile-user-menu-container">
-    <button class="mobile-user-btn">
-      <i class="fas fa-user"></i>
-    </button>
-    <div class="mobile-user-dropdown">
-      <a href="#"><i class="fas fa-user-circle"></i> 我的收藏</a>
-      <a href="#"><i class="fas fa-bookmark"></i> 我的成就</a>
-      <a href="#"><i class="fas fa-history"></i> 游览历史</a>
-      <a href="#"><i class="fas fa-cog"></i> 设置</a>
-      <a href="#" id="mobileLoginBtn"><i class="fas fa-sign-in-alt"></i> 登录/注册</a>
-    </div>
-  </div>
-</div>
-
-        <!-- 移动端二级导航按钮 --> 
- 
-      <div class="mobile-nav-content"> 
-        <!-- 移动端，世界文学奖 -->
-        <div class="mobile-nav-category">世界文学奖</div>
-        <div class="mobile-nav-submenu">
-          <a
-            href="https://baike.baidu.com/item/诺贝尔文学奖/571471"
-            target="_blank"
-            >诺贝尔文学奖</a
-          >
-          <a href="https://example.com/booker" target="_blank">布克奖</a>
-          <a href="https://example.com/pulitzer" target="_blank"
-            >普利策文学奖</a
-          >
-          <a href="https://example.com/international-booker" target="_blank"
-            >布克国际文学奖</a
-          >
-          <a href="https://example.com/goncourt" target="_blank"
-            >龚古尔文学奖</a
-          >
-          <a href="https://example.com/del-duca" target="_blank"
-            >奇诺・德尔杜卡世界奖</a
-          >
-        </div>
-
-        <!-- 移动端，区域文学奖 -->
-        <div class="mobile-nav-category">区域文学奖</div>
-        <div class="mobile-nav-submenu">
-          <a href="https://example.com/maodun" target="_blank"
-            >茅盾文学奖（中国）</a
-          >
-          <a href="https://example.com/luxun" target="_blank"
-            >鲁迅文学奖（中国）</a
-          >
-          <a href="https://example.com/national-book" target="_blank"
-            >美国国家图书奖</a
-          >
-          <a href="https://example.com/buechner" target="_blank"
-            >格奥尔格・毕希纳奖（德国）</a
-          >
-          <a href="https://example.com/dublin" target="_blank"
-            >都柏林文学奖（德国）</a
-          >
-          <a href="https://example.com/akutagawa" target="_blank"
-            >芥川龙之介奖（日本）</a
-          >
-          <a href="https://example.com/naoki" target="_blank">直木奖（日本）</a>
-          <a href="https://example.com/kafka" target="_blank"
-            >卡夫卡文学奖（捷克）</a
-          >
-          <a href="https://example.com/cervantes" target="_blank"
-            >米格尔・德・塞万提斯奖（西班牙）</a
-          >
-          <a href="https://example.com/neustadt" target="_blank"
-            >纽斯塔特国际文学奖（美国）</a
-          >
-          <a href="https://example.com/jerusalem" target="_blank"
-            >耶路撒冷文学奖（以色列）</a
-          >
-          <a href="https://example.com/prince-asturias" target="_blank"
-            >阿斯图里亚斯王子奖（西班牙）</a
-          >
-          <a href="https://example.com/caine" target="_blank">凯恩非洲文学奖</a>
-          <a href="https://example.com/arabic-fiction" target="_blank"
-            >国际阿拉伯小说奖</a
-          >
-          <a href="https://example.com/jnanpith" target="_blank"
-            >杰南皮特奖（印度）</a
-          >
-        </div>
-
-        <!-- 儿童文学奖 -->
-        <div class="mobile-nav-category">儿童文学奖</div>
-        <div class="mobile-nav-submenu">
-          <a href="https://example.com/andersen" target="_blank"
-            >国际安徒生奖</a
-          >
-        </div>
-
-        <!-- 推理小说奖 -->
-        <div class="mobile-nav-category">推理小说奖</div>
-        <div class="mobile-nav-submenu">
-          <a href="https://example.com/edgar" target="_blank"
-            >埃德加・爱伦・坡奖（美国）</a
-          >
-          <a href="https://example.com/agatha" target="_blank"
-            >阿加莎奖（美国）</a
-          >
-          <a href="https://example.com/gold-dagger" target="_blank"
-            >金匕首奖（英国）</a
-          >
-          <a href="https://example.com/ranpo" target="_blank"
-            >江户川乱步奖（日本）</a
-          >
-          <a href="https://example.com/honkaku" target="_blank"
-            >本格推理大奖（日本）</a
-          >
-          <a href="https://example.com/anthony" target="_blank"
-            >安东尼奖（美国）</a
-          >
-          <a href="https://example.com/glass-key" target="_blank"
-            >玻璃钥匙奖（北欧）</a
-          >
-          <a href="https://example.com/japan-mystery" target="_blank"
-            >日本推理作家协会奖</a
-          >
-          <a href="https://example.com/international-dagger" target="_blank"
-            >国际匕首奖（英国）</a
-          >
-          <a href="https://example.com/barry" target="_blank">巴瑞奖（美国）</a>
-          <a href="https://example.com/shimada" target="_blank"
-            >岛田庄司推理小说奖（中国台湾）</a
-          >
-          <a href="https://example.com/flint" target="_blank"
-            >燧石文学奖・推理单元（中国）</a
-          >
-          <a href="https://example.com/macavity" target="_blank">麦卡维帝奖</a>
-        </div>
-
-        <!-- 科幻小说奖 -->
-        <div class="mobile-nav-category">科幻小说奖</div>
-        <div class="mobile-nav-submenu">
-          <a href="https://example.com/hugo" target="_blank">雨果奖（美国）</a>
-          <a href="https://example.com/nebula" target="_blank"
-            >星云奖（美国）</a
-          >
-        </div>
-
-          <!-- 其他菜单项... -->
-        </div>
-      </div>
-    </nav>
-
-    <!-- 原电脑端导航改为 desktop-nav -->
+    <!-- 电脑端导航 -->
     <nav class="desktop-nav">
       <div class="nav-container">
         <div class="logo-container">
           <a href="#" class="logo has-dropdown">世界奖项</a>
           <div class="logo-dropdown">
-    <!-- 文学奖项 -->
-    <a href="https://example.com/literature" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-book-open"></i></span>
-        <span class="logo-menu-text">文学奖项</span>
-    </a>
-    
-    <!-- 电影奖项 -->
-    <a href="https://example.com/movie" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-film"></i></span>
-        <span class="logo-menu-text">电影奖项</span>
-    </a>
-    
-    <!-- 动画奖项 -->
-    <a href="https://example.com/animation" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-play-circle"></i></span>
-        <span class="logo-menu-text">动画奖项</span>
-    </a>
-    
-    <!-- 漫画奖项 -->
-    <a href="https://example.com/comic" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-book"></i></span>
-        <span class="logo-menu-text">漫画奖项</span>
-    </a>
-    
-    <!-- 音乐奖项 -->
-    <a href="https://example.com/music" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-music"></i></span>
-        <span class="logo-menu-text">音乐奖项</span>
-    </a>
-    
-    <!-- 摄影奖项 -->
-    <a href="https://example.com/photography" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-camera"></i></span>
-        <span class="logo-menu-text">摄影奖项</span>
-    </a>
-    
-    <!-- 插画奖项 -->
-    <a href="https://example.com/illustration" target="_blank">
-        <span class="logo-menu-icon"><i class="fas fa-palette"></i></span>
-        <span class="logo-menu-text">插画奖项</span>
-    </a>
-</div>
+            <!-- 文学奖项 -->
+            <a href="https://example.com/literature" target="_blank">
+              <span class="logo-menu-icon"
+                ><i class="fas fa-book-open"></i
+              ></span>
+              <span class="logo-menu-text">文学奖项</span>
+            </a>
+
+            <!-- 电影奖项 -->
+            <a href="https://example.com/movie" target="_blank">
+              <span class="logo-menu-icon"><i class="fas fa-film"></i></span>
+              <span class="logo-menu-text">电影奖项</span>
+            </a>
+
+            <!-- 动画奖项 -->
+            <a href="https://example.com/animation" target="_blank">
+              <span class="logo-menu-icon"
+                ><i class="fas fa-play-circle"></i
+              ></span>
+              <span class="logo-menu-text">动画奖项</span>
+            </a>
+
+            <!-- 漫画奖项 -->
+            <a href="https://example.com/comic" target="_blank">
+              <span class="logo-menu-icon"><i class="fas fa-book"></i></span>
+              <span class="logo-menu-text">漫画奖项</span>
+            </a>
+
+            <!-- 音乐奖项 -->
+            <a href="https://example.com/music" target="_blank">
+              <span class="logo-menu-icon"><i class="fas fa-music"></i></span>
+              <span class="logo-menu-text">音乐奖项</span>
+            </a>
+
+            <!-- 摄影奖项 -->
+            <a href="https://example.com/photography" target="_blank">
+              <span class="logo-menu-icon"><i class="fas fa-camera"></i></span>
+              <span class="logo-menu-text">摄影奖项</span>
+            </a>
+
+            <!-- 插画奖项 -->
+            <a href="https://example.com/illustration" target="_blank">
+              <span class="logo-menu-icon"><i class="fas fa-palette"></i></span>
+              <span class="logo-menu-text">插画奖项</span>
+            </a>
+          </div>
         </div>
 
         <div class="nav-links">
@@ -1679,6 +1420,209 @@
       </div>
     </nav>
 
+    <!-- 移动端导航 -->
+    <nav class="mobile-nav">
+      <div class="mobile-nav-header">
+        <!-- 菜单按钮靠左 -->
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="mobile-logo-container">
+          <a href="#" class="mobile-logo has-dropdown">世界奖项</a>
+          <div class="mobile-logo-dropdown">
+            <a href="https://example.com/literature" target="_blank">
+              <span class="mobile-logo-menu-icon"
+                ><i class="fas fa-book-open"></i
+              ></span>
+              <span class="mobile-logo-menu-text">文学奖项</span>
+            </a>
+            <a href="https://example.com/movie" target="_blank">
+              <span class="mobile-logo-menu-icon"
+                ><i class="fas fa-film"></i
+              ></span>
+              <span class="mobile-logo-menu-text">电影奖项</span>
+            </a>
+            <a href="https://example.com/animation" target="_blank">
+              <span class="mobile-logo-menu-icon"
+                ><i class="fas fa-play-circle"></i
+              ></span>
+              <span class="mobile-logo-menu-text">动画奖项</span>
+            </a>
+            <a href="https://example.com/comic" target="_blank">
+              <span class="mobile-logo-menu-icon"
+                ><i class="fas fa-book"></i
+              ></span>
+              <span class="mobile-logo-menu-text">漫画奖项</span>
+            </a>
+            <a href="https://example.com/music" target="_blank">
+              <span class="mobile-logo-menu-icon"
+                ><i class="fas fa-music"></i
+              ></span>
+              <span class="mobile-logo-menu-text">音乐奖项</span>
+            </a>
+            <a href="https://example.com/photography" target="_blank">
+              <span class="mobile-logo-menu-icon"
+                ><i class="fas fa-camera"></i
+              ></span>
+              <span class="mobile-logo-menu-text">摄影奖项</span>
+            </a>
+            <a href="https://example.com/illustration" target="_blank">
+              <span class="mobile-logo-menu-icon"
+                ><i class="fas fa-palette"></i
+              ></span>
+              <span class="mobile-logo-menu-text">插画奖项</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 新增用户菜单按钮 -->
+        <div class="mobile-user-menu-container">
+          <button class="mobile-user-btn">
+            <i class="fas fa-user"></i>
+          </button>
+          <div class="mobile-user-dropdown">
+            <a href="#"><i class="fas fa-user-circle"></i> 我的收藏</a>
+            <a href="#"><i class="fas fa-bookmark"></i> 我的成就</a>
+            <a href="#"><i class="fas fa-history"></i> 游览历史</a>
+            <a href="#"><i class="fas fa-cog"></i> 设置</a>
+            <a href="#" id="mobileLoginBtn"
+              ><i class="fas fa-sign-in-alt"></i> 登录/注册</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- 移动端二级导航按钮 -->
+      <div class="mobile-nav-content">
+        <!-- 移动端，世界文学奖 -->
+        <div class="mobile-nav-category">世界文学奖</div>
+        <div class="mobile-nav-submenu">
+          <a
+            href="https://baike.baidu.com/item/诺贝尔文学奖/571471"
+            target="_blank"
+            >诺贝尔文学奖</a
+          >
+          <a href="https://example.com/booker" target="_blank">布克奖</a>
+          <a href="https://example.com/pulitzer" target="_blank"
+            >普利策文学奖</a
+          >
+          <a href="https://example.com/international-booker" target="_blank"
+            >布克国际文学奖</a
+          >
+          <a href="https://example.com/goncourt" target="_blank"
+            >龚古尔文学奖</a
+          >
+          <a href="https://example.com/del-duca" target="_blank"
+            >奇诺・德尔杜卡世界奖</a
+          >
+        </div>
+
+        <!-- 移动端，区域文学奖 -->
+        <div class="mobile-nav-category">区域文学奖</div>
+        <div class="mobile-nav-submenu">
+          <a href="https://example.com/maodun" target="_blank"
+            >茅盾文学奖（中国）</a
+          >
+          <a href="https://example.com/luxun" target="_blank"
+            >鲁迅文学奖（中国）</a
+          >
+          <a href="https://example.com/national-book" target="_blank"
+            >美国国家图书奖</a
+          >
+          <a href="https://example.com/buechner" target="_blank"
+            >格奥尔格・毕希纳奖（德国）</a
+          >
+          <a href="https://example.com/dublin" target="_blank"
+            >都柏林文学奖（德国）</a
+          >
+          <a href="https://example.com/akutagawa" target="_blank"
+            >芥川龙之介奖（日本）</a
+          >
+          <a href="https://example.com/naoki" target="_blank">直木奖（日本）</a>
+          <a href="https://example.com/kafka" target="_blank"
+            >卡夫卡文学奖（捷克）</a
+          >
+          <a href="https://example.com/cervantes" target="_blank"
+            >米格尔・德・塞万提斯奖（西班牙）</a
+          >
+          <a href="https://example.com/neustadt" target="_blank"
+            >纽斯塔特国际文学奖（美国）</a
+          >
+          <a href="https://example.com/jerusalem" target="_blank"
+            >耶路撒冷文学奖（以色列）</a
+          >
+          <a href="https://example.com/prince-asturias" target="_blank"
+            >阿斯图里亚斯王子奖（西班牙）</a
+          >
+          <a href="https://example.com/caine" target="_blank">凯恩非洲文学奖</a>
+          <a href="https://example.com/arabic-fiction" target="_blank"
+            >国际阿拉伯小说奖</a
+          >
+          <a href="https://example.com/jnanpith" target="_blank"
+            >杰南皮特奖（印度）</a
+          >
+        </div>
+
+        <!-- 儿童文学奖 -->
+        <div class="mobile-nav-category">儿童文学奖</div>
+        <div class="mobile-nav-submenu">
+          <a href="https://example.com/andersen" target="_blank"
+            >国际安徒生奖</a
+          >
+        </div>
+
+        <!-- 推理小说奖 -->
+        <div class="mobile-nav-category">推理小说奖</div>
+        <div class="mobile-nav-submenu">
+          <a href="https://example.com/edgar" target="_blank"
+            >埃德加・爱伦・坡奖（美国）</a
+          >
+          <a href="https://example.com/agatha" target="_blank"
+            >阿加莎奖（美国）</a
+          >
+          <a href="https://example.com/gold-dagger" target="_blank"
+            >金匕首奖（英国）</a
+          >
+          <a href="https://example.com/ranpo" target="_blank"
+            >江户川乱步奖（日本）</a
+          >
+          <a href="https://example.com/honkaku" target="_blank"
+            >本格推理大奖（日本）</a
+          >
+          <a href="https://example.com/anthony" target="_blank"
+            >安东尼奖（美国）</a
+          >
+          <a href="https://example.com/glass-key" target="_blank"
+            >玻璃钥匙奖（北欧）</a
+          >
+          <a href="https://example.com/japan-mystery" target="_blank"
+            >日本推理作家协会奖</a
+          >
+          <a href="https://example.com/international-dagger" target="_blank"
+            >国际匕首奖（英国）</a
+          >
+          <a href="https://example.com/barry" target="_blank">巴瑞奖（美国）</a>
+          <a href="https://example.com/shimada" target="_blank"
+            >岛田庄司推理小说奖（中国台湾）</a
+          >
+          <a href="https://example.com/flint" target="_blank"
+            >燧石文学奖・推理单元（中国）</a
+          >
+          <a href="https://example.com/macavity" target="_blank">麦卡维帝奖</a>
+        </div>
+
+        <!-- 科幻小说奖 -->
+        <div class="mobile-nav-category">科幻小说奖</div>
+        <div class="mobile-nav-submenu">
+          <a href="https://example.com/hugo" target="_blank">雨果奖（美国）</a>
+          <a href="https://example.com/nebula" target="_blank"
+            >星云奖（美国）</a
+          >
+        </div>
+      </div>
+    </nav>
+
     <!-- 登录弹窗 -->
     <div id="loginModal" class="login-modal">
       <div class="login-content">
@@ -1710,73 +1654,97 @@
       <h1>发现你的下一本好书</h1>
       <p>在浩瀚书海中寻找属于你的精神食粮，让阅读成为生活的日常。</p>
 
-    <div class="book-list">
-    <!-- 活着 -->
-    <a href="https://book.douban.com/subject/4913064/" target="_blank" class="book-card-link">
-        <div class="book-card">
+      <div class="book-list">
+        <!-- 活着 -->
+        <a
+          href="https://book.douban.com/subject/4913064/"
+          target="_blank"
+          class="book-card-link"
+        >
+          <div class="book-card">
             <div class="book-title">活着</div>
             <div class="book-author">余华</div>
             <div class="book-desc">
-                《活着》讲述一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。
+              《活着》讲述一个人历尽世间沧桑和磨难的一生，亦将中国大半个世纪的社会变迁凝缩其间。
             </div>
-        </div>
-    </a>
+          </div>
+        </a>
 
-    <!-- 百年孤独 -->
-    <a href="https://book.douban.com/subject/6082808/" target="_blank" class="book-card-link">
-        <div class="book-card">
+        <!-- 百年孤独 -->
+        <a
+          href="https://book.douban.com/subject/6082808/"
+          target="_blank"
+          class="book-card-link"
+        >
+          <div class="book-card">
             <div class="book-title">百年孤独</div>
             <div class="book-author">加西亚・马尔克斯</div>
             <div class="book-desc">
-                魔幻现实主义文学的代表作，描写了布恩迪亚家族七代人的传奇故事，以及加勒比海沿岸小镇马孔多的百年兴衰。
+              魔幻现实主义文学的代表作，描写了布恩迪亚家族七代人的传奇故事，以及加勒比海沿岸小镇马孔多的百年兴衰。
             </div>
-        </div>
-    </a>
+          </div>
+        </a>
 
-    <!-- 人类简史 -->
-    <a href="https://book.douban.com/subject/25985021/" target="_blank" class="book-card-link">
-        <div class="book-card">
+        <!-- 人类简史 -->
+        <a
+          href="https://book.douban.com/subject/25985021/"
+          target="_blank"
+          class="book-card-link"
+        >
+          <div class="book-card">
             <div class="book-title">人类简史</div>
             <div class="book-author">尤瓦尔・赫拉利</div>
             <div class="book-desc">
-                从认知革命、农业革命到科学革命，理清影响人类发展的重大脉络，重新定义我们是谁、我们从哪里来。
+              从认知革命、农业革命到科学革命，理清影响人类发展的重大脉络，重新定义我们是谁、我们从哪里来。
             </div>
-        </div>
-    </a>
+          </div>
+        </a>
 
-    <!-- 平凡的世界 -->
-    <a href="https://book.douban.com/subject/1084165/" target="_blank" class="book-card-link">
-        <div class="book-card">
+        <!-- 平凡的世界 -->
+        <a
+          href="https://book.douban.com/subject/1084165/"
+          target="_blank"
+          class="book-card-link"
+        >
+          <div class="book-card">
             <div class="book-title">平凡的世界</div>
             <div class="book-author">路遥</div>
             <div class="book-desc">
-                全景式地表现中国当代城乡社会生活，高度浓缩了中国西北农村的历史变迁过程。
+              全景式地表现中国当代城乡社会生活，高度浓缩了中国西北农村的历史变迁过程。
             </div>
-        </div>
-    </a>
+          </div>
+        </a>
 
-    <!-- 围城 -->
-    <a href="https://book.douban.com/subject/1008145/" target="_blank" class="book-card-link">
-        <div class="book-card">
+        <!-- 围城 -->
+        <a
+          href="https://book.douban.com/subject/1008145/"
+          target="_blank"
+          class="book-card-link"
+        >
+          <div class="book-card">
             <div class="book-title">围城</div>
             <div class="book-author">钱钟书</div>
             <div class="book-desc">
-                中国现代文学史上一部风格独特的讽刺小说，被誉为"新儒林外史"。
+              中国现代文学史上一部风格独特的讽刺小说，被誉为"新儒林外史"。
             </div>
-        </div>
-    </a>
+          </div>
+        </a>
 
-    <!-- 三体 -->
-    <a href="https://book.douban.com/subject/2567698/" target="_blank" class="book-card-link">
-        <div class="book-card">
+        <!-- 三体 -->
+        <a
+          href="https://book.douban.com/subject/2567698/"
+          target="_blank"
+          class="book-card-link"
+        >
+          <div class="book-card">
             <div class="book-title">三体</div>
             <div class="book-author">刘慈欣</div>
             <div class="book-desc">
-                中国科幻文学的里程碑之作，讲述了地球人类文明和三体文明的信息交流、生死搏杀及两个文明在宇宙中的兴衰历程。
+              中国科幻文学的里程碑之作，讲述了地球人类文明和三体文明的信息交流、生死搏杀及两个文明在宇宙中的兴衰历程。
             </div>
-        </div>
-    </a>
-</div>
+          </div>
+        </a>
+      </div>
     </div>
 
     <!-- 画廊区域 -->
@@ -1802,15 +1770,15 @@
             <i class="fas fa-search-plus"></i>
           </div>
 
-         <!-- 导航箭头 -->
-<div class="nav-arrows">
-  <div class="arrow prev" title="上一张">
-    <i class="fas fa-chevron-left"></i>
-  </div>
-  <div class="arrow next" title="下一张">
-    <i class="fas fa-chevron-right"></i>
-  </div>
-</div>
+          <!-- 导航箭头 -->
+          <div class="nav-arrows">
+            <div class="arrow prev" title="上一张">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="arrow next" title="下一张">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+          </div>
         </div>
 
         <!-- 缩略图容器 -->
@@ -1850,165 +1818,7 @@
     </div>
 
     <script>
-   // 移动端logo下拉菜单交互
-// 移动端logo点击事件 - 添加关闭用户菜单逻辑
-document.querySelector('.mobile-logo').addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    // 关闭用户菜单
-    document.querySelector('.mobile-user-menu-container').classList.remove('active');
-    
-    // 切换logo下拉菜单
-    this.parentElement.classList.toggle('active');
-    
-    // 关闭主菜单
-    document.querySelector(".mobile-nav").classList.remove("active");
-    
-    // 关闭所有分类菜单
-    document.querySelectorAll('.mobile-nav-category').forEach(category => {
-        category.classList.remove('active');
-        category.nextElementSibling.classList.remove('active');
-    });
-});
-
-
-// 移动端菜单按钮点击事件 - 添加关闭用户菜单逻辑
-document.querySelector(".mobile-menu-btn").addEventListener("click", function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    // 关闭用户菜单
-    document.querySelector('.mobile-user-menu-container').classList.remove('active');
-    
-    const mobileNav = document.querySelector(".mobile-nav");
-    const isActive = mobileNav.classList.contains("active");
-    
-    // 切换主菜单状态
-    mobileNav.classList.toggle("active");
-    
-    // 关闭其他菜单
-    if (!isActive) {
-        document.querySelector('.mobile-logo-container').classList.remove('active');
-        document.querySelectorAll('.mobile-nav-category').forEach(category => {
-            category.classList.remove('active');
-            category.nextElementSibling.classList.remove('active');
-
-            
-        });
-    }
-});
-
-// 点击页面其他区域关闭所有菜单
-document.addEventListener('click', function(e) {
-    // 如果点击的不是导航相关元素
-    if (!e.target.closest('.mobile-nav') && 
-        !e.target.closest('.mobile-menu-btn') &&
-        !e.target.closest('.mobile-user-btn')) {
-        
-        // 关闭所有菜单
-        document.querySelector(".mobile-nav").classList.remove("active");
-        document.querySelectorAll('.mobile-nav-category').forEach(category => {
-            category.classList.remove('active');
-            category.nextElementSibling.classList.remove('active');
-        });
-        document.querySelector('.mobile-user-menu-container').classList.remove('active');
-    }
-});
-
-// 移动端分类菜单交互 - 点击分类标题展开/收起子菜单
-document.querySelectorAll('.mobile-nav-category').forEach(category => {
-    category.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // 切换当前分类菜单
-        this.classList.toggle('active');
-        const submenu = this.nextElementSibling;
-        submenu.classList.toggle('active');
-        
-        // 如果是"区域文学奖"或"推理小说奖"，添加sticky类
-        const categoryText = this.textContent.trim();
-        if (categoryText === '区域文学奖' || categoryText === '推理小说奖') {
-            this.classList.toggle('sticky');
-        }
-        
-        // 关闭其他分类菜单
-        document.querySelectorAll('.mobile-nav-category').forEach(item => {
-            if (item !== this) {
-                item.classList.remove('active');
-                item.classList.remove('sticky');
-                item.nextElementSibling.classList.remove('active');
-            }
-        });
-    });
-});
-
-// 监听子菜单滚动事件，确保标题始终可见
-document.querySelectorAll('.mobile-nav-submenu').forEach(submenu => {
-    submenu.addEventListener('scroll', function() {
-        const category = this.previousElementSibling;
-        if (category.classList.contains('sticky')) {
-            // 确保标题始终在顶部
-            category.style.top = '0';
-        }
-    });
-});
-
-// 点击页面其他区域关闭所有菜单
-document.addEventListener('click', function(e) {
-    // 如果点击的不是导航相关元素
-    if (!e.target.closest('.mobile-nav') && 
-        !e.target.closest('.mobile-menu-btn')) {
-        
-        // 关闭所有菜单
-        document.querySelector(".mobile-nav").classList.remove("active");
-        document.querySelectorAll('.mobile-nav-category').forEach(category => {
-            category.classList.remove('active');
-            category.nextElementSibling.classList.remove('active');
-        });
-    }
-});
-
-// 阻止子菜单点击事件冒泡
-document.querySelectorAll('.mobile-nav-submenu a').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
-});
-
-
-// 在现有的JavaScript代码中添加用户菜单交互
-document.querySelector('.mobile-user-btn').addEventListener('click', function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-  
-  // 切换用户下拉菜单
-  this.parentElement.classList.toggle('active');
-  
-  // 关闭其他菜单
-  document.querySelector(".mobile-nav").classList.remove("active");
-  document.querySelector('.mobile-logo-container').classList.remove('active');
-  document.querySelectorAll('.mobile-nav-category').forEach(category => {
-      category.classList.remove('active');
-      category.nextElementSibling.classList.remove('active');
-  });
-});
-
-// 点击页面其他区域关闭用户菜单
-document.addEventListener('click', function(e) {
-  if (!e.target.closest('.mobile-user-menu-container')) {
-    document.querySelector('.mobile-user-menu-container').classList.remove('active');
-  }
-});
-
-// 移动端登录按钮
-document.getElementById('mobileLoginBtn').addEventListener('click', function(e) {
-  e.preventDefault();
-  document.getElementById('loginModal').style.display = 'block';
-  document.querySelector('.mobile-user-menu-container').classList.remove('active');
-});
-
+      // ==================== 电脑端和移动端共用的JavaScript ====================
       // 登录弹窗控制
       const loginBtn = document.getElementById("loginBtn");
       const modal = document.getElementById("loginModal");
@@ -2060,28 +1870,28 @@ document.getElementById('mobileLoginBtn').addEventListener('click', function(e) 
         const loader = document.querySelector(".loader");
 
         // 图片数据
-const images = [
-  {
-    url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    title: "《老人与海》海明威 (1/5)"
-  },
-  {
-    url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    title: "《百年孤独》加西亚·马尔克斯 (2/5)"
-  },
-  {
-    url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    title: "《局外人》阿尔贝·加缪 (3/5)"
-  },
-  {
-    url: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    title: "《静静的顿河》米哈依尔·肖洛霍夫 (4/5)"
-  },
-  {
-    url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    title: "《霍乱时期的爱情》‌加西亚·马尔克斯 (5/5)"
-  }
-];
+        const images = [
+          {
+            url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+            title: "《老人与海》海明威 (1/5)",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+            title: "《百年孤独》加西亚·马尔克斯 (2/5)",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+            title: "《局外人》阿尔贝·加缪 (3/5)",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+            title: "《静静的顿河》米哈依尔·肖洛霍夫 (4/5)",
+          },
+          {
+            url: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+            title: "《霍乱时期的爱情》‌加西亚·马尔克斯 (5/5)",
+          },
+        ];
 
         let currentIndex = 0;
         let isZoomed = false;
@@ -2190,6 +2000,168 @@ const images = [
           }
         }
       });
+
+      // ==================== 移动端专属JavaScript ====================
+      // 移动端logo点击事件 - 添加关闭用户菜单逻辑
+      document
+        .querySelector(".mobile-logo")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // 关闭用户菜单
+          document
+            .querySelector(".mobile-user-menu-container")
+            .classList.remove("active");
+
+          // 切换logo下拉菜单
+          this.parentElement.classList.toggle("active");
+
+          // 关闭主菜单
+          document.querySelector(".mobile-nav").classList.remove("active");
+
+          // 关闭所有分类菜单
+          document
+            .querySelectorAll(".mobile-nav-category")
+            .forEach((category) => {
+              category.classList.remove("active");
+              category.nextElementSibling.classList.remove("active");
+            });
+        });
+
+      // 移动端菜单按钮点击事件 - 添加关闭用户菜单逻辑
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // 关闭用户菜单
+          document
+            .querySelector(".mobile-user-menu-container")
+            .classList.remove("active");
+
+          const mobileNav = document.querySelector(".mobile-nav");
+          const isActive = mobileNav.classList.contains("active");
+
+          // 切换主菜单状态
+          mobileNav.classList.toggle("active");
+
+          // 关闭其他菜单
+          if (!isActive) {
+            document
+              .querySelector(".mobile-logo-container")
+              .classList.remove("active");
+            document
+              .querySelectorAll(".mobile-nav-category")
+              .forEach((category) => {
+                category.classList.remove("active");
+                category.nextElementSibling.classList.remove("active");
+              });
+          }
+        });
+
+      // 移动端分类菜单交互 - 点击分类标题展开/收起子菜单
+      document.querySelectorAll(".mobile-nav-category").forEach((category) => {
+        category.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // 切换当前分类菜单
+          this.classList.toggle("active");
+          const submenu = this.nextElementSibling;
+          submenu.classList.toggle("active");
+
+          // 如果是"区域文学奖"或"推理小说奖"，添加sticky类
+          const categoryText = this.textContent.trim();
+          if (categoryText === "区域文学奖" || categoryText === "推理小说奖") {
+            this.classList.toggle("sticky");
+          }
+
+          // 关闭其他分类菜单
+          document.querySelectorAll(".mobile-nav-category").forEach((item) => {
+            if (item !== this) {
+              item.classList.remove("active");
+              item.classList.remove("sticky");
+              item.nextElementSibling.classList.remove("active");
+            }
+          });
+        });
+      });
+
+      // 监听子菜单滚动事件，确保标题始终可见
+      document.querySelectorAll(".mobile-nav-submenu").forEach((submenu) => {
+        submenu.addEventListener("scroll", function () {
+          const category = this.previousElementSibling;
+          if (category.classList.contains("sticky")) {
+            // 确保标题始终在顶部
+            category.style.top = "0";
+          }
+        });
+      });
+
+      // 点击页面其他区域关闭所有菜单
+      document.addEventListener("click", function (e) {
+        // 如果点击的不是导航相关元素
+        if (
+          !e.target.closest(".mobile-nav") &&
+          !e.target.closest(".mobile-menu-btn") &&
+          !e.target.closest(".mobile-user-btn")
+        ) {
+          // 关闭所有菜单
+          document.querySelector(".mobile-nav").classList.remove("active");
+          document
+            .querySelectorAll(".mobile-nav-category")
+            .forEach((category) => {
+              category.classList.remove("active");
+              category.nextElementSibling.classList.remove("active");
+            });
+          document
+            .querySelector(".mobile-user-menu-container")
+            .classList.remove("active");
+        }
+      });
+
+      // 阻止子菜单点击事件冒泡
+      document.querySelectorAll(".mobile-nav-submenu a").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+      });
+
+      // 用户菜单交互
+      document
+        .querySelector(".mobile-user-btn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // 切换用户下拉菜单
+          this.parentElement.classList.toggle("active");
+
+          // 关闭其他菜单
+          document.querySelector(".mobile-nav").classList.remove("active");
+          document
+            .querySelector(".mobile-logo-container")
+            .classList.remove("active");
+          document
+            .querySelectorAll(".mobile-nav-category")
+            .forEach((category) => {
+              category.classList.remove("active");
+              category.nextElementSibling.classList.remove("active");
+            });
+        });
+
+      // 移动端登录按钮
+      document
+        .getElementById("mobileLoginBtn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById("loginModal").style.display = "block";
+          document
+            .querySelector(".mobile-user-menu-container")
+            .classList.remove("active");
+        });
     </script>
   </body>
 </html>
