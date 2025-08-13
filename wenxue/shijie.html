@@ -880,44 +880,54 @@
   content: "-";
 }
 
-/* 最终优化后的CSS */
+/* 修改移动端子菜单样式 */
 .mobile-nav-submenu {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  background: #f9f9f9;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: #fff;
+    width: 100%;
+    display: none; /* 初始隐藏 */
 }
 
 .mobile-nav-submenu.active {
-  max-height: 60vh; /* 根据实际内容调整 */
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  border-top: 1px solid #eee;
-}
-
-/* 可选：美化滚动条（仅支持部分浏览器） */
-.mobile-nav-submenu::-webkit-scrollbar {
-  width: 5px;
-}
-
-.mobile-nav-submenu::-webkit-scrollbar-thumb {
-  background: var(--accent-color);
-  border-radius: 3px;
+    max-height: 60vh; /* 使用视口单位 */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
+    display: block !important; /* 强制显示 */
+    position: relative; /* 添加相对定位 */
+    z-index: 100; /* 确保菜单在上层 */
 }
 
 /* 菜单项样式优化 */
 .mobile-nav-submenu a {
-  display: block;
-  padding: 10px 15px;
-  color: var(--text-color);
-  text-decoration: none;
-  border-bottom: 1px solid #eee;
-  font-size: 14px;
+    display: block;
+    white-space: normal;
+    padding: 12px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s;
 }
 
+/* 修复滚动条 */
+.mobile-nav-submenu::-webkit-scrollbar {
+    width: 5px;
+}
+.mobile-nav-submenu::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 3px;
+}
+
+.mobile-nav-submenu::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 3px;
+}
+
+
 .mobile-nav-submenu a:hover {
-  background-color: var(--hover-bg);
-  color: var(--primary-color);
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
 }
 
 .mobile-nav-submenu.active {
@@ -970,12 +980,13 @@
     height: 100%; /* 确保高度充满父容器 */
 }
 
-      .mobile-nav-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        background: white;
-      }
+     .mobile-nav-content {
+    max-height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: white;
+    transition: all 0.3s ease;
+}
 
       /* 菜单项样式 */
       .mobile-nav-item {
@@ -986,8 +997,9 @@
 
       /* 菜单展开状态 */
       .mobile-nav.active .mobile-nav-content {
-        max-height: 100vh;
-      }
+    max-height: 100vh;
+    overflow-y: auto;
+}
 
       /* ======== 媒体查询切换 ======== */
       @media (max-width: 768px) {
@@ -1181,13 +1193,13 @@
           </div>
         </div>
 
-        <!-- 导航按钮 --> 
+        <!-- 移动端导航按钮 --> 
         <button class="mobile-menu-btn">
           <i class="fas fa-bars"></i>
         </button>
       </div>
       <div class="mobile-nav-content"> 
-        <!-- 世界文学奖 -->
+        <!-- 移动端，世界文学奖 -->
         <div class="mobile-nav-category">世界文学奖</div>
         <div class="mobile-nav-submenu">
           <a
@@ -1210,7 +1222,7 @@
           >
         </div>
 
-        <!-- 区域文学奖 -->
+        <!-- 移动端，区域文学奖 -->
         <div class="mobile-nav-category">区域文学奖</div>
         <div class="mobile-nav-submenu">
           <a href="https://example.com/maodun" target="_blank"
@@ -1710,9 +1722,11 @@ document.querySelector('.mobile-logo').addEventListener('click', function(e) {
     
     // 关闭所有分类菜单
     document.querySelectorAll('.mobile-nav-category').forEach(category => {
-        category.classList.remove('active');
-        category.nextElementSibling.classList.remove('active');
+    category.addEventListener('click', function() {
+        this.classList.toggle('active');
+        this.nextElementSibling.classList.toggle('active');
     });
+});
     
     // 切换logo下拉菜单
     this.parentElement.classList.toggle('active');
@@ -1742,32 +1756,43 @@ document.addEventListener('click', function(e) {
     }
 });
 
-   // 移动端分类菜单交互
+// 修正后的菜单交互代码
 document.querySelectorAll('.mobile-nav-category').forEach(category => {
     category.addEventListener('click', function(e) {
-        // 阻止事件冒泡，避免触发document的点击事件
+        e.preventDefault();
         e.stopPropagation();
         
-        // 关闭logo下拉菜单
-        document.querySelector('.mobile-logo-container').classList.remove('active');
-        
-        // 检查当前菜单是否已激活
-        const isActive = this.classList.contains('active');
-        
-        // 关闭所有其他菜单
-        document.querySelectorAll('.mobile-nav-category').forEach(otherCategory => {
-            if (otherCategory !== this) {
-                otherCategory.classList.remove('active');
-                otherCategory.nextElementSibling.classList.remove('active');
+        // 关闭其他菜单
+        document.querySelectorAll('.mobile-nav-category').forEach(item => {
+            if (item !== this) {
+                item.classList.remove('active');
+                item.nextElementSibling.classList.remove('active');
             }
         });
         
-        // 切换当前菜单状态
+        // 切换当前菜单
         this.classList.toggle('active');
-        this.nextElementSibling.classList.toggle('active');
+        const submenu = this.nextElementSibling;
+        submenu.classList.toggle('active');
+        
+        // 如果是展开状态，滚动到可见区域
+        if (this.classList.contains('active')) {
+            // 先滚动到分类标题
+            this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // 然后确保子菜单内容可以滚动
+            submenu.style.overflowY = 'auto';
+        } else {
+            submenu.style.overflowY = 'hidden';
+        }
     });
 });
 
+// 阻止子菜单点击事件冒泡
+document.querySelectorAll('.mobile-nav-submenu a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+});
 
   // 新增移动端菜单按钮交互
 document.querySelector(".mobile-menu-btn").addEventListener("click", function (e) {
