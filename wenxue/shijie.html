@@ -681,12 +681,11 @@
 
       /* 基础版-调整logo容器 */
       .mobile-logo-container {
-        width: 100%; /* 占据全部宽度以便居中 */
-        position: relative; /* 为绝对定位的子元素提供参照 */
-        display: flex; /* 使用flex布局确保垂直居中 */
-        justify-content: center; /* 水平居中 */
-        align-items: center; /* 垂直居中 */
-        height: 100%; /* 确保高度充满父容器 */
+        position: relative;
+        display: inline-block;
+        padding: 0; /* 清除所有内边距 */
+        margin: 0; /* 清除所有外边距 */
+        vertical-align: top; /* 防止基线对齐问题 */
       }
 
       /* 基础版-修改移动端logo样式 */
@@ -729,12 +728,12 @@
       .mobile-logo-dropdown {
         position: absolute;
         top: 100%;
-        left: 50%; /* 从左侧50%开始 */
+        left: -20%; /* 从左侧50%开始 */
         transform: translateX(-50%); /* 向左移动自身宽度的一半 */
         background-color: rgba(255, 255, 255, 0.98);
         border: 1px solid #e0e0e0;
         border-top: none;
-        width: 200px;
+        width: 150px;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease;
@@ -843,7 +842,7 @@
         content: "-";
       }
 
-      /* 基础版-修改移动端子菜单样式 */
+      /* 移动端基础版-修改移动端子菜单样式 */
       .mobile-nav-submenu {
         max-height: 0;
         overflow: hidden;
@@ -864,7 +863,7 @@
         z-index: 100; /* 确保菜单在上层 */
       }
 
-      /* 基础版-固定分类标题样式 */
+      /* 移动端基础版-固定分类标题样式 */
       .mobile-nav-category.sticky {
         position: sticky;
         top: 0;
@@ -873,7 +872,7 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
 
-      /* 基础版-移动端"我"的菜单样式 */
+      /* 移动端基础版-移动端"我"的菜单样式 */
       .mobile-user-menu-container {
         position: absolute;
         right: 15px;
