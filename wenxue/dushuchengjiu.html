@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阅读成就系统</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .sidebar {
+            width: 220px;
+            background-color: #2a2a2a;
+            padding: 20px;
+            height: 100vh;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .achievement-points {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .points {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        
+        .search {
+            margin-bottom: 20px;
+        }
+        
+        .search input {
+            width: 100%;
+            padding: 8px;
+            background-color: #444;
+            border: none;
+            border-radius: 3px;
+            color: white;
+        }
+        
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nav-menu li {
+            padding: 10px 0;
+            cursor: pointer;
+        }
+        
+        .nav-menu li:hover {
+            color: #ffd700;
+        }
+        
+        .nav-menu li.active {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .recent-achievements, .progress-overview {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            color: #ffd700;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        
+        .achievement-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .achievement-item:last-child {
+            border-bottom: none;
+        }
+        
+        .progress-categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .progress-category {
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .category-name {
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            height: 5px;
+            background-color: #444;
+            border-radius: 3px;
+            margin-top: 5px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="achievement-points">
+                <div class="points">8,760 点</div>
+                <div>阅读成就点数</div>
+            </div>
+            
+            <div class="search">
+                <input type="text" placeholder="搜索成就...">
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="active">总览</li>
+                <li>书籍</li>
+                <li>阅读挑战</li>
+                <li>探索</li>
+                <li>经典名著</li>
+                <li>现代文学</li>
+                <li>专业书籍</li>
+                <li>作者收藏</li>
+                <li>阅读活动</li>
+                <li>书评</li>
+                <li>藏书</li>
+                <li>特色更新</li>
+                <li>阅读里程碑</li>
+                <li>绝版书籍</li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <div class="recent-achievements">
+                <h2>近期成就</h2>
+                <div class="achievement-item">
+                    <strong>科幻大师</strong><br>
+                    完成10本科幻小说的阅读
+                </div>
+                <div class="achievement-item">
+                    <strong>经典挑战（史诗难度）</strong><br>
+                    在一个月内读完《战争与和平》
+                </div>
+                <div class="achievement-item">
+                    <strong>文学探索者（英雄难度）</strong><br>
+                    连续30天每天阅读超过2小时
+                </div>
+                <div class="achievement-item">
+                    <strong>知识收集者</strong><br>
+                    完成年度阅读目标50本书
+                </div>
+            </div>
+            
+            <div class="progress-overview">
+                <h2>进展总览</h2>
+                <div>已获得成就 342/1,527</div>
+                
+                <div class="progress-categories">
+                    <div class="progress-category">
+                        <div class="category-name">书籍 45/120</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 37.5%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-category">
+                        <div class="category-name">阅读挑战 12/36</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 33.3%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-category">
+                        <div class="category-name">探索 28/150</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 18.7%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-category">
+                        <div class="category-name">经典名著 15/50</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-category">
+                        <div class="category-name">现代文学 20/75</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 26.7%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-category">
+                        <div class="category-name">专业书籍 8/40</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 20%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-category">
+                        <div class="category-name">作者收藏 10/60</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 16.7%"></div>
+                        </div>
+                    </div>
+                    <div class="progress-category">
+                        <div class="category-name">阅读活动 5/30</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 16.7%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
