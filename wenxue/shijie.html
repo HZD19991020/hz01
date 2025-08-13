@@ -854,42 +854,65 @@
         }
       }
 
-      /* 新增移动端子菜单样式 */
 .mobile-nav-category {
-  padding: 15px 20px;
+  padding: 12px 10px;
   font-weight: bold;
   color: var(--primary-color);
   background-color: var(--light-bg);
   border-bottom: 1px solid #e0e0e0;
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative; /* 让伪元素相对定位 */
+  padding-right: 25px; /* 给 + 号预留空间 */
 }
 
+/* 调整 + 号位置 */
 .mobile-nav-category::after {
   content: "+";
-  font-size: 18px;
+  font-size: 16px;
+  position: absolute; /* 绝对定位 */
+  right: 10px; /* 距离右侧 10px */
+  top: 50%; /* 垂直居中 */
+  transform: translateY(-50%);
+  margin-left: 5px; /* 与文字的间距 */
 }
 
 .mobile-nav-category.active::after {
   content: "-";
 }
 
+/* 最终优化后的CSS */
 .mobile-nav-submenu {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-  background-color: #f9f9f9;
+  background: #f9f9f9;
 }
 
+.mobile-nav-submenu.active {
+  max-height: 60vh; /* 根据实际内容调整 */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  border-top: 1px solid #eee;
+}
+
+/* 可选：美化滚动条（仅支持部分浏览器） */
+.mobile-nav-submenu::-webkit-scrollbar {
+  width: 5px;
+}
+
+.mobile-nav-submenu::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 3px;
+}
+
+/* 菜单项样式优化 */
 .mobile-nav-submenu a {
   display: block;
-  padding: 12px 20px 12px 35px;
+  padding: 10px 15px;
   color: var(--text-color);
   text-decoration: none;
   border-bottom: 1px solid #eee;
-  transition: all 0.3s;
+  font-size: 14px;
 }
 
 .mobile-nav-submenu a:hover {
