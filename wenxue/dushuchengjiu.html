@@ -45,7 +45,7 @@
         .points {
             font-size: 24px;
             font-weight: bold;
-            color: #2a7f62;
+            color: #d4af37; /* 金色 */
         }
         
         .search {
@@ -70,15 +70,39 @@
             padding: 10px 0;
             cursor: pointer;
             color: #555555;
+            position: relative;
         }
         
         .nav-menu li:hover {
-            color: #2a7f62;
+            color: #d4af37; /* 金色 */
         }
         
         .nav-menu li.active {
-            color: #2a7f62;
+            color: #d4af37; /* 金色 */
             font-weight: bold;
+        }
+        
+        .sub-menu {
+            display: none;
+            list-style: none;
+            padding-left: 15px;
+            margin-top: 5px;
+        }
+        
+        .sub-menu li {
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .nav-menu li.has-submenu::after {
+            content: "▼";
+            font-size: 10px;
+            margin-left: 5px;
+            color: #999;
+        }
+        
+        .nav-menu li.active.has-submenu::after {
+            color: #d4af37; /* 金色 */
         }
         
         .recent-achievements, .progress-overview {
@@ -90,7 +114,7 @@
         }
         
         h2 {
-            color: #2a7f62;
+            color: #d4af37; /* 金色 */
             border-bottom: 1px solid #dddddd;
             padding-bottom: 10px;
         }
@@ -102,6 +126,10 @@
         
         .achievement-item:last-child {
             border-bottom: none;
+        }
+        
+        .achievement-item strong {
+            color: #d4af37; /* 金色 */
         }
         
         .progress-categories {
@@ -130,7 +158,7 @@
         
         .progress-fill {
             height: 100%;
-            background-color: #2a7f62;
+            background-color: #d4af37; /* 金色 */
             border-radius: 3px;
         }
     </style>
@@ -148,17 +176,160 @@
             </div>
             
             <ul class="nav-menu">
-                <li class="active">总览</li>
-                <li>书籍</li>
-                <li>阅读挑战</li>
-                <li>探索</li>
-                <li>经典名著</li>
-                <li>现代文学</li>
-                <li>专业书籍</li>
-                <li>作者收藏</li>
-                <li>阅读活动</li>
-                <li>书评</li>
-                <li>藏书</li>
+                <li class="active has-submenu">总览
+                    <ul class="sub-menu" style="display: block;">
+                        <li>阅读统计</li>
+                        <li>年度报告</li>
+                        <li>月度目标</li>
+                        <li>阅读日历</li>
+                        <li>成就墙</li>
+                        <li>阅读趋势</li>
+                        <li>书籍分布</li>
+                        <li>阅读时长</li>
+                        <li>热门标签</li>
+                        <li>阅读习惯</li>
+                    </ul>
+                </li>
+                <li class="has-submenu">书籍
+                    <ul class="sub-menu">
+                        <li>已读书籍</li>
+                        <li>在读列表</li>
+                        <li>想读书单</li>
+                        <li>书籍分类</li>
+                        <li>书籍评分</li>
+                        <li>阅读笔记</li>
+                        <li>书摘收藏</li>
+                        <li>书籍标签</li>
+                        <li>书籍推荐</li>
+                        <li>书籍搜索</li>
+                    </ul>
+                </li>
+                <li class="has-submenu">阅读挑战
+                    <ul class="sub-menu">
+                        <li>每日阅读</li>
+                        <li>每周目标</li>
+                        <li>月度挑战</li>
+                        <li>年度目标</li>
+                        <li>专题挑战</li>
+                        <li>经典挑战</li>
+                        <li>速读挑战</li>
+                        <li>精读挑战</li>
+                        <li>作者挑战</li>
+                        <li>类型挑战</li>
+                    </ul>
+                </li>
+                <li class="has-submenu">探索
+                    <ul class="sub-menu">
+                        <li>新书发现</li>
+                        <li>冷门佳作</li>
+                        <li>编辑推荐</li>
+                        <li>读者推荐</li>
+                        <li>获奖作品</li>
+                        <li>主题书单</li>
+                        <li>作者探索</li>
+                        <li>类型探索</li>
+                        <li>时代探索</li>
+                        <li>地区探索</li>
+                    </ul>
+                </li>
+                <li class="has-submenu">经典名著
+                    <ul class="sub-menu">
+                        <li>中国古典</li>
+                        <li>外国经典</li>
+                        <li>诺贝尔奖</li>
+                        <li>茅盾文学奖</li>
+                        <li>世界名著</li>
+                        <li>哲学经典</li>
+                        <li>历史典籍</li>
+                        <li>诗歌集</li>
+                        <li>戏剧作品</li>
+                        <li>儿童经典</li>
+                    </ul>
+                </li>
+                <li class="has-submenu">现代文学
+                    <ul class="sub-menu">
+                        <li>中国当代</li>
+                        <li>外国现代</li>
+                        <li>畅销小说</li>
+                        <li>科幻奇幻</li>
+                        <li>悬疑推理</li>
+                        <li>爱情小说</li>
+                        <li>成长小说</li>
+                        <li>历史小说</li>
+                        <li>都市小说</li>
+                        <li>网络文学</li>
+                    </ul>
+                </li>
+                <li class="has-submenu">专业书籍
+                    <ul class="sub-menu">
+                        <li>科学技术</li>
+                        <li>经济管理</li>
+                        <li>心理学</li>
+                        <li>社会学</li>
+                        <li>历史学</li>
+                        <li>艺术设计</li>
+                        <li>计算机</li>
+                        <li>医学健康</li>
+                        <li>法律政治</li>
+                        <li>教育学习</li>
+                    </ul>
+                </li>
+                <li class="has-submenu">作者收藏
+                    <ul class="sub-menu">
+                        <li>鲁迅</li>
+                        <li>村上春树</li>
+                        <li>J.K.罗琳</li>
+                        <li>东野圭吾</li>
+                        <li>余华</li>
+                        <li>马尔克斯</li>
+                        <li>托尔斯泰</li>
+                        <li>毛姆</li>
+                        <li>张爱玲</li>
+                        <li>金庸</li>
+                    </ul>
+                </li>
+                <li class="has-submenu">阅读活动
+                    <ul class="sub-menu">
+                        <li>读书会</li>
+                        <li>作者见面会</li>
+                        <li>签售会</li>
+                        <li>书展</li>
+                        <li>阅读马拉松</li>
+                        <li>共读活动</li>
+                        <li>读书分享</li>
+                        <li>书评大赛</li>
+                        <li>阅读挑战赛</li>
+                        <li>图书漂流</li>
+                    </ul>
+                </li>
+                <li class="has-submenu">书评
+                    <ul class="sub-menu">
+                        <li>我的书评</li>
+                        <li>热门书评</li>
+                        <li>专业书评</li>
+                        <li>短评</li>
+                        <li>长评</li>
+                        <li>读书笔记</li>
+                        <li>读后感</li>
+                        <li>书评标签</li>
+                        <li>书评搜索</li>
+                        <li>书评收藏</li>
+                    </ul>
+                </li>
+                <li class="has-submenu">藏书
+                    <ul class="sub-menu">
+                        <li>实体书</li>
+                        <li>电子书</li>
+                        <li>有声书</li>
+                        <li>藏书统计</li>
+                        <li>藏书分类</li>
+                        <li>藏书价值</li>
+                        <li>藏书整理</li>
+                        <li>藏书分享</li>
+                        <li>藏书交换</li>
+                        <li>藏书保险</li>
+                    </ul>
+                </li>
                 <li>特色更新</li>
                 <li>阅读里程碑</li>
                 <li>绝版书籍</li>
@@ -243,5 +414,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // 添加下拉菜单的交互功能
+        document.querySelectorAll('.has-submenu').forEach(item => {
+            item.addEventListener('click', function(e) {
+                // 如果点击的是子菜单项，则不处理
+                if (e.target.tagName === 'LI' && e.target !== this) return;
+                
+                // 切换当前菜单的active状态
+                this.classList.toggle('active');
+                
+                // 获取子菜单
+                const subMenu = this.querySelector('.sub-menu');
+                
+                // 切换子菜单显示状态
+                if (subMenu.style.display === 'block') {
+                    subMenu.style.display = 'none';
+                } else {
+                    subMenu.style.display = 'block';
+                }
+                
+                // 阻止事件冒泡
+                e.stopPropagation();
+            });
+        });
+    </script>
 </body>
 </html>
