@@ -1816,14 +1816,11 @@ document.querySelectorAll('.mobile-nav-category').forEach(category => {
 // 点击页面其他区域关闭所有菜单
 document.addEventListener('click', function(e) {
     // 如果点击的不是导航相关元素
-    if (!e.target.closest('.mobile-nav-header') && 
-        !e.target.closest('.mobile-nav-category') && 
-        !e.target.closest('.mobile-nav-submenu')) {
+    if (!e.target.closest('.mobile-nav') && 
+        !e.target.closest('.mobile-menu-btn')) {
         
-        // 关闭主菜单
+        // 关闭所有菜单
         document.querySelector(".mobile-nav").classList.remove("active");
-        
-        // 关闭所有分类菜单
         document.querySelectorAll('.mobile-nav-category').forEach(category => {
             category.classList.remove('active');
             category.nextElementSibling.classList.remove('active');
