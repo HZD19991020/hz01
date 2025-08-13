@@ -903,13 +903,83 @@
     z-index: 100; /* 确保菜单在上层 */
 }
 
-/* 新增：固定分类标题样式 */
+/* 固定分类标题样式 */
 .mobile-nav-category.sticky {
   position: sticky;
   top: 0;
   z-index: 110;
   background-color: var(--light-bg);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 移动端“我”的菜单样式 */
+.mobile-user-menu-container {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1100;
+}
+
+.mobile-user-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--primary-color);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.mobile-user-btn:hover {
+  background-color: rgba(139, 69, 19, 0.1);
+}
+
+.mobile-user-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  width: 180px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+  padding: 10px 0;
+  margin-top: 5px;
+}
+
+.mobile-user-menu-container.active .mobile-user-dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-user-dropdown a {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.mobile-user-dropdown a:hover {
+  background-color: var(--hover-bg);
+  color: var(--primary-color);
+}
+
+.mobile-user-dropdown i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
 }
 
 
@@ -1054,6 +1124,18 @@
           display: none;
         }
       }
+
+      @media (max-width: 768px) {
+  .mobile-nav-header {
+    position: relative;
+    padding: 10px 50px 10px 15px; /* 增加右侧空间 */
+  }
+  
+  .mobile-logo-container {
+    width: auto;
+    max-width: calc(100% - 100px);
+  }
+}
       
       /* 修改移动端logo下拉箭头样式 */
 .mobile-logo.has-dropdown {
@@ -1190,11 +1272,15 @@
     </style>
   </head>
   <body>
-    <!-- 新增移动端导航 -->
+    <!-- 移动端主导航 -->
     <nav class="mobile-nav">
-      <div class="mobile-nav-header">
-        <div class="mobile-logo-container">
-          <a href="#" class="mobile-logo has-dropdown">世界奖项</a>
+   <div class="mobile-nav-header">
+  <button class="mobile-menu-btn">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <div class="mobile-logo-container">
+    <a href="#" class="mobile-logo has-dropdown">世界奖项</a>
           <div class="mobile-logo-dropdown">
             <a href="https://example.com/literature" target="_blank">
               <span class="mobile-logo-menu-icon"><i class="fas fa-book-open"></i></span>
@@ -1227,7 +1313,22 @@
           </div>
         </div>
 
-        <!-- 移动端导航按钮 --> 
+          <!-- 新增用户菜单按钮 -->
+  <div class="mobile-user-menu-container">
+    <button class="mobile-user-btn">
+      <i class="fas fa-user"></i>
+    </button>
+    <div class="mobile-user-dropdown">
+      <a href="#"><i class="fas fa-user-circle"></i> 个人中心</a>
+      <a href="#"><i class="fas fa-bookmark"></i> 我的收藏</a>
+      <a href="#"><i class="fas fa-history"></i> 阅读历史</a>
+      <a href="#"><i class="fas fa-cog"></i> 设置</a>
+      <a href="#" id="mobileLoginBtn"><i class="fas fa-sign-in-alt"></i> 登录/注册</a>
+    </div>
+  </div>
+</div>
+
+        <!-- 移动端二级导航按钮 --> 
         <button class="mobile-menu-btn">
           <i class="fas fa-bars"></i>
         </button>
@@ -1768,13 +1869,6 @@ document.querySelector('.mobile-logo').addEventListener('click', function(e) {
 });
 
 
-
-
-
-
-
-
-
 // 替换现有的移动端菜单按钮交互代码
 document.querySelector(".mobile-menu-btn").addEventListener("click", function(e) {
     e.preventDefault();
@@ -1855,6 +1949,38 @@ document.querySelectorAll('.mobile-nav-submenu a').forEach(link => {
     link.addEventListener('click', function(e) {
         e.stopPropagation();
     });
+});
+
+
+// 在现有的JavaScript代码中添加用户菜单交互
+document.querySelector('.mobile-user-btn').addEventListener('click', function(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  
+  // 切换用户下拉菜单
+  this.parentElement.classList.toggle('active');
+  
+  // 关闭其他菜单
+  document.querySelector(".mobile-nav").classList.remove("active");
+  document.querySelector('.mobile-logo-container').classList.remove('active');
+  document.querySelectorAll('.mobile-nav-category').forEach(category => {
+      category.classList.remove('active');
+      category.nextElementSibling.classList.remove('active');
+  });
+});
+
+// 点击页面其他区域关闭用户菜单
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.mobile-user-menu-container')) {
+    document.querySelector('.mobile-user-menu-container').classList.remove('active');
+  }
+});
+
+// 移动端登录按钮
+document.getElementById('mobileLoginBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.getElementById('loginModal').style.display = 'block';
+  document.querySelector('.mobile-user-menu-container').classList.remove('active');
 });
 
       // 登录弹窗控制
