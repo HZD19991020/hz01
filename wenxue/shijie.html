@@ -854,6 +854,7 @@
         }
       }
 
+/* 修改移动端分类标题样式 */
 .mobile-nav-category {
   padding: 12px 10px;
   font-weight: bold;
@@ -861,8 +862,9 @@
   background-color: var(--light-bg);
   border-bottom: 1px solid #e0e0e0;
   cursor: pointer;
-  position: relative; /* 让伪元素相对定位 */
-  padding-right: 25px; /* 给 + 号预留空间 */
+  position: relative;
+  padding-right: 25px;
+  z-index: 100; /* 确保标题在上层 */
 }
 
 /* 调整 + 号位置 */
@@ -882,13 +884,14 @@
 
 /* 修改移动端子菜单样式 */
 .mobile-nav-submenu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    background-color: #fff;
-    width: 100%;
-    display: none; /* 初始隐藏 */
-    position: relative; /* 添加相对定位 */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background-color: #fff;
+  width: 100%;
+  display: none;
+  position: relative;
+  z-index: 100;
 }
 
 .mobile-nav-submenu.active {
@@ -902,12 +905,13 @@
 
 /* 新增：固定分类标题样式 */
 .mobile-nav-category.sticky {
-    position: sticky;
-    top: 0;
-    z-index: 110;
-    background-color: var(--light-bg);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 110;
+  background-color: var(--light-bg);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
 
 /* 菜单项样式优化 */
 .mobile-nav-submenu a {
@@ -1803,13 +1807,31 @@ document.querySelectorAll('.mobile-nav-category').forEach(category => {
         const submenu = this.nextElementSibling;
         submenu.classList.toggle('active');
         
+        // 如果是"区域文学奖"或"推理小说奖"，添加sticky类
+        const categoryText = this.textContent.trim();
+        if (categoryText === '区域文学奖' || categoryText === '推理小说奖') {
+            this.classList.toggle('sticky');
+        }
+        
         // 关闭其他分类菜单
         document.querySelectorAll('.mobile-nav-category').forEach(item => {
             if (item !== this) {
                 item.classList.remove('active');
+                item.classList.remove('sticky');
                 item.nextElementSibling.classList.remove('active');
             }
         });
+    });
+});
+
+// 监听子菜单滚动事件，确保标题始终可见
+document.querySelectorAll('.mobile-nav-submenu').forEach(submenu => {
+    submenu.addEventListener('scroll', function() {
+        const category = this.previousElementSibling;
+        if (category.classList.contains('sticky')) {
+            // 确保标题始终在顶部
+            category.style.top = '0';
+        }
     });
 });
 
