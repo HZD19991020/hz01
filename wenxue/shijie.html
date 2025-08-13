@@ -888,6 +888,7 @@
     background-color: #fff;
     width: 100%;
     display: none; /* 初始隐藏 */
+    position: relative; /* 添加相对定位 */
 }
 
 .mobile-nav-submenu.active {
@@ -897,6 +898,15 @@
     display: block !important; /* 强制显示 */
     position: relative; /* 添加相对定位 */
     z-index: 100; /* 确保菜单在上层 */
+}
+
+/* 新增：固定分类标题样式 */
+.mobile-nav-category.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 110;
+    background-color: var(--light-bg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 /* 菜单项样式优化 */
@@ -968,6 +978,9 @@
     left: 15px; /* 靠左 */
     top: 50%; /* 垂直居中 */
     transform: translateY(-50%); /* 精确垂直居中 */
+      z-index: 1100; /* 确保按钮在最上层 */
+    pointer-events: auto; /* 确保按钮可点击 */
+}
 }
 
 /* 调整logo容器 */
@@ -997,9 +1010,8 @@
 
       /* 菜单展开状态 */
       .mobile-nav.active .mobile-nav-content {
-    max-height: 100vh;
-    overflow-y: auto;
-}
+        max-height: 100vh;
+      }
 
       /* ======== 媒体查询切换 ======== */
       @media (max-width: 768px) {
@@ -1715,24 +1727,22 @@
     </div>
 
     <script>
-     // 移动端logo下拉菜单交互
+   // 移动端logo下拉菜单交互
 document.querySelector('.mobile-logo').addEventListener('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
-    
-    // 关闭所有分类菜单
-    document.querySelectorAll('.mobile-nav-category').forEach(category => {
-    category.addEventListener('click', function() {
-        this.classList.toggle('active');
-        this.nextElementSibling.classList.toggle('active');
-    });
-});
     
     // 切换logo下拉菜单
     this.parentElement.classList.toggle('active');
     
     // 关闭主菜单
     document.querySelector(".mobile-nav").classList.remove("active");
+    
+    // 关闭所有分类菜单
+    document.querySelectorAll('.mobile-nav-category').forEach(category => {
+        category.classList.remove('active');
+        category.nextElementSibling.classList.remove('active');
+    });
 });
 
 // 点击页面其他区域关闭所有菜单
@@ -1740,7 +1750,8 @@ document.addEventListener('click', function(e) {
     // 如果点击的不是导航相关元素
     if (!e.target.closest('.mobile-nav-category') && 
         !e.target.closest('.mobile-nav-submenu') &&
-        !e.target.closest('.mobile-logo-container')) {
+        !e.target.closest('.mobile-logo-container') &&
+        !e.target.closest('.mobile-menu-btn')) {
         
         // 关闭logo下拉菜单
         document.querySelector('.mobile-logo-container').classList.remove('active');
@@ -1756,7 +1767,14 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// 修正后的菜单交互代码
+// 阻止子菜单点击事件冒泡
+document.querySelectorAll('.mobile-nav-submenu a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+});
+
+// 移动端分类菜单交互
 document.querySelectorAll('.mobile-nav-category').forEach(category => {
     category.addEventListener('click', function(e) {
         e.preventDefault();
@@ -1777,42 +1795,40 @@ document.querySelectorAll('.mobile-nav-category').forEach(category => {
         
         // 如果是展开状态，滚动到可见区域
         if (this.classList.contains('active')) {
-            // 先滚动到分类标题
+            this.classList.add('sticky');
             this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            // 然后确保子菜单内容可以滚动
             submenu.style.overflowY = 'auto';
         } else {
+            this.classList.remove('sticky');
             submenu.style.overflowY = 'hidden';
         }
     });
 });
 
-// 阻止子菜单点击事件冒泡
-document.querySelectorAll('.mobile-nav-submenu a').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
-});
 
-  // 新增移动端菜单按钮交互
-document.querySelector(".mobile-menu-btn").addEventListener("click", function (e) {
+
+
+// 移动端菜单按钮交互 - 修复后的代码
+document.querySelector(".mobile-menu-btn").addEventListener("click", function(e) {
+    e.preventDefault();
     e.stopPropagation();
-    // 关闭所有打开的菜单
+    
+    // 切换主菜单显示状态
+    const mobileNav = document.querySelector(".mobile-nav");
+    const isActive = mobileNav.classList.contains("active");
+    mobileNav.classList.toggle("active", !isActive);
+    
+    // 关闭logo下拉菜单
     document.querySelector('.mobile-logo-container').classList.remove('active');
+    
+    // 关闭所有分类菜单并移除固定效果
     document.querySelectorAll('.mobile-nav-category').forEach(category => {
-        category.classList.remove('active');
-        category.nextElementSibling.classList.remove('active');
+        category.classList.remove('active', 'sticky');
+        const submenu = category.nextElementSibling;
+        submenu.classList.remove('active');
+        submenu.style.overflowY = 'hidden';
     });
-    // 切换主菜单
-    document.querySelector(".mobile-nav").classList.toggle("active");
 });
-
-      // 点击页面关闭菜单
-      document.addEventListener("click", function (e) {
-        if (!e.target.closest(".mobile-nav")) {
-          document.querySelector(".mobile-nav").classList.remove("active");
-        }
-      });
 
       // 登录弹窗控制
       const loginBtn = document.getElementById("loginBtn");
