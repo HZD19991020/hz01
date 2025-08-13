@@ -1332,10 +1332,7 @@
 </div>
 
         <!-- 移动端二级导航按钮 --> 
-        <button class="mobile-menu-btn">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
+ 
       <div class="mobile-nav-content"> 
         <!-- 移动端，世界文学奖 -->
         <div class="mobile-nav-category">世界文学奖</div>
@@ -1854,9 +1851,13 @@
 
     <script>
    // 移动端logo下拉菜单交互
+// 移动端logo点击事件 - 添加关闭用户菜单逻辑
 document.querySelector('.mobile-logo').addEventListener('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
+    
+    // 关闭用户菜单
+    document.querySelector('.mobile-user-menu-container').classList.remove('active');
     
     // 切换logo下拉菜单
     this.parentElement.classList.toggle('active');
@@ -1872,10 +1873,13 @@ document.querySelector('.mobile-logo').addEventListener('click', function(e) {
 });
 
 
-// 替换现有的移动端菜单按钮交互代码
+// 移动端菜单按钮点击事件 - 添加关闭用户菜单逻辑
 document.querySelector(".mobile-menu-btn").addEventListener("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
+    
+    // 关闭用户菜单
+    document.querySelector('.mobile-user-menu-container').classList.remove('active');
     
     const mobileNav = document.querySelector(".mobile-nav");
     const isActive = mobileNav.classList.contains("active");
@@ -1889,7 +1893,26 @@ document.querySelector(".mobile-menu-btn").addEventListener("click", function(e)
         document.querySelectorAll('.mobile-nav-category').forEach(category => {
             category.classList.remove('active');
             category.nextElementSibling.classList.remove('active');
+
+            
         });
+    }
+});
+
+// 点击页面其他区域关闭所有菜单
+document.addEventListener('click', function(e) {
+    // 如果点击的不是导航相关元素
+    if (!e.target.closest('.mobile-nav') && 
+        !e.target.closest('.mobile-menu-btn') &&
+        !e.target.closest('.mobile-user-btn')) {
+        
+        // 关闭所有菜单
+        document.querySelector(".mobile-nav").classList.remove("active");
+        document.querySelectorAll('.mobile-nav-category').forEach(category => {
+            category.classList.remove('active');
+            category.nextElementSibling.classList.remove('active');
+        });
+        document.querySelector('.mobile-user-menu-container').classList.remove('active');
     }
 });
 
