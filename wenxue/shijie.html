@@ -9,1265 +9,1280 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <style>
-                                                            /* 基础样式 - 共用部分 */
-                                                            :root {
-                                                              --primary-color: #8b4513; /* 深棕色 */
-                                                              --accent-color: #d2b48c; /* 浅褐色 */
-                                                              --text-color: #333333;
-                                                              --light-bg: #faf5ef;
-                                                              --hover-bg: rgba(210, 180, 140, 0.1);
-                                                            }
-
-                                                            body {
-                                                              font-family: "Microsoft YaHei", "SimSun", serif;
-                                                              margin: 0;
-                                                              padding: 0;
-                                                              background-color: #ffffff;
-                                                              color: var(--text-color);
-                                                              line-height: 1.6;
-                                                            }
-
-                                                            /* 内容区域 - 共用部分 */
-                                                            .content {
-                                                              max-width: 1200px;
-                                                              margin: 50px auto;
-                                                              padding: 30px;
-                                                              background-color: #ffffff;
-                                                              border: 1px solid #e0e0e0;
-                                                              border-radius: 8px;
-                                                              min-height: 500px;
-                                                              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-                                                            }
-
-                                                            h1 {
-                                                              color: var(--primary-color);
-                                                              text-align: center;
-                                                              margin-bottom: 30px;
-                                                              font-family: "KaiTi", "STKaiti", serif;
-                                                              font-size: 2.5em;
-                                                            }
-
-                                                            /* 书籍卡片 - 共用部分 */
-                                                            .book-list {
-                                                              display: grid;
-                                                              grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                                                              gap: 30px;
-                                                              margin-top: 40px;
-                                                            }
-
-                                                            /* 书籍卡片链接样式 */
-                                                            .book-card-link {
-                                                              display: block;
-                                                              color: inherit;
-                                                              text-decoration: none;
-                                                              transition: all 0.3s ease;
-                                                            }
-
-                                                            /* 书籍卡片悬停效果 */
-                                                            .book-card-link:hover .book-card {
-                                                              transform: translateY(-8px);
-                                                              box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-                                                              background-color: #f8f3ec;
-                                                              border-color: var(--accent-color);
-                                                            }
-
-                                                            /* 书籍卡片点击效果 */
-                                                            .book-card-link:active .book-card {
-                                                              transform: translateY(-5px);
-                                                              box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-                                                            }
-
-                                                            /* 原有书籍卡片样式保持不变 */
-                                                            .book-card {
-                                                              background-color: var(--light-bg);
-                                                              border-radius: 8px;
-                                                              padding: 20px;
-                                                              transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-                                                              border: 1px solid #e0e0e0;
-                                                              height: 100%;
-                                                              box-sizing: border-box;
-                                                            }
-
-                                                            .book-title {
-                                                              color: var(--primary-color);
-                                                              font-weight: bold;
-                                                              font-size: 1.2em;
-                                                              margin-bottom: 10px;
-                                                              border-bottom: 1px solid var(--accent-color);
-                                                              padding-bottom: 8px;
-                                                            }
-
-                                                            .book-author {
-                                                              color: #666;
-                                                              font-style: italic;
-                                                              margin-bottom: 10px;
-                                                            }
-
-                                                            .book-desc {
-                                                              font-size: 0.9em;
-                                                              color: #555;
-                                                            }
-
-                                                            /* 按钮样式 - 共用部分 */
-                                                            .btn {
-                                                              display: inline-block;
-                                                              padding: 8px 20px;
-                                                              border-radius: 4px;
-                                                              font-weight: bold;
-                                                              text-decoration: none;
-                                                              transition: all 0.3s;
-                                                            }
-
-                                                            .btn-primary {
-                                                              background-color: white;
-                                                              color: var(--primary-color);
-                                                              border: 1px solid var(--primary-color);
-                                                            }
-
-                                                            .btn-primary:hover {
-                                                              background-color: #f5f5f5;
-                                                              color: #6d3100;
-                                                              border-color: #6d3100;
-                                                            }
-
-                                                            /* 登录弹窗样式 - 共用部分 */
-                                                            .login-modal {
-                                                              display: none;
-                                                              position: fixed;
-                                                              z-index: 1000;
-                                                              left: 0;
-                                                              top: 0;
-                                                              width: 100%;
-                                                              height: 100%;
-                                                              background-color: rgba(0, 0, 0, 0.5);
-                                                            }
-
-                                                            .login-content {
-                                                              background-color: #fefefe;
-                                                              margin: 10% auto;
-                                                              padding: 30px;
-                                                              border: 1px solid var(--accent-color);
-                                                              border-radius: 8px;
-                                                              width: 350px;
-                                                              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-                                                            }
-
-                                                            .login-header {
-                                                              display: flex;
-                                                              justify-content: space-between;
-                                                              align-items: center;
-                                                              margin-bottom: 20px;
-                                                              padding-bottom: 10px;
-                                                              border-bottom: 1px solid var(--accent-color);
-                                                            }
-
-                                                            .login-title {
-                                                              color: var(--primary-color);
-                                                              font-size: 1.5em;
-                                                              font-weight: bold;
-                                                            }
-
-                                                            .close-btn {
-                                                              color: #aaa;
-                                                              font-size: 28px;
-                                                              font-weight: bold;
-                                                              cursor: pointer;
-                                                            }
-
-                                                            .close-btn:hover {
-                                                              color: var(--primary-color);
-                                                            }
-
-                                                            .login-form input {
-                                                              width: 100%;
-                                                              padding: 12px;
-                                                              margin: 10px 0;
-                                                              border: 1px solid #ddd;
-                                                              border-radius: 4px;
-                                                              box-sizing: border-box;
-                                                            }
-
-                                                            .login-form button {
-                                                              width: 100%;
-                                                              padding: 12px;
-                                                              margin-top: 15px;
-                                                              background-color: var(--primary-color);
-                                                              color: white;
-                                                              border: none;
-                                                              border-radius: 4px;
-                                                              cursor: pointer;
-                                                              font-weight: bold;
-                                                            }
-
-                                                            .login-form button:hover {
-                                                              background-color: #6d3100;
-                                                            }
-
-                                                            .login-footer {
-                                                              margin-top: 15px;
-                                                              text-align: center;
-                                                              font-size: 0.9em;
-                                                            }
-
-                                                            .login-footer a {
-                                                              color: var(--primary-color);
-                                                              text-decoration: none;
-                                                            }
-
-                                                            /* 画廊样式 - 共用部分 */
-                                                            .gallery-section {
-                                                              max-width: 1200px;
-                                                              margin: 50px auto;
-                                                              padding: 0 30px;
-                                                            }
-
-                                                            .gallery-section h2 {
-                                                              color: var(--primary-color);
-                                                              text-align: center;
-                                                              margin-bottom: 30px;
-                                                              font-family: "KaiTi", "STKaiti", serif;
-                                                              font-size: 2em;
-                                                            }
-
-                                                            .gallery-container {
-                                                              width: 100%;
-                                                              position: relative;
-                                                              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-                                                              border-radius: 8px;
-                                                              overflow: hidden;
-                                                            }
-
-                                                            .main-image-container {
-                                                              width: 100%;
-                                                              height: 600px;
-                                                              position: relative;
-                                                              overflow: hidden;
-                                                            }
-
-                                                            .main-image {
-                                                              width: 100%;
-                                                              height: 100%;
-                                                              object-fit: cover;
-                                                              transition: transform 0.5s ease;
-                                                            }
-
-                                                            .main-image.zoom {
-                                                              transform: scale(1.05);
-                                                            }
-
-                                                            .image-title {
-                                                              position: absolute;
-                                                              bottom: 0;
-                                                              left: 0;
-                                                              width: 100%;
-                                                              padding: 20px;
-                                                              background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-                                                              color: white;
-                                                              font-size: 24px;
-                                                              text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-                                                            }
-
-                                                            .thumbnail-container {
-                                                              position: absolute;
-                                                              right: 20px;
-                                                              bottom: 20px;
-                                                              display: flex;
-                                                              gap: 10px;
-                                                              z-index: 10;
-                                                            }
-
-                                                            .thumbnail {
-                                                              width: 80px;
-                                                              height: 60px;
-                                                              border: 2px solid white;
-                                                              border-radius: 4px;
-                                                              cursor: pointer;
-                                                              opacity: 0.7;
-                                                              transition: all 0.3s ease;
-                                                              object-fit: cover;
-                                                              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-                                                            }
-
-                                                            .thumbnail:hover,
-                                                            .thumbnail.active {
-                                                              opacity: 1;
-                                                              border-color: #ff4757;
-                                                              transform: translateY(-5px);
-                                                            }
-
-                                                            /* 修改导航箭头样式 */
-                                                            .nav-arrows {
-                                                              position: absolute;
-                                                              top: 50%;
-                                                              width: 100%;
-                                                              display: flex;
-                                                              justify-content: space-between;
-                                                              padding: 0 50px; /* 减少两侧的内边距，使箭头更靠近中间 */
-                                                              transform: translateY(-50%);
-                                                              z-index: 5;
-                                                              box-sizing: border-box;
-                                                            }
-
-                                                            /* 修改箭头颜色为白色 */
-                                                            .arrow {
-                                                              width: 50px;
-                                                              height: 50px;
-                                                              background-color: rgba(0, 0, 0, 0.5); /* 保持半透明黑色背景 */
-                                                              border-radius: 50%;
-                                                              display: flex;
-                                                              align-items: center;
-                                                              justify-content: center;
-                                                              cursor: pointer;
-                                                              transition: all 0.3s ease;
-                                                              color: white; /* 确保箭头图标为白色 */
-                                                              font-size: 24px;
-                                                            }
-
-                                                            /* 确保hover状态也是白色 */
-                                                            .arrow:hover {
-                                                              background-color: rgba(0, 0, 0, 0.8);
-                                                              color: white; /* 保持hover时箭头为白色 */
-                                                            }
-
-                                                            /* 如果图标颜色被其他样式覆盖，可以增加特异性 */
-                                                            .nav-arrows .arrow i {
-                                                              color: white !important;
-                                                            }
-
-                                                            /* 调整缩放按钮 */
-                                                            .zoom-btn {
-                                                              position: absolute;
-                                                              top: 20px;
-                                                              right: 20px;
-                                                              width: 45px; /* 增大按钮大小 */
-                                                              height: 45px;
-                                                              background-color: rgba(0, 0, 0, 0.5);
-                                                              border-radius: 50%;
-                                                              display: flex;
-                                                              justify-content: center;
-                                                              align-items: center;
-                                                              cursor: pointer;
-                                                              z-index: 10;
-                                                              transition: all 0.3s ease;
-                                                            }
-
-                                                            .zoom-btn:hover {
-                                                              background-color: rgba(0, 0, 0, 0.8);
-                                                              transform: scale(1.1);
-                                                            }
-
-                                                            .zoom-btn i {
-                                                              color: white;
-                                                              font-size: 20px; /* 增大图标大小 */
-                                                            }
-
-                                                            /* 加载动画 */
-                                                            .loader {
-                                                              position: absolute;
-                                                              top: 50%;
-                                                              left: 50%;
-                                                              transform: translate(-50%, -50%);
-                                                              width: 50px;
-                                                              height: 50px;
-                                                              border: 5px solid rgba(255, 255, 255, 0.3);
-                                                              border-radius: 50%;
-                                                              border-top-color: #ff4757;
-                                                              animation: spin 1s ease-in-out infinite;
-                                                              z-index: 5;
-                                                            }
-
-                                                            @keyframes spin {
-                                                              to {
-                                                                transform: translate(-50%, -50%) rotate(360deg);
-                                                              }
-                                                            }
-
-                                                            /* ==================== 电脑端专属样式 ==================== */
-                                                            /* 顶部导航 */
-                                                            .top-nav {
-                                                              background-color: rgba(255, 255, 255, 0.98);
-                                                              padding: 0;
-                                                              border-bottom: 2px solid var(--accent-color);
-                                                              position: sticky;
-                                                              top: 0;
-                                                              z-index: 100;
-                                                              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                                                              height: 60px; /* 固定导航栏高度 */
-                                                            }
-
-                                                            /* 修改导航栏容器样式 */
-                                                            .nav-container {
-                                                              max-width: 1200px;
-                                                              margin: 0 auto;
-                                                              display: flex;
-                                                              justify-content: flex-start;
-                                                              align-items: center; /* 确保所有子项垂直居中 */
-                                                              padding: 0 10px;
-                                                              position: relative;
-                                                              height: 100%;
-                                                            }
-
-                                                            .nav-item > a {
-                                                              color: var(--text-color);
-                                                              text-decoration: none;
-                                                              font-size: 15px;
-                                                              font-weight: bold;
-                                                              padding: 0 12px;
-                                                              display: flex;
-                                                              align-items: center;
-                                                              transition: all 0.3s;
-                                                              height: 100%;
-                                                              white-space: nowrap;
-                                                            }
-
-                                                            .nav-item.has-dropdown > a::after {
-                                                              content: "▼";
-                                                              font-size: 8px;
-                                                              margin-left: 3px;
-                                                              position: static;
-                                                              transform: none;
-                                                              top: auto;
-                                                              right: auto;
-                                                              color: var(--text-color);
-                                                            }
-
-                                                            /* 用户操作区修正 */
-                                                            .user-actions {
-                                                              margin-left: auto;
-                                                              display: flex;
-                                                              align-items: center;
-                                                              height: 100%;
-                                                            }
-
-                                                            .user-actions a {
-                                                              color: var(--text-color);
-                                                              text-decoration: none;
-                                                              margin-left: 12px;
-                                                              font-size: 14px;
-                                                              transition: all 0.3s;
-                                                              white-space: nowrap;
-                                                              display: flex;
-                                                              align-items: center;
-                                                              height: 100%;
-                                                              padding: 0 12px;
-                                                            }
-
-                                                            .user-actions a:hover {
-                                                              color: var(--primary-color);
-                                                              background-color: var(--hover-bg);
-                                                            }
-
-                                                            .user-actions .btn {
-                                                              padding: 8px 20px;
-                                                              margin-left: 12px;
-                                                              height: auto;
-                                                              line-height: normal;
-                                                            }
-
-                                                            /* 调整logo容器 */
-                                                            .logo-container {
-                                                              position: relative;
-                                                              margin-right: 20px;
-                                                              height: 100%;
-                                                              display: flex;
-                                                              align-items: center; /* 垂直居中 */
-                                                            }
-
-                                                            .logo {
-                                                              font-size: 28px;
-                                                              font-weight: bold;
-                                                              color: var(--primary-color);
-                                                              text-decoration: none;
-                                                              font-family: "KaiTi", "STKaiti", serif;
-                                                              padding: 0 20px 0 0;
-                                                              display: flex;
-                                                              align-items: center;
-                                                              height: 100%;
-                                                            }
-
-                                                            .logo.has-dropdown {
-                                                              position: relative;
-                                                              padding-right: 20px;
-                                                              display: flex;
-                                                              align-items: center;
-                                                            }
-
-                                                            .logo.has-dropdown::after {
-                                                              content: "▼";
-                                                              font-size: 10px;
-                                                              margin-left: 5px;
-                                                              position: static;
-                                                              transform: none;
-                                                              top: auto;
-                                                              right: auto;
-                                                              color: var(--text-color);
-                                                            }
-
-                                                            .logo-dropdown {
-                                                              position: absolute;
-                                                              top: 100%;
-                                                              left: 0;
-                                                              background-color: rgba(255, 255, 255, 0.98);
-                                                              border: 1px solid #e0e0e0;
-                                                              border-top: 2px solid var(--accent-color);
-                                                              width: 200px;
-                                                              opacity: 0;
-                                                              visibility: hidden;
-                                                              transition: all 0.3s ease;
-                                                              z-index: 1000;
-                                                              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                                                              padding: 15px 0;
-                                                              border-radius: 0 0 8px 8px;
-                                                            }
-
-                                                            .logo-container:hover .logo-dropdown {
-                                                              opacity: 1;
-                                                              visibility: visible;
-                                                            }
-
-                                                            .logo-dropdown a {
-                                                              color: var(--text-color);
-                                                              padding: 12px 20px;
-                                                              display: flex;
-                                                              align-items: center;
-                                                              border-bottom: 1px solid #f5f5f5;
-                                                              transition: all 0.3s;
-                                                              text-decoration: none;
-                                                            }
-
-                                                            .logo-dropdown a:hover {
-                                                              color: var(--primary-color);
-                                                              background-color: var(--hover-bg);
-                                                              padding-left: 25px;
-                                                            }
-
-                                                            .logo-dropdown a:last-child {
-                                                              border-bottom: none;
-                                                            }
-
-                                                            .logo-menu-icon {
-                                                              width: 24px;
-                                                              height: 24px;
-                                                              margin-right: 15px;
-                                                              color: var(--accent-color);
-                                                              text-align: center;
-                                                              font-size: 18px;
-                                                              display: flex;
-                                                              align-items: center;
-                                                              justify-content: center;
-                                                            }
-
-                                                            .logo-menu-text {
-                                                              flex: 1;
-                                                            }
-
-                                                            /* 调整导航链接容器 */
-                                                            .nav-links {
-                                                              display: flex;
-                                                              height: 100%; /* 与导航栏同高 */
-                                                              flex-grow: 1;
-                                                              align-items: center; /* 垂直居中 */
-                                                            }
-
-                                                            /* 调整导航项样式 */
-                                                            .nav-item {
-                                                              position: relative;
-                                                              height: 100%;
-                                                              display: flex;
-                                                              align-items: center; /* 垂直居中 */
-                                                            }
-
-                                                            /* 下拉菜单 - 带图标 */
-                                                            .dropdown-menu {
-                                                              position: absolute;
-                                                              top: 100%; /* 从按钮底部开始 */
-                                                              left: 0;
-                                                              background-color: rgba(255, 255, 255, 0.98);
-                                                              border: 1px solid #e0e0e0;
-                                                              border-top: 2px solid var(--accent-color);
-                                                              width: 280px;
-                                                              opacity: 0;
-                                                              visibility: hidden;
-                                                              transition: all 0.3s ease;
-                                                              z-index: 1000;
-                                                              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                                                              padding: 15px 0;
-                                                              border-radius: 0 0 8px 8px;
-                                                            }
-
-                                                            .nav-item:hover .dropdown-menu {
-                                                              opacity: 1;
-                                                              visibility: visible;
-                                                            }
-
-                                                            .dropdown-menu a {
-                                                              color: var(--text-color);
-                                                              padding: 12px 20px;
-                                                              display: flex;
-                                                              align-items: center;
-                                                              border-bottom: 1px solid #f5f5f5;
-                                                              transition: all 0.3s;
-                                                            }
-
-                                                            .dropdown-menu a:hover {
-                                                              color: var(--primary-color);
-                                                              background-color: var(--hover-bg);
-                                                              padding-left: 25px;
-                                                            }
-
-                                                            .dropdown-menu a:last-child {
-                                                              border-bottom: none;
-                                                            }
-
-                                                            .menu-icon {
-                                                              width: 24px;
-                                                              height: 24px;
-                                                              margin-right: 15px;
-                                                              color: var(--accent-color);
-                                                              text-align: center;
-                                                              font-size: 18px;
-                                                            }
-
-                                                            .menu-text {
-                                                              flex: 1;
-                                                            }
-
-                                                            /* ==================== 移动端专属样式 ==================== */
-                                                            /* 基础版-主菜单容器 */
-                                                            .mobile-nav {
-                                                              position: fixed;
-                                                              top: 0;
-                                                              left: 0;
-                                                              width: 100%;
-                                                              z-index: 1100; /* 提高z-index确保在最上层 */
-                                                              background: white;
-                                                              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                                                              display: none; /* 默认隐藏 */
-                                                            }
-
-                                                            /* 基础版-主菜单激活状态 */
-                                                            .mobile-nav.active {
-                                                              display: block;
-                                                            }
-
-                                                            /* 基础版-修改移动端导航头部布局 */
-                                                            .mobile-nav-header {
-                                                              display: flex;
-                                                              justify-content: center; /* 主轴上居中 */
-                                                              align-items: center;
-                                                              padding: 10px 15px;
-                                                              height: 50px;
-                                                              border-bottom: 1px solid #eee;
-                                                              position: relative; /* 添加相对定位 */
-                                                            }
-
-                                                            /* 基础版-保持菜单按钮靠左 */
-                                                            .mobile-menu-btn {
-                                                              position: absolute;
-                                                              left: 15px;
-                                                              top: 50%;
-                                                              transform: translateY(-50%);
-                                                              z-index: 1100;
-                                                              background: none;
-                                                              border: none;
-                                                              font-size: 20px;
-                                                              color: var(--primary-color);
-                                                              width: 30px;
-                                                              height: 30px;
-                                                              display: flex;
-                                                              align-items: center;
-                                                              justify-content: center;
-                                                            }
-
-                                                            /* 基础版-调整logo容器 */
-                                                            .mobile-logo-container {
-                                                              width: 100%; /* 占据全部宽度以便居中 */
-                                                              position: relative; /* 为绝对定位的子元素提供参照 */
-                                                              display: flex; /* 使用flex布局确保垂直居中 */
-                                                              justify-content: center; /* 水平居中 */
-                                                              align-items: center; /* 垂直居中 */
-                                                              height: 100%; /* 确保高度充满父容器 */
-                                                            }
-
-                                                            /* 基础版-修改移动端logo样式 */
-                                                            .mobile-logo {
-                                                              font-size: 24px;
-                                                              font-weight: bold;
-                                                              color: var(--primary-color);
-                                                              text-decoration: none;
-                                                              font-family: "KaiTi", "STKaiti", serif;
-                                                              position: relative;
-                                                              display: inline-block; /* 使margin: 0 auto生效 */
-                                                              margin: 0 auto; /* 水平居中 */
-                                                              text-align: center; /* 文本居中 */
-                                                            }
-
-                                                            /* 基础版-修改移动端logo下拉箭头样式 */
-                                                            .mobile-logo.has-dropdown {
-                                                              position: relative;
-                                                              padding-right: 20px; /* 为箭头留出空间 */
-                                                            }
-
-                                                            /* 基础版-倒三角箭头样式 */
-                                                            .mobile-logo.has-dropdown::after {
-                                                              content: "▼";
-                                                              font-size: 10px;
-                                                              position: absolute;
-                                                              right: 0;
-                                                              top: 50%;
-                                                              transform: translateY(-50%);
-                                                              color: var(--text-color);
-                                                              transition: transform 0.3s;
-                                                            }
-
-                                                            /* 基础版-下拉菜单展开时箭头旋转 */
-                                                            .mobile-logo-container.active .mobile-logo.has-dropdown::after {
-                                                              transform: translateY(-50%) rotate(180deg);
-                                                            }
-
-                                                            /* 基础版-修改移动端logo下拉菜单样式 */
-                                                            .mobile-logo-dropdown {
-                                                              position: absolute;
-                                                              top: 100%;
-                                                              left: 50%; /* 从左侧50%开始 */
-                                                              transform: translateX(-50%); /* 向左移动自身宽度的一半 */
-                                                              background-color: rgba(255, 255, 255, 0.98);
-                                                              border: 1px solid #e0e0e0;
-                                                              border-top: none;
-                                                              width: 200px;
-                                                              max-height: 0;
-                                                              overflow: hidden;
-                                                              transition: max-height 0.3s ease;
-                                                              z-index: 1000;
-                                                              box-shadow: none;
-                                                              padding: 0;
-                                                              opacity: 0;
-                                                              visibility: hidden;
-                                                            }
-
-                                                             /* 基础版 */
-                                                            .mobile-logo-container.active .mobile-logo-dropdown {
-                                                              max-height: 500px;
-                                                              padding: 15px 0;
-                                                              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                                                              opacity: 1;
-                                                              visibility: visible;
-                                                              border: 1px solid #e0e0e0;
-                                                              border-top: none;
-                                                            }
-
-                                                            /* 基础版 */
-                                                            .mobile-logo-dropdown a {
-                                                              color: var(--text-color);
-                                                              padding: 12px 20px;
-                                                              display: flex;
-                                                              align-items: center;
-                                                              border-bottom: 1px solid #f5f5f5;
-                                                              transition: all 0.3s;
-                                                              text-decoration: none;
-                                                            }
-
-                                                               /* 基础版 */
-                                                            .mobile-logo-dropdown a:hover {
-                                                              color: var(--primary-color);
-                                                              background-color: var(--hover-bg);
-                                                              padding-left: 25px;
-                                                            }
-
-                                                               /* 基础版 */
-                                                            .mobile-logo-dropdown a:last-child {
-                                                              border-bottom: none;
-                                                            }
-
-                                                               /* 基础版 */
-                                                            .mobile-logo-menu-icon {
-                                                              width: 24px;
-                                                              height: 24px;
-                                                              margin-right: 15px;
-                                                              color: var(--accent-color);
-                                                              text-align: center;
-                                                              font-size: 18px;
-                                                            }
-
-                                                               /* 基础版 */
-                                                            .mobile-logo-menu-text {
-                                                              flex: 1;
-                                                            }
-
-                                                            /* 基础版-移动端内容区域 */
-                                                            .mobile-nav-content {
-                                                              max-height: 0;
-                                                              overflow: hidden;
-                                                              transition: max-height 0.3s ease;
-                                                              background: white;
-                                                            }
-
-                                                            /* 基础版-菜单项样式 */
-                                                            .mobile-nav-item {
-                                                              padding: 15px 20px;
-                                                              border-bottom: 1px solid #f5f5f5;
-                                                              cursor: pointer;
-                                                            }
-
-                                                            /* 基础版-菜单展开状态 */
-                                                            .mobile-nav.active .mobile-nav-content {
-                                                              max-height: 100vh; /* 使用视口高度 */
-                                                              overflow-y: auto; /* 允许滚动 */
-                                                            }
-
-                                                            /* 基础版-修改移动端分类标题样式 */
-                                                            .mobile-nav-category {
-                                                              padding: 12px 10px;
-                                                              font-weight: bold;
-                                                              color: var(--primary-color);
-                                                              background-color: var(--light-bg);
-                                                              border-bottom: 1px solid #e0e0e0;
-                                                              cursor: pointer;
-                                                              position: relative;
-                                                              padding-right: 25px;
-                                                              z-index: 100; /* 确保标题在上层 */
-                                                            }
-
-                                                            /* 基础版-调整 + 号位置 */
-                                                            .mobile-nav-category::after {
-                                                              content: "+";
-                                                              font-size: 16px;
-                                                              position: absolute; /* 绝对定位 */
-                                                              right: 10px; /* 距离右侧 10px */
-                                                              top: 50%; /* 垂直居中 */
-                                                              transform: translateY(-50%);
-                                                              margin-left: 5px; /* 与文字的间距 */
-                                                            }
-
-                                                            .mobile-nav-category.active::after {
-                                                              content: "-";
-                                                            }
-
-                                                            /* 基础版-修改移动端子菜单样式 */
-                                                            .mobile-nav-submenu {
-                                                              max-height: 0;
-                                                              overflow: hidden;
-                                                              transition: max-height 0.3s ease;
-                                                              background-color: #fff;
-                                                              width: 100%;
-                                                              display: none;
-                                                              position: relative;
-                                                              z-index: 100;
-                                                            }
-
-                                                            .mobile-nav-submenu.active {
-                                                              max-height: 60vh; /* 使用视口单位 */
-                                                              overflow-y: auto;
-                                                              -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
-                                                              display: block !important; /* 强制显示 */
-                                                              position: relative; /* 添加相对定位 */
-                                                              z-index: 100; /* 确保菜单在上层 */
-                                                            }
-
-                                                            /* 基础版-固定分类标题样式 */
-                                                            .mobile-nav-category.sticky {
-                                                              position: sticky;
-                                                              top: 0;
-                                                              z-index: 110;
-                                                              background-color: var(--light-bg);
-                                                              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                                                            }
-
-                                                            /* 基础版-移动端"我"的菜单样式 */
-                                                            .mobile-user-menu-container {
-                                                              position: absolute;
-                                                              right: 15px;
-                                                              top: 50%;
-                                                              transform: translateY(-50%);
-                                                              z-index: 1100;
-                                                              width: 30px;
-                                                              height: 30px;
-                                                            }
-
-                                                            .mobile-user-btn {
-                                                              background: none;
-                                                              border: none;
-                                                              font-size: 20px;
-                                                              color: var(--primary-color);
-                                                              cursor: pointer;
-                                                              width: 40px;
-                                                              height: 40px;
-                                                              display: flex;
-                                                              align-items: center;
-                                                              justify-content: center;
-                                                              border-radius: 50%;
-                                                              transition: all 0.3s;
-                                                            }
-
-                                                            .mobile-user-btn:hover {
-                                                              background-color: rgba(139, 69, 19, 0.1);
-                                                            }
-
-                                                            .mobile-user-dropdown {
-                                                              position: absolute;
-                                                              right: 0;
-                                                              top: 100%;
-                                                              background-color: white;
-                                                              border: 1px solid #e0e0e0;
-                                                              border-radius: 8px;
-                                                              width: 180px;
-                                                              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                                                              opacity: 0;
-                                                              visibility: hidden;
-                                                              transition: all 0.3s;
-                                                              padding: 10px 0;
-                                                              margin-top: 5px;
-                                                            }
-
-                                                            .mobile-user-menu-container.active .mobile-user-dropdown {
-                                                              opacity: 1;
-                                                              visibility: visible;
-                                                            }
-
-                                                            .mobile-user-dropdown a {
-                                                              display: flex;
-                                                              align-items: center;
-                                                              padding: 10px 15px;
-                                                              color: var(--text-color);
-                                                              text-decoration: none;
-                                                              font-size: 14px;
-                                                              transition: all 0.3s;
-                                                            }
-
-                                                            .mobile-user-dropdown a:hover {
-                                                              background-color: var(--hover-bg);
-                                                              color: var(--primary-color);
-                                                            }
-
-                                                            .mobile-user-dropdown i {
-                                                              margin-right: 10px;
-                                                              width: 20px;
-                                                              text-align: center;
-                                                            }
-
-                                                            /* 基础版-菜单项样式优化 */
-                                                            .mobile-nav-submenu a {
-                                                              display: block;
-                                                              white-space: normal;
-                                                              padding: 12px 20px;
-                                                              border-bottom: 1px solid #f0f0f0;
-                                                              color: var(--text-color);
-                                                              text-decoration: none;
-                                                              transition: all 0.3s;
-                                                            }
-
-                                                            .mobile-nav-submenu a:hover {
-                                                              background-color: var(--hover-bg);
-                                                              color: var(--primary-color);
-                                                            }
-
-                                                            /* 基础版-修复滚动条 */
-                                                            .mobile-nav-submenu::-webkit-scrollbar {
-                                                              width: 5px;
-                                                            }
-                                                            .mobile-nav-submenu::-webkit-scrollbar-thumb {
-                                                              background: var(--accent-color);
-                                                              border-radius: 3px;
-                                                            }
-
-
-            /* 在移动端专属样式部分修改以下代码 */
+                                                                  /* 基础样式 - 共用部分 */
+                                                                  :root {
+                                                                    --primary-color: #8b4513; /* 深棕色 */
+                                                                    --accent-color: #d2b48c; /* 浅褐色 */
+                                                                    --text-color: #333333;
+                                                                    --light-bg: #faf5ef;
+                                                                    --hover-bg: rgba(210, 180, 140, 0.1);
+                                                                  }
+
+                                                                  body {
+                                                                    font-family: "Microsoft YaHei", "SimSun", serif;
+                                                                    margin: 0;
+                                                                    padding: 0;
+                                                                    background-color: #ffffff;
+                                                                    color: var(--text-color);
+                                                                    line-height: 1.6;
+                                                                  }
+
+                                                                  /* 内容区域 - 共用部分 */
+                                                                  .content {
+                                                                    max-width: 1200px;
+                                                                    margin: 50px auto;
+                                                                    padding: 30px;
+                                                                    background-color: #ffffff;
+                                                                    border: 1px solid #e0e0e0;
+                                                                    border-radius: 8px;
+                                                                    min-height: 500px;
+                                                                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+                                                                  }
+
+                                                                  h1 {
+                                                                    color: var(--primary-color);
+                                                                    text-align: center;
+                                                                    margin-bottom: 30px;
+                                                                    font-family: "KaiTi", "STKaiti", serif;
+                                                                    font-size: 2.5em;
+                                                                  }
+
+                                                                  /* 书籍卡片 - 共用部分 */
+                                                                  .book-list {
+                                                                    display: grid;
+                                                                    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                                                                    gap: 30px;
+                                                                    margin-top: 40px;
+                                                                  }
+
+                                                                  /* 书籍卡片链接样式 */
+                                                                  .book-card-link {
+                                                                    display: block;
+                                                                    color: inherit;
+                                                                    text-decoration: none;
+                                                                    transition: all 0.3s ease;
+                                                                  }
+
+                                                                  /* 书籍卡片悬停效果 */
+                                                                  .book-card-link:hover .book-card {
+                                                                    transform: translateY(-8px);
+                                                                    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+                                                                    background-color: #f8f3ec;
+                                                                    border-color: var(--accent-color);
+                                                                  }
+
+                                                                  /* 书籍卡片点击效果 */
+                                                                  .book-card-link:active .book-card {
+                                                                    transform: translateY(-5px);
+                                                                    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+                                                                  }
+
+                                                                  /* 原有书籍卡片样式保持不变 */
+                                                                  .book-card {
+                                                                    background-color: var(--light-bg);
+                                                                    border-radius: 8px;
+                                                                    padding: 20px;
+                                                                    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+                                                                    border: 1px solid #e0e0e0;
+                                                                    height: 100%;
+                                                                    box-sizing: border-box;
+                                                                  }
+
+                                                                  .book-title {
+                                                                    color: var(--primary-color);
+                                                                    font-weight: bold;
+                                                                    font-size: 1.2em;
+                                                                    margin-bottom: 10px;
+                                                                    border-bottom: 1px solid var(--accent-color);
+                                                                    padding-bottom: 8px;
+                                                                  }
+
+                                                                  .book-author {
+                                                                    color: #666;
+                                                                    font-style: italic;
+                                                                    margin-bottom: 10px;
+                                                                  }
+
+                                                                  .book-desc {
+                                                                    font-size: 0.9em;
+                                                                    color: #555;
+                                                                  }
+
+                                                                  /* 按钮样式 - 共用部分 */
+                                                                  .btn {
+                                                                    display: inline-block;
+                                                                    padding: 8px 20px;
+                                                                    border-radius: 4px;
+                                                                    font-weight: bold;
+                                                                    text-decoration: none;
+                                                                    transition: all 0.3s;
+                                                                  }
+
+                                                                  .btn-primary {
+                                                                    background-color: white;
+                                                                    color: var(--primary-color);
+                                                                    border: 1px solid var(--primary-color);
+                                                                  }
+
+                                                                  .btn-primary:hover {
+                                                                    background-color: #f5f5f5;
+                                                                    color: #6d3100;
+                                                                    border-color: #6d3100;
+                                                                  }
+
+                                                                  /* 登录弹窗样式 - 共用部分 */
+                                                                  .login-modal {
+                                                                    display: none;
+                                                                    position: fixed;
+                                                                    z-index: 1000;
+                                                                    left: 0;
+                                                                    top: 0;
+                                                                    width: 100%;
+                                                                    height: 100%;
+                                                                    background-color: rgba(0, 0, 0, 0.5);
+                                                                  }
+
+                                                                  .login-content {
+                                                                    background-color: #fefefe;
+                                                                    margin: 10% auto;
+                                                                    padding: 30px;
+                                                                    border: 1px solid var(--accent-color);
+                                                                    border-radius: 8px;
+                                                                    width: 350px;
+                                                                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                                                                  }
+
+                                                                  .login-header {
+                                                                    display: flex;
+                                                                    justify-content: space-between;
+                                                                    align-items: center;
+                                                                    margin-bottom: 20px;
+                                                                    padding-bottom: 10px;
+                                                                    border-bottom: 1px solid var(--accent-color);
+                                                                  }
+
+                                                                  .login-title {
+                                                                    color: var(--primary-color);
+                                                                    font-size: 1.5em;
+                                                                    font-weight: bold;
+                                                                  }
+
+                                                                  .close-btn {
+                                                                    color: #aaa;
+                                                                    font-size: 28px;
+                                                                    font-weight: bold;
+                                                                    cursor: pointer;
+                                                                  }
+
+                                                                  .close-btn:hover {
+                                                                    color: var(--primary-color);
+                                                                  }
+
+                                                                  .login-form input {
+                                                                    width: 100%;
+                                                                    padding: 12px;
+                                                                    margin: 10px 0;
+                                                                    border: 1px solid #ddd;
+                                                                    border-radius: 4px;
+                                                                    box-sizing: border-box;
+                                                                  }
+
+                                                                  .login-form button {
+                                                                    width: 100%;
+                                                                    padding: 12px;
+                                                                    margin-top: 15px;
+                                                                    background-color: var(--primary-color);
+                                                                    color: white;
+                                                                    border: none;
+                                                                    border-radius: 4px;
+                                                                    cursor: pointer;
+                                                                    font-weight: bold;
+                                                                  }
+
+                                                                  .login-form button:hover {
+                                                                    background-color: #6d3100;
+                                                                  }
+
+                                                                  .login-footer {
+                                                                    margin-top: 15px;
+                                                                    text-align: center;
+                                                                    font-size: 0.9em;
+                                                                  }
+
+                                                                  .login-footer a {
+                                                                    color: var(--primary-color);
+                                                                    text-decoration: none;
+                                                                  }
+
+                                                                  /* 画廊样式 - 共用部分 */
+                                                                  .gallery-section {
+                                                                    max-width: 1200px;
+                                                                    margin: 50px auto;
+                                                                    padding: 0 30px;
+                                                                  }
+
+                                                                  .gallery-section h2 {
+                                                                    color: var(--primary-color);
+                                                                    text-align: center;
+                                                                    margin-bottom: 30px;
+                                                                    font-family: "KaiTi", "STKaiti", serif;
+                                                                    font-size: 2em;
+                                                                  }
+
+                                                                  .gallery-container {
+                                                                    width: 100%;
+                                                                    position: relative;
+                                                                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                                                                    border-radius: 8px;
+                                                                    overflow: hidden;
+                                                                  }
+
+                                                                  .main-image-container {
+                                                                    width: 100%;
+                                                                    height: 600px;
+                                                                    position: relative;
+                                                                    overflow: hidden;
+                                                                  }
+
+                                                                  .main-image {
+                                                                    width: 100%;
+                                                                    height: 100%;
+                                                                    object-fit: cover;
+                                                                    transition: transform 0.5s ease;
+                                                                  }
+
+                                                                  .main-image.zoom {
+                                                                    transform: scale(1.05);
+                                                                  }
+
+                                                                  .image-title {
+                                                                    position: absolute;
+                                                                    bottom: 0;
+                                                                    left: 0;
+                                                                    width: 100%;
+                                                                    padding: 20px;
+                                                                    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+                                                                    color: white;
+                                                                    font-size: 24px;
+                                                                    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+                                                                  }
+
+                                                                  .thumbnail-container {
+                                                                    position: absolute;
+                                                                    right: 20px;
+                                                                    bottom: 20px;
+                                                                    display: flex;
+                                                                    gap: 10px;
+                                                                    z-index: 10;
+                                                                  }
+
+                                                                  .thumbnail {
+                                                                    width: 80px;
+                                                                    height: 60px;
+                                                                    border: 2px solid white;
+                                                                    border-radius: 4px;
+                                                                    cursor: pointer;
+                                                                    opacity: 0.7;
+                                                                    transition: all 0.3s ease;
+                                                                    object-fit: cover;
+                                                                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                                                                  }
+
+                                                                  .thumbnail:hover,
+                                                                  .thumbnail.active {
+                                                                    opacity: 1;
+                                                                    border-color: #ff4757;
+                                                                    transform: translateY(-5px);
+                                                                  }
+
+                                                                  /* 修改导航箭头样式 */
+                                                                  .nav-arrows {
+                                                                    position: absolute;
+                                                                    top: 50%;
+                                                                    width: 100%;
+                                                                    display: flex;
+                                                                    justify-content: space-between;
+                                                                    padding: 0 50px; /* 减少两侧的内边距，使箭头更靠近中间 */
+                                                                    transform: translateY(-50%);
+                                                                    z-index: 5;
+                                                                    box-sizing: border-box;
+                                                                  }
+
+                                                                  /* 修改箭头颜色为白色 */
+                                                                  .arrow {
+                                                                    width: 50px;
+                                                                    height: 50px;
+                                                                    background-color: rgba(0, 0, 0, 0.5); /* 保持半透明黑色背景 */
+                                                                    border-radius: 50%;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    justify-content: center;
+                                                                    cursor: pointer;
+                                                                    transition: all 0.3s ease;
+                                                                    color: white; /* 确保箭头图标为白色 */
+                                                                    font-size: 24px;
+                                                                  }
+
+                                                                  /* 确保hover状态也是白色 */
+                                                                  .arrow:hover {
+                                                                    background-color: rgba(0, 0, 0, 0.8);
+                                                                    color: white; /* 保持hover时箭头为白色 */
+                                                                  }
+
+                                                                  /* 如果图标颜色被其他样式覆盖，可以增加特异性 */
+                                                                  .nav-arrows .arrow i {
+                                                                    color: white !important;
+                                                                  }
+
+                                                                  /* 调整缩放按钮 */
+                                                                  .zoom-btn {
+                                                                    position: absolute;
+                                                                    top: 20px;
+                                                                    right: 20px;
+                                                                    width: 45px; /* 增大按钮大小 */
+                                                                    height: 45px;
+                                                                    background-color: rgba(0, 0, 0, 0.5);
+                                                                    border-radius: 50%;
+                                                                    display: flex;
+                                                                    justify-content: center;
+                                                                    align-items: center;
+                                                                    cursor: pointer;
+                                                                    z-index: 10;
+                                                                    transition: all 0.3s ease;
+                                                                  }
+
+                                                                  .zoom-btn:hover {
+                                                                    background-color: rgba(0, 0, 0, 0.8);
+                                                                    transform: scale(1.1);
+                                                                  }
+
+                                                                  .zoom-btn i {
+                                                                    color: white;
+                                                                    font-size: 20px; /* 增大图标大小 */
+                                                                  }
+
+                                                                  /* 加载动画 */
+                                                                  .loader {
+                                                                    position: absolute;
+                                                                    top: 50%;
+                                                                    left: 50%;
+                                                                    transform: translate(-50%, -50%);
+                                                                    width: 50px;
+                                                                    height: 50px;
+                                                                    border: 5px solid rgba(255, 255, 255, 0.3);
+                                                                    border-radius: 50%;
+                                                                    border-top-color: #ff4757;
+                                                                    animation: spin 1s ease-in-out infinite;
+                                                                    z-index: 5;
+                                                                  }
+
+                                                                  @keyframes spin {
+                                                                    to {
+                                                                      transform: translate(-50%, -50%) rotate(360deg);
+                                                                    }
+                                                                  }
+
+                                                                  /* ==================== 电脑端专属样式 ==================== */
+                                                                  /* 顶部导航 */
+                                                                  .top-nav {
+                                                                    background-color: rgba(255, 255, 255, 0.98);
+                                                                    padding: 0;
+                                                                    border-bottom: 2px solid var(--accent-color);
+                                                                    position: sticky;
+                                                                    top: 0;
+                                                                    z-index: 100;
+                                                                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                                                                    height: 60px; /* 固定导航栏高度 */
+                                                                  }
+
+                                                                  /* 修改导航栏容器样式 */
+                                                                  .nav-container {
+                                                                    max-width: 1200px;
+                                                                    margin: 0 auto;
+                                                                    display: flex;
+                                                                    justify-content: flex-start;
+                                                                    align-items: center; /* 确保所有子项垂直居中 */
+                                                                    padding: 0 10px;
+                                                                    position: relative;
+                                                                    height: 100%;
+                                                                  }
+
+                                                                  .nav-item > a {
+                                                                    color: var(--text-color);
+                                                                    text-decoration: none;
+                                                                    font-size: 15px;
+                                                                    font-weight: bold;
+                                                                    padding: 0 12px;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    transition: all 0.3s;
+                                                                    height: 100%;
+                                                                    white-space: nowrap;
+                                                                  }
+
+                                                                  .nav-item.has-dropdown > a::after {
+                                                                    content: "▼";
+                                                                    font-size: 8px;
+                                                                    margin-left: 3px;
+                                                                    position: static;
+                                                                    transform: none;
+                                                                    top: auto;
+                                                                    right: auto;
+                                                                    color: var(--text-color);
+                                                                  }
+
+                                                                  /* 用户操作区修正 */
+                                                                  .user-actions {
+                                                                    margin-left: auto;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    height: 100%;
+                                                                  }
+
+                                                                  .user-actions a {
+                                                                    color: var(--text-color);
+                                                                    text-decoration: none;
+                                                                    margin-left: 12px;
+                                                                    font-size: 14px;
+                                                                    transition: all 0.3s;
+                                                                    white-space: nowrap;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    height: 100%;
+                                                                    padding: 0 12px;
+                                                                  }
+
+                                                                  .user-actions a:hover {
+                                                                    color: var(--primary-color);
+                                                                    background-color: var(--hover-bg);
+                                                                  }
+
+                                                                  .user-actions .btn {
+                                                                    padding: 8px 20px;
+                                                                    margin-left: 12px;
+                                                                    height: auto;
+                                                                    line-height: normal;
+                                                                  }
+
+                                                                  /* 调整logo容器 */
+                                                                  .logo-container {
+                                                                    position: relative;
+                                                                    margin-right: 20px;
+                                                                    height: 100%;
+                                                                    display: flex;
+                                                                    align-items: center; /* 垂直居中 */
+                                                                  }
+
+                                                                  .logo {
+                                                                    font-size: 28px;
+                                                                    font-weight: bold;
+                                                                    color: var(--primary-color);
+                                                                    text-decoration: none;
+                                                                    font-family: "KaiTi", "STKaiti", serif;
+                                                                    padding: 0 20px 0 0;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    height: 100%;
+                                                                  }
+
+                                                                  .logo.has-dropdown {
+                                                                    position: relative;
+                                                                    padding-right: 20px;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                  }
+
+                                                                  .logo.has-dropdown::after {
+                                                                    content: "▼";
+                                                                    font-size: 10px;
+                                                                    margin-left: 5px;
+                                                                    position: static;
+                                                                    transform: none;
+                                                                    top: auto;
+                                                                    right: auto;
+                                                                    color: var(--text-color);
+                                                                  }
+
+                                                                  .logo-dropdown {
+                                                                    position: absolute;
+                                                                    top: 100%;
+                                                                    left: 0;
+                                                                    background-color: rgba(255, 255, 255, 0.98);
+                                                                    border: 1px solid #e0e0e0;
+                                                                    border-top: 2px solid var(--accent-color);
+                                                                    width: 200px;
+                                                                    opacity: 0;
+                                                                    visibility: hidden;
+                                                                    transition: all 0.3s ease;
+                                                                    z-index: 1000;
+                                                                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                                                                    padding: 15px 0;
+                                                                    border-radius: 0 0 8px 8px;
+                                                                  }
+
+                                                                  .logo-container:hover .logo-dropdown {
+                                                                    opacity: 1;
+                                                                    visibility: visible;
+                                                                  }
+
+                                                                  .logo-dropdown a {
+                                                                    color: var(--text-color);
+                                                                    padding: 12px 20px;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    border-bottom: 1px solid #f5f5f5;
+                                                                    transition: all 0.3s;
+                                                                    text-decoration: none;
+                                                                  }
+
+                                                                  .logo-dropdown a:hover {
+                                                                    color: var(--primary-color);
+                                                                    background-color: var(--hover-bg);
+                                                                    padding-left: 25px;
+                                                                  }
+
+                                                                  .logo-dropdown a:last-child {
+                                                                    border-bottom: none;
+                                                                  }
+
+                                                                  .logo-menu-icon {
+                                                                    width: 24px;
+                                                                    height: 24px;
+                                                                    margin-right: 15px;
+                                                                    color: var(--accent-color);
+                                                                    text-align: center;
+                                                                    font-size: 18px;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    justify-content: center;
+                                                                  }
+
+                                                                  .logo-menu-text {
+                                                                    flex: 1;
+                                                                  }
+
+                                                                  /* 调整导航链接容器 */
+                                                                  .nav-links {
+                                                                    display: flex;
+                                                                    height: 100%; /* 与导航栏同高 */
+                                                                    flex-grow: 1;
+                                                                    align-items: center; /* 垂直居中 */
+                                                                  }
+
+                                                                  /* 调整导航项样式 */
+                                                                  .nav-item {
+                                                                    position: relative;
+                                                                    height: 100%;
+                                                                    display: flex;
+                                                                    align-items: center; /* 垂直居中 */
+                                                                  }
+
+                                                                  /* 下拉菜单 - 带图标 */
+                                                                  .dropdown-menu {
+                                                                    position: absolute;
+                                                                    top: 100%; /* 从按钮底部开始 */
+                                                                    left: 0;
+                                                                    background-color: rgba(255, 255, 255, 0.98);
+                                                                    border: 1px solid #e0e0e0;
+                                                                    border-top: 2px solid var(--accent-color);
+                                                                    width: 280px;
+                                                                    opacity: 0;
+                                                                    visibility: hidden;
+                                                                    transition: all 0.3s ease;
+                                                                    z-index: 1000;
+                                                                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                                                                    padding: 15px 0;
+                                                                    border-radius: 0 0 8px 8px;
+                                                                  }
+
+                                                                  .nav-item:hover .dropdown-menu {
+                                                                    opacity: 1;
+                                                                    visibility: visible;
+                                                                  }
+
+                                                                  .dropdown-menu a {
+                                                                    color: var(--text-color);
+                                                                    padding: 12px 20px;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    border-bottom: 1px solid #f5f5f5;
+                                                                    transition: all 0.3s;
+                                                                  }
+
+                                                                  .dropdown-menu a:hover {
+                                                                    color: var(--primary-color);
+                                                                    background-color: var(--hover-bg);
+                                                                    padding-left: 25px;
+                                                                  }
+
+                                                                  .dropdown-menu a:last-child {
+                                                                    border-bottom: none;
+                                                                  }
+
+                                                                  .menu-icon {
+                                                                    width: 24px;
+                                                                    height: 24px;
+                                                                    margin-right: 15px;
+                                                                    color: var(--accent-color);
+                                                                    text-align: center;
+                                                                    font-size: 18px;
+                                                                  }
+
+                                                                  .menu-text {
+                                                                    flex: 1;
+                                                                  }
+
+                                                                  /* ==================== 移动端专属样式 ==================== */
+                                                                  /* 基础版-主菜单容器 */
+                                                                  .mobile-nav {
+                                                                    position: fixed;
+                                                                    top: 0;
+                                                                    left: 0;
+                                                                    width: 100%;
+                                                                    z-index: 1100; /* 提高z-index确保在最上层 */
+                                                                    background: white;
+                                                                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                                                                    display: none; /* 默认隐藏 */
+                                                                  }
+
+                                                                  /* 基础版-主菜单激活状态 */
+                                                                  .mobile-nav.active {
+                                                                    display: block;
+                                                                  }
+
+                                                                  /* 基础版-修改移动端导航头部布局 */
+                                                                  .mobile-nav-header {
+                                                                    display: flex;
+                                                                    justify-content: center; /* 主轴上居中 */
+                                                                    align-items: center;
+                                                                    padding: 10px 15px;
+                                                                    height: 50px;
+                                                                    border-bottom: 1px solid #eee;
+                                                                    position: relative; /* 添加相对定位 */
+                                                                  }
+
+                                                                  /* 基础版-保持菜单按钮靠左 */
+                                                                  .mobile-menu-btn {
+                                                                    position: absolute;
+                                                                    left: 15px;
+                                                                    top: 50%;
+                                                                    transform: translateY(-50%);
+                                                                    z-index: 1100;
+                                                                    background: none;
+                                                                    border: none;
+                                                                    font-size: 20px;
+                                                                    color: var(--primary-color);
+                                                                    width: 30px;
+                                                                    height: 30px;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    justify-content: center;
+                                                                  }
+
+                                                                  /* 基础版-调整logo容器 */
+                                                                  .mobile-logo-container {
+                                                                    width: 100%; /* 占据全部宽度以便居中 */
+                                                                    position: relative; /* 为绝对定位的子元素提供参照 */
+                                                                    display: flex; /* 使用flex布局确保垂直居中 */
+                                                                    justify-content: center; /* 水平居中 */
+                                                                    align-items: center; /* 垂直居中 */
+                                                                    height: 100%; /* 确保高度充满父容器 */
+                                                                  }
+
+                                                                  /* 基础版-修改移动端logo样式 */
+                                                                  .mobile-logo {
+                                                                    font-size: 24px;
+                                                                    font-weight: bold;
+                                                                    color: var(--primary-color);
+                                                                    text-decoration: none;
+                                                                    font-family: "KaiTi", "STKaiti", serif;
+                                                                    position: relative;
+                                                                    display: inline-block; /* 使margin: 0 auto生效 */
+                                                                    margin: 0 auto; /* 水平居中 */
+                                                                    text-align: center; /* 文本居中 */
+                                                                  }
+
+                                                                  /* 基础版-修改移动端logo下拉箭头样式 */
+                                                                  .mobile-logo.has-dropdown {
+                                                                    position: relative;
+                                                                    padding-right: 20px; /* 为箭头留出空间 */
+                                                                  }
+
+                                                                  /* 基础版-倒三角箭头样式 */
+                                                                  .mobile-logo.has-dropdown::after {
+                                                                    content: "▼";
+                                                                    font-size: 10px;
+                                                                    position: absolute;
+                                                                    right: 0;
+                                                                    top: 50%;
+                                                                    transform: translateY(-50%);
+                                                                    color: var(--text-color);
+                                                                    transition: transform 0.3s;
+                                                                  }
+
+                                                                  /* 基础版-下拉菜单展开时箭头旋转 */
+                                                                  .mobile-logo-container.active .mobile-logo.has-dropdown::after {
+                                                                    transform: translateY(-50%) rotate(180deg);
+                                                                  }
+
+                                                                  /* 基础版-修改移动端logo下拉菜单样式 */
+                                                                  .mobile-logo-dropdown {
+                                                                    position: absolute;
+                                                                    top: 100%;
+                                                                    left: 50%; /* 从左侧50%开始 */
+                                                                    transform: translateX(-50%); /* 向左移动自身宽度的一半 */
+                                                                    background-color: rgba(255, 255, 255, 0.98);
+                                                                    border: 1px solid #e0e0e0;
+                                                                    border-top: none;
+                                                                    width: 200px;
+                                                                    max-height: 0;
+                                                                    overflow: hidden;
+                                                                    transition: max-height 0.3s ease;
+                                                                    z-index: 1000;
+                                                                    box-shadow: none;
+                                                                    padding: 0;
+                                                                    opacity: 0;
+                                                                    visibility: hidden;
+                                                                  }
+
+                                                                   /* 基础版 */
+                                                                  .mobile-logo-container.active .mobile-logo-dropdown {
+                                                                    max-height: 500px;
+                                                                    padding: 15px 0;
+                                                                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                                                                    opacity: 1;
+                                                                    visibility: visible;
+                                                                    border: 1px solid #e0e0e0;
+                                                                    border-top: none;
+                                                                  }
+
+                                                                  /* 基础版 */
+                                                                  .mobile-logo-dropdown a {
+                                                                    color: var(--text-color);
+                                                                    padding: 12px 20px;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    border-bottom: 1px solid #f5f5f5;
+                                                                    transition: all 0.3s;
+                                                                    text-decoration: none;
+                                                                  }
+
+                                                                     /* 基础版 */
+                                                                  .mobile-logo-dropdown a:hover {
+                                                                    color: var(--primary-color);
+                                                                    background-color: var(--hover-bg);
+                                                                    padding-left: 25px;
+                                                                  }
+
+                                                                     /* 基础版 */
+                                                                  .mobile-logo-dropdown a:last-child {
+                                                                    border-bottom: none;
+                                                                  }
+
+                                                                     /* 基础版 */
+                                                                  .mobile-logo-menu-icon {
+                                                                    width: 24px;
+                                                                    height: 24px;
+                                                                    margin-right: 15px;
+                                                                    color: var(--accent-color);
+                                                                    text-align: center;
+                                                                    font-size: 18px;
+                                                                  }
+
+                                                                     /* 基础版 */
+                                                                  .mobile-logo-menu-text {
+                                                                    flex: 1;
+                                                                  }
+
+                                                                  /* 基础版-移动端内容区域 */
+                                                                  .mobile-nav-content {
+                                                                    max-height: 0;
+                                                                    overflow: hidden;
+                                                                    transition: max-height 0.3s ease;
+                                                                    background: white;
+                                                                  }
+
+                                                                  /* 基础版-菜单项样式 */
+                                                                  .mobile-nav-item {
+                                                                    padding: 15px 20px;
+                                                                    border-bottom: 1px solid #f5f5f5;
+                                                                    cursor: pointer;
+                                                                  }
+
+                                                                  /* 基础版-菜单展开状态 */
+                                                                  .mobile-nav.active .mobile-nav-content {
+                                                                    max-height: 100vh; /* 使用视口高度 */
+                                                                    overflow-y: auto; /* 允许滚动 */
+                                                                  }
+
+                                                                  /* 基础版-修改移动端分类标题样式 */
+                                                                  .mobile-nav-category {
+                                                                    padding: 12px 10px;
+                                                                    font-weight: bold;
+                                                                    color: var(--primary-color);
+                                                                    background-color: var(--light-bg);
+                                                                    border-bottom: 1px solid #e0e0e0;
+                                                                    cursor: pointer;
+                                                                    position: relative;
+                                                                    padding-right: 25px;
+                                                                    z-index: 100; /* 确保标题在上层 */
+                                                                  }
+
+                                                                  /* 基础版-调整 + 号位置 */
+                                                                  .mobile-nav-category::after {
+                                                                    content: "+";
+                                                                    font-size: 16px;
+                                                                    position: absolute; /* 绝对定位 */
+                                                                    right: 10px; /* 距离右侧 10px */
+                                                                    top: 50%; /* 垂直居中 */
+                                                                    transform: translateY(-50%);
+                                                                    margin-left: 5px; /* 与文字的间距 */
+                                                                  }
+
+                                                                  .mobile-nav-category.active::after {
+                                                                    content: "-";
+                                                                  }
+
+                                                                  /* 基础版-修改移动端子菜单样式 */
+                                                                  .mobile-nav-submenu {
+                                                                    max-height: 0;
+                                                                    overflow: hidden;
+                                                                    transition: max-height 0.3s ease;
+                                                                    background-color: #fff;
+                                                                    width: 100%;
+                                                                    display: none;
+                                                                    position: relative;
+                                                                    z-index: 100;
+                                                                  }
+
+                                                                  .mobile-nav-submenu.active {
+                                                                    max-height: 60vh; /* 使用视口单位 */
+                                                                    overflow-y: auto;
+                                                                    -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
+                                                                    display: block !important; /* 强制显示 */
+                                                                    position: relative; /* 添加相对定位 */
+                                                                    z-index: 100; /* 确保菜单在上层 */
+                                                                  }
+
+                                                                  /* 基础版-固定分类标题样式 */
+                                                                  .mobile-nav-category.sticky {
+                                                                    position: sticky;
+                                                                    top: 0;
+                                                                    z-index: 110;
+                                                                    background-color: var(--light-bg);
+                                                                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                                                                  }
+
+                                                                  /* 基础版-移动端"我"的菜单样式 */
+                                                                  .mobile-user-menu-container {
+                                                                    position: absolute;
+                                                                    right: 15px;
+                                                                    top: 50%;
+                                                                    transform: translateY(-50%);
+                                                                    z-index: 1100;
+                                                                    width: 30px;
+                                                                    height: 30px;
+                                                                  }
+
+                                                                  .mobile-user-btn {
+                                                                    background: none;
+                                                                    border: none;
+                                                                    font-size: 20px;
+                                                                    color: var(--primary-color);
+                                                                    cursor: pointer;
+                                                                    width: 40px;
+                                                                    height: 40px;
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    justify-content: center;
+                                                                    border-radius: 50%;
+                                                                    transition: all 0.3s;
+                                                                  }
+
+                                                                  .mobile-user-btn:hover {
+                                                                    background-color: rgba(139, 69, 19, 0.1);
+                                                                  }
+
+                                                                  .mobile-user-dropdown {
+                                                                    position: absolute;
+                                                                    right: 0;
+                                                                    top: 100%;
+                                                                    background-color: white;
+                                                                    border: 1px solid #e0e0e0;
+                                                                    border-radius: 8px;
+                                                                    width: 180px;
+                                                                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                                                                    opacity: 0;
+                                                                    visibility: hidden;
+                                                                    transition: all 0.3s;
+                                                                    padding: 10px 0;
+                                                                    margin-top: 5px;
+                                                                  }
+
+                                                                  .mobile-user-menu-container.active .mobile-user-dropdown {
+                                                                    opacity: 1;
+                                                                    visibility: visible;
+                                                                  }
+
+                                                                  .mobile-user-dropdown a {
+                                                                    display: flex;
+                                                                    align-items: center;
+                                                                    padding: 10px 15px;
+                                                                    color: var(--text-color);
+                                                                    text-decoration: none;
+                                                                    font-size: 14px;
+                                                                    transition: all 0.3s;
+                                                                  }
+
+                                                                  .mobile-user-dropdown a:hover {
+                                                                    background-color: var(--hover-bg);
+                                                                    color: var(--primary-color);
+                                                                  }
+
+                                                                  .mobile-user-dropdown i {
+                                                                    margin-right: 10px;
+                                                                    width: 20px;
+                                                                    text-align: center;
+                                                                  }
+
+                                                                  /* 基础版-菜单项样式优化 */
+                                                                  .mobile-nav-submenu a {
+                                                                    display: block;
+                                                                    white-space: normal;
+                                                                    padding: 12px 20px;
+                                                                    border-bottom: 1px solid #f0f0f0;
+                                                                    color: var(--text-color);
+                                                                    text-decoration: none;
+                                                                    transition: all 0.3s;
+                                                                  }
+
+                                                                  .mobile-nav-submenu a:hover {
+                                                                    background-color: var(--hover-bg);
+                                                                    color: var(--primary-color);
+                                                                  }
+
+                                                                  /* 基础版-修复滚动条 */
+                                                                  .mobile-nav-submenu::-webkit-scrollbar {
+                                                                    width: 5px;
+                                                                  }
+                                                                  .mobile-nav-submenu::-webkit-scrollbar-thumb {
+                                                                    background: var(--accent-color);
+                                                                    border-radius: 3px;
+                                                                  }
+
+      /* 在移动端专属样式 */
       @media (max-width: 768px) {
         .mobile-user-dropdown {
           right: 0;
           left: auto;
-          width: auto; /* 改为自动宽度 */
-          min-width: unset; /* 移除最小宽度限制 */
-          padding: 10px 0; /* 保持原有内边距 */
-          white-space: nowrap; /* 防止文字换行 */
-          /* 其他原有样式保持不变 */
+          width: auto; /* 自动宽度 */
+          min-width: unset;
+          padding: 8px 0; /* 适当内边距 */
+          white-space: nowrap;
         }
 
-        /* 仅调整菜单项水平内边距 */
+        /* 使菜单项字体与导航菜单一致 */
         .mobile-user-dropdown a {
-          padding-left: 15px;
-          padding-right: 15px;
-          /* 保持其他样式不变 */
+          padding: 8px 15px;
+          font-size: 14px; /* 与文学奖项菜单相同的字体大小 */
+          line-height: 1.5; /* 保持原有行高 */
+        }
+
+        /* 图标大小保持不变 */
+        .mobile-user-dropdown i {
+          margin-right: 10px;
+          font-size: 20px;
         }
       }
-                                                            /* ==================== 响应式设计 ==================== */
-                                                            @media (max-width: 1024px) {
-                                                              /* 电脑端响应式调整 */
-                                                              .nav-item > a {
-                                                                padding: 0 8px;
-                                                                font-size: 14px;
-                                                              }
 
-                                                              .user-actions a {
-                                                                margin-left: 8px;
-                                                                font-size: 13px;
-                                                                padding: 0 8px;
-                                                              }
-                                                            }
+      /* 小屏幕微调 */
+      @media (max-width: 480px) {
+        .mobile-user-dropdown a {
+          padding: 16px 20px;
+          font-size: 13px; /* 在小屏幕上稍小 */
+        }
+      }
 
-                                                            @media (max-width: 768px) {
-                                                              /* 电脑端在小屏幕下的调整 */
-                                                              .logo-container {
-                                                                width: 100%;
-                                                                text-align: center;
-                                                                padding: 8px 0;
-                                                                height: auto;
-                                                              }
+                                                                  /* ==================== 响应式设计 ==================== */
+                                                                  @media (max-width: 1024px) {
+                                                                    /* 电脑端响应式调整 */
+                                                                    .nav-item > a {
+                                                                      padding: 0 8px;
+                                                                      font-size: 14px;
+                                                                    }
 
-                                                              .logo {
-                                                                justify-content: center;
-                                                                font-size: 22px;
-                                                                padding: 0;
-                                                              }
-
-                                                              .dropdown-menu {
-                                                                position: static;
-                                                                width: 100%;
-                                                                max-height: 0;
-                                                                overflow: hidden;
-                                                                transition: max-height 0.3s ease;
-                                                                box-shadow: none;
-                                                                border: none;
-                                                                padding: 0;
-                                                              }
-
-                                                              .user-actions {
-                                                                margin: 10px 0;
-                                                                width: 100%;
-                                                                justify-content: center;
-                                                                flex-direction: row;
-                                                                flex-wrap: wrap;
-                                                              }
-
-                                                              .content {
-                                                                margin-top: 60px;
-                                                                padding: 15px;
-                                                              }
-
-                                                              .book-list {
-                                                                grid-template-columns: 1fr;
-                                                              }
+                                                                    .user-actions a {
+                                                                      margin-left: 8px;
+                                                                      font-size: 13px;
+                                                                      padding: 0 8px;
+                                                                    }
+                                                                  }
 
 
 
-                                                              /* 画廊响应式调整 */
-                                                              .main-image-container {
-                                                                height: 400px;
-                                                              }
+                                                                  @media (max-width: 768px) {
+                                                                    /* 电脑端在小屏幕下的调整 */
+                                                                    .logo-container {
+                                                                      width: 100%;
+                                                                      text-align: center;
+                                                                      padding: 8px 0;
+                                                                      height: auto;
+                                                                    }
 
-                                                              .thumbnail {
-                                                                width: 60px;
-                                                                height: 45px;
-                                                              }
+                                                                    .logo {
+                                                                      justify-content: center;
+                                                                      font-size: 22px;
+                                                                      padding: 0;
+                                                                    }
 
-                                                              .image-title {
-                                                                font-size: 18px;
-                                                                padding: 15px;
-                                                              }
+                                                                    .dropdown-menu {
+                                                                      position: static;
+                                                                      width: 100%;
+                                                                      max-height: 0;
+                                                                      overflow: hidden;
+                                                                      transition: max-height 0.3s ease;
+                                                                      box-shadow: none;
+                                                                      border: none;
+                                                                      padding: 0;
+                                                                    }
 
-                                                              /* 调整缩略图容器位置 */
-                                                              .thumbnail-container {
-                                                                position: absolute;
-                                                                right: 50%; /* 改为居中 */
-                                                                transform: translateX(50%); /* 水平居中 */
-                                                                bottom: 30px; /* 增加底部间距 */
-                                                                display: flex;
-                                                                gap: 15px; /* 增加缩略图间距 */
-                                                                z-index: 10;
-                                                                background-color: rgba(0, 0, 0, 0.3); /* 添加半透明背景 */
-                                                                padding: 10px;
-                                                                border-radius: 8px;
-                                                              }
+                                                                    .user-actions {
+                                                                      margin: 10px 0;
+                                                                      width: 100%;
+                                                                      justify-content: center;
+                                                                      flex-direction: row;
+                                                                      flex-wrap: wrap;
+                                                                    }
 
-                                                              .thumbnail {
-                                                                width: 100px; /* 增大缩略图大小 */
-                                                                height: 75px;
-                                                                border: 2px solid white;
-                                                                border-radius: 4px;
-                                                                cursor: pointer;
-                                                                opacity: 0.7;
-                                                                transition: all 0.3s ease;
-                                                                object-fit: cover;
-                                                                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
-                                                              }
+                                                                    .content {
+                                                                      margin-top: 60px;
+                                                                      padding: 15px;
+                                                                    }
 
-                                                              .arrow {
-                                                                width: 40px;
-                                                                height: 40px;
-                                                              }
+                                                                    .book-list {
+                                                                      grid-template-columns: 1fr;
+                                                                    }
 
-                                                              .nav-arrows {
-                                                                padding: 0 5px; /* 移动端更小的内边距 */
-                                                              }
-                                                            }
 
-                                                            @media (max-width: 480px) {
-                                                              /* 更小屏幕的调整 */
-                                                              .main-image-container {
-                                                                height: 300px;
-                                                              }
 
-                                                              .thumbnail {
-                                                                width: 40px;
-                                                                height: 30px;
-                                                              }
-                                                            }
+                                                                    /* 画廊响应式调整 */
+                                                                    .main-image-container {
+                                                                      height: 400px;
+                                                                    }
 
-                                                            @media (max-width: 375px) {
-                                                            .mobile-logo {
-                                            font-size: 20px;
-                                            font-weight: bold;
-                                            color: var(--primary-color);
-                                            text-decoration: none;
-                                            font-family: "KaiTi", "STKaiti", serif;
-                                            white-space: nowrap;
-                                            display: inline-block;
-                                            margin: 0;
-                                            padding-right: 20px; /* 为下拉箭头留空间 */
-                                          }
+                                                                    .thumbnail {
+                                                                      width: 60px;
+                                                                      height: 45px;
+                                                                    }
 
-                                                              .mobile-logo.has-dropdown::after {
-                                      content: "▼";
-                                      font-size: 10px;
-                                      position: absolute;
-                                      right: 0;
-                                      top: 50%;
-                                      transform: translateY(-50%);
-                                      color: var(--text-color);
-                                    }
+                                                                    .image-title {
+                                                                      font-size: 18px;
+                                                                      padding: 15px;
+                                                                    }
 
-                                                              /* 确保logo容器不会截断内容 */
-                                                             .mobile-logo-container {
-                                                  position: absolute;
-                                                  left: 50%;
-                                                  transform: translateX(-50%);
-                                                  width: auto;
-                                                  max-width: calc(100% - 100px);
-                                                  text-align: center;
+                                                                    /* 调整缩略图容器位置 */
+                                                                    .thumbnail-container {
+                                                                      position: absolute;
+                                                                      right: 50%; /* 改为居中 */
+                                                                      transform: translateX(50%); /* 水平居中 */
+                                                                      bottom: 30px; /* 增加底部间距 */
+                                                                      display: flex;
+                                                                      gap: 15px; /* 增加缩略图间距 */
+                                                                      z-index: 10;
+                                                                      background-color: rgba(0, 0, 0, 0.3); /* 添加半透明背景 */
+                                                                      padding: 10px;
+                                                                      border-radius: 8px;
+                                                                    }
+
+                                                                    .thumbnail {
+                                                                      width: 100px; /* 增大缩略图大小 */
+                                                                      height: 75px;
+                                                                      border: 2px solid white;
+                                                                      border-radius: 4px;
+                                                                      cursor: pointer;
+                                                                      opacity: 0.7;
+                                                                      transition: all 0.3s ease;
+                                                                      object-fit: cover;
+                                                                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
+                                                                    }
+
+                                                                    .arrow {
+                                                                      width: 40px;
+                                                                      height: 40px;
+                                                                    }
+
+                                                                    .nav-arrows {
+                                                                      padding: 0 5px; /* 移动端更小的内边距 */
+                                                                    }
+                                                                  }
+
+                                                                  @media (max-width: 480px) {
+                                                                    /* 更小屏幕的调整 */
+                                                                    .main-image-container {
+                                                                      height: 300px;
+                                                                    }
+
+                                                                    .thumbnail {
+                                                                      width: 40px;
+                                                                      height: 30px;
+                                                                    }
+                                                                  }
+
+                                                                  @media (max-width: 375px) {
+                                                                  .mobile-logo {
+                                                  font-size: 20px;
+                                                  font-weight: bold;
+                                                  color: var(--primary-color);
+                                                  text-decoration: none;
+                                                  font-family: "KaiTi", "STKaiti", serif;
+                                                  white-space: nowrap;
+                                                  display: inline-block;
+                                                  margin: 0;
+                                                  padding-right: 20px; /* 为下拉箭头留空间 */
                                                 }
 
-                                                              .mobile-menu-btn,
-                                                              .mobile-user-btn {
-                                                                width: 30px;
-                                                                height: 30px;
-                                                                font-size: 18px;
-                                                              }
+                                                                    .mobile-logo.has-dropdown::after {
+                                            content: "▼";
+                                            font-size: 10px;
+                                            position: absolute;
+                                            right: 0;
+                                            top: 50%;
+                                            transform: translateY(-50%);
+                                            color: var(--text-color);
+                                          }
 
-                                                              .logo {
-                                                                font-size: 20px;
-                                                              }
-
-                                                              .user-actions a {
-                                                                font-size: 12px;
-                                                                padding: 5px 8px;
-                                                              }
-
-                                                              .content {
-                                                                margin-top: 55px;
-                                                                padding: 10px;
-                                                              }
-
-                                                              h1 {
-                                                                font-size: 1.8em;
-                                                                margin-bottom: 20px;
-                                                              }
-
-                                                              .gallery-section h2 {
-                                                                font-size: 1.5em;
-                                                              }
-
-                                                              .main-image-container {
-                                                                height: 250px;
-                                                              }
-
-                                                              .thumbnail {
-                                                                width: 40px;
-                                                                height: 30px;
-                                                              }
-
-                                                            }
-
-                                                            /* ======== 媒体查询切换 ======== */
-                                                            @media (max-width: 768px) {
-                                                              .desktop-nav {
-                                                                display: none;
-                                                              }
-                                                              .mobile-nav {
-                                                                display: block;
-                                                              }
-
-                                                              .content {
-                                                                margin-top: 50px !important;
-                                                              }
-                                                            }
-
-                                                            @media (min-width: 769px) {
-                                                              .mobile-nav {
-                                                                display: none;
-                                                              }
-                                                            }
-
-                                                            @media (max-width: 768px) {
-                                                              .mobile-nav-header {
-                                                                position: relative;
-                                                                padding: 10px 50px 10px 15px; /* 增加右侧空间 */
-                                                              }
-
-                                                              .mobile-logo-container {
-                                                                width: auto;
-                                                                max-width: calc(100% - 100px);
-                                                              }
-                                                            }
-
-                                                            @media (max-width: 375px) {
-                                                              .mobile-nav-header {
-                                                        position: relative;
-                                                        padding: 10px 50px 10px 15px;
-                                                        height: 50px;
-                                                        display: flex;
-                                                        justify-content: center;
-                                                        align-items: center;
+                                                                    /* 确保logo容器不会截断内容 */
+                                                                   .mobile-logo-container {
+                                                        position: absolute;
+                                                        left: 50%;
+                                                        transform: translateX(-50%);
+                                                        width: auto;
+                                                        max-width: calc(100% - 100px);
+                                                        text-align: center;
                                                       }
-                                                      {
-                                /* 1. 重置默认间距 */
-                                 /* 如果图标是 <i> 标签 */
-                  .mobile-logo-dropdown a i {
-                    font-size: 14px !important;
-                    margin-right: 5px !important;
-                    width: 18px;
-                    display: inline-flex;
-                    justify-content: center;
-                  }
 
-                                /* 2. 缩小图标和文字的间距 */
-                            /* 提高优先级：使用更具体的选择器 */
-                      .mobile-logo-dropdown a .mobile-logo-menu-icon {
-                        width: 18px !important;       /* 用 !important 强制生效（慎用）*/
-                        height: 18px !important;
-                        margin-right: 5px !important;
-                        font-size: 14px !important;
-                        min-width: auto !important;   /* 覆盖可能的 min-width 限制 */
-                      }
+                                                                    .mobile-menu-btn,
+                                                                    .mobile-user-btn {
+                                                                      width: 30px;
+                                                                      height: 30px;
+                                                                      font-size: 18px;
+                                                                    }
 
-                                /* 3. 防止文字换行 */
-                                .mobile-logo-menu-text {
-                                  white-space: nowrap;
-                                  overflow: hidden;
-                                  text-overflow: ellipsis;
-                                  font-size: 13px; /* 稍微缩小字体 */
-                                }
+                                                                    .logo {
+                                                                      font-size: 20px;
+                                                                    }
 
-                                /* 4. 确保 Flex 布局紧凑 */
-                                .mobile-logo-dropdown a {
-                                  gap: 0;
-                                }
+                                                                    .user-actions a {
+                                                                      font-size: 12px;
+                                                                      padding: 5px 8px;
+                                                                    }
 
-                                /* 5. 可选：整体缩小下拉菜单 */
-                                .mobile-logo-dropdown {
-                                  transform: scale(0.95);
-                                  transform-origin: top center;
-                                }
-                              }
+                                                                    .content {
+                                                                      margin-top: 55px;
+                                                                      padding: 10px;
+                                                                    }
+
+                                                                    h1 {
+                                                                      font-size: 1.8em;
+                                                                      margin-bottom: 20px;
+                                                                    }
+
+                                                                    .gallery-section h2 {
+                                                                      font-size: 1.5em;
+                                                                    }
+
+                                                                    .main-image-container {
+                                                                      height: 250px;
+                                                                    }
+
+                                                                    .thumbnail {
+                                                                      width: 40px;
+                                                                      height: 30px;
+                                                                    }
+
+                                                                  }
+
+                                                                  /* ======== 媒体查询切换 ======== */
+                                                                  @media (max-width: 768px) {
+                                                                    .desktop-nav {
+                                                                      display: none;
+                                                                    }
+                                                                    .mobile-nav {
+                                                                      display: block;
+                                                                    }
+
+                                                                    .content {
+                                                                      margin-top: 50px !important;
+                                                                    }
+                                                                  }
+
+                                                                  @media (min-width: 769px) {
+                                                                    .mobile-nav {
+                                                                      display: none;
+                                                                    }
+                                                                  }
+
+                                                                  @media (max-width: 768px) {
+                                                                    .mobile-nav-header {
+                                                                      position: relative;
+                                                                      padding: 10px 50px 10px 15px; /* 增加右侧空间 */
+                                                                    }
+
+                                                                    .mobile-logo-container {
+                                                                      width: auto;
+                                                                      max-width: calc(100% - 100px);
+                                                                    }
+                                                                  }
+
+                                                                  @media (max-width: 375px) {
+                                                                    .mobile-nav-header {
+                                                              position: relative;
+                                                              padding: 10px 50px 10px 15px;
+                                                              height: 50px;
+                                                              display: flex;
+                                                              justify-content: center;
+                                                              align-items: center;
+                                                            }
+                                                            {
+                                      /* 1. 重置默认间距 */
+                                       /* 如果图标是 <i> 标签 */
+                        .mobile-logo-dropdown a i {
+                          font-size: 14px !important;
+                          margin-right: 5px !important;
+                          width: 18px;
+                          display: inline-flex;
+                          justify-content: center;
+                        }
+
+                                      /* 2. 缩小图标和文字的间距 */
+                                  /* 提高优先级：使用更具体的选择器 */
+                            .mobile-logo-dropdown a .mobile-logo-menu-icon {
+                              width: 18px !important;       /* 用 !important 强制生效（慎用）*/
+                              height: 18px !important;
+                              margin-right: 5px !important;
+                              font-size: 14px !important;
+                              min-width: auto !important;   /* 覆盖可能的 min-width 限制 */
+                            }
+
+                                      /* 3. 防止文字换行 */
+                                      .mobile-logo-menu-text {
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        font-size: 13px; /* 稍微缩小字体 */
+                                      }
+
+                                      /* 4. 确保 Flex 布局紧凑 */
+                                      .mobile-logo-dropdown a {
+                                        gap: 0;
+                                      }
+
+                                      /* 5. 可选：整体缩小下拉菜单 */
+                                      .mobile-logo-dropdown {
+                                        transform: scale(0.95);
+                                        transform-origin: top center;
+                                      }
+                                    }
     </style>
   </head>
   <body>
