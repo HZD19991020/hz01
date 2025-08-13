@@ -45,7 +45,7 @@
         .points {
             font-size: 24px;
             font-weight: bold;
-            color: #d4af37; /* 金色 */
+            color: #d4af37;
         }
         
         .search {
@@ -74,11 +74,11 @@
         }
         
         .nav-menu li:hover {
-            color: #d4af37; /* 金色 */
+            color: #d4af37;
         }
         
         .nav-menu li.active {
-            color: #d4af37; /* 金色 */
+            color: #d4af37;
             font-weight: bold;
         }
         
@@ -102,7 +102,7 @@
         }
         
         .nav-menu li.active.has-submenu::after {
-            color: #d4af37; /* 金色 */
+            color: #d4af37;
         }
         
         .recent-achievements, .progress-overview {
@@ -114,7 +114,7 @@
         }
         
         h2 {
-            color: #d4af37; /* 金色 */
+            color: #d4af37;
             border-bottom: 1px solid #dddddd;
             padding-bottom: 10px;
         }
@@ -129,7 +129,7 @@
         }
         
         .achievement-item strong {
-            color: #d4af37; /* 金色 */
+            color: #d4af37;
         }
         
         .progress-categories {
@@ -158,14 +158,86 @@
         
         .progress-fill {
             height: 100%;
-            background-color: #d4af37; /* 金色 */
+            background-color: #d4af37;
             border-radius: 3px;
+        }
+
+        /* 移动端适配 - iPhone SE (320px宽度) */
+        @media only screen and (max-width: 640px) {
+            .container {
+                flex-direction: column;
+                max-width: 100%;
+            }
+            
+            .sidebar {
+                width: auto;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                padding: 15px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .achievement-points {
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .points {
+                font-size: 20px;
+            }
+            
+            .nav-menu {
+                display: none; /* 默认隐藏导航菜单 */
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                background-color: #d4af37;
+                color: white;
+                border: none;
+                padding: 10px;
+                border-radius: 5px;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 15px;
+                font-weight: bold;
+            }
+            
+            .nav-menu.active {
+                display: block; /* 显示激活的导航菜单 */
+            }
+            
+            .sub-menu {
+                padding-left: 10px;
+            }
+            
+            .progress-categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .recent-achievements, .progress-overview {
+                padding: 12px;
+            }
+            
+            h2 {
+                font-size: 18px;
+            }
+            
+            .achievement-item {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="sidebar">
+            <button class="mobile-menu-toggle" id="menuToggle">显示菜单 ▼</button>
+            
             <div class="achievement-points">
                 <div class="points">8,760 点</div>
                 <div>阅读成就点数</div>
@@ -175,7 +247,7 @@
                 <input type="text" placeholder="搜索成就...">
             </div>
             
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="mainMenu">
                 <li class="active has-submenu">总览
                     <ul class="sub-menu" style="display: block;">
                         <li>阅读统计</li>
@@ -438,6 +510,15 @@
                 // 阻止事件冒泡
                 e.stopPropagation();
             });
+        });
+
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menuToggle');
+        const mainMenu = document.getElementById('mainMenu');
+        
+        menuToggle.addEventListener('click', function() {
+            mainMenu.classList.toggle('active');
+            this.textContent = mainMenu.classList.contains('active') ? '隐藏菜单 ▲' : '显示菜单 ▼';
         });
     </script>
 </body>
