@@ -455,45 +455,45 @@
                 <li class="active" id="overview">总览</li>
                 <li class="has-submenu" id="books">书籍
                     <ul class="sub-menu">
-                        <li>已读书籍</li>
-                        <li>在读列表</li>
-                        <li>想读书单</li>
-                        <li>书籍分类</li>
-                        <li>书籍评分</li>
+                        <li data-page="read-books">已读书籍</li>
+                        <li data-page="reading-list">在读列表</li>
+                        <li data-page="wishlist">想读书单</li>
+                        <li data-page="book-categories">书籍分类</li>
+                        <li data-page="book-ratings">书籍评分</li>
                     </ul>
                 </li>
                 <li class="has-submenu" id="challenges">阅读挑战
                     <ul class="sub-menu">
-                        <li>每日阅读</li>
-                        <li>每周目标</li>
-                        <li>月度挑战</li>
-                        <li>年度目标</li>
-                        <li>专题挑战</li>
+                        <li data-page="daily-reading">每日阅读</li>
+                        <li data-page="weekly-goals">每周目标</li>
+                        <li data-page="monthly-challenges">月度挑战</li>
+                        <li data-page="yearly-goals">年度目标</li>
+                        <li data-page="special-challenges">专题挑战</li>
                     </ul>
                 </li>
                 <li class="has-submenu" id="explore">探索
                     <ul class="sub-menu">
-                        <li>新书发现</li>
-                        <li>冷门佳作</li>
-                        <li>编辑推荐</li>
-                        <li>读者推荐</li>
-                        <li>获奖作品</li>
+                        <li data-page="new-discoveries">新书发现</li>
+                        <li data-page="hidden-gems">冷门佳作</li>
+                        <li data-page="editor-picks">编辑推荐</li>
+                        <li data-page="reader-recommendations">读者推荐</li>
+                        <li data-page="award-winners">获奖作品</li>
                     </ul>
                 </li>
                 <li class="has-submenu" id="classics">经典名著
                     <ul class="sub-menu">
-                        <li>中国古典</li>
-                        <li>外国经典</li>
-                        <li>诺贝尔奖</li>
-                        <li>茅盾文学奖</li>
-                        <li>世界名著</li>
+                        <li data-page="chinese-classics">中国古典</li>
+                        <li data-page="foreign-classics">外国经典</li>
+                        <li data-page="nobel-prize">诺贝尔奖</li>
+                        <li data-page="maodun-prize">茅盾文学奖</li>
+                        <li data-page="world-classics">世界名著</li>
                     </ul>
                 </li>
-                <li id="modern">现代文学</li>
-                <li id="professional">专业书籍</li>
-                <li id="authors">作者收藏</li>
-                <li id="events">阅读活动</li>
-                <li id="reviews">书评</li>
+                <li id="modern" data-page="modern-literature">现代文学</li>
+                <li id="professional" data-page="professional-books">专业书籍</li>
+                <li id="authors" data-page="author-collections">作者收藏</li>
+                <li id="events" data-page="reading-events">阅读活动</li>
+                <li id="reviews" data-page="book-reviews">书评</li>
             </ul>
         </div>
         
@@ -689,30 +689,61 @@
             });
             
             // 页面切换功能
-            const menuItems = document.querySelectorAll('.nav-menu > li');
+            const menuItems = document.querySelectorAll('.nav-menu > li:not(.has-submenu)');
+            const subMenuItems = document.querySelectorAll('.sub-menu li');
             const overviewPage = document.getElementById('overviewPage');
             const achievementPage = document.getElementById('achievementPage');
             const achievementPageTitle = document.getElementById('achievementPageTitle');
             
+            // 主菜单项点击事件
             menuItems.forEach(item => {
                 item.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        // 更新菜单激活状态
-                        menuItems.forEach(i => i.classList.remove('active'));
-                        this.classList.add('active');
+                    // 更新菜单激活状态
+                    document.querySelectorAll('.nav-menu > li').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 判断显示哪个页面
+                    if (this.id === 'overview') {
+                        overviewPage.classList.add('active');
+                        achievementPage.classList.remove('active');
+                    } else {
+                        overviewPage.classList.remove('active');
+                        achievementPage.classList.add('active');
                         
-                        // 判断显示哪个页面
-                        if (this.id === 'overview') {
-                            overviewPage.classList.add('active');
-                            achievementPage.classList.remove('active');
-                        } else {
-                            overviewPage.classList.remove('active');
-                            achievementPage.classList.add('active');
-                            
-                            // 更新成就页面标题
-                            achievementPageTitle.textContent = this.textContent.trim() + '成就';
-                        }
+                        // 更新成就页面标题
+                        const pageTitle = this.getAttribute('data-page');
+                        achievementPageTitle.textContent = this.textContent.trim() + '成就';
+                        
+                        // 更新成就内容
+                        updateAchievementContent(pageTitle);
                     }
+                });
+            });
+            
+            // 子菜单项点击事件
+            subMenuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    // 更新菜单激活状态
+                    document.querySelectorAll('.nav-menu > li').forEach(i => i.classList.remove('active'));
+                    document.querySelectorAll('.sub-menu li').forEach(i => i.classList.remove('active'));
+                    
+                    // 激活父菜单项
+                    const parentMenu = this.closest('.has-submenu');
+                    parentMenu.classList.add('active');
+                    this.classList.add('active');
+                    
+                    // 显示成就页面
+                    overviewPage.classList.remove('active');
+                    achievementPage.classList.add('active');
+                    
+                    // 更新成就页面标题
+                    const pageTitle = this.getAttribute('data-page');
+                    achievementPageTitle.textContent = this.textContent.trim() + '成就';
+                    
+                    // 更新成就内容
+                    updateAchievementContent(pageTitle);
                 });
             });
             
@@ -735,6 +766,111 @@
                     stats.querySelector('span:last-child').textContent = points;
                 });
             });
+            
+            // 更新成就内容函数
+            function updateAchievementContent(pageType) {
+                const container = document.querySelector('.achievement-container');
+                const stats = container.querySelector('.achievement-stats');
+                
+                // 根据页面类型生成不同的成就内容
+                let achievementsHTML = '';
+                let totalAchievements = 0;
+                let completedAchievements = 0;
+                let totalPoints = 0;
+                
+                // 模拟不同页面的成就数据
+                const achievementData = {
+                    'read-books': [
+                        { title: '阅读10本书籍', desc: '完成10本不同类型书籍的阅读', points: 10, progress: 100, completed: true },
+                        { title: '阅读50本书籍', desc: '完成50本不同类型书籍的阅读', points: 50, progress: 45, completed: false },
+                        { title: '阅读100本书籍', desc: '完成100本不同类型书籍的阅读', points: 100, progress: 45, completed: false }
+                    ],
+                    'reading-list': [
+                        { title: '同时阅读3本书', desc: '同时保持3本以上的在读状态', points: 15, progress: 100, completed: true },
+                        { title: '同时阅读5本书', desc: '同时保持5本以上的在读状态', points: 25, progress: 60, completed: false },
+                        { title: '完成10本在读', desc: '完成10本在读书籍的阅读', points: 30, progress: 40, completed: false }
+                    ],
+                    'wishlist': [
+                        { title: '添加10本到想读', desc: '将10本书添加到想读书单', points: 5, progress: 100, completed: true },
+                        { title: '添加50本到想读', desc: '将50本书添加到想读书单', points: 15, progress: 80, completed: false },
+                        { title: '完成10本想读书籍', desc: '阅读并完成10本想读书单中的书籍', points: 25, progress: 30, completed: false }
+                    ],
+                    // 其他页面的数据...
+                    'daily-reading': [
+                        { title: '每日阅读7天', desc: '连续7天每天阅读至少30分钟', points: 10, progress: 100, completed: true },
+                        { title: '每日阅读30天', desc: '连续30天每天阅读至少30分钟', points: 30, progress: 50, completed: false },
+                        { title: '每日阅读100天', desc: '连续100天每天阅读至少30分钟', points: 50, progress: 10, completed: false }
+                    ],
+                    'modern-literature': [
+                        { title: '阅读5本现代文学作品', desc: '完成5本现代文学作品的阅读', points: 15, progress: 80, completed: true },
+                        { title: '阅读10本现代文学作品', desc: '完成10本现代文学作品的阅读', points: 25, progress: 60, completed: false },
+                        { title: '阅读20本现代文学作品', desc: '完成20本现代文学作品的阅读', points: 40, progress: 30, completed: false }
+                    ]
+                };
+                
+                // 获取当前页面的成就数据，如果没有则使用默认数据
+                const data = achievementData[pageType] || [
+                    { title: '初级成就', desc: '完成该分类下的初级目标', points: 10, progress: 50, completed: false },
+                    { title: '中级成就', desc: '完成该分类下的中级目标', points: 20, progress: 30, completed: false },
+                    { title: '高级成就', desc: '完成该分类下的高级目标', points: 30, progress: 10, completed: false }
+                ];
+                
+                // 生成成就HTML
+                data.forEach(achievement => {
+                    achievementsHTML += `
+                        <div class="achievement gold">
+                            <label class="achievement-checkbox">
+                                <input type="checkbox" class="achievement-check" ${achievement.completed ? 'checked' : ''}>
+                            </label>
+                            <div class="achievement-content">
+                                <div class="achievement-points">${achievement.points}</div>
+                                <div class="achievement-title">${achievement.title}</div>
+                                <div class="achievement-desc">${achievement.desc}</div>
+                                <div class="progress-container">
+                                    <div class="progress-bar-main" style="width: ${achievement.progress}%"></div>
+                                    <div class="progress-text">${achievement.progress}% 完成</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    totalAchievements++;
+                    if (achievement.completed) {
+                        completedAchievements++;
+                        totalPoints += achievement.points;
+                    }
+                });
+                
+                // 更新成就内容
+                container.innerHTML = `
+                    <h2 class="achievement-header">${achievementPageTitle.textContent}</h2>
+                    ${achievementsHTML}
+                    <div class="achievement-stats">
+                        <div>已完成成就: <span id="completed-count">${completedAchievements}</span>/<span id="total-count">${totalAchievements}</span></div>
+                        <div>成就点数: <span id="total-points">${totalPoints}</span></div>
+                    </div>
+                `;
+                
+                // 重新绑定复选框事件
+                document.querySelectorAll('.achievement-check').forEach(checkbox => {
+                    checkbox.addEventListener('change', function() {
+                        const container = this.closest('.achievement-container');
+                        const checkboxes = container.querySelectorAll('.achievement-check');
+                        const checkedBoxes = container.querySelectorAll('.achievement-check:checked');
+                        
+                        // 更新统计信息
+                        const stats = container.querySelector('.achievement-stats');
+                        stats.querySelector('span:first-child').textContent = checkedBoxes.length;
+                        
+                        // 计算总点数
+                        let points = 0;
+                        checkedBoxes.forEach(box => {
+                            points += parseInt(box.parentElement.nextElementSibling.querySelector('.achievement-points').textContent);
+                        });
+                        stats.querySelector('span:last-child').textContent = points;
+                    });
+                });
+            }
         });
     </script>
 </body>
