@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文学阅读成就系统</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* 整体布局 */
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        
+        /* 左侧导航区域 */
+        .sidebar {
+            width: 300px;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+        }
+        
+        /* 成就点数显示 */
+        .achievement-points {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .points {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d4af37;
+        }
+        
+        /* 搜索框 */
+        .search {
+            margin-bottom: 20px;
+        }
+        
+        .search input {
+            width: 100%;
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-radius: 3px;
+            color: #333333;
+        }
+        
+        /* 导航菜单 */
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nav-menu li {
+            padding: 10px 0;
+            cursor: pointer;
+            color: #555555;
+            position: relative;
+        }
+        
+        .nav-menu li:hover {
+            color: #d4af37;
+        }
+        
+        .nav-menu li.active {
+            color: #d4af37;
+            font-weight: bold;
+        }
+        
+        .sub-menu {
+            display: none;
+            list-style: none;
+            padding-left: 15px;
+            margin-top: 5px;
+        }
+        
+        .sub-menu li {
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .nav-menu li.has-submenu::after {
+            content: "▼";
+            font-size: 10px;
+            margin-left: 5px;
+            color: #999;
+        }
+        
+        .nav-menu li.active.has-submenu::after {
+            color: #d4af37;
+        }
+        
+        /* 右侧内容区域 */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            overflow-y: auto;
+        }
+        
+        /* 总览页面样式 */
+        .overview-page {
+            display: none;
+        }
+        
+        .overview-page.active {
+            display: block;
+        }
+        
+        .recent-achievements {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .progress-overview {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: #d4af37;
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .achievement-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .achievement-item:last-child {
+            border-bottom: none;
+        }
+        
+        .achievement-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .achievement-text {
+            flex: 1;
+        }
+        
+        .achievement-name {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .achievement-desc {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .progress-categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .progress-category {
+            background-color: #fff;
+            padding: 12px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-name {
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .category-count {
+            color: #d4af37;
+            font-weight: bold;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #d4af37;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        /* 成就系统页面样式 */
+        .achievement-page {
+            display: none;
+        }
+        
+        .achievement-page.active {
+            display: block;
+        }
+        
+        .achievement-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .achievement {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-left: 4px solid #ffd700;
+            margin-bottom: 15px;
+            padding: 12px;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            border-radius: 4px;
+        }
+        
+        .achievement-checkbox {
+            margin-right: 15px;
+            margin-top: 3px;
+            position: relative;
+        }
+        
+        .achievement-checkbox input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cccccc;
+            border-radius: 3px;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .achievement-checkbox input[type="checkbox"]:hover {
+            border-color: #999999;
+        }
+        
+        .achievement-checkbox input[type="checkbox"]:checked {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+        }
+        
+        .achievement-checkbox input[type="checkbox"]:checked::after {
+            content: "✓";
+            position: absolute;
+            color: white;
+            font-size: 14px;
+            left: 3px;
+            top: -1px;
+        }
+        
+        .achievement-content {
+            flex: 1;
+        }
+        
+        .achievement.gold {
+            border-left-color: #ffd700;
+            background: linear-gradient(to right, rgba(255, 215, 0, 0.05), #ffffff);
+        }
+        
+        .achievement.silver {
+            border-left-color: #c0c0c0;
+            background: linear-gradient(to right, rgba(192, 192, 192, 0.05), #ffffff);
+        }
+        
+        .achievement-title {
+            color: #d4af37;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .silver .achievement-title {
+            color: #c0c0c0;
+        }
+        
+        .achievement-desc {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #666666;
+        }
+        
+        .achievement-points {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            color: #d4af37;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .progress-container {
+            height: 16px;
+            background: #e9e9e9;
+            border: 1px solid #d0d0d0;
+            margin-top: 8px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-main {
+            height: 100%;
+            background: linear-gradient(to right, #3a6ea5, #4b9cd3);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            line-height: 16px;
+            color: #333333;
+        }
+        
+        .achievement-stats {
+            margin-top: 20px;
+            padding: 12px 15px;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .achievement-stats div {
+            display: flex;
+            align-items: center;
+        }
+        
+        .achievement-stats span {
+            font-weight: bold;
+            margin-left: 5px;
+            color: #d4af37;
+        }
+        
+        .achievement-header {
+            color: #d4af37;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                max-height: 400px;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                background-color: #d4af37;
+                color: white;
+                border: none;
+                padding: 10px;
+                border-radius: 5px;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 15px;
+                font-weight: bold;
+            }
+            
+            .nav-menu.active {
+                display: block;
+            }
+            
+            .progress-categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧导航区域 -->
+        <div class="sidebar">
+            <button class="mobile-menu-toggle" id="menuToggle">显示菜单 ▼</button>
+            
+            <div class="achievement-points">
+                <div class="points">8,760 点</div>
+                <div>阅读成就点数</div>
+            </div>
+            
+            <div class="search">
+                <input type="text" placeholder="搜索成就...">
+            </div>
+            
+            <ul class="nav-menu" id="mainMenu">
+                <li class="active" id="overview">总览</li>
+                <li class="has-submenu" id="books">书籍
+                    <ul class="sub-menu">
+                        <li>已读书籍</li>
+                        <li>在读列表</li>
+                        <li>想读书单</li>
+                        <li>书籍分类</li>
+                        <li>书籍评分</li>
+                    </ul>
+                </li>
+                <li class="has-submenu" id="challenges">阅读挑战
+                    <ul class="sub-menu">
+                        <li>每日阅读</li>
+                        <li>每周目标</li>
+                        <li>月度挑战</li>
+                        <li>年度目标</li>
+                        <li>专题挑战</li>
+                    </ul>
+                </li>
+                <li class="has-submenu" id="explore">探索
+                    <ul class="sub-menu">
+                        <li>新书发现</li>
+                        <li>冷门佳作</li>
+                        <li>编辑推荐</li>
+                        <li>读者推荐</li>
+                        <li>获奖作品</li>
+                    </ul>
+                </li>
+                <li class="has-submenu" id="classics">经典名著
+                    <ul class="sub-menu">
+                        <li>中国古典</li>
+                        <li>外国经典</li>
+                        <li>诺贝尔奖</li>
+                        <li>茅盾文学奖</li>
+                        <li>世界名著</li>
+                    </ul>
+                </li>
+                <li id="modern">现代文学</li>
+                <li id="professional">专业书籍</li>
+                <li id="authors">作者收藏</li>
+                <li id="events">阅读活动</li>
+                <li id="reviews">书评</li>
+            </ul>
+        </div>
+        
+        <!-- 右侧内容区域 -->
+        <div class="main-content">
+            <!-- 总览页面 -->
+            <div class="overview-page active" id="overviewPage">
+                <div class="recent-achievements">
+                    <h2 class="section-title">近期成就</h2>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">✓</div>
+                        <div class="achievement-text">
+                            <div class="achievement-name">科幻大师</div>
+                            <div class="achievement-desc">完成10本科幻小说的阅读</div>
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">✓</div>
+                        <div class="achievement-text">
+                            <div class="achievement-name">经典挑战（史诗难度）</div>
+                            <div class="achievement-desc">在一个月内读完《战争与和平》</div>
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">✓</div>
+                        <div class="achievement-text">
+                            <div class="achievement-name">文学探索者（英雄难度）</div>
+                            <div class="achievement-desc">连续30天每天阅读超过2小时</div>
+                        </div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-icon">✓</div>
+                        <div class="achievement-text">
+                            <div class="achievement-name">知识收集者</div>
+                            <div class="achievement-desc">完成年度阅读目标50本书</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="progress-overview">
+                    <h2 class="section-title">进度总览</h2>
+                    <div class="progress-categories">
+                        <div class="progress-category">
+                            <div class="category-name">
+                                <span>书籍</span>
+                                <span class="category-count">45/120</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 37.5%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-category">
+                            <div class="category-name">
+                                <span>阅读挑战</span>
+                                <span class="category-count">12/36</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 33.3%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-category">
+                            <div class="category-name">
+                                <span>探索</span>
+                                <span class="category-count">28/150</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 18.7%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-category">
+                            <div class="category-name">
+                                <span>经典名著</span>
+                                <span class="category-count">15/50</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-category">
+                            <div class="category-name">
+                                <span>现代文学</span>
+                                <span class="category-count">20/75</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 26.7%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-category">
+                            <div class="category-name">
+                                <span>专业书籍</span>
+                                <span class="category-count">8/40</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 20%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 成就系统页面（书籍、阅读挑战、探索等共用） -->
+            <div class="achievement-page" id="achievementPage">
+                <div class="achievement-container">
+                    <h2 class="achievement-header" id="achievementPageTitle">书籍成就</h2>
+                    
+                    <div class="achievement gold">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" class="achievement-check" checked>
+                        </label>
+                        <div class="achievement-content">
+                            <div class="achievement-points">10</div>
+                            <div class="achievement-title">阅读10本书籍</div>
+                            <div class="achievement-desc">完成10本不同类型书籍的阅读</div>
+                            <div class="progress-container">
+                                <div class="progress-bar-main" style="width: 100%"></div>
+                                <div class="progress-text">100% 完成</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement gold">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" class="achievement-check" checked>
+                        </label>
+                        <div class="achievement-content">
+                            <div class="achievement-points">15</div>
+                            <div class="achievement-title">经典阅读者</div>
+                            <div class="achievement-desc">阅读5本经典文学作品</div>
+                            <div class="progress-container">
+                                <div class="progress-bar-main" style="width: 80%"></div>
+                                <div class="progress-text">80% 完成</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement gold">
+                        <label class="achievement-checkbox">
+                            <input type="checkbox" class="achievement-check">
+                        </label>
+                        <div class="achievement-content">
+                            <div class="achievement-points">20</div>
+                            <div class="achievement-title">专业读者</div>
+                            <div class="achievement-desc">完成3本专业书籍的阅读</div>
+                            <div class="progress-container">
+                                <div class="progress-bar-main" style="width: 33%"></div>
+                                <div class="progress-text">33% 完成</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-stats">
+                        <div>已完成成就: <span id="completed-count">2</span>/<span id="total-count">3</span></div>
+                        <div>成就点数: <span id="total-points">25</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 移动端菜单切换
+            const menuToggle = document.getElementById('menuToggle');
+            const mainMenu = document.getElementById('mainMenu');
+            
+            menuToggle.addEventListener('click', function() {
+                mainMenu.classList.toggle('active');
+                this.textContent = mainMenu.classList.contains('active') ? '隐藏菜单 ▲' : '显示菜单 ▼';
+            });
+            
+            // 下拉菜单交互功能
+            document.querySelectorAll('.has-submenu').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // 如果点击的是子菜单项，则不处理
+                    if (e.target.tagName === 'LI' && e.target !== this) return;
+                    
+                    // 切换当前菜单的active状态
+                    this.classList.toggle('active');
+                    
+                    // 获取子菜单
+                    const subMenu = this.querySelector('.sub-menu');
+                    
+                    // 切换子菜单显示状态
+                    if (subMenu.style.display === 'block') {
+                        subMenu.style.display = 'none';
+                    } else {
+                        subMenu.style.display = 'block';
+                    }
+                    
+                    // 阻止事件冒泡
+                    e.stopPropagation();
+                });
+            });
+            
+            // 页面切换功能
+            const menuItems = document.querySelectorAll('.nav-menu > li');
+            const overviewPage = document.getElementById('overviewPage');
+            const achievementPage = document.getElementById('achievementPage');
+            const achievementPageTitle = document.getElementById('achievementPageTitle');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        // 更新菜单激活状态
+                        menuItems.forEach(i => i.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // 判断显示哪个页面
+                        if (this.id === 'overview') {
+                            overviewPage.classList.add('active');
+                            achievementPage.classList.remove('active');
+                        } else {
+                            overviewPage.classList.remove('active');
+                            achievementPage.classList.add('active');
+                            
+                            // 更新成就页面标题
+                            achievementPageTitle.textContent = this.textContent.trim() + '成就';
+                        }
+                    }
+                });
+            });
+            
+            // 成就复选框交互
+            document.querySelectorAll('.achievement-check').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const container = this.closest('.achievement-container');
+                    const checkboxes = container.querySelectorAll('.achievement-check');
+                    const checkedBoxes = container.querySelectorAll('.achievement-check:checked');
+                    
+                    // 更新统计信息
+                    const stats = container.querySelector('.achievement-stats');
+                    stats.querySelector('span:first-child').textContent = checkedBoxes.length;
+                    
+                    // 计算总点数
+                    let points = 0;
+                    checkedBoxes.forEach(box => {
+                        points += parseInt(box.parentElement.nextElementSibling.querySelector('.achievement-points').textContent);
+                    });
+                    stats.querySelector('span:last-child').textContent = points;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
